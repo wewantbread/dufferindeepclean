@@ -68,3 +68,69 @@ footer {
   padding: 2em;
   color: #bbb;
 }
+/* Use custom font from Google */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #000, #fff);
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+
+/* Header and Nav */
+header {
+  text-align: center;
+  padding: 2em;
+  background: rgba(0, 0, 0, 0.6);
+  border-bottom: 2px solid white;
+}
+
+nav a {
+  margin: 0 10px;
+  padding: 0.5em 1em;
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background: white;
+  color: black;
+}
+
+/* Split screen layout */
+.split-screen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3em 2em;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.text-side {
+  flex: 1;
+  padding: 2em;
+}
+
+.image-side {
+  flex: 1;
+  text-align: center;
+}
+
+.image-side img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .split-screen {
+    flex-direction: column;
+  }
+}

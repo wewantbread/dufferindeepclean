@@ -196,3 +196,62 @@ nav a:hover {
 .image-side img:hover {
   transform: scale(1.03);
 }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 3em;
+  background: linear-gradient(to right, #111, #222);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00d4ff;
+}
+
+.nav-links a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #eee;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #00d4ff;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #00d4ff;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.quote-btn {
+  padding: 0.5em 1em;
+  background: #00d4ff;
+  color: black !important;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.quote-btn:hover {
+  background: white;
+  color: black;
+}

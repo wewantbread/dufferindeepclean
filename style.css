@@ -1,24 +1,20 @@
 body {
   font-family: 'Inter', sans-serif;
   color: white;
-  background-color: #000;
-  background-image: 
-    linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: cyberGrid 30s linear infinite;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  background-color: #000;
+
+  /* Knit cyber grid background */
+  background-image: 
+    linear-gradient(0deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0;
+  animation: cyberGrid 60s linear infinite;
 }
 
-@keyframes cyberGrid {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100px 100px;
-  }
-}
 
 
 h1, h2, h3 {

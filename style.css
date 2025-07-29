@@ -125,3 +125,55 @@ body {
     transform: translateY(0);
   }
 }
+.quote-form-section {
+  padding: 4em 2em;
+  background: linear-gradient(to bottom, #000, #333);
+  color: white;
+  text-align: center;
+}
+
+.quote-form-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #00d4ff;
+}
+
+.quote-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.quote-form label {
+  display: block;
+  margin-top: 1.5rem;
+  font-weight: bold;
+}
+
+.quote-form input,
+.quote-form textarea,
+.quote-form select {
+  width: 100%;
+  padding: 0.8em;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+}
+
+.quote-form button {
+  margin-top: 2rem;
+  padding: 0.8em 2em;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.quote-form button:hover {
+  background: white;
+}

@@ -5,22 +5,24 @@ body {
   padding: 0;
   min-height: 100vh;
 
+  /* Dark background with animated cyber grid */
   background-color: #000;
-  background-image: 
-    linear-gradient(0deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 20px 20px;
+  background-image:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 25px 25px;
   background-position: 0 0;
-  animation: cyberGrid 40s linear infinite;
+  animation: cyberGrid 45s linear infinite;
 }
 @keyframes cyberGrid {
   0% {
     background-position: 0 0;
   }
   100% {
-    background-position: 100px 100px;
+    background-position: 200px 200px;
   }
 }
+
 
 h1, h2, h3 {
   font-family: 'Bebas Neue', sans-serif;

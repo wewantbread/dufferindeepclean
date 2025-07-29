@@ -179,5 +179,8 @@ h1, h2, h3 {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background
-
+  transition: background 0.3s ease;
+}
+.quote-form button:hover {
+  background: white;
+}

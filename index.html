@@ -1,36 +1,47 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f6f9fc;
-  color: #333;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DufferinDeep Cleaners</title>
 
-header {
-  background-color: #4ecdc4;
-  color: white;
-  text-align: center;
-  padding: 2em 1em;
-}
+  <!-- Load custom font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-.services {
-  padding: 2em;
-  text-align: center;
-}
+  <!-- Style and AOS animations -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+</head>
+<body>
 
-.services ul {
-  list-style: none;
-  padding: 0;
-}
+  <header data-aos="fade-down">
+    <h1>DufferinDeep Cleaners</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="elevate.html">ElevateClean</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-.services li {
-  margin: 1em 0;
-  font-size: 1.2em;
-}
+  <!-- Split screen layout -->
+  <section class="split-screen" data-aos="fade-up">
+    <div class="text-side">
+      <h2>Elevate Your Cleaning Standards</h2>
+      <p>We’re a family-owned cleaning company that believes in honest work, fair pricing, and spotless spaces. We serve warehouses, apartments, and offices with care and consistency.</p>
+    </div>
+    <div class="image-side">
+      <img src="cleaning.jpg" alt="Cleaning team" />
+    </div>
+  </section>
 
-footer {
-  background-color: #ddd;
-  text-align: center;
-  padding: 1em;
-  font-size: 0.9em;
-}
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+</body>
+</html>

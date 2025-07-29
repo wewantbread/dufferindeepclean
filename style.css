@@ -13,6 +13,14 @@ body {
   background-position: 0 0;
   animation: cyberGrid 40s linear infinite;
 }
+@keyframes cyberGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
 
 @keyframes cyberGrid {
   0% {

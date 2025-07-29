@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DufferinDeep Cleaners - Home</title>
+  <title>DufferinDeep Cleaners</title>
+
+  <!-- Load custom font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Style and AOS animations -->
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="assets/aos.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
 </head>
 <body>
-  <header class="hero" data-aos="fade-in">
-    <h1>Dufferin Deep Cleaners</h1>
-    <p>Family-owned. Quality-driven. Trusted by warehouses, offices, and homes.</p>
+
+  <header data-aos="fade-down">
+    <h1>DufferinDeep Cleaners</h1>
     <nav>
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
@@ -20,12 +25,23 @@
     </nav>
   </header>
 
-  <section class="welcome" data-aos="fade-up">
-    <h2>Welcome to Dufferin Deep Clean</h2>
-    <p>We bring personal care and professional shine to your space. Serving commercial and residential clients with pride.</p>
+  <!-- Split screen layout -->
+  <section class="split-screen" data-aos="fade-up">
+    <div class="text-side">
+      <h2>Elevate Your Cleaning Standards</h2>
+      <p>We’re a family-owned cleaning company that believes in honest work, fair pricing, and spotless spaces. We serve warehouses, apartments, and offices with care and consistency.</p>
+    </div>
+    <div class="image-side">
+      <img src="cleaning.jpg" alt="Cleaning team" />
+    </div>
   </section>
 
-  <script src="assets/aos.js"></script>
-  <script>AOS.init();</script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
 </body>
 </html>

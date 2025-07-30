@@ -234,7 +234,7 @@ h1, h2, h3 {
   letter-spacing: 1px;
   animation: fadeInUp 5s ease forwards;
   opacity: 0;
-  animation-delay: 10s;
+  animation-delay: 2s;
 }
 
 @keyframes popIn {

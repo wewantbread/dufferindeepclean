@@ -1,10 +1,218 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap');
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  animation-fill-mode: both;
+}
+
+
+/* Body with animated cyber grid */
+body {
+  font-family: 'Inter', sans-serif;
+  color: white;
+  min-height: 100vh;
+
+  background-color: #000;
+  background-image:
+    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 25px 25px;
+  background-position: 0 0;
+  animation: cyberGrid 45s linear infinite;
+}
+
+@keyframes cyberGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200px 200px;
+  }
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+
+/* Navigation Bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5em 3em;
+  background: linear-gradient(to right, #000, #111);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 .logo {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00d4ff;
+}
+.nav-links a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #eee;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: #00d4ff;
+}
+.quote-btn-home {
+  margin-top: 4rem;
+  padding: 0.8em 2em;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 3rem;
+  cursor: pointer;
+  align-self: center; /* Center the button in the flex column */
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.quote-btn-home:hover {
+  background: white;
+}
+
+
+/* Add this animation if it's not already in your CSS */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Split Layout */
+.split-screen {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+}
+
+.text-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4em;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.image-side {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Headline */
+.headline {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.headline span {
+  display: inline-block;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+.headline span:nth-child(1) { animation-delay: 0.3s; }
+.headline span:nth-child(2) { animation-delay: 0.6s; }
+.headline span:nth-child(3) { animation-delay: 0.9s; }
+.headline span:nth-child(4) { animation-delay: 1.2s; }
+
+/* Subtext */
+.subtext {
+  font-size: 1.1rem;
+  margin-top: 2rem;
+  color: #ccc;
+  max-width: 500px;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Quote Section */
+.quote-form-section {
+  padding: 4em 2em;
+  background: linear-gradient(to bottom, #000, #333);
+  color: white;
+  text-align: center;
+}
+.quote-form-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #00d4ff;
+}
+.quote-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+.quote-form label {
+  display: block;
+  margin-top: 1.5rem;
+  font-weight: bold;
+}
+.quote-form input,
+.quote-form textarea,
+.quote-form select {
+  width: 100%;
+  padding: 0.8em;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background: #222;
+  color: white;
+}
+.quote-form button {
+  margin-top: 2rem;
+  padding: 0.8em 2em;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.quote-form button:hover {
+  background: white;
+}.logo {
   display: flex;
   align-items: center;
   font-size: 2rem;
   font-weight: bold;
   color: #00d4ff;
-  position: relative;
   animation: fadeInUp 0.4s ease forwards;
   transform: translateY(-10px);
   opacity: 0;
@@ -12,21 +220,67 @@
 }
 
 .logo .soap {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-right: 0.5rem;
   animation: popIn 1.2s ease forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
   transform: scale(0.8);
-  animation-fill-mode: forwards;
-  position: relative;
+  opacity: 0;
+  animation-delay: 0.2s;
 }
 
 .logo-text {
   font-size: 1.8rem;
   letter-spacing: 1px;
-  text-transform: lowercase;
-  animation: fadeInUp 0.4s ease forwards;
-  animation-delay: 0.4s;
+  animation: fadeInUp 0.1s ease forwards;
   opacity: 0;
+  animation-delay: 0.3s;
+}
+
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.5) rotate(-30deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.3) rotate(10deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Sparkle effect */
+.logo {
+  position: relative; /* Needed so the sparkle is positioned correctly */
+}
+
+.logo .soap::after {
+  content: '✨';
+  position: absolute;
+  font-size: 0.9rem;
+  top: -10px;
+  right: -8px;
+  animation: sparkle 1.2s ease-in-out infinite;
+  color: #fff;
+  opacity: 0.7;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.4) rotate(20deg); opacity: 1; }
 }

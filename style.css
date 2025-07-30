@@ -207,59 +207,57 @@ h1, h2, h3 {
 }
 .quote-form button:hover {
   background: white;
-}
-.logo {
+}.logo {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #00d4ff;
-  animation: logoFadeIn 1.2s ease-out forwards;
+  animation: fadeInUp 1.2s ease forwards;
+  transform: translateY(-10px);
   opacity: 0;
+  animation-delay: 0.2s;
 }
 
-/* Animate the soap icon */
-.soap-emoji {
-  animation: popIn 1s ease-out forwards;
+.logo .soap {
+  font-size: 2.5rem;
+  margin-right: 0.5rem;
+  animation: popIn 1.2s ease forwards;
+  transform: scale(0.8);
   opacity: 0;
+  animation-delay: 0.2s;
 }
 
-/* Animate the brand text */
 .logo-text {
-  animation: fadeSlideIn 1s ease-out forwards;
-  animation-delay: 0.3s;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: fadeInUp 1.5s ease forwards;
   opacity: 0;
+  animation-delay: 0.4s;
 }
 
-/* Animations */
 @keyframes popIn {
   0% {
-    transform: scale(0);
+    transform: scale(0.5) rotate(-30deg);
     opacity: 0;
   }
-  70% {
-    transform: scale(1.2);
+  60% {
+    transform: scale(1.3) rotate(10deg);
     opacity: 1;
   }
   100% {
-    transform: scale(1);
+    transform: scale(1.1) rotate(0deg);
   }
 }
 
-@keyframes fadeSlideIn {
-  0% {
-    transform: translateX(-10px);
+@keyframes fadeInUp {
+  from {
     opacity: 0;
+    transform: translateY(10px);
   }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes logoFadeIn {
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }

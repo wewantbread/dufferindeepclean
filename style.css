@@ -272,7 +272,7 @@ h1, h2, h3 {
   font-size: 0.9rem;
   top: -10px;
   right: -8px;
-  animation: sparkle 2.5s ease-in-out infinite;
+  animation: sparkle 4.2s ease-in-out infinite;
   color: #fff;
   opacity: 0.7;
 }

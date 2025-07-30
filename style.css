@@ -66,24 +66,27 @@ h1, h2, h3 {
 .nav-links a:hover {
   color: #00d4ff;
 }
-.quote-btn {
-  display: inline-block;
-  margin-top: 2rem;        /* space below the text */
-  padding: 0.75em 2em;
+.quote-btn-home {
+  margin-top: 2rem;
+  padding: 0.8em 2em;
   background: #00d4ff;
   color: black;
   font-weight: bold;
   border: none;
   border-radius: 8px;
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.3s ease;
-  animation: fadeInUp 1s ease forwards;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: center; /* Center the button in the flex column */
+  animation: fadeInUp 1.5s ease forwards;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
+  transition: background 0.3s ease, transform 0.3s ease;
 }
-.quote-btn:hover {
+.quote-btn-home:hover {
   background: white;
 }
+
 
 /* Add this animation if it's not already in your CSS */
 @keyframes fadeInUp {

@@ -261,3 +261,23 @@ h1, h2, h3 {
     transform: translateY(0);
   }
 }
+/* Sparkle effect */
+.logo {
+  position: relative; /* Needed so the sparkle is positioned correctly */
+}
+
+.logo .soap::after {
+  content: '✨';
+  position: absolute;
+  font-size: 0.9rem;
+  top: -10px;
+  right: -8px;
+  animation: sparkle 2.5s ease-in-out infinite;
+  color: #fff;
+  opacity: 0.7;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.4) rotate(20deg); opacity: 1; }
+}

@@ -67,15 +67,15 @@ h1, h2, h3 {
   color: #00d4ff;
 }
 .quote-btn-home {
-  margin-top: 2rem;
+  margin-top: 4rem;
   padding: 0.8em 2em;
   background: #00d4ff;
   color: black;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 14px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 3rem;
   cursor: pointer;
   align-self: center; /* Center the button in the flex column */
   animation: fadeInUp 1.5s ease forwards;

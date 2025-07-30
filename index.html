@@ -1,65 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dufferindeepclean</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DufferinDeep Cleaners</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
+  <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
-      <span class="logo-text">dufferindeepclean</span>
+      <span class="logo-text">dufferindeep</span>
     </div>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About Us</a>
+      <a href="quote.html" class="quote-btn">Get a Quote</a>
+    </nav>
+  </header>
 
-  <!-- Split Screen Layout -->
-  <div class="split-screen">
+  <section class="split-screen">
     <div class="text-side">
       <h1 class="headline">
-        <span>deep</span>
-        <span>cleaning</span>
-        <span>for</span>
-        <span>dufferin</span>
+        <span>deep</span> <span>cleaning</span> <span>for</span> <span>durham</span>
       </h1>
-      <p class="subtext">Residential & commercial cleaning services with a shine that speaks for itself.</p>
-      <a href="#quote" class="quote-btn-home">get a quote</a>
+      <p class="subtext">Industrial-grade cleaning for warehouses, offices, and apartment buildings.</p>
+      <a href="quote.html" class="quote-btn-home">get a quote</a>
     </div>
+
     <div class="image-side">
-      <img src="cleaning-image.jpg" alt="Cleaning in action">
+      <img src="warehouse.jpg" alt="Warehouse image" />
     </div>
-  </div>
-
-  <!-- Quote Section -->
-  <section id="quote" class="quote-form-section">
-    <h1>Request a Free Quote</h1>
-    <form class="quote-form">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required>
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-
-      <label for="service">Service Type</label>
-      <select id="service" name="service">
-        <option>Residential</option>
-        <option>Commercial</option>
-      </select>
-
-      <label for="message">Details</label>
-      <textarea id="message" name="message"></textarea>
-
-      <button type="submit">Submit</button>
-    </form>
   </section>
 
 </body>
 </html>
+

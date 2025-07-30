@@ -67,13 +67,32 @@ h1, h2, h3 {
   color: #00d4ff;
 }
 .quote-btn {
-  padding: 0.5em 1em;
+  display: inline-block;
+  margin-top: 2rem;        /* space below the text */
+  padding: 0.75em 2em;
   background: #00d4ff;
   color: black;
-  border-radius: 8px;
   font-weight: bold;
-  margin-left: 2rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
 }
+.quote-btn:hover {
+  background: white;
+}
+
+/* Add this animation if it's not already in your CSS */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 /* Split Layout */
 .split-screen {

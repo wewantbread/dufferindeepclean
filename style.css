@@ -232,9 +232,9 @@ h1, h2, h3 {
   font-size: 1.8rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  animation: fadeInUp 1.5s ease forwards;
+  animation: fadeInUp 5s ease forwards;
   opacity: 0;
-  animation-delay: 0.4s;
+  animation-delay: 10s;
 }
 
 @keyframes popIn {

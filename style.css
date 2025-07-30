@@ -206,3 +206,58 @@ h1, h2, h3 {
 .quote-form button:hover {
   background: white;
 }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00d4ff;
+  animation: logoFadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+/* Animate the soap icon */
+.soap-emoji {
+  animation: popIn 1s ease-out forwards;
+  opacity: 0;
+}
+
+/* Animate the brand text */
+.logo-text {
+  animation: fadeSlideIn 1s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+/* Animations */
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes logoFadeIn {
+  to {
+    opacity: 1;
+  }
+}

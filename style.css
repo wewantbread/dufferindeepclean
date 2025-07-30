@@ -230,11 +230,12 @@ h1, h2, h3 {
 
 .logo-text {
   font-size: 1.8rem;
-  text-transform: uppercase;
   letter-spacing: 1px;
   animation: fadeInUp 0.1s ease forwards;
   opacity: 0;
   animation-delay: 0.3s;
+}
+
 }
 
 @keyframes popIn {

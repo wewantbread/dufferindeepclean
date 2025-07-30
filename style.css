@@ -207,13 +207,14 @@ h1, h2, h3 {
 }
 .quote-form button:hover {
   background: white;
-}.logo {
+}
+.logo {
   display: flex;
   align-items: center;
   font-size: 2rem;
   font-weight: bold;
   color: #00d4ff;
-  animation: fadeInUp 0.4s ease forwards;
+  animation: fadeInUp 1.2s ease forwards;
   transform: translateY(-10px);
   opacity: 0;
   animation-delay: 0.2s;
@@ -230,12 +231,11 @@ h1, h2, h3 {
 
 .logo-text {
   font-size: 1.8rem;
+  text-transform: uppercase;
   letter-spacing: 1px;
-  animation: fadeInUp 0.1s ease forwards;
+  animation: fadeInUp 1.5s ease forwards;
   opacity: 0;
-  animation-delay: 0.3s;
-}
-
+  animation-delay: 0.4s;
 }
 
 @keyframes popIn {
@@ -248,11 +248,9 @@ h1, h2, h3 {
     opacity: 1;
   }
   100% {
-    transform: scale(1.4) rotate(0deg);
-    opacity: 1;
+    transform: scale(1.1) rotate(0deg);
   }
 }
-
 
 @keyframes fadeInUp {
   from {
@@ -263,24 +261,4 @@ h1, h2, h3 {
     opacity: 1;
     transform: translateY(0);
   }
-}
-/* Sparkle effect */
-.logo {
-  position: relative; /* Needed so the sparkle is positioned correctly */
-}
-
-.logo .soap::after {
-  content: '✨';
-  position: absolute;
-  font-size: 0.9rem;
-  top: -10px;
-  right: -8px;
-  animation: sparkle 1.2s ease-in-out infinite;
-  color: #fff;
-  opacity: 0.7;
-}
-
-@keyframes sparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
-  50% { transform: scale(1.4) rotate(20deg); opacity: 1; }
 }

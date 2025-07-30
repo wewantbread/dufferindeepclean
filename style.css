@@ -247,9 +247,11 @@ h1, h2, h3 {
     opacity: 1;
   }
   100% {
-    transform: scale(1.1) rotate(0deg);
+    transform: scale(1.4) rotate(0deg);
+    opacity: 1;
   }
 }
+
 
 @keyframes fadeInUp {
   from {

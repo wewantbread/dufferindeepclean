@@ -355,21 +355,21 @@ h1, h2, h3 {
 }
 /* === Mop Guy Logo Anim === */
 .mopguy-logo-wrapper {
-  width: 40px;
-  height: 40px;
-  margin-left: 10px;
+  width: 1.8rem;  /* same size as emoji */
+  height: auto;
+  margin-left: 0.5rem;
+  display: inline-block;
   opacity: 0;
   animation: mopGuyFadeIn 1.5s ease 1s forwards;
   position: relative;
-  display: inline-block;
 }
 
-/* Mop Guy Image */
 .mopguy-logo {
   width: 100%;
   height: auto;
-  animation: mopWiggle 3s ease-in-out forwards;
+  animation: mopWiggle 2.5s ease-in-out forwards;
 }
+
 
 /* Pixel Spill */
 .pixel-spill {

@@ -445,3 +445,69 @@ h1, h2, h3 {
   75% { transform: rotate(-1deg); }
   100% { transform: rotate(0); }
 }
+/* Body Style for Services Page */
+.services-body {
+  background: black;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main Layout */
+.services-page {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  padding: 3em;
+}
+
+/* Left Section */
+.services-left {
+  flex: 1;
+  padding-right: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.services-left h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.services-left p {
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+/* Right Gallery */
+.services-gallery {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Image Thumbnails */
+.hover-thumb {
+  width: 80px;
+  height: auto;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.hover-thumb:hover {
+  width: 220px;
+  opacity: 1;
+  z-index: 10;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #00d4ff66;
+}

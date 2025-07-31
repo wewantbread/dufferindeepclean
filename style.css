@@ -172,9 +172,10 @@ h1, h2, h3 {
 }
 
 .image-side img {
-  width: 100%;
+  width: 120%;
   height: 100%;
   object-fit: cover;
+  object-position: left center;
 }
 
 /* Headline */

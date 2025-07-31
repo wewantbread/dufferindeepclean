@@ -371,24 +371,24 @@ h1, h2, h3 {
 }
 
 
-/* Pixel Spill */
 .pixel-spill {
   position: absolute;
-  bottom: -4px;
-  left: 6px;
-  width: 12px;
-  height: 6px;
+  bottom: -2px;
+  left: 4px;
+  width: 0.6rem;
+  height: 0.25rem;
   background: repeating-linear-gradient(
     45deg,
     #00d4ff,
-    #00d4ff 2px,
-    #0088aa 2px,
-    #0088aa 4px
+    #00d4ff 1px,
+    #0088aa 1px,
+    #0088aa 2px
   );
   opacity: 1;
-  animation: cleanSpill 3s ease-out 1s forwards;
+  animation: cleanSpill 2s ease-out 1s forwards;
   border-radius: 1px;
 }
+
 
 /* Fade + Wiggle */
 @keyframes mopGuyFadeIn {

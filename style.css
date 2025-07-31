@@ -577,9 +577,9 @@ h1, h2, h3 {
 .services-gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
   justify-content: center;
-  flex: 2 1 600px;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .service-card {

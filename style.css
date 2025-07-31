@@ -448,11 +448,19 @@ h1, h2, h3 {
 /* Body Style for Services Page */
 /* Body Style for Services Page */
 .services-body {
-  background: black;
+  background: radial-gradient(#0a0a0a 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: moveGrid 20s linear infinite;
   color: white;
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
+}
+
+@keyframes moveGrid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
 }
 
 /* Main Layout */

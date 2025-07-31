@@ -406,3 +406,23 @@ h1, h2, h3 {
   80% { opacity: 0.5; transform: scale(0.7); }
   100% { opacity: 0; transform: scale(0); }
 }
+/* Reuse quote-btn-home styling for services button */
+.services-btn-home {
+  margin-top: 1rem;
+  padding: 0.6em 1.5em;
+  background: transparent;
+  border: 2px solid #00d4ff;
+  color: #00d4ff;
+  font-weight: bold;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.services-btn-home:hover {
+  background: #00d4ff;
+  color: black;
+}

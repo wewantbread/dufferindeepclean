@@ -353,3 +353,60 @@ h1, h2, h3 {
     opacity: 0;
   }
 }
+/* === Mop Guy Logo Anim === */
+.mopguy-logo-wrapper {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  opacity: 0;
+  animation: mopGuyFadeIn 1.5s ease 1s forwards;
+  position: relative;
+  display: inline-block;
+}
+
+/* Mop Guy Image */
+.mopguy-logo {
+  width: 100%;
+  height: auto;
+  animation: mopWiggle 3s ease-in-out forwards;
+}
+
+/* Pixel Spill */
+.pixel-spill {
+  position: absolute;
+  bottom: -4px;
+  left: 6px;
+  width: 12px;
+  height: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    #00d4ff,
+    #00d4ff 2px,
+    #0088aa 2px,
+    #0088aa 4px
+  );
+  opacity: 1;
+  animation: cleanSpill 3s ease-out 1s forwards;
+  border-radius: 1px;
+}
+
+/* Fade + Wiggle */
+@keyframes mopGuyFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mopWiggle {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-2deg); }
+  50%  { transform: rotate(2deg); }
+  75%  { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Spill Fade Out */
+@keyframes cleanSpill {
+  0%   { opacity: 1; transform: scale(1); }
+  80%  { opacity: 0.5; transform: scale(0.7); }
+  100% { opacity: 0; transform: scale(0); }
+}

@@ -426,3 +426,22 @@ h1, h2, h3 {
   background: #00d4ff;
   color: black;
 }
+.nav-services {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nav-services .mini-mopguy {
+  width: 1.5rem;
+  height: auto;
+  animation: miniMopWiggle 2s ease-in-out infinite;
+}
+
+@keyframes miniMopWiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+  75% { transform: rotate(-1deg); }
+  100% { transform: rotate(0); }
+}

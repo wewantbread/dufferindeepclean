@@ -31,55 +31,6 @@ body {
     background-position: 200px 200px;
   }
 }
-/* Mop Guy Animation */
-.mopguy-container {
-  position: absolute;
-  bottom: 2%;
-  right: 5%;
-  width: 120px;
-  height: auto;
-  opacity: 0;
-  animation: mopFadeIn 2s ease-out 2s forwards;
-  z-index: 10;
-}
-
-.mopguy {
-  width: 100%;
-  height: auto;
-  animation: mopScrub 4s ease-in-out 1 forwards;
-}
-
-.mop-sparkle {
-  position: absolute;
-  bottom: 65%;
-  right: 20%;
-  font-size: 1rem;
-  opacity: 0;
-  color: #c8f7ff;
-  animation: sparklePop 3s ease-in-out 4s infinite;
-}
-
-/* Mop Guy Appears */
-@keyframes mopFadeIn {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Mop Action */
-@keyframes mopScrub {
-  0% { transform: translateY(0) rotate(0); }
-  20% { transform: rotate(-5deg); }
-  40% { transform: rotate(5deg); }
-  60% { transform: rotate(-3deg); }
-  80% { transform: rotate(3deg); }
-  100% { transform: rotate(0) scale(1.05); }
-}
-
-/* Sparkle Effect */
-@keyframes sparklePop {
-  0%, 100% { opacity: 0.2; transform: scale(1) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.4) rotate(15deg); }
-}
 
 /* Typography */
 h1, h2, h3 {

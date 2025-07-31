@@ -512,3 +512,26 @@ h1, h2, h3 {
   transform: scale(1.05);
   box-shadow: 0 0 12px #00d4ff66;
 }
+.services-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.services-list li::before {
+  content: "🧼 ";
+  margin-right: 0.5rem;
+  color: #00d4ff;
+  font-size: 1rem;
+}
+
+.hook-text {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  max-width: 400px;
+}

@@ -287,3 +287,66 @@ h1, h2, h3 {
 .quote-form button:hover {
   background: white;
 }
+/* === Mop Guy Animation (Separate from Logo) === */
+.image-side {
+  position: relative; /* Required to position mop guy inside it */
+}
+
+.mopguy-wrapper {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  width: 110px;
+  z-index: 10;
+  animation: fadeInGuy 1.2s ease-in-out forwards;
+}
+
+.mopguy-animated {
+  width: 100%;
+  height: auto;
+  animation: mopScrub 3s ease-in-out infinite;
+}
+
+/* Simulated dirt being cleaned */
+.dirt-pixels {
+  position: absolute;
+  bottom: 5px;
+  left: 10px;
+  width: 50px;
+  height: 10px;
+  background: #555;
+  border-radius: 4px;
+  opacity: 1;
+  animation: cleanDirt 3s ease-in-out forwards;
+}
+
+/* Fade-in for mop guy */
+@keyframes fadeInGuy {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrubbing animation */
+@keyframes mopScrub {
+  0%   { transform: translateY(0) rotate(0deg); }
+  25%  { transform: translateY(-2px) rotate(-2deg); }
+  50%  { transform: translateY(0) rotate(2deg); }
+  75%  { transform: translateY(-2px) rotate(-1deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+/* Dirt fade-out */
+@keyframes cleanDirt {
+  0%, 50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

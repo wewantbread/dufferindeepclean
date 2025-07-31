@@ -535,3 +535,83 @@ h1, h2, h3 {
   color: #fff;
   max-width: 400px;
 }
+.services-body {
+  font-family: Arial, sans-serif;
+  background-color: #0f0f0f;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.services-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+}
+
+.services-left {
+  flex: 1 1 300px;
+  padding-right: 2rem;
+  max-width: 400px;
+}
+
+.services-left h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #00d4ff;
+}
+
+.services-list {
+  list-style-type: none;
+  padding-left: 0;
+  line-height: 1.6;
+}
+
+.hook-text {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #ccc;
+}
+
+.services-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  flex: 2 1 600px;
+}
+
+.service-card {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.service-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.service-card h3 {
+  margin: 0.8rem 0 0.4rem;
+  font-size: 1.1rem;
+  color: #00d4ff;
+}
+
+.service-card p {
+  padding: 0 1rem 1rem;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}

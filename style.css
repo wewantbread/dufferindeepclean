@@ -212,23 +212,26 @@ h1, h2, h3 {
 }
 
 /* Quote Button Under Headline */
-.quote-btn-home {
-  margin-top: 3rem;
+.outline-btn-home {
+  margin-top: 1.5rem;
   padding: 0.8em 2em;
-  background: #00d4ff;
-  color: black;
+  background: transparent;
+  color: #00d4ff;
   font-weight: bold;
-  border: none;
+  border: 2px solid #00d4ff;
   border-radius: 14px;
   text-decoration: none;
   font-size: 1.5rem;
   cursor: pointer;
   align-self: flex-start;
-  animation: fadeInUp 1.5s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
+
+.outline-btn-home:hover {
+  background: #00d4ff;
+  color: black;
+}
+
 
 .quote-btn-home:hover {
   background: white;

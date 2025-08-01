@@ -298,3 +298,47 @@ h1, h2, h3 {
 .quote-form button:hover {
   background: white;
 }
+.services-section {
+  padding: 4em 2em;
+  text-align: center;
+}
+
+.services-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 3rem;
+}
+
+.service-card {
+  width: 250px;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+}
+
+.service-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.service-card img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255,255,255,0.3);
+}
+
+.service-card p {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+}

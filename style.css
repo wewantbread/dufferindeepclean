@@ -3,10 +3,21 @@
 
 /* Global Reset */
 * {
-  a {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  animation-fill-mode: both;
+}
+
+a {
   text-decoration: none;
   color: white;
 }
+
+a:visited {
+  color: white;
+}
+
 
 a:visited {
   color: white;
@@ -346,4 +357,22 @@ h1, h2, h3 {
   margin-top: 2rem; /* was 3rem before — try adjusting */
   margin-bottom: 1.5rem; /* ADD this to create space below */
   /* rest stays the same */
+}
+.quote-btn-home {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 0.8em 2em;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: background 0.3s ease, transform 0.3s ease;
 }

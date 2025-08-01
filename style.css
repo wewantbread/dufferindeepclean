@@ -712,50 +712,60 @@ body.services-body {
 .services-body {
   background: black;
   color: white;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 2rem;
 }
 
 .services-page {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 2rem;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .services-left {
   flex: 1;
-  padding-right: 2rem;
+  min-width: 280px;
 }
 
 .services-list {
   list-style-type: disc;
-  padding-left: 1.5rem;
-  margin-top: 1rem;
+  padding-left: 20px;
 }
 
 .hook-text {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   font-style: italic;
+  color: #ccc;
 }
 
 .services-gallery {
-  flex: 1;
+  flex: 2;
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
   gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.hover-thumb {
-  width: 100px;
-  height: auto;
-  border-radius: 8px;
+.gallery-card {
+  background: #1c1c1c;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 30%;
+  box-sizing: border-box;
+  text-align: center;
   transition: transform 0.3s ease;
 }
 
-.hover-thumb:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+.gallery-card:hover {
+  transform: scale(1.05);
+}
+
+.gallery-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
 }

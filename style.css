@@ -342,3 +342,8 @@ h1, h2, h3 {
   opacity: 0;
   animation-delay: 0.4s;
 }
+.quote-btn-home {
+  margin-top: 2rem; /* was 3rem before — try adjusting */
+  margin-bottom: 1.5rem; /* ADD this to create space below */
+  /* rest stays the same */
+}

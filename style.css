@@ -229,3 +229,65 @@ h1, h2, h3 {
     transform: translateY(0);
   }
 }
+/* Main CTA buttons */
+.quote-btn-home {
+  margin-top: 2rem;
+  margin-bottom: 1.2rem;
+  padding: 0.8em 2em;
+  background: #00d4ff;
+  color: black;
+  font-weight: bold;
+  border: none;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s ease;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.outline-btn-home {
+  margin-top: 0;
+  padding: 0.8em 2em;
+  background: transparent;
+  color: #00d4ff;
+  font-weight: bold;
+  border: 2px solid #00d4ff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.3s ease, color 0.3s ease;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  animation-delay: 0.3s;
+}
+
+.outline-btn-home:hover {
+  background: #00d4ff;
+  color: black;
+}
+
+/* Optional: restore text styles */
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+.subtext {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.headline span {
+  text-decoration: none;
+}

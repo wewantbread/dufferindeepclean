@@ -9,6 +9,24 @@
   animation-fill-mode: both;
 }
 
+/* Remove all underlines globally */
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+a:visited {
+  color: #00d4ff;
+  text-decoration: none !important;
+}
+
+a:link {
+  text-decoration: none !important;
+}
+
 /* Body with animated cyber grid */
 body {
   font-family: 'Inter', sans-serif;
@@ -135,7 +153,7 @@ h1, h2, h3 {
 /* Nav Links */
 .nav-links a {
   margin-left: 2rem;
-  text-decoration: none;
+  text-decoration: none !important;
   color: #eee;
   font-size: 1rem;
   position: relative;
@@ -144,6 +162,7 @@ h1, h2, h3 {
 
 .nav-links a:hover {
   color: #00d4ff;
+  text-decoration: none !important;
 }
 
 /* Split Layout */
@@ -268,7 +287,7 @@ h1, h2, h3 {
 
 .services-header {
   text-align: center;
-  padding: 4em 2em 2em;
+  padding: 3em 2em 1em;
 }
 
 .services-header h1 {
@@ -290,17 +309,17 @@ h1, h2, h3 {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 3rem;
-  padding: 4em 3em;
-  max-width: 1200px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding: 2em 2em;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .service-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
   transition: all 0.4s ease;
   border: 2px solid transparent;
@@ -336,14 +355,17 @@ h1, h2, h3 {
   background: rgba(0, 212, 255, 0.1);
 }
 
-.service-icon {
-  font-size: 4rem;
-  margin-bottom: 1.5rem;
+.service-image {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border-radius: 15px;
   transition: transform 0.3s ease;
 }
 
-.service-card:hover .service-icon {
-  transform: scale(1.2) rotate(5deg);
+.service-card:hover .service-image {
+  transform: scale(1.05);
 }
 
 .service-card h3 {
@@ -428,24 +450,29 @@ h1, h2, h3 {
     flex-direction: column;
     height: auto;
   }
-  
+
   .text-side, .image-side {
     flex: none;
   }
-  
+
   .headline {
     font-size: 2.5rem;
   }
-  
+
   .services-grid {
     grid-template-columns: 1fr;
     padding: 2em 1em;
   }
-  
+
+  .service-image {
+    width: 150px;
+    height: 150px;
+  }
+
   .navbar {
     padding: 1em 2em;
   }
-  
+
   .logo {
     font-size: 1.5rem;
   }

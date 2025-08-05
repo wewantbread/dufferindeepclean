@@ -530,12 +530,12 @@ h1, h2, h3 {
   width: 200%;
   height: 200%;
   background: repeating-radial-gradient(
-    circle,
-    rgba(255, 165, 0, 0.2) 0px,
-    rgba(255, 165, 0, 0.2) 1px,
-    transparent 2px,
-    transparent 20px
-  );
+  circle,
+  rgba(255, 165, 0, 0.2) 0px,
+  rgba(0, 212, 255, 0.2) 1px,
+  transparent 2px,
+  transparent 20px
+);
   animation: rotateGrid 60s linear infinite;
   z-index: 0;
   pointer-events: none;

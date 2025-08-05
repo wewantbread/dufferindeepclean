@@ -29,13 +29,11 @@ a:link {
 
 /* Body with animated cyber grid */
 body {
-  body {
   font-family: 'Inter', sans-serif;
   color: white;
   min-height: 100vh;
   background-color: #000;
   position: relative;
-}
   background-image:
     linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
@@ -173,6 +171,8 @@ h1, h2, h3 {
   display: flex;
   height: 90vh;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .text-side {
@@ -183,8 +183,8 @@ h1, h2, h3 {
   padding: 4em;
   background-color: #000;
   background-image:
-  linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(0deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 25px 25px;
   background-position: 0 0;
   animation: cyberGrid 45s linear infinite;
@@ -194,17 +194,22 @@ h1, h2, h3 {
   flex: 1;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  position: relative; /* NEW: Needed for gradient overlay */
+  position: relative;
+  z-index: 1;
 }
 
-.image-side img {
-  width: 100%;
+.image-side::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
-  object-fit: cover;
-  position: relative; /* NEW: Makes sure the image stays behind the gradient */
-  z-index: 0;         /* NEW: Keeps image under the overlay */
+  width: 120px;
+  background: linear-gradient(to right, black, transparent);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .image-side img {
@@ -213,10 +218,8 @@ h1, h2, h3 {
   object-fit: cover;
   position: relative;
   z-index: 0;
-
-  transform: translateX(-40px); /* scoot left */
+  transform: translateX(-40px);
 }
-
 
 /* Headline */
 .headline {
@@ -520,6 +523,7 @@ h1, h2, h3 {
     font-size: 1.5rem;
   }
 }
+
 .orbital-grid {
   position: relative;
   overflow: hidden;
@@ -534,12 +538,12 @@ h1, h2, h3 {
   width: 200%;
   height: 200%;
   background: repeating-radial-gradient(
-  circle,
-  rgba(255, 165, 0, 0.2) 0px,
-  rgba(0, 212, 255, 0.2) 1px,
-  transparent 2px,
-  transparent 20px
-);
+    circle,
+    rgba(255, 165, 0, 0.2) 0px,
+    rgba(0, 212, 255, 0.2) 1px,
+    transparent 2px,
+    transparent 20px
+  );
   animation: rotateGrid 60s linear infinite;
   z-index: 0;
   pointer-events: none;
@@ -552,9 +556,4 @@ h1, h2, h3 {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.split-screen {
-  position: relative;
-  z-index: 1;
 }

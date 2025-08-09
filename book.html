@@ -6,6 +6,213 @@
   <title>Book Online — DufferinDeepClean</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Minimal, safe inline styles to guarantee the new background + step bar look -->
+  <style>
+    :root{
+      --bg-card: rgba(10, 12, 16, 0.72);
+      --bg-stepper: rgba(0, 0, 0, 0.65);
+      --text: #f2f5f8;
+      --muted: #b6c2cf;
+      --brand: #4cc3ff;
+      --brand-2: #00e0a4;
+      --border: rgba(255,255,255,0.08);
+      --done: #00d084;
+      --active: #ffd166;
+    }
+
+    /* Full-page background image */
+    html, body {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background-image: url('backgroundbook.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+
+    /* Subtle overlay to ensure readability over the background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,0.45), rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85));
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* NAV (kept minimal) */
+    .navbar{
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 14px 22px; backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.5); border-bottom: 1px solid var(--border);
+    }
+    .logo{ display:flex; align-items:center; gap:.5rem; }
+    .logo-text{ text-decoration:none; font-weight:800; color:var(--text); text-transform:lowercase; letter-spacing:0.5px; }
+    .nav-links a{ color:var(--muted); text-decoration:none; margin-left:18px; }
+    .nav-links a:hover{ color:var(--text); }
+
+    /* Page section */
+    .booking{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: clamp(20px, 4vw, 48px);
+    }
+    .booking-title{
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: clamp(36px, 6vw, 72px);
+      letter-spacing: 1px;
+      margin: 10px 0 18px;
+      text-transform: lowercase;
+    }
+
+    /* Long centered step bar (rectangle) */
+    .stepper-wrap{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .stepper{
+      list-style: none; padding: 10px; margin: 0;
+      width: min(100%, 1050px);
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      background: var(--bg-stepper);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+    }
+    .stepper li{
+      padding: 14px 12px;
+      text-align: center;
+      border-radius: 12px;
+      font-weight: 600;
+      text-transform: lowercase;
+      color: var(--muted);
+      border: 1px dashed rgba(255,255,255,0.12);
+      transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .stepper li.done{
+      color: #0f0;
+      border-color: rgba(0, 208, 132, 0.35);
+      background: linear-gradient(180deg, rgba(0,208,132,0.12), rgba(0,208,132,0.05));
+    }
+    .stepper li.active{
+      color: #111; 
+      background: linear-gradient(180deg, #ffd166, #ffb703);
+      border-color: rgba(255, 183, 3, 0.65);
+      transform: translateY(-1px);
+    }
+
+    /* The main “application” card */
+    .booking-card{
+      margin: 18px auto 0;
+      width: min(100%, 1050px);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+    }
+
+    .booking-form, .booking-success{
+      padding: clamp(16px, 3vw, 28px);
+    }
+
+    fieldset{
+      border: none; margin: 0; padding: 0;
+    }
+    legend{
+      font-weight: 800; font-size: 1.2rem; margin-bottom: 14px;
+    }
+    .muted{ color: var(--muted); }
+
+    .grid-2{
+      display: grid; gap: 14px;
+      grid-template-columns: 1fr;
+    }
+    .grid-2 .wide{ grid-column: 1 / -1; }
+    @media (min-width: 720px){
+      .grid-2{ grid-template-columns: 1fr 1fr; }
+    }
+
+    label{ display:flex; flex-direction:column; gap:6px; font-size: .95rem; }
+    input, select, textarea{
+      border-radius: 12px; border: 1px solid var(--border); padding: 12px 12px;
+      background: rgba(255,255,255,0.05); color: var(--text);
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(76, 195, 255, 0.7);
+      box-shadow: 0 0 0 3px rgba(76, 195, 255, 0.25);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .plans{
+      display:grid; gap:12px; grid-template-columns: 1fr;
+    }
+    @media (min-width: 840px){
+      .plans{ grid-template-columns: repeat(3, 1fr); }
+    }
+    .plan{ display:block; }
+    .plan input{ display:none; }
+    .plan-card{
+      border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+      background: rgba(255,255,255,0.04);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .plan input:checked + .plan-card{
+      border-color: rgba(0,208,132,0.6);
+      background: linear-gradient(180deg, rgba(0,208,132,0.12), rgba(0,208,132,0.05));
+      transform: translateY(-1px);
+    }
+    .plan-title{ font-weight: 800; }
+    .plan-discount{ color: #00d084; font-weight: 700; }
+    .plan-note{ color: var(--muted); font-size: .9rem; }
+
+    .actions{
+      margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap;
+    }
+    .btn{
+      appearance: none; border: 1px solid var(--border); color: #0b0d10;
+      background: linear-gradient(180deg, #4cc3ff, #00e0a4);
+      font-weight: 800; border-radius: 12px; padding: 10px 16px; cursor: pointer;
+    }
+    .btn.back{
+      background: rgba(255,255,255,0.06); color: var(--text);
+    }
+    .btn:hover{ filter: brightness(1.05); }
+
+    /* Package descriptions */
+    .package-desc{
+      border: 1px dashed rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Review list */
+    .review{
+      display:grid; gap:10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .review dt{
+      font-weight: 700; color: var(--muted);
+    }
+    .review dd{
+      margin: 0 0 10px;
+    }
+  </style>
 </head>
 <body>
   <!-- NAV -->
@@ -25,204 +232,222 @@
   <section class="booking">
     <h1 class="booking-title">book online</h1>
 
-    <!-- Stepper -->
-    <ol class="stepper" id="stepper">
-      <li class="active">1. when &amp; where</li>
-      <li>2. how often</li>
-      <li>3. cleaning type</li>
-      <li>4. your details</li>
-    </ol>
+    <!-- Long, centered step rectangle -->
+    <div class="stepper-wrap">
+      <ol class="stepper" id="stepper">
+        <li class="active">1. when &amp; where</li>
+        <li>2. how often</li>
+        <li>3. cleaning type</li>
+        <li>4. your details</li>
+        <li>5. review &amp; confirm</li>
+      </ol>
+    </div>
 
-    <form id="bookingForm" class="booking-form" novalidate>
-      <!-- STEP 1: When & Where -->
-      <fieldset class="step" data-step="1">
-        <legend>When &amp; Where</legend>
-        <div class="grid-2">
-          <label>
-            Business name (optional)
-            <input type="text" name="business" placeholder="ACME Distribution" />
-          </label>
-          <label>
-            Address
-            <input type="text" name="address" placeholder="123 Main St" required />
-          </label>
-          <label>
-            City
-            <input type="text" name="city" placeholder="Orangeville" required />
-          </label>
-          <label>
-            Postal Code
-            <input type="text" name="postal" placeholder="L9W 1A1" required />
-          </label>
-          <label>
-            Preferred date
-            <input type="date" name="date" required />
-          </label>
-          <label>
-            Preferred time
-            <input type="time" name="time" required />
-          </label>
-          <label class="wide">
-            Approx. square footage
-            <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" required />
-          </label>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn next">Next</button>
-        </div>
-      </fieldset>
-
-      <!-- STEP 2: How Often (with discounts) -->
-      <fieldset class="step" data-step="2" hidden>
-        <legend>How Often?</legend>
-        <p class="muted">Save on recurring cleanings. Choose a frequency.</p>
-        <div class="plans">
-          <label class="plan">
-            <input type="radio" name="frequency" value="weekly" required />
-            <div class="plan-card">
-              <div class="plan-title">Weekly</div>
-              <div class="plan-discount">25% off</div>
-              <div class="plan-note">Best value &amp; consistency</div>
-            </div>
-          </label>
-          <label class="plan">
-            <input type="radio" name="frequency" value="biweekly" />
-            <div class="plan-card">
-              <div class="plan-title">Bi-Weekly</div>
-              <div class="plan-discount">20% off</div>
-              <div class="plan-note">Great for busy offices</div>
-            </div>
-          </label>
-          <label class="plan">
-            <input type="radio" name="frequency" value="triweekly" />
-            <div class="plan-card">
-              <div class="plan-title">Tri-Weekly</div>
-              <div class="plan-discount">15% off</div>
-              <div class="plan-note">Light traffic spaces</div>
-            </div>
-          </label>
-          <label class="plan">
-            <input type="radio" name="frequency" value="monthly" />
-            <div class="plan-card">
-              <div class="plan-title">Monthly</div>
-              <div class="plan-discount">10% off</div>
-              <div class="plan-note">Routine upkeep</div>
-            </div>
-          </label>
-          <label class="plan">
-            <input type="radio" name="frequency" value="biannual" />
-            <div class="plan-card">
-              <div class="plan-title">Biannual</div>
-              <div class="plan-discount">5% off</div>
-              <div class="plan-note">Seasonal refresh</div>
-            </div>
-          </label>
-          <label class="plan">
-            <input type="radio" name="frequency" value="onetime" />
-            <div class="plan-card">
-              <div class="plan-title">One-time</div>
-              <div class="plan-discount">—</div>
-              <div class="plan-note">Deep clean on demand</div>
-            </div>
-          </label>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn back">Back</button>
-          <button type="button" class="btn next">Next</button>
-        </div>
-      </fieldset>
-
-      <!-- STEP 3: Cleaning Type + Packages -->
-      <fieldset class="step" data-step="3" hidden>
-        <legend>What type of cleaning?</legend>
-        <div class="grid-2">
-          <label class="wide">
-            Select a package
-            <select name="package" id="package" required>
-              <option value="" disabled selected>Choose a package…</option>
-              <option value="industrial">🏭 Industrial &amp; Warehouse Care</option>
-              <option value="office">🖥️ Office &amp; Corporate Cleaning</option>
-              <option value="specialty">🪟 Specialty Facility Services</option>
-            </select>
-          </label>
-
-          <!-- Industrial -->
-          <div class="package-desc" id="pkg-industrial" hidden>
-            <h4>🏭 Industrial &amp; Warehouse Care</h4>
-            <p class="muted"><strong>Tagline:</strong> Heavy-duty cleaning for high-demand environments.<br/><strong>Ideal for:</strong> Factories, distribution centers, and large-scale workspaces.</p>
-            <ul>
-              <li>High-dusting and overhead beam cleaning</li>
-              <li>Sweeping, scrubbing, and degreasing of production floors</li>
-              <li>Equipment and machinery wipe-downs</li>
-              <li>Loading dock and storage area cleaning</li>
-              <li>Restroom cleaning and sanitation for high-traffic use</li>
-            </ul>
+    <!-- Application card -->
+    <div class="booking-card">
+      <form id="bookingForm" class="booking-form" novalidate>
+        <!-- STEP 1: When & Where -->
+        <fieldset class="step" data-step="1">
+          <legend>When &amp; Where</legend>
+          <div class="grid-2">
+            <label>
+              Business name (optional)
+              <input type="text" name="business" placeholder="ACME Distribution" />
+            </label>
+            <label>
+              Address
+              <input type="text" name="address" placeholder="123 Main St" required />
+            </label>
+            <label>
+              City
+              <input type="text" name="city" placeholder="Orangeville" required />
+            </label>
+            <label>
+              Postal Code
+              <input type="text" name="postal" placeholder="L9W 1A1" required />
+            </label>
+            <label>
+              Preferred date
+              <input type="date" name="date" required />
+            </label>
+            <label>
+              Preferred time
+              <input type="time" name="time" required />
+            </label>
+            <label class="wide">
+              Approx. square footage
+              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" required />
+            </label>
           </div>
-
-          <!-- Office -->
-          <div class="package-desc" id="pkg-office" hidden>
-            <h4>🖥️ Office &amp; Corporate Cleaning</h4>
-            <p class="muted"><strong>Tagline:</strong> A spotless, professional image for your business.<br/><strong>Ideal for:</strong> Offices, corporate headquarters, and professional buildings.</p>
-            <ul>
-              <li>Daily surface and workstation cleaning</li>
-              <li>Waste removal and recycling service</li>
-              <li>Floor care: vacuuming, mopping, and spot-cleaning carpets</li>
-              <li>Reception and common-area tidying</li>
-              <li>Restroom cleaning and supply replenishment</li>
-            </ul>
+          <div class="actions">
+            <button type="button" class="btn next">Next</button>
           </div>
+        </fieldset>
 
-          <!-- Specialty -->
-          <div class="package-desc" id="pkg-specialty" hidden>
-            <h4>🪟 Specialty Facility Services</h4>
-            <p class="muted"><strong>Tagline:</strong> Targeted deep-cleaning for the areas that matter most.<br/><strong>Ideal for:</strong> Businesses needing targeted or seasonal deep-cleaning.</p>
-            <ul>
-              <li>Window washing and glass polishing (interior &amp; exterior)</li>
-              <li>Cafeteria / lunchroom cleaning and sanitization</li>
-              <li>Washroom deep-clean and disinfection</li>
-              <li>Touchpoint sanitization (doors, handles, switches)</li>
-              <li>Post-construction or move-out cleaning</li>
-            </ul>
+        <!-- STEP 2: How Often -->
+        <fieldset class="step" data-step="2" hidden>
+          <legend>How Often?</legend>
+          <p class="muted">Save on recurring cleanings. Choose a frequency.</p>
+          <div class="plans">
+            <label class="plan">
+              <input type="radio" name="frequency" value="weekly" required />
+              <div class="plan-card">
+                <div class="plan-title">Weekly</div>
+                <div class="plan-discount">25% off</div>
+                <div class="plan-note">Best value &amp; consistency</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="biweekly" />
+              <div class="plan-card">
+                <div class="plan-title">Bi-Weekly</div>
+                <div class="plan-discount">20% off</div>
+                <div class="plan-note">Great for busy offices</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="triweekly" />
+              <div class="plan-card">
+                <div class="plan-title">Tri-Weekly</div>
+                <div class="plan-discount">15% off</div>
+                <div class="plan-note">Light traffic spaces</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="monthly" />
+              <div class="plan-card">
+                <div class="plan-title">Monthly</div>
+                <div class="plan-discount">10% off</div>
+                <div class="plan-note">Routine upkeep</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="biannual" />
+              <div class="plan-card">
+                <div class="plan-title">Biannual</div>
+                <div class="plan-discount">5% off</div>
+                <div class="plan-note">Seasonal refresh</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="onetime" />
+              <div class="plan-card">
+                <div class="plan-title">One-time</div>
+                <div class="plan-discount">—</div>
+                <div class="plan-note">Deep clean on demand</div>
+              </div>
+            </label>
           </div>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn back">Back</button>
-          <button type="button" class="btn next">Next</button>
-        </div>
-      </fieldset>
+          <div class="actions">
+            <button type="button" class="btn back">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
 
-      <!-- STEP 4: Contact -->
-      <fieldset class="step" data-step="4" hidden>
-        <legend>Your contact information</legend>
-        <div class="grid-2">
-          <label>
-            Full name
-            <input type="text" name="name" placeholder="Jane Smith" required />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" placeholder="you@company.com" required />
-          </label>
-          <label>
-            Phone
-            <input type="tel" name="phone" placeholder="(555) 555-5555" required />
-          </label>
-          <label class="wide">
-            Notes (optional)
-            <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
-          </label>
-        </div>
-        <div class="actions">
-          <button type="button" class="btn back">Back</button>
-          <button type="submit" class="btn submit">Submit</button>
-        </div>
-      </fieldset>
-    </form>
+        <!-- STEP 3: Cleaning Type + Packages -->
+        <fieldset class="step" data-step="3" hidden>
+          <legend>What type of cleaning?</legend>
+          <div class="grid-2">
+            <label class="wide">
+              Select a package
+              <select name="package" id="package" required>
+                <option value="" disabled selected>Choose a package…</option>
+                <option value="industrial">🏭 Industrial &amp; Warehouse Care</option>
+                <option value="office">🖥️ Office &amp; Corporate Cleaning</option>
+                <option value="specialty">🪟 Specialty Facility Services</option>
+              </select>
+            </label>
 
-    <div id="bookingSuccess" class="booking-success" hidden>
-      <h2>Thanks! Your request has been received.</h2>
-      <p>We’ll get back to you within one business day to confirm your booking.</p>
-      <a href="index.html" class="btn">Back to Home</a>
+            <!-- Industrial -->
+            <div class="package-desc" id="pkg-industrial" hidden>
+              <h4>🏭 Industrial &amp; Warehouse Care</h4>
+              <p class="muted"><strong>Tagline:</strong> Heavy-duty cleaning for high-demand environments.<br/><strong>Ideal for:</strong> Factories, distribution centers, and large-scale workspaces.</p>
+              <ul>
+                <li>High-dusting and overhead beam cleaning</li>
+                <li>Sweeping, scrubbing, and degreasing of production floors</li>
+                <li>Equipment and machinery wipe-downs</li>
+                <li>Loading dock and storage area cleaning</li>
+                <li>Restroom cleaning and sanitation for high-traffic use</li>
+              </ul>
+            </div>
+
+            <!-- Office -->
+            <div class="package-desc" id="pkg-office" hidden>
+              <h4>🖥️ Office &amp; Corporate Cleaning</h4>
+              <p class="muted"><strong>Tagline:</strong> A spotless, professional image for your business.<br/><strong>Ideal for:</strong> Offices, corporate headquarters, and professional buildings.</p>
+              <ul>
+                <li>Daily surface and workstation cleaning</li>
+                <li>Waste removal and recycling service</li>
+                <li>Floor care: vacuuming, mopping, and spot-cleaning carpets</li>
+                <li>Reception and common-area tidying</li>
+                <li>Restroom cleaning and supply replenishment</li>
+              </ul>
+            </div>
+
+            <!-- Specialty -->
+            <div class="package-desc" id="pkg-specialty" hidden>
+              <h4>🪟 Specialty Facility Services</h4>
+              <p class="muted"><strong>Tagline:</strong> Targeted deep-cleaning for the areas that matter most.<br/><strong>Ideal for:</strong> Businesses needing targeted or seasonal deep-cleaning.</p>
+              <ul>
+                <li>Window washing and glass polishing (interior &amp; exterior)</li>
+                <li>Cafeteria / lunchroom cleaning and sanitization</li>
+                <li>Washroom deep-clean and disinfection</li>
+                <li>Touchpoint sanitization (doors, handles, switches)</li>
+                <li>Post-construction or move-out cleaning</li>
+              </ul>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn back">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <!-- STEP 4: Contact -->
+        <fieldset class="step" data-step="4" hidden>
+          <legend>Your contact information</legend>
+          <div class="grid-2">
+            <label>
+              Full name
+              <input type="text" name="name" placeholder="Jane Smith" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="you@company.com" required />
+            </label>
+            <label>
+              Phone
+              <input type="tel" name="phone" placeholder="(555) 555-5555" required />
+            </label>
+            <label class="wide">
+              Notes (optional)
+              <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
+            </label>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn back">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <!-- STEP 5: Review & Confirm -->
+        <fieldset class="step" data-step="5" hidden>
+          <legend>Review &amp; Confirm</legend>
+          <dl class="review" id="reviewList">
+            <!-- Filled by JS -->
+          </dl>
+          <div class="actions">
+            <button type="button" class="btn back">Back</button>
+            <button type="submit" class="btn submit">Submit</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div id="bookingSuccess" class="booking-success" hidden>
+        <h2>Thanks! Your request has been received.</h2>
+        <p>We’ll get back to you within one business day to confirm your booking.</p>
+        <a href="index.html" class="btn">Back to Home</a>
+      </div>
     </div>
   </section>
 
@@ -240,6 +465,7 @@
       const form = document.getElementById('bookingForm');
       const steps = Array.from(document.querySelectorAll('.step'));
       const stepper = document.getElementById('stepper').children;
+      const reviewList = document.getElementById('reviewList');
       let current = 0;
 
       function showStep(i){
@@ -249,6 +475,7 @@
           li.classList.toggle('done', idx < i);
         });
         current = i;
+        if (i === 4) buildReview(); // step index 4 = "Step 5"
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
@@ -280,9 +507,43 @@
           specialty: document.getElementById('pkg-specialty')
         };
         Object.values(blocks).forEach(b=> b.hidden = true);
-        if(blocks[pkg.value]) blocks[pkg.value].hidden = false;
+        if (blocks[pkg.value]) blocks[pkg.value].hidden = false;
       }
       if(pkg){ pkg.addEventListener('change', updatePkg); }
+
+      // Build the review summary
+      function buildReview(){
+        const fd = new FormData(form);
+        const freqMap = {
+          weekly: 'Weekly (25% off)',
+          biweekly: 'Bi-Weekly (20% off)',
+          triweekly: 'Tri-Weekly (15% off)',
+          monthly: 'Monthly (10% off)',
+          biannual: 'Biannual (5% off)',
+          onetime: 'One-time'
+        };
+        const pkgMap = {
+          industrial: '🏭 Industrial & Warehouse Care',
+          office: '🖥️ Office & Corporate Cleaning',
+          specialty: '🪟 Specialty Facility Services'
+        };
+
+        const rows = [
+          ['Business', fd.get('business') || '—'],
+          ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
+          ['Preferred Date', fd.get('date') || '—'],
+          ['Preferred Time', fd.get('time') || '—'],
+          ['Approx. Sq Ft', fd.get('sqft') || '—'],
+          ['Frequency', freqMap[fd.get('frequency')] || '—'],
+          ['Package', pkgMap[fd.get('package')] || '—'],
+          ['Full Name', fd.get('name') || '—'],
+          ['Email', fd.get('email') || '—'],
+          ['Phone', fd.get('phone') || '—'],
+          ['Notes', (fd.get('notes') || '—')]
+        ];
+
+        reviewList.innerHTML = rows.map(([k,v])=> `<dt>${k}</dt><dd>${String(v).replace(/</g,'&lt;')}</dd>`).join('');
+      }
 
       // init
       showStep(0);

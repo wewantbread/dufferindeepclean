@@ -405,3 +405,32 @@ html.ios .text-side::before {
 /* Bigger, bolder, BLACK text on iOS */
 html.ios .headline {
   font-si
+/* ===== iOS-ONLY: black text + green buttons ===== */
+html.ios .headline,
+html.ios .subtext {
+  color: black !important;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7); /* subtle pop */
+}
+
+html.ios .quote-btn-home,
+html.ios .services-btn-home {
+  background: #00ff88 !important;  /* neon green */
+  color: black !important;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0.8em 2em;
+  text-transform: lowercase;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+html.ios .quote-btn-home:hover,
+html.ios .services-btn-home:hover {
+  background: #00cc6d !important;  /* darker green on hover */
+  transform: translateY(-2px);
+}
+
+html.ios .services-btn-home {
+  border: 2px solid transparent; /* match solid button look */
+}

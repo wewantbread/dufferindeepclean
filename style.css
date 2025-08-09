@@ -367,7 +367,7 @@ html, body { height: -webkit-fill-available; }
 /* Requires the small detector script that adds .ios to <html> on iPhone/iPad */
 
 html.ios .split-screen {
-  /* Stack for iOS only, but not fixed-overlay—let it flow */
+  /* Stack for iOS only, let it flow */
   flex-direction: column;
   height: auto;
 }
@@ -394,59 +394,87 @@ html.ios .text-side {
   position: relative;
 }
 
-/* Top gradient so text reads over bright areas */
+/* LIGHT top gradient so BLACK text reads over bright areas */
 html.ios .text-side::before {
   content: "";
-  position: absolute; inset: 0 0 auto 0; height: 35%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
-  z-index: 1; pointer-events: none;
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 35%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* Bigger, bolder, BLACK text on iOS */
 html.ios .headline {
-  font-si
-/* ===== iOS-ONLY: black text + green buttons ===== */
-html.ios .headline,
+  font-size: 3rem;
+  line-height: 1.15;
+  font-weight: 900;
+  color: #000;
+  position: relative;
+  z-index: 2;
+}
 html.ios .subtext {
-  color: black !important;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.7); /* subtle pop */
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #000;
+  max-width: 30ch;
+  position: relative;
+  z-index: 2;
 }
 
+/* Subtle halo so text pops on busy areas */
+html.ios .headline,
+html.ios .subtext {
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.65);
+}
+
+/* iOS buttons: green + black, both CTAs match */
 html.ios .quote-btn-home,
 html.ios .services-btn-home {
   background: #00ff88 !important;  /* neon green */
-  color: black !important;
+  color: #000 !important;
   border: none;
   border-radius: 14px;
-  font-weight: bold;
+  font-weight: 800;
   font-size: 1.5rem;
   padding: 0.8em 2em;
   text-transform: lowercase;
   transition: background 0.3s ease, transform 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
-
 html.ios .quote-btn-home:hover,
 html.ios .services-btn-home:hover {
-  background: #00cc6d !important;  /* darker green on hover */
+  background: #00cc6d !important;
   transform: translateY(-2px);
 }
 
-html.ios .services-btn-home {
-  border: 2px solid transparent; /* match solid button look */
-}
-/* === Moving announcement bar === */
+/* Keep navbar above everything */
+html.ios .navbar { z-index: 1003; }
+
+/* Optional: avoid scroll-jumps on iOS */
+html.ios, html.ios body { height: 100%; }
+
+/* =========================
+   Moving announcement bar
+   ========================= */
 .announcement {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: #000; /* desktop dark */
+  background: #000; /* dark bar on desktop */
   border-bottom: 1px solid rgba(255,255,255,0.1);
   z-index: 999;
 }
 .announcement-track {
-  display: flex;
-  width: max-content;
-  white-space: nowrap;
+  display: flex;              /* two children side-by-side */
+  width: max-content;         /* shrink to content for smooth scroll */
+  white-space: nowrap;        /* keep items on one line */
   will-change: transform;
   animation: announcer 28s linear infinite;
 }
@@ -454,41 +482,34 @@ html.ios .services-btn-home {
   display: inline-flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 0.75rem 2rem;
+  padding: 0.75rem 2rem;      /* this padding creates the bar's "rectangle" look */
   font-size: 1rem;
   color: #f2f2f2;
 }
-.announcement-items span {
-  opacity: 0.95;
-}
+.announcement-items span { opacity: 0.95; }
 
-/* Button inside announcement */
+/* Button inside the bar */
 .announcement-cta {
   display: inline-block;
   padding: 0.45em 1.1em;
   font-weight: 700;
   font-size: 0.95rem;
   border-radius: 999px;
-  background: #00d4ff;
+  background: #00d4ff;        /* cyan on desktop */
   color: #000 !important;
   border: none;
   transition: transform .2s ease, background .2s ease, opacity .2s ease;
 }
-.announcement-cta:hover {
-  transform: translateY(-1px);
-  background: #ffffff;
-}
+.announcement-cta:hover { transform: translateY(-1px); background: #ffffff; }
 
-/* Seamless loop animation */
+/* Seamless loop: translate by half because we duplicated the content */
 @keyframes announcer {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
 /* Pause on hover (desktop) */
-.announcement:hover .announcement-track {
-  animation-play-state: paused;
-}
+.announcement:hover .announcement-track { animation-play-state: paused; }
 
 /* Mobile tweaks */
 @media (max-width: 768px) {
@@ -496,18 +517,19 @@ html.ios .services-btn-home {
   .announcement-cta { font-size: 0.9rem; padding: 0.45em 1em; }
 }
 
-/* iOS overrides: green buttons + black text */
+/* iOS-only: light bar + green buttons + black text */
 html.ios .announcement {
-  background: #f6f7f8; /* light bar so black text pops */
+  background: #f6f7f8;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
-html.ios .announcement-items {
-  color: #000 !important;
-}
+html.ios .announcement-items { color: #000 !important; }
 html.ios .announcement-cta {
   background: #00ff88 !important;
   color: #000 !important;
 }
-html.ios .announcement-cta:hover {
-  background: #00cc6d !important;
+html.ios .announcement-cta:hover { background: #00cc6d !important; }
+
+/* Respect reduced motion (remove if you want it to always animate) */
+@media (prefers-reduced-motion: reduce) {
+  .announcement-track { animation: none; }
 }

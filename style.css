@@ -585,3 +585,64 @@ h1, h2, h3 {
 html, body {
   height: -webkit-fill-available;
 }
+/* ===== iOS-only hero overlay (keeps desktop exactly as-is) ===== */
+html.ios .split-screen {
+  /* Override your mobile column stack only on iOS */
+  display: block !important;
+  position: relative;
+  height: 100svh;              /* modern iOS viewport unit */
+  min-height: 100svh;
+  overflow: hidden;
+}
+
+html.ios .image-side {
+  position: relative;
+  height: 100%;
+  z-index: 1;
+}
+
+html.ios .image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: none;             /* undo the -40px shift */
+}
+
+/* Remove the left fade band that was meant for split layout */
+html.ios .image-side::after { display: none; }
+
+/* Put the text on top of the image, readable, same screen */
+html.ios .text-side {
+  position: absolute;
+  inset: 0;                    /* cover image */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;   /* sit near bottom for CTA focus */
+  padding: 4em 1.5em calc(1.5em + env(safe-area-inset-bottom));
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.65) 85%);
+  /* Turn off the animated grid behind text so it stays clean on overlay */
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.65) 85%);
+}
+
+html.ios .text-side .subtext {
+  color: #e6e6e6;
+  max-width: 30ch;
+}
+
+/* Buttons sit nicely on overlay */
+html.ios .quote-btn-home,
+html.ios .services-btn-home {
+  align-self: flex-start;
+}
+
+/* Make headline a bit tighter on overlay */
+html.ios .headline { font-size: 2.3rem; line-height: 1.15; }
+
+/* Keep navbar above everything */
+html.ios .navbar { z-index: 1003; }
+
+/* Optional: avoid extra scroll-jumps on iOS */
+html.ios, html.ios body { height: 100%; }

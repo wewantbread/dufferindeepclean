@@ -10,22 +10,10 @@
 }
 
 /* Remove all underlines globally */
-a {
-  text-decoration: none !important;
-}
-
-a:hover {
-  text-decoration: none !important;
-}
-
-a:visited {
-  color: #00d4ff;
-  text-decoration: none !important;
-}
-
-a:link {
-  text-decoration: none !important;
-}
+a { text-decoration: none !important; }
+a:hover { text-decoration: none !important; }
+a:visited { color: #00d4ff; text-decoration: none !important; }
+a:link { text-decoration: none !important; }
 
 /* Body with animated cyber grid */
 body {
@@ -41,14 +29,9 @@ body {
   background-position: 0 0;
   animation: cyberGrid 45s linear infinite;
 }
-
 @keyframes cyberGrid {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 200px 200px;
-  }
+  0% { background-position: 0 0; }
+  100% { background-position: 200px 200px; }
 }
 
 /* Typography */
@@ -83,7 +66,6 @@ h1, h2, h3 {
   animation-delay: 0.2s;
   position: relative;
 }
-
 .logo .soap {
   font-size: 2.5rem;
   margin-right: 0.5rem;
@@ -94,7 +76,6 @@ h1, h2, h3 {
   animation-fill-mode: backwards;
   position: relative;
 }
-
 .logo .soap::after {
   content: '✨';
   position: absolute;
@@ -105,7 +86,6 @@ h1, h2, h3 {
   color: #fff;
   opacity: 0.8;
 }
-
 .logo-text {
   font-size: 1.8rem;
   text-transform: lowercase;
@@ -116,39 +96,17 @@ h1, h2, h3 {
 }
 
 @keyframes popIn {
-  0% {
-    transform: scale(0.5) rotate(-30deg);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.3) rotate(10deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.1) rotate(0deg);
-  }
+  0% { transform: scale(0.5) rotate(-30deg); opacity: 0; }
+  60% { transform: scale(1.3) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1.1) rotate(0deg); }
 }
-
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-
 @keyframes sparkle {
-  0%, 100% {
-    opacity: 0.8;
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2) rotate(20deg);
-  }
+  0%, 100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
+  50%      { opacity: 1;   transform: scale(1.2) rotate(20deg); }
 }
 
 /* Nav Links */
@@ -160,13 +118,9 @@ h1, h2, h3 {
   position: relative;
   transition: color 0.3s ease;
 }
+.nav-links a:hover { color: #00d4ff; text-decoration: none !important; }
 
-.nav-links a:hover {
-  color: #00d4ff;
-  text-decoration: none !important;
-}
-
-/* Split Layout */
+/* Split Layout (Desktop) */
 .split-screen {
   display: flex;
   height: 90vh;
@@ -174,7 +128,6 @@ h1, h2, h3 {
   position: relative;
   z-index: 1;
 }
-
 .text-side {
   flex: 1;
   display: flex;
@@ -189,7 +142,6 @@ h1, h2, h3 {
   background-position: 0 0;
   animation: cyberGrid 45s linear infinite;
 }
-
 .image-side {
   flex: 1;
   overflow: hidden;
@@ -199,19 +151,14 @@ h1, h2, h3 {
   position: relative;
   z-index: 1;
 }
-
 .image-side::after {
   content: "";
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 120px;
+  left: 0; top: 0;
+  height: 100%; width: 120px;
   background: linear-gradient(to right, black, transparent);
-  z-index: 2;
-  pointer-events: none;
+  z-index: 2; pointer-events: none;
 }
-
 .image-side img {
   width: 100%;
   height: 100%;
@@ -227,27 +174,19 @@ h1, h2, h3 {
   font-weight: 800;
   line-height: 1.2;
 }
-
 .headline span {
   display: inline-block;
   animation: fadeIn 1s ease forwards;
   opacity: 0;
 }
-
 .headline span:nth-child(1) { animation-delay: 0.3s; }
 .headline span:nth-child(2) { animation-delay: 0.6s; }
 .headline span:nth-child(3) { animation-delay: 0.9s; }
 .headline span:nth-child(4) { animation-delay: 1.2s; }
-
 .headline-image {
-  height: 1em;
-  width: auto;
-  display: inline-block;
-  margin-left: 0.5rem;
-  vertical-align: baseline;
-  animation: fadeIn 1s ease forwards;
-  opacity: 0;
-  animation-delay: 1.5s;
+  height: 1em; width: auto; display: inline-block;
+  margin-left: 0.5rem; vertical-align: baseline;
+  animation: fadeIn 1s ease forwards; opacity: 0; animation-delay: 1.5s;
 }
 
 /* Subtext */
@@ -259,12 +198,7 @@ h1, h2, h3 {
 }
 
 /* Fade-in for headline */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
 /* Quote Button Under Headline */
 .quote-btn-home {
@@ -284,21 +218,11 @@ h1, h2, h3 {
   transform: translateY(20px);
   transition: background 0.3s ease, transform 0.3s ease;
 }
+.quote-btn-home:hover { background: white; color: black !important; }
+.quote-btn-home:visited { color: black !important; }
+.quote-btn-home:link    { color: black !important; }
 
-.quote-btn-home:hover {
-  background: white;
-  color: black !important;
-}
-
-.quote-btn-home:visited {
-  color: black !important;
-}
-
-.quote-btn-home:link {
-  color: black !important;
-}
-
-/* Services Button Under Quote Button */
+/* Services Button Under Quote Button (desktop/mobile default) */
 .services-btn-home {
   margin-top: 1.5rem;
   padding: 0.8em 2em;
@@ -317,7 +241,6 @@ h1, h2, h3 {
   transition: all 0.3s ease;
   text-transform: lowercase;
 }
-
 .services-btn-home:hover {
   background: #00d4ff;
   color: black;
@@ -326,33 +249,15 @@ h1, h2, h3 {
 }
 
 /* Services Page Styles */
-.services-page {
-  min-height: 100vh;
-  padding: 2em 0;
-}
-
-.services-header {
-  text-align: center;
-  padding: 3em 2em 1em;
-}
-
+.services-page { min-height: 100vh; padding: 2em 0; }
+.services-header { text-align: center; padding: 3em 2em 1em; }
 .services-header h1 {
-  font-size: 3.5rem;
-  color: #00d4ff;
-  margin-bottom: 1rem;
-  animation: fadeInUp 0.8s ease forwards;
+  font-size: 3.5rem; color: #00d4ff; margin-bottom: 1rem; animation: fadeInUp 0.8s ease forwards;
 }
-
 .services-header p {
-  font-size: 1.2rem;
-  color: #ccc;
-  max-width: 600px;
-  margin: 0 auto;
-  animation: fadeInUp 1s ease forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
+  font-size: 1.2rem; color: #ccc; max-width: 600px; margin: 0 auto;
+  animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0;
 }
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -361,7 +266,6 @@ h1, h2, h3 {
   max-width: 1000px;
   margin: 0 auto;
 }
-
 .service-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
@@ -374,67 +278,36 @@ h1, h2, h3 {
   animation: fadeInUp 1s ease forwards;
   opacity: 0;
 }
-
 .service-card:nth-child(1) { animation-delay: 0.3s; }
 .service-card:nth-child(2) { animation-delay: 0.5s; }
 .service-card:nth-child(3) { animation-delay: 0.7s; }
-
 .service-card::before {
   content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
   transition: left 0.5s ease;
 }
-
-.service-card:hover::before {
-  left: 100%;
-}
-
+.service-card:hover::before { left: 100%; }
 .service-card:hover {
   transform: translateY(-10px);
   border-color: #00d4ff;
   box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
   background: rgba(0, 212, 255, 0.1);
 }
-
 .service-image {
-  width: 180px;
-  height: 180px;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  border-radius: 15px;
-  transition: transform 0.3s ease;
+  width: 180px; height: 180px; object-fit: cover;
+  margin-bottom: 1rem; border-radius: 15px; transition: transform 0.3s ease;
 }
-
-.service-card:hover .service-image {
-  transform: scale(1.05);
-}
-
+.service-card:hover .service-image { transform: scale(1.05); }
 .service-card h3 {
-  font-size: 2rem;
-  color: #00d4ff;
-  margin-bottom: 1rem;
-  transition: color 0.3s ease;
+  font-size: 2rem; color: #00d4ff; margin-bottom: 1rem; transition: color 0.3s ease;
 }
-
-.service-card:hover h3 {
-  color: white;
-}
-
+.service-card:hover h3 { color: white; }
 .service-card p {
-  color: #ccc;
-  line-height: 1.6;
-  font-size: 1rem;
-  transition: color 0.3s ease;
+  color: #ccc; line-height: 1.6; font-size: 1rem; transition: color 0.3s ease;
 }
-
-.service-card:hover p {
-  color: white;
-}
+.service-card:hover p { color: white; }
 
 /* Quote Page Section */
 .quote-form-section {
@@ -443,100 +316,35 @@ h1, h2, h3 {
   color: white;
   text-align: center;
 }
-
-.quote-form-section h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #00d4ff;
+.quote-form-section h1 { font-size: 2.5rem; margin-bottom: 2rem; color: #00d4ff; }
+.quote-form { max-width: 600px; margin: 0 auto; text-align: left; }
+.quote-form label { display: block; margin-top: 1.5rem; font-weight: bold; }
+.quote-form input, .quote-form textarea, .quote-form select {
+  width: 100%; padding: 0.8em; margin-top: 0.5rem; border: none; border-radius: 6px; background: #222; color: white;
 }
-
-.quote-form {
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.quote-form label {
-  display: block;
-  margin-top: 1.5rem;
-  font-weight: bold;
-}
-
-.quote-form input,
-.quote-form textarea,
-.quote-form select {
-  width: 100%;
-  padding: 0.8em;
-  margin-top: 0.5rem;
-  border: none;
-  border-radius: 6px;
-  background: #222;
-  color: white;
-}
-
 .quote-form button {
-  margin-top: 2rem;
-  padding: 0.8em 2em;
-  background: #00d4ff;
-  color: black;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  margin-top: 2rem; padding: 0.8em 2em; background: #00d4ff; color: black;
+  font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s ease;
 }
-
-.quote-form button:hover {
-  background: white;
-}
+.quote-form button:hover { background: white; }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .split-screen {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .text-side, .image-side {
-    flex: none;
-  }
-
-  .headline {
-    font-size: 2.5rem;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-    padding: 2em 1em;
-  }
-
-  .service-image {
-    width: 150px;
-    height: 150px;
-  }
-
-  .navbar {
-    padding: 1em 2em;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-  }
+  .split-screen { flex-direction: column; height: auto; }
+  .text-side, .image-side { flex: none; }
+  .headline { font-size: 2.5rem; }
+  .services-grid { grid-template-columns: 1fr; padding: 2em 1em; }
+  .service-image { width: 150px; height: 150px; }
+  .navbar { padding: 1em 2em; }
+  .logo { font-size: 1.5rem; }
 }
 
-.orbital-grid {
-  position: relative;
-  overflow: hidden;
-  background-color: black;
-}
-
+/* Orbital background utility (unused on hero now, but keep) */
+.orbital-grid { position: relative; overflow: hidden; background-color: black; }
 .orbital-grid::before {
   content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
   background: repeating-radial-gradient(
     circle,
     rgba(255, 165, 0, 0.2) 0px,
@@ -545,194 +353,55 @@ h1, h2, h3 {
     transparent 20px
   );
   animation: rotateGrid 60s linear infinite;
-  z-index: 0;
-  pointer-events: none;
+  z-index: 0; pointer-events: none;
 }
-
-@keyframes rotateGrid {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-#services-grid {
-  scroll-margin-top: 80px; /* Adjust based on your navbar height */
-}
-/* Keep all your current CSS unchanged above */
-
-/* iOS / Mobile adjustments for hero section */
-@media (max-width: 768px) {
-  .split-screen {
-    flex-direction: column;
-    height: auto;
-  }
-  .image-side, .text-side {
-    flex: none;
-    width: 100%;
-  }
-  .image-side img {
-    transform: none;
-    height: auto;
-  }
-  .headline {
-    font-size: 2.5rem;
-  }
-}
+@keyframes rotateGrid { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+#services-grid { scroll-margin-top: 80px; }
 
 /* Ensure iOS Safari handles viewport properly */
-html, body {
-  height: -webkit-fill-available;
-}
-/* ===== iOS-only hero overlay (keeps desktop exactly as-is) ===== */
+html, body { height: -webkit-fill-available; }
+
+/* =========================
+   iOS-ONLY HERO TWEAKS
+   ========================= */
+/* Requires the small detector script that adds .ios to <html> on iPhone/iPad */
+
 html.ios .split-screen {
-  /* Override your mobile column stack only on iOS */
-  display: block !important;
-  position: relative;
-  height: 100svh;              /* modern iOS viewport unit */
-  min-height: 100svh;
-  overflow: hidden;
-}
-
-html.ios .image-side {
-  position: relative;
-  height: 100%;
-  z-index: 1;
-}
-
-html.ios .image-side img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: none;             /* undo the -40px shift */
-}
-
-/* Remove the left fade band that was meant for split layout */
-html.ios .image-side::after { display: none; }
-
-/* Put the text on top of the image, readable, same screen */
-html.ios .text-side {
-  position: absolute;
-  inset: 0;                    /* cover image */
-  z-index: 2;
-  display: flex;
+  /* Stack for iOS only, but not fixed-overlay—let it flow */
   flex-direction: column;
-  justify-content: flex-end;   /* sit near bottom for CTA focus */
-  padding: 4em 1.5em calc(1.5em + env(safe-area-inset-bottom));
-  background:
-    linear-gradient(180deg, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.65) 85%);
-  /* Turn off the animated grid behind text so it stays clean on overlay */
-  background-image:
-    linear-gradient(180deg, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.65) 85%);
+  height: auto;
 }
-
-html.ios .text-side .subtext {
-  color: #e6e6e6;
-  max-width: 30ch;
-}
-
-/* Buttons sit nicely on overlay */
-html.ios .quote-btn-home,
-html.ios .services-btn-home {
-  align-self: flex-start;
-}
-
-/* Make headline a bit tighter on overlay */
-html.ios .headline { font-size: 2.3rem; line-height: 1.15; }
-
-/* Keep navbar above everything */
-html.ios .navbar { z-index: 1003; }
-
-/* Optional: avoid extra scroll-jumps on iOS */
-html.ios, html.ios body { height: 100%; }
-/* ===== iOS-ONLY: make hero image sit behind the hero text ===== */
-html.ios .split-screen {
-  flex-direction: column;    /* stack for iOS only */
-  height: auto;              /* allow content to size naturally */
-}
-
-html.ios .image-side {       /* hide the separate image pane */
-  display: none !important;
-}
+html.ios .image-side { display: none !important; } /* hide separate image pane */
 
 html.ios .text-side {
-  /* Use your hero image as the background, right behind the text */
+  /* Use hero image behind text */
   background: url('cleanuptransformation.jpg') center center / cover no-repeat;
-  /* Fill the viewport cleanly on iOS */
   min-height: 100svh;
   padding: 4em 1.5em calc(1.5em + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* keeps headline/buttons in view */
+  justify-content: center;
   align-items: flex-start;
-  /* Remove animated grid inside to keep it clean over image */
+
+  /* Round corners since image is bg here */
+  border-radius: 20px;
+  overflow: hidden;
+
+  /* Clean canvas on iOS (remove animated grid underlay) */
   animation: none;
   background-color: transparent;
+
+  position: relative;
 }
 
-html.ios .headline { font-size: 2.6rem; line-height: 1.15; }
-html.ios .subtext  { color: #e6e6e6; max-width: 30ch; }
-
-/* keep navbar above hero on iOS */
-html.ios .navbar { z-index: 1003; }
-/* ===== Desktop: Bigger, more spread-out service cards ===== */
-@media (min-width: 1024px) {
-  .services-page {
-    padding: 3em 0 4em;
-  }
-
-  .services-header h1 {
-    font-size: 4rem; /* a touch larger for balance */
-  }
-
-  .services-grid {
-    max-width: 1200px;                         /* widen the grid container */
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 3rem;                                  /* more space between cards */
-    padding: 2em 3em;                           /* more horizontal padding */
-    margin: 0 auto;
-  }
-
-  .service-card {
-    padding: 2rem;                              /* bigger inner spacing */
-    border-radius: 24px;
-  }
-
-  .service-image {
-    width: 240px;                               /* larger images */
-    height: 240px;
-    margin-bottom: 1.5rem;
-    object-fit: cover;
-  }
-
-  .service-card h3 {
-    font-size: 2.4rem;                          /* larger headings */
-    margin-bottom: 1.2rem;
-  }
-
-  .service-card p {
-    font-size: 1.1rem;                          /* slightly larger body copy */
-    line-height: 1.7;
-    max-width: 46ch;
-    margin: 0 auto;
-  }
+/* Top gradient so text reads over bright areas */
+html.ios .text-side::before {
+  content: "";
+  position: absolute; inset: 0 0 auto 0; height: 35%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  z-index: 1; pointer-events: none;
 }
 
-/* Optional: scale up a bit more on very large screens */
-@media (min-width: 1440px) {
-  .services-grid {
-    max-width: 1320px;
-    gap: 3.5rem;
-  }
-  .service-image {
-    width: 260px;
-    height: 260px;
-  }
-  .service-card h3 {
-    font-size: 2.6rem;
-  }
-  .service-card p {
-    font-size: 1.15rem;
-  }
-}
+/* Bigger, bolder, BLACK text on iOS */
+html.ios .headline {
+  font-si

@@ -646,3 +646,33 @@ html.ios .navbar { z-index: 1003; }
 
 /* Optional: avoid extra scroll-jumps on iOS */
 html.ios, html.ios body { height: 100%; }
+/* ===== iOS-ONLY: make hero image sit behind the hero text ===== */
+html.ios .split-screen {
+  flex-direction: column;    /* stack for iOS only */
+  height: auto;              /* allow content to size naturally */
+}
+
+html.ios .image-side {       /* hide the separate image pane */
+  display: none !important;
+}
+
+html.ios .text-side {
+  /* Use your hero image as the background, right behind the text */
+  background: url('cleanuptransformation.jpg') center center / cover no-repeat;
+  /* Fill the viewport cleanly on iOS */
+  min-height: 100svh;
+  padding: 4em 1.5em calc(1.5em + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* keeps headline/buttons in view */
+  align-items: flex-start;
+  /* Remove animated grid inside to keep it clean over image */
+  animation: none;
+  background-color: transparent;
+}
+
+html.ios .headline { font-size: 2.6rem; line-height: 1.15; }
+html.ios .subtext  { color: #e6e6e6; max-width: 30ch; }
+
+/* keep navbar above hero on iOS */
+html.ios .navbar { z-index: 1003; }

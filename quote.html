@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-   <title>Get a Quote - DufferinDeepClean</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼✨</text></svg>">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Cleaning — DufferinDeepClean</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
@@ -16,53 +14,43 @@
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
+      <a href="index.html#services">Services</a>
       <a href="about.html">About Us</a>
-      <a href="quote.html" class="quote-btn">Get Quote</a>
+      <a href="book.html" class="quote-btn">Book Now</a>
     </nav>
   </header>
 
   <section class="quote-form-section">
-    <h1>get your free quote</h1>
+    <h1>Book Your Cleaning Appointment</h1>
+    <p>Fill out the form below and we’ll confirm your booking within one business day.</p>
     <form class="quote-form" action="https://formspree.io/f/mrblyqpr" method="POST">
-    <input type="hidden" name="_next" value="https://www.dufferindeepclean.ca/thankyou.html">
+      <input type="hidden" name="_next" value="https://www.dufferindeepclean.ca/thankyou.html">
       
-      <label for="name">Your Name</label>
+      <label for="name">Full Name</label>
       <input type="text" id="name" name="name" required>
-      
+
       <label for="email">Email Address</label>
       <input type="email" id="email" name="email" required>
-      
+
       <label for="phone">Phone Number</label>
-      <input type="tel" id="phone" name="phone">
-      
+      <input type="tel" id="phone" name="phone" required>
+
       <label for="service">Service Type</label>
       <select id="service" name="service" required>
-        <option value="">Select a service</option>
+        <option value="">Select a service...</option>
         <option value="warehouse">Warehouse Cleaning</option>
         <option value="office">Office Cleaning</option>
-        <option value="building">Building Maintenance</option>
-        <option value="other">Other</option>
+        <option value="residential">Residential / Condo</option>
       </select>
-      
-      <label for="size">Facility Size (sq ft)</label>
-      <input type="number" id="size" name="size" placeholder="e.g. 5000">
-      
-      <label for="frequency">Cleaning Frequency</label>
-      <select id="frequency" name="frequency">
-        <option value="">Select frequency</option>
-        <option value="one-time">One-time cleaning</option>
-        <option value="weekly">Weekly</option>
-        <option value="bi-weekly">Bi-weekly</option>
-        <option value="monthly">Monthly</option>
-      </select>
-      
+
+      <label for="date">Preferred Date</label>
+      <input type="date" id="date" name="date" required>
+
       <label for="message">Additional Details</label>
-      <textarea id="message" name="message" rows="4" placeholder="Tell us about your specific cleaning needs..."></textarea>
-      
-      <button type="submit">Get My Quote</button>
+      <textarea id="message" name="message" rows="4" placeholder="Any special instructions?"></textarea>
+
+      <button type="submit">Submit Booking</button>
     </form>
   </section>
-
 </body>
 </html>

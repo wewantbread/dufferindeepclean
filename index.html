@@ -2,11 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
   <title>DufferinDeepClean</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼✨</text></svg>">
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼✨</text></svg>"
+  >
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  >
 </head>
 <body>
 
@@ -24,19 +33,35 @@
     </nav>
   </header>
 
-  <!-- MOVING ANNOUNCEMENT -->
+  <!-- MOVING ANNOUNCEMENT BAR -->
   <div class="announcement" role="region" aria-label="Promotions">
     <div class="announcement-track">
       <div class="announcement-items">
         <span>We’ll give you a free, no-obligation quote within one business day!</span>
+        <a class="announcement-cta" href="quote.html">Book now</a>
+        <span>Free, fast, and professional—no pressure.</span>
+        <a class="announcement-cta" href="quote.html">Book now</a>
+        <span>Trusted by offices & warehouses across Dufferin.</span>
+        <a class="announcement-cta" href="quote.html">Book now</a>
+      </div>
+      <!-- clone for seamless loop -->
+      <div class="announcement-items" aria-hidden="true">
+        <span>We’ll give you a free, no-obligation quote within one business day!</span>
+        <a class="announcement-cta" href="quote.html">Book now</a>
+        <span>Free, fast, and professional—no pressure.</span>
+        <a class="announcement-cta" href="quote.html">Book now</a>
+        <span>Trusted by offices & warehouses across Dufferin.</span>
+        <a class="announcement-cta" href="quote.html">Book now</a>
+      </div>
+    </div>
   </div>
 
-  <!-- HERO SPLIT SCREEN SECTION (desktop stays split, iOS gets bg behind text) -->
+  <!-- HERO SPLIT SCREEN (desktop stays split; iOS shows image behind text) -->
   <section id="home" class="split-screen">
     <div class="text-side">
       <h1 class="headline">
         <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
-        <img src="cleanerguy.png" alt="Cleaner guy" class="headline-image">
+        <img src="cleanerguy.png" alt="Cleaner" class="headline-image">
       </h1>
       <p class="subtext">Industrial-grade cleaning for warehouses, offices, and apartment buildings</p>
       <a href="quote.html" class="quote-btn-home">Get a Quote</a>
@@ -48,7 +73,7 @@
     </div>
   </section>
 
-  <!-- SERVICES SECTION -->
+  <!-- SERVICES -->
   <section id="services" class="services-page">
     <div class="services-header">
       <h1>our services</h1>

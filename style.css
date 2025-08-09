@@ -560,3 +560,28 @@ h1, h2, h3 {
 #services-grid {
   scroll-margin-top: 80px; /* Adjust based on your navbar height */
 }
+/* Keep all your current CSS unchanged above */
+
+/* iOS / Mobile adjustments for hero section */
+@media (max-width: 768px) {
+  .split-screen {
+    flex-direction: column;
+    height: auto;
+  }
+  .image-side, .text-side {
+    flex: none;
+    width: 100%;
+  }
+  .image-side img {
+    transform: none;
+    height: auto;
+  }
+  .headline {
+    font-size: 2.5rem;
+  }
+}
+
+/* Ensure iOS Safari handles viewport properly */
+html, body {
+  height: -webkit-fill-available;
+}

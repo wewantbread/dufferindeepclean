@@ -516,3 +516,49 @@ html.ios .announcement-cta:hover { background: #00cc6d !important; }
   background-image: none !important;
   animation: none !important; /* stops cyberGrid */
 }
+/* === Global: seamless tiling with smaller icons + infinite loop === */
+:root{
+  --bg-tile: url('backgroundbook.png');   /* or your seamless pattern */
+  --tile-w: 640px;                        /* native tile width  */
+  --tile-h: 320px;                        /* native tile height */
+  --tile-scale: 0.55;                     /* ↓ make icons smaller (0.4–0.7) */
+
+  /* Derived size (don’t touch) */
+  --tile-w-sized: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-sized: calc(var(--tile-h) * var(--tile-scale));
+}
+
+body { background: #000 !important; }
+
+/* two layers, offset; move by exactly one tile for a perfect loop */
+body::before{
+  content:"";
+  position:fixed; inset:0; z-index:-1; pointer-events:none;
+
+  background-image: var(--bg-tile), var(--bg-tile);
+  background-repeat: repeat, repeat;
+  background-size: var(--tile-w-sized) var(--tile-h-sized), var(--tile-w-sized) var(--tile-h-sized);
+  background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2);
+
+  animation: bg-a 60s linear infinite, bg-b 90s linear infinite;
+
+  /* keep text readable (same feel as book) */
+  box-shadow: inset 0 -200vmax 0 rgba(0,0,0,.6);
+}
+
+/* seamless loops (end == start modulo one tile) */
+@keyframes bg-a {
+  from { background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+  to   { background-position: var(--tile-w-sized) var(--tile-h-sized),
+                        calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+}
+@keyframes bg-b {
+  from { background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+  to   { background-position: 0 0,
+                        calc(var(--tile-w-sized)*1.5) calc(var(--tile-h-sized)*1.5); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce){
+  body::before{ animation:none; }
+}

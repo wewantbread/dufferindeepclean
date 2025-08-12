@@ -593,3 +593,45 @@ html.ios .announcement-cta {
   color: #000 !important;
 }
 html.ios .announcement-cta:hover { background: #00cc6d !important; }
+/* === Sitewide background: replace old grid with backgroundbook.png === */
+html, body {
+  background: #0a0c10; /* keep your dark base */
+  min-height: 100%;
+}
+
+/* Layer the animated pattern behind everything */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  /* use your booking background image */
+  background-image: url("backgroundbook.png");
+  background-repeat: repeat;          /* tile pattern */
+  background-size: 820px auto;        /* tweak to taste */
+  opacity: 0.2;                       /* subtle like book.html */
+  animation: bg-drift 60s linear infinite;
+}
+
+/* Gentle drift motion (same feel as book.html) */
+@keyframes bg-drift {
+  from { background-position: 0 0; }
+  to   { background-position: -600px -300px; }
+}
+
+/* Respect Reduce Motion settings */
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+/* HARD OVERRIDES: neutralize any old grid backgrounds if they still show */
+.split-screen,
+.hero,
+.page,
+main,
+section {
+  background-image: none !important;  /* kill old grid images */
+  /* keep any solid/gradient panel backgrounds you already use */
+}

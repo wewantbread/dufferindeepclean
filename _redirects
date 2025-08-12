@@ -1,0 +1,5 @@
+/login     /login.html     200
+/register  /register.html  200
+/about     /about.html     200
+/book      /book.html      200
+/*         /index.html     200

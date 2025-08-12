@@ -562,3 +562,70 @@ body::before{
 @media (prefers-reduced-motion: reduce){
   body::before{ animation:none; }
 }
+/* ==== Infinite tiling background (diagonal loop) + readable overlay ==== */
+:root{
+  /* Use the seamless pattern you like */
+  --bg-tile: url('backgroundbook.png');    /* swap to your mini-supplies tile if that's the seamless one */
+  --tile-w: 640px;                         /* set to the tile's native pixels */
+  --tile-h: 320px;                         /* set to the tile's native pixels */
+  --tile-scale: 0.85;                      /* 0.85 ~= medium size. Raise to 0.95 if still too small */
+  --tile-w-sized: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-sized: calc(var(--tile-h) * var(--tile-scale));
+}
+
+/* Kill any static cover backgrounds so animation is visible everywhere */
+body{
+  background-image: none !important;
+  background-color: #000;
+}
+
+/* Keep your existing dark overlay (use ::before) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(1200px 600px at 50% -10%,
+              rgba(0,0,0,0.45), rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85));
+}
+
+/* NEW: animated tiling pattern (put it *behind* the overlay) */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: -2;             /* sits under ::before overlay, above body background */
+  pointer-events: none;
+
+  /* Two layers, offset and looped */
+  background-image: var(--bg-tile), var(--bg-tile);
+  background-repeat: repeat, repeat;
+  background-size: var(--tile-w-sized) var(--tile-h-sized), var(--tile-w-sized) var(--tile-h-sized);
+  background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2);
+
+  /* Move by exactly one tile → perfect seamless loop */
+  animation:
+    bgA 38s linear infinite,
+    bgB 62s linear infinite;
+}
+
+/* Diagonal loops */
+@keyframes bgA {
+  from { background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+  to   { background-position: var(--tile-w-sized) var(--tile-h-sized),
+                           calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+}
+@keyframes bgB {
+  from { background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+  to   { background-position: 0 0,
+                           calc(var(--tile-w-sized)*1.5) calc(var(--tile-h-sized)*1.5); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body::after{ animation: none; }
+}
+
+/* Ensure the hero left panel never reinstates the old grid */
+.split-screen .text-side { background: transparent !important; background-image: none !important; animation: none !important; }

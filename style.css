@@ -509,3 +509,10 @@ html.ios .announcement-cta {
   color: #000 !important;
 }
 html.ios .announcement-cta:hover { background: #00cc6d !important; }
+/* --- kill hero grid on index (left panel) --- */
+#home.split-screen .text-side,
+.split-screen .text-side {
+  background: transparent !important;
+  background-image: none !important;
+  animation: none !important; /* stops cyberGrid */
+}

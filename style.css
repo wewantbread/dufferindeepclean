@@ -471,3 +471,10 @@ main, .navbar, .announcement, .split-screen, .services-page, footer, section {
   .service-card h3 { font-size: 2.2rem; }
   .services-header h1 { font-size: 4rem; }
 }
+/* iOS: keep the announcement bar dark to match desktop */
+html.ios .announcement { background:#000 !important; border-bottom:1px solid rgba(255,255,255,0.1) !important; }
+html.ios .announce-line { color:#f2f2f2 !important; }
+html.ios .announcement-cta { background:#00d4ff !important; color:#000 !important; }
+.announcement { padding: calc(0.9rem + env(safe-area-inset-top)) 1.25rem 0.9rem; }
+/* Neutralize any page-level background/overlay left in inline styles */
+body { background: transparent !important; }

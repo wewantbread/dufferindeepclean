@@ -629,3 +629,66 @@ body::after{
 
 /* Ensure the hero left panel never reinstates the old grid */
 .split-screen .text-side { background: transparent !important; background-image: none !important; animation: none !important; }
+/* === Infinite tiling background (fixed) === */
+:root{
+  /* POINT THIS TO YOUR REAL TILE */
+  --bg-tile: url('backgroundbook.png');  /* change if it's in /assets/bg/... */
+  --tile-w: 640px;   /* set to the tile's native size */
+  --tile-h: 320px;
+  --tile-scale: 0.90;  /* bump up/down to change icon size */
+
+  --tile-w-sized: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-sized: calc(var(--tile-h) * var(--tile-scale));
+}
+
+/* Put the solid black on <html>, keep <body> transparent so layers show */
+html { background-color: #000; }
+body {
+  position: relative;             /* create stacking context */
+  background: transparent !important;   /* don't cover the animation */
+}
+
+/* Dark readability overlay (ON TOP of the animation) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 1;                     /* overlay sits above animation */
+  pointer-events: none;
+  background: radial-gradient(1200px 600px at 50% -10%,
+              rgba(0,0,0,0.45), rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85));
+}
+
+/* Animated tiling pattern (BEHIND overlay, IN FRONT of html bg) */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;                     /* visible under overlay */
+  pointer-events: none;
+
+  background-image: var(--bg-tile), var(--bg-tile);
+  background-repeat: repeat, repeat;
+  background-size: var(--tile-w-sized) var(--tile-h-sized), var(--tile-w-sized) var(--tile-h-sized);
+  background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2);
+
+  animation: bgA 38s linear infinite, bgB 62s linear infinite;
+}
+
+/* Seamless diagonal loops (move by exactly one tile) */
+@keyframes bgA {
+  from { background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+  to   { background-position: var(--tile-w-sized) var(--tile-h-sized),
+                           calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+}
+@keyframes bgB {
+  from { background-position: 0 0, calc(var(--tile-w-sized)/2) calc(var(--tile-h-sized)/2); }
+  to   { background-position: 0 0,
+                           calc(var(--tile-w-sized)*1.5) calc(var(--tile-h-sized)*1.5); }
+}
+
+/* Make sure the hero left panel never brings the old grid back */
+.split-screen .text-side { background: transparent !important; background-image: none !important; animation: none !important; }
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce){ body::after{ animation: none; } }

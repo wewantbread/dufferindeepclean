@@ -382,3 +382,78 @@ footer {
 @media (prefers-reduced-motion: reduce){
   body::after { animation: none; }
 }
+/* === SITEWIDE: seamless diagonal background (1536×1024 tile) === */
+:root{
+  --bg-tile: url('backgroundbook.png');  /* your file */
+  --tile-w: 1536px;                      /* native tile size */
+  --tile-h: 1024px;
+  --tile-scale: 0.90;                    /* make icons slightly smaller (0.85–0.95) */
+
+  --tile-w-size: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-size: calc(var(--tile-h) * var(--tile-scale));
+
+  /* overlay strength (tune 0.55–0.75) */
+  --overlay-a: rgba(0,0,0,0.50);
+  --overlay-b: rgba(0,0,0,0.78);
+  --overlay-c: rgba(0,0,0,0.88);
+}
+
+html { background:#000; }
+body { background: transparent !important; }
+
+/* Animated tile (under content) */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;                  /* stays under your content */
+  pointer-events: none;
+
+  background-image: var(--bg-tile), var(--bg-tile);
+  background-repeat: repeat, repeat;
+  background-size: var(--tile-w-size) var(--tile-h-size), var(--tile-w-size) var(--tile-h-size);
+  background-position: 0 0, calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2);
+
+  /* move EXACTLY one tile -> perfect loop */
+  animation: bgA 46s linear infinite, bgB 78s linear infinite;
+}
+
+/* Readability overlay (also under content) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;                  /* merged below, we’ll lift content above */
+  pointer-events: none;
+  background: radial-gradient(1200px 600px at 50% -10%,
+              var(--overlay-a), var(--overlay-b) 60%, var(--overlay-c));
+}
+
+/* Force core sections above both ::before/::after */
+main, .navbar, .announcement, .split-screen, .services-page, footer, section {
+  position: relative;
+  z-index: 2;
+}
+
+/* Old grid never returns on hero-left */
+#home.split-screen .text-side,
+.split-screen .text-side {
+  background: transparent !important;
+  background-image: none !important;
+  animation: none !important;
+}
+
+/* Seamless loops */
+@keyframes bgA {
+  from { background-position: 0 0, calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2); }
+  to   { background-position: var(--tile-w-size) var(--tile-h-size),
+                           calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2); }
+}
+@keyframes bgB {
+  from { background-position: 0 0, calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2); }
+  to   { background-position: 0 0,
+                           calc(var(--tile-w-size)*1.5) calc(var(--tile-h-size)*1.5); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){ body::after{ animation:none; } }

@@ -282,3 +282,103 @@ html.ios .navbar { z-index: 1003; }
 }
 @keyframes rotateGrid { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
 #services-grid { scroll-margin-top: 80px; }
+/* ===== FINAL: Seamless diagonal infinite background + safe stacking ===== */
+:root{
+  /* 👉 point to your seamless cleaning-supplies tile */
+  --bg-tile: url('cleaning-pattern.png');   /* e.g. /assets/bg/cleaning-pattern-wide.png */
+
+  /* 👉 set to the tile PNG’s native pixel size (exact) */
+  --tile-w: 1024px;   /* CHANGE if your tile differs */
+  --tile-h: 512px;    /* CHANGE if your tile differs */
+
+  /* icon size (1.00 = native). Try 0.9–1.1 */
+  --tile-scale: 0.95;
+
+  /* derived sizes */
+  --tile-w-size: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-size: calc(var(--tile-h) * var(--tile-scale));
+}
+
+/* keep the page black behind everything */
+html { background:#000; }
+
+/* content will sit above the animated layer */
+body { background: transparent !important; }
+
+/* One pseudo-element = overlay + two tiled layers (in that order) */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;            /* base layer; content is forced above below */
+  pointer-events: none;
+
+  /* [0]=overlay, [1]=tile A, [2]=tile B */
+  background-image:
+    radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.45), rgba(0,0,0,.75) 60%, rgba(0,0,0,.85)),
+    var(--bg-tile),
+    var(--bg-tile);
+
+  background-repeat:
+    no-repeat,
+    repeat,
+    repeat;
+
+  background-size:
+    cover,
+    var(--tile-w-size) var(--tile-h-size),
+    var(--tile-w-size) var(--tile-h-size);
+
+  background-position:
+    center,
+    0 0,
+    calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2);
+
+  /* move exactly one tile → perfect seamless loop */
+  animation: bgA 38s linear infinite, bgB 62s linear infinite;
+}
+
+/* Put ALL main sections above the animated layer */
+.navbar,
+.announcement,
+.split-screen,
+.services-page,
+footer {
+  position: relative;
+  z-index: 2;   /* safely above body::after */
+}
+
+/* Ensure hero left panel never reintroduces the old grid */
+#home.split-screen .text-side,
+.split-screen .text-side {
+  background: transparent !important;
+  background-image: none !important;
+  animation: none !important;
+}
+
+/* Seamless diagonal loops */
+@keyframes bgA {
+  from {
+    background-position: center, 0 0,
+      calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2);
+  }
+  to {
+    background-position: center, var(--tile-w-size) var(--tile-h-size),
+      calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2);
+  }
+}
+@keyframes bgB {
+  from {
+    background-position: center, 0 0,
+      calc(var(--tile-w-size)/2) calc(var(--tile-h-size)/2);
+  }
+  to {
+    background-position: center, 0 0,
+      calc(var(--tile-w-size)*1.5) calc(var(--tile-h-size)*1.5);
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body::after { animation: none; }
+}

@@ -628,3 +628,17 @@ main {
 @media (prefers-reduced-motion: reduce){
   body::after{ animation: none; }
 }
+body {
+  background: url('backgroundbook.png') repeat;
+  background-size: 300px; /* scale so icons are smaller */
+  animation: moveBackground 60s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 300px 300px; /* same as background-size for seamless diagonal */
+  }
+}

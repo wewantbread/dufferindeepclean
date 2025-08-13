@@ -481,7 +481,7 @@ body { background: transparent !important; }
 /* === SITEWIDE: seamless diagonal background (animated icons) === */
 :root{
   /* Use the SEAMLESS tile file (not backgroundbook.png) */
-  --bg-tile: url('cleaning-pattern.png');
+  --bg-tile: url('backgroundbook.png');
 
   /* Set to the tile image's native pixel size */
   --tile-w: 1024px;   /* <- change if your tile is a different size */

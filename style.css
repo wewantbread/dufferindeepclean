@@ -547,3 +547,84 @@ body::before{
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce){ body::after{ animation:none; } }
+/* === ONE-LAYER, SITE-WIDE, SEAMLESS DIAGONAL BACKGROUND === */
+/* Uses a single tile, repeated across the entire page, with a perfect loop. */
+:root{
+  /* Your tile image (the cleaning-icons PNG you want). */
+  --bg-tile: url('backgroundbook.png');     /* or 'cleaning-pattern.png' if that's the seamless one */
+
+  /* Native tile size of your PNG */
+  --tile-w: 1536px;                         /* you told me 1536 × 1024 */
+  --tile-h: 1024px;
+
+  /* Make icons a tiny bit smaller or bigger (0.86–0.96 range works well) */
+  --tile-scale: 0.90;
+
+  /* Derived size */
+  --tile-w-size: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-size: calc(var(--tile-h) * var(--tile-scale));
+}
+
+html, body { min-height: 100%; }
+html { background: #000; }
+
+/* Keep body transparent so the single animated layer shows through */
+body {
+  background: transparent !important;
+}
+
+/* SINGLE animated layer for the WHOLE SITE (no second layer, no parallax) */
+body::after{
+  content:"";
+  position: fixed;      /* covers viewport; repeats across full scroll */
+  inset: 0;
+  z-index: 0;           /* content stays above */
+  pointer-events: none;
+
+  background-image: var(--bg-tile);
+  background-repeat: repeat;   /* duplicates seamlessly */
+  background-size: var(--tile-w-size) var(--tile-h-size);
+  background-position: 0 0;
+
+  /* Move by EXACTLY one tile → perfect seamless loop corner-to-corner */
+  animation: bgInfinite 56s linear infinite;
+}
+
+/* Optional: subtle readability (turn to 0.00 to remove any dim) */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 1;           /* above pattern, below content */
+  pointer-events: none;
+  background: radial-gradient(1200px 600px at 50% -10%,
+              rgba(0,0,0,0.40), rgba(0,0,0,0.66) 60%, rgba(0,0,0,0.80));
+}
+
+/* Ensure ALL content sits above the background layers */
+.navbar, .announcement, .split-screen, .services-page, main, section, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Kill any section backgrounds that might “break” the continuous canvas */
+#home.split-screen .text-side,
+.split-screen .text-side,
+.services-page,
+section,
+main {
+  background: transparent !important;
+  background-image: none !important;
+  animation: none !important;
+}
+
+/* One single diagonal seamless loop */
+@keyframes bgInfinite {
+  from { background-position: 0 0; }
+  to   { background-position: var(--tile-w-size) var(--tile-h-size); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  body::after{ animation: none; }
+}

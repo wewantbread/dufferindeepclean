@@ -4,12 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>DufferinDeepClean</title>
+
+  <!-- favicon (soap + sparkle) -->
   <link
     rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼✨</text></svg>"
   />
+
+  <!-- fonts + site CSS -->
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- safety: make sure sections sit above animated bg even if CSS got overridden -->
+  <style>
+    .navbar, .announcement, .split-screen, .services-page, main, section, footer { position: relative; z-index: 2; }
+    /* ensure services cards layout always renders as grid */
+    .services-grid{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 2rem;
+      padding: 2em 2em;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (max-width: 980px){
+      .services-grid{ grid-template-columns: 1fr; }
+    }
+    .service-card{ display:block; text-decoration:none; }
+    .service-cta{ display:inline-block; margin-top:12px; padding:8px 14px; border-radius:999px; font-weight:800; background:#00d4ff; color:#000; }
+    /* nuke any accidental backgrounds that could hide cards */
+    #services, .services-page, .services-grid, .service-card { background: transparent !important; }
+  </style>
 </head>
 <body>
 
@@ -29,22 +54,22 @@
     </nav>
   </header>
 
-  <!-- Announcement / Static Header -->
+  <!-- Announcement -->
   <div class="announcement" role="region" aria-label="Promotion">
     <div class="announcement-inner">
-      <p class="announce-line">Trusted by offices &amp; warehouses across Ontario 🇨🇦 We’ll give you a free, no-obligation quote within one business day!</p>
+      <p class="announce-line">Trusted by offices &amp; warehouses across Ontario 🇨🇦 Get a free, no-obligation quote within one business day.</p>
       <a class="announcement-cta" href="book.html">Book now</a>
     </div>
   </div>
 
-  <!-- HERO SPLIT SCREEN (desktop stays split; iOS shows image behind text) -->
+  <!-- HERO: text left / image right -->
   <section id="home" class="split-screen">
     <div class="text-side">
       <h1 class="headline">
         <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
         <img src="cleanerguy.png" alt="Cleaner" class="headline-image" />
       </h1>
-      <p class="subtext">Industrial-grade cleaning for warehouses, offices, and apartment buildings</p>
+      <p class="subtext">Industrial-grade cleaning for warehouses, offices, and apartment buildings.</p>
       <a href="book.html" class="quote-btn-home">Book Online</a>
       <a href="#services" class="services-btn-home">Our Services</a>
     </div>
@@ -58,57 +83,35 @@
   <section id="services" class="services-page">
     <div class="services-header">
       <h1>our services</h1>
-      <p>Professional cleaning solutions tailored to your specific needs. From warehouses to offices, we deliver exceptional results every time.</p>
+      <p>Professional cleaning solutions tailored to your needs. From warehouses to offices, we deliver exceptional results every time.</p>
     </div>
 
-    <!-- Industrial -->
-<div class="package-desc" id="pkg-industrial" hidden>
-  <h4>🏭 Industrial &amp; Warehouse Deep Clean</h4>
-  <p class="muted">
-    <strong>Tagline:</strong> Heavy-duty cleaning for high-demand environments.<br/>
-    <strong>Ideal for:</strong> Warehouses, distribution centers, and manufacturing.
-  </p>
-  <ul>
-    <li>High-dusting of beams, racking, fixtures</li>
-    <li>Floor scrubbing &amp; degreasing (production, aisles, docks)</li>
-    <li>Equipment and machinery wipe-downs</li>
-    <li>Loading dock &amp; storage area cleanup</li>
-    <li>Restroom cleaning and sanitation for high-traffic use</li>
-  </ul>
-</div>
+    <div class="services-grid">
+      <!-- Industrial & Warehouse Deep Clean -->
+      <a class="service-card" href="book.html?pkg=industrial&service=Industrial%20%26%20Warehouse%20Deep%20Clean#start">
+        <img src="img/warehouse-deep-clean.jpg" alt="Warehouse deep cleaning with floor scrubber and high-dusting" class="service-image" />
+        <h3>industrial &amp; warehouse deep clean</h3>
+        <p>Heavy-duty cleaning for aisles, docks, and production floors—degreasing, machine wipe-downs, and high-dusting of beams &amp; racking.</p>
+        <span class="service-cta">book this</span>
+      </a>
 
-<!-- Office -->
-<div class="package-desc" id="pkg-office" hidden>
-  <h4>🖥️ Office Deep Clean</h4>
-  <p class="muted">
-    <strong>Tagline:</strong> A spotless, professional image for your business.<br/>
-    <strong>Ideal for:</strong> Offices, HQs, and professional buildings.
-  </p>
-  <ul>
-    <li>Workstations, reception, meeting rooms (surfaces &amp; touchpoints)</li>
-    <li>Waste removal &amp; recycling</li>
-    <li>Floor care: vacuuming, mopping, carpet spot-treat</li>
-    <li>Common-area tidying and detailing</li>
-    <li>Restrooms cleaned and supplies replenished</li>
-  </ul>
-</div>
+      <!-- Office Deep Clean -->
+      <a class="service-card" href="book.html?pkg=office&service=Office%20Deep%20Clean#start">
+        <img src="img/office-deep-clean.jpg" alt="Office deep clean: tidy desks, mopped floors, stocked restrooms" class="service-image" />
+        <h3>office deep clean</h3>
+        <p>Workstations, meeting rooms, and common areas—vacuum &amp; mop, bin service &amp; recycling, restroom sanitization and supply refill.</p>
+        <span class="service-cta">book this</span>
+      </a>
 
-<!-- Specialty (High-Reach for Warehouses) -->
-<div class="package-desc" id="pkg-specialty" hidden>
-  <h4>🪟 High-Reach Window &amp; Rail Cleaning (Warehouses)</h4>
-  <p class="muted">
-    <strong>Tagline:</strong> Clear views and safe rails—done with scissor lifts (no rope-access).<br/>
-    <strong>Ideal for:</strong> Warehouse façades, interior high glass, mezzanine rails.
-  </p>
-  <ul>
-    <li>Scissor-lift window washing (interior/exterior where permitted)</li>
-    <li>Balcony/guardrail &amp; mezzanine rail cleaning and sanitization</li>
-    <li>Frame, sill, and track detailing</li>
-    <li>Mineral deposit / haze removal where accessible</li>
-    <li>Pre-task safety checks and barricade setup around lift work</li>
-  </ul>
-</div>
-
+      <!-- High-Reach Window & Rail (Warehouses, scissor lift only) -->
+      <a class="service-card" href="book.html?pkg=specialty&service=High-Reach%20Window%20%26%20Rail%20Cleaning%20(Scissor%20Lift)%20%E2%80%94%20Warehouses#start">
+        <img src="img/highreach-warehouse.jpg" alt="Scissor-lift crew cleaning warehouse high windows and rails" class="service-image" />
+        <h3>high-reach window &amp; rail (warehouses)</h3>
+        <p>Clear glass and safe rails at height—performed with scissor lifts (no rope-access). Frames, tracks, and mezzanine rails detailed and sanitized.</p>
+        <span class="service-cta">book this</span>
+      </a>
+    </div>
+  </section>
 
   <!-- iOS detector (adds .ios to <html> on iPhone/iPad) -->
   <script>

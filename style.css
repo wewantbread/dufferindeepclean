@@ -1268,6 +1268,15 @@ h1, h2, h3 {
 .carousel-dots .dot.active {
   background: #00d4ff;
 }
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(1200px 600px at 50% -10%,
+              rgba(0,0,0,0.40), rgba(0,0,0,0.66) 60%, rgba(0,0,0,0.80));
+}
 
 @keyframes underlineSweep {
   from { transform: scaleX(0); opacity: 0; }

@@ -2,65 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>DufferinDeepClean</title>
 
-  <!-- favicon (soap + sparkle) -->
-  <link
-    rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼✨</text></svg>"
-  />
-
-  <!-- fonts + site CSS -->
-  <link rel="stylesheet" href="style.css" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;600;800&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- safety: make sure sections sit above animated bg even if CSS got overridden -->
-  <style>
-    .navbar, .announcement, .split-screen, .services-page, main, section, footer { position: relative; z-index: 2; }
-    /* ensure services cards layout always renders as grid */
-    .services-grid{
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 2rem;
-      padding: 2em 2em;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    @media (max-width: 980px){
-      .services-grid{ grid-template-columns: 1fr; }
-    }
-    .service-card{ display:block; text-decoration:none; }
-    .service-cta{ display:inline-block; margin-top:12px; padding:8px 14px; border-radius:999px; font-weight:800; background:#00d4ff; color:#000; }
-    /* nuke any accidental backgrounds that could hide cards */
-    #services, .services-page, .services-grid, .service-card { background: transparent !important; }
-  </style>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dufferin Deep Clean</title>
-
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="DeepClean" />
   <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Your existing CSS -->
+  <!-- Fonts + site CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- page content -->
-</body>
-</html>
 
+  <!-- Safety: keep content above animated bg -->
+  <style>
+    .navbar, .announcement, .split-screen, .services-page, main, section, footer { position: relative; z-index: 2; }
+
+    /* Header transparent over infinite bg */
+    .navbar{
+      background: rgba(0,0,0,0.25) !important;
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* Logo: match “about us” font + left→right reveal + bigger */
+    @keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
+    @keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
+    .logo .logo-text{
+      font-family: 'Great Vibes', cursive !important;
+      font-size: 2.6rem !important;
+      letter-spacing: .5px;
+      color:#fff !important;
+      position:relative;
+      display:inline-block;
+      clip-path: inset(0 100% 0 0);
+      opacity:0; animation: logoUnveil 1.1s ease forwards .25s;
+    }
+    .logo .logo-text::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
+      mix-blend-mode: screen; opacity:0; pointer-events:none;
+      animation: logoSweep 1.1s ease forwards .25s;
+    }
+
+    /* Nav links use same display font */
+    .nav-links a{
+      font-family:'Great Vibes', cursive !important;
+      font-size:1.6rem !important;
+      letter-spacing:.02em;
+      color:#f6fbff;
+    }
+
+    /* Hero image flush to right edge */
+    .image-side img{
+      transform:none !important;
+      object-position: right center !important;
+    }
+
+    /* ABOUT: position soap emoji + glow on right half of card */
+    :root{ --soap-x: 76%; --soap-y: 58%; }
+    .about-inner{ position:relative !important; }
+    .about-soap{
+      position:absolute !important;
+      left:var(--soap-x); top:var(--soap-y);
+      transform:translate(-50%,-50%);
+      margin:0 !important; padding:0 !important; line-height:1 !important;
+      font-size:5rem !important; z-index:2 !important; pointer-events:none !important;
+    }
+    .about-soap::before{
+      content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:220px; height:220px; border-radius:50%;
+      background: radial-gradient(circle, rgba(0,212,255,.38) 0%, rgba(0,212,255,0) 70%);
+      filter: blur(20px); z-index:-1;
+    }
+
+    /* Rotator styles (card with underline + dots) */
+    .rotator-card{
+      margin-top: 1.25rem; display:grid; gap:.75rem;
+      padding: 1.4rem 1.6rem; max-width: 560px;
+      border-radius: 20px; border:1px solid rgba(0,212,255,0.25);
+      background: rgba(0,0,0,0.55);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 22px rgba(0,212,255,0.12);
+      backdrop-filter: blur(8px);
+    }
+    .rotator-line{ display:none; }
+    .rotator-line.active{ display:block; }
+    .rotator-title{
+      display:block; font-family:'Bebas Neue',sans-serif; text-transform:uppercase;
+      letter-spacing:.08em; font-size:1.1rem; color:rgba(0,212,255,0.8);
+    }
+    .rotator-text{ display:block; font-size:1.2rem; line-height:1.65; color:#d8ecff; animation: rotatorFade .45s ease both; }
+    .rotator-underline{
+      display:block; height:3px; width:100%; border-radius:999px;
+      background:linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,.85), rgba(255,255,255,0));
+      transform-origin:left center; animation: rotatorUnderline .6s ease both;
+    }
+    .rotator-dots{ display:flex; gap:.5rem; margin-top:.2rem; }
+    .rotator-dots .dot{
+      width:10px; height:10px; border-radius:50%; border:1.5px solid #00d4ff;
+      background:transparent; opacity:.7; cursor:pointer;
+      transition: transform .2s ease, opacity .2s ease, background-color .2s ease;
+    }
+    .rotator-dots .dot.active{ background:#00d4ff; opacity:1; transform:scale(1.05); }
+    @keyframes rotatorFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+    @keyframes rotatorUnderline{ from{ transform:scaleX(0); opacity:.4;} to{ transform:scaleX(1); opacity:1;} }
+
+    /* Services grid safety */
+    .services-grid{
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem;
+      padding:2em 2em; max-width:1200px; margin:0 auto;
+    }
+    @media (max-width:980px){ .services-grid{ grid-template-columns:1fr; } }
+    .service-card{ display:block; text-decoration:none; }
+    .service-cta{ display:inline-block; margin-top:12px; padding:8px 14px; border-radius:999px; font-weight:800; background:#00d4ff; color:#000; }
+    #services, .services-page, .services-grid, .service-card { background: transparent !important; }
+  </style>
 </head>
 <body>
 
@@ -81,8 +142,8 @@
   <!-- Announcement -->
   <div class="announcement" role="region" aria-label="Promotion">
     <div class="announcement-inner">
-      <p class="announce-line">999-999-999.</p>
-      <a class="announcement-cta" href="book.html">Call Today</a>
+      <p class="announce-line">999-999-999</p>
+      <a class="announcement-cta" href="tel:+1999999999">Call Today</a>
     </div>
   </div>
 
@@ -93,15 +154,43 @@
         <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
         <img src="cleanerguy.png" alt="Cleaner" class="headline-image" />
       </h1>
-      <p class="subtext">Industrial-grade cleaning for warehouses, offices, and apartment buildings.</p>
-      <a href="book.html" class="quote-btn-home">Book Online</a>
+
+      <!-- Rotating service lines -->
+      <div class="rotator-card" id="service-rotator">
+        <div class="rotator-line active" data-title="Residential Homes">
+          <span class="rotator-title">Residential Homes</span>
+          <span class="rotator-text">We don’t just tidy houses. We deep clean homes.</span>
+        </div>
+
+        <div class="rotator-line" data-title="Commercial Buildings">
+          <span class="rotator-title">Commercial Buildings</span>
+          <span class="rotator-text">Commercial spaces collect more than dust. We remove it all.</span>
+        </div>
+
+        <div class="rotator-line" data-title="Offices / Workspaces">
+          <span class="rotator-title">Offices / Workspaces</span>
+          <span class="rotator-text">Clean offices look professional. Deep clean offices stay professional.</span>
+        </div>
+
+        <span class="rotator-underline" aria-hidden="true"></span>
+
+        <div class="rotator-dots" role="tablist" aria-label="Service types">
+          <button class="dot active" aria-label="Residential Homes" role="tab"></button>
+          <button class="dot" aria-label="Commercial Buildings" role="tab"></button>
+          <button class="dot" aria-label="Offices / Workspaces" role="tab"></button>
+        </div>
+      </div>
+
+      <a href="tel:+1999999999" class="quote-btn-home">Call Now</a>
       <a href="#services" class="services-btn-home">Our Services</a>
     </div>
-      <div class="image-side">
+
+    <div class="image-side">
       <div class="image-top-diffuse" aria-hidden="true"></div>
       <img src="cleanuptransformation.jpg" alt="Cleanup transformation image" />
     </div>
   </section>
+
   <!-- SERVICES -->
   <section id="services" class="services-page">
     <div class="services-header">
@@ -140,185 +229,4 @@
   <section id="about" class="about-section">
     <div class="about-inner">
       <div class="about-content">
-        <p class="about-intro">A quick reminder of who we are</p>
-        <h2 class="about-title">
-          <span class="about-script">about us</span>
-        </h2>
-        <p class="about-slogan">We scrub with heart so your team can focus on what matters.</p>
-        <p class="about-description">
-          <span>Family-built, people-first cleaning crews who respect every facility we enter.</span>
-          <span>We show up on time, finish the tough jobs, and leave every surface ready to shine.</span>
-           <span>Trusted by Homeowners, Offices and warehouses across Ontario get a free, no-obligation quote within one business day.
-             
-        </p>
-      </div>
-      <div class="about-soap" aria-hidden="true">🧼</div>
-    </div>
-  </section>
 
-  <!-- iOS detector (adds .ios to <html> on iPhone/iPad) -->
-  <script>
-    (function () {
-      var iOS =
-        /iP(hone|od|ad)/.test(navigator.platform) ||
-        (navigator.userAgent.includes('Mac') && navigator.maxTouchPoints > 1);
-      if (iOS) document.documentElement.classList.add('ios');
-      <section id="home" class="split-screen">
-  <div class="text-side">
-    <h1 class="headline-carousel">
-      <div class="carousel-track">
-        
-        <!-- Slide 1: Residential Homes -->
-        <div class="carousel-slide active">
-          <h2 class="carousel-title">Residential Homes</h2>
-          <p>“We don’t just tidy houses. We deep clean homes.”</p>
-          <p>“Every room, every surface, every corner—done right.”</p>
-        </div>
-
-        <!-- Slide 2: Commercial Buildings -->
-        <div class="carousel-slide">
-          <h2 class="carousel-title">Commercial Buildings</h2>
-          <p>“Commercial spaces collect more than dust. We remove it all.”</p>
-          <p>“Deep cleaning keeps large buildings safe, healthy, and lasting.”</p>
-        </div>
-
-        <!-- Slide 3: Offices -->
-        <div class="carousel-slide">
-          <h2 class="carousel-title">Offices / Workspaces</h2>
-          <p>“Clean offices look professional. Deep clean offices stay professional.”</p>
-          <p>“A real deep clean keeps employees and clients comfortable.”</p>
-        </div>
-
-      </div>
-      <!-- Navigation dots -->
-      <div class="carousel-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </h1>
-
-    <p class="subtext">Professional deep cleaning services across homes, offices, and commercial spaces.</p>
-    <a href="tel:+1234567890" class="quote-btn-home">Call Now</a>
-    <a href="#services-grid" class="services-btn-home">Our Services</a>
-  </div>
-
-  <div class="image-side">
-    <img src="cleanuptransformation.jpg" alt="Deep Cleaning in action">
-  </div>
-</section>
-
-    })();
-  </script>
-</body>
-</html>
-<script>
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dots = document.querySelectorAll('.carousel-dots .dot');
-  let current = 0;
-
-  function showSlide(index) {
-    slides.forEach((s,i) => {
-      s.classList.toggle('active', i === index);
-      dots[i].classList.toggle('active', i === index);
-    });
-    current = index;
-  }
-
-  // Auto-rotate every 6s
-  setInterval(() => {
-    let next = (current + 1) % slides.length;
-    showSlide(next);
-  }, 6000);
-
-  // Manual swipe (dot click)
-  dots.forEach((dot,i) => {
-    dot.addEventListener('click', () => showSlide(i));
-  });
-</script>
-<style id="hotfix-soap-logo">
-/* ===== FORCE the About emoji + glow to the green-circle spot ===== */
-:root{
-  /* adjust these two numbers if you want to nudge later */
-  --soap-x: 62%;
-  --soap-y: 66%;
-}
-
-/* make the card a positioning context */
-body .about-section .about-inner{ position: relative !important; }
-
-/* hard-reset any old styles on the soap */
-body .about-section .about-soap{
-  position: absolute !important;
-  left: var(--soap-x) !important;
-  top: var(--soap-y) !important;
-  transform: translate(-50%, -54%) !important; /* small visual lift to center the emoji drawing */
-  margin: 0 !important;
-  padding: 0 !important;
-  line-height: 1 !important;
-  font-size: 5rem !important; /* keep your size */
-  z-index: 2 !important;
-  pointer-events: none !important;
-  display: flex !important; align-items: center !important; justify-content: center !important;
-}
-
-/* perfectly centered glow behind the emoji */
-body .about-section .about-soap::before{
-  content:"";
-  position:absolute; left:50%; top:50%;
-  transform: translate(-50%,-50%);
-  width: 220px; height: 220px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(0,212,255,.38) 0%, rgba(0,212,255,0) 70%);
-  filter: blur(20px);
-  z-index: -1;
-}
-
-/* keep the ✨ close but not clipped */
-body .about-section .about-soap::after{
-  content:'✨';
-  position:absolute; right:-10px; top:-10px;
-  font-size: 1.5rem;
-  animation: sparkle 1.6s ease-in-out infinite;
-  opacity:.9;
-}
-
-/* ===== LOGO: match “about us” font + left→right reveal ===== */
-@keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
-@keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
-
-body .navbar .logo .logo-text{
-  font-family: 'Great Vibes', cursive !important;
-  font-size: 2.2rem !important;
-  letter-spacing: .5px !important;
-  color:#fff !important;
-  position:relative !important;
-  display:inline-block !important;
-  clip-path: inset(0 100% 0 0);
-  opacity:0;
-  animation: logoUnveil 1.1s ease forwards .25s;
-}
-
-/* subtle sheen during the reveal */
-body .navbar .logo .logo-text::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
-  mix-blend-mode: screen; opacity:0; pointer-events:none;
-  animation: logoSweep 1.1s ease forwards .25s;
-}
-
-/* keep the soap in the logo floating; reuse your sparkle keyframes if present */
-@keyframes sparkle{0%,100%{opacity:.8;transform:scale(1) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
-</style>
-<!-- Standard favicon -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-<!-- PNG favicons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
-
-<!-- Apple iOS -->
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-<!-- Web App Manifest -->
-<link rel="manifest" href="/site.webmanifest">

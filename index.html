@@ -229,4 +229,328 @@
   <section id="about" class="about-section">
     <div class="about-inner">
       <div class="about-content">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>DufferinDeepClean</title>
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="DeepClean" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Fonts + CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Page-specific tweaks (safe to keep inline) -->
+  <style>
+    /* keep sections above animated bg from style.css */
+    .navbar, .announcement, .split-screen, .services-page, .about-section, main, section, footer { position:relative; z-index:2; }
+
+    /* Transparent header over infinite bg */
+    .navbar{
+      background: rgba(0,0,0,0.25) !important;
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* Logo: match “about us” font + left→right reveal + bigger */
+    @keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
+    @keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
+    .logo .logo-text{
+      font-family: 'Great Vibes', cursive !important;
+      font-size: 2.8rem !important;
+      letter-spacing: .5px;
+      color:#fff !important;
+      position:relative;
+      display:inline-block;
+      clip-path: inset(0 100% 0 0);
+      opacity:0; animation: logoUnveil 1.1s ease forwards .25s;
+    }
+    .logo .logo-text::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
+      mix-blend-mode: screen; opacity:0; pointer-events:none;
+      animation: logoSweep 1.1s ease forwards .25s;
+    }
+
+    /* Nav links in same script font */
+    .nav-links a{
+      font-family:'Great Vibes', cursive !important;
+      font-size:1.6rem !important;
+      letter-spacing:.02em;
+      color:#f6fbff;
+    }
+
+    /* Hero image flush to right edge */
+    .image-side img{
+      transform:none !important;
+      object-position: right center !important;
+    }
+
+    /* ===== Rotator card (with slide animations) ===== */
+    .rotator-card{
+      margin-top: 1.25rem;
+      padding: 1.4rem 1.6rem;
+      max-width: 560px;
+      border-radius: 20px;
+      border:1px solid rgba(0,212,255,0.25);
+      background: rgba(0,0,0,0.55);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 22px rgba(0,212,255,0.12);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
+      position: relative;
+    }
+    .rotator-window{ position:relative; height:auto; min-height: 84px; }
+    .rotator-line{
+      position:absolute; left:0; top:0; width:100%;
+      opacity:0; transform: translateX(24px);
+      transition: transform .45s ease, opacity .45s ease;
+      will-change: transform, opacity;
+    }
+    .rotator-line.active{ opacity:1; transform: translateX(0); }
+    .rotator-title{
+      display:block; font-family:'Bebas Neue',sans-serif; text-transform:uppercase;
+      letter-spacing:.08em; font-size:1.05rem; color:rgba(0,212,255,0.85); margin-bottom:.25rem;
+    }
+    .rotator-text{ display:block; font-size:1.2rem; line-height:1.65; color:#d8ecff; }
+
+    .rotator-underline{
+      display:block; height:3px; width:100%; border-radius:999px; margin-top:.75rem;
+      background:linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,.85), rgba(255,255,255,0));
+      transform-origin:left center; animation: underlineGrow .6s ease both;
+    }
+    @keyframes underlineGrow{ from{ transform:scaleX(0); opacity:.4;} to{ transform:scaleX(1); opacity:1;} }
+
+    .rotator-dots{ display:flex; gap:.5rem; margin-top:.45rem; }
+    .rotator-dots .dot{
+      width:10px; height:10px; border-radius:50%; border:1.5px solid #00d4ff;
+      background:transparent; opacity:.7; cursor:pointer;
+      transition: transform .2s ease, opacity .2s ease, background-color .2s ease;
+    }
+    .rotator-dots .dot.active{ background:#00d4ff; opacity:1; transform:scale(1.05); }
+
+    /* Slight nudge of whole card on change for “box is moving” feel */
+    .rotator-card.bump{ animation: cardBump .35s ease; }
+    @keyframes cardBump{ 0%{ transform:translateX(0);} 40%{ transform:translateX(6px);} 100%{ transform:translateX(0);} }
+
+    /* ===== ABOUT (restored) ===== */
+    .about-section { padding: 6em 2em 7em; }
+    .about-inner{
+      max-width:1100px; margin:0 auto; display:flex; align-items:flex-start; justify-content:space-between; gap:3rem;
+      background: rgba(0,0,0,0.55); border: 1px solid rgba(0,212,255,0.25); border-radius: 28px; padding: 3em;
+      box-shadow: 0 40px 90px rgba(0,0,0,0.45); position:relative;
+    }
+    .about-intro{ letter-spacing:.35rem; font-size:.85rem; text-transform:uppercase; color:rgba(0,212,255,0.75); margin-bottom:1rem; }
+    .about-title{ margin-bottom:1.2rem; position:relative; }
+    .about-script{ font-family:'Great Vibes', cursive; font-size:4rem; text-transform:lowercase; color:#f3fbff; letter-spacing:.1rem; position:relative; }
+    .about-script::after{
+      content:""; position:absolute; left:0; bottom:-6px; height:4px; width:100%;
+      background: linear-gradient(90deg, rgba(0,212,255,0) 0%, rgba(0,212,255,0.8) 35%, rgba(0,212,255,1) 55%, rgba(0,212,255,0) 100%);
+      border-radius:999px; transform-origin:left center; animation: underlineGrow .7s ease .3s both;
+    }
+    .about-slogan{ font-size:1.35rem; color:#d2ebff; line-height:1.6; margin-bottom:1.75rem; max-width:28ch; }
+    .about-description{ display:grid; gap:1rem; color:#cfe9ff; font-size:1.05rem; line-height:1.7; }
+    .about-soap{
+      font-size:5rem; color:#00d4ff; position:absolute; left:76%; top:58%;
+      transform:translate(-50%,-50%); pointer-events:none; z-index:2;
+    }
+    .about-soap::before{
+      content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+      width:220px; height:220px; border-radius:50%;
+      background: radial-gradient(circle, rgba(0,212,255,.38) 0%, rgba(0,212,255,0) 70%);
+      filter: blur(20px); z-index:-1;
+    }
+
+    /* iOS-only quick fixes keep working via style.css rules */
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="soap">🧼</span>
+      <a class="logo-text" href="/">DufferinDeepClean</a>
+    </div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About Us</a>
+      <a href="book.html" class="quote-btn">Book Online</a>
+    </nav>
+  </header>
+
+  <!-- Announcement -->
+  <div class="announcement" role="region" aria-label="Promotion">
+    <div class="announcement-inner">
+      <p class="announce-line">999-999-999</p>
+      <a class="announcement-cta" href="tel:+1999999999">Call Today</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="home" class="split-screen">
+    <div class="text-side">
+      <h1 class="headline">
+        <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
+        <img src="cleanerguy.png" alt="Cleaner" class="headline-image" />
+      </h1>
+
+      <!-- Rotating service lines (moving box) -->
+      <div class="rotator-card" id="service-rotator">
+        <div class="rotator-window" aria-live="polite">
+          <div class="rotator-line active" data-title="Residential Homes">
+            <span class="rotator-title">Residential Homes</span>
+            <span class="rotator-text">We don’t just tidy houses. We deep clean homes.</span>
+          </div>
+          <div class="rotator-line" data-title="Commercial Buildings">
+            <span class="rotator-title">Commercial Buildings</span>
+            <span class="rotator-text">Commercial spaces collect more than dust. We remove it all.</span>
+          </div>
+          <div class="rotator-line" data-title="Offices / Workspaces">
+            <span class="rotator-title">Offices / Workspaces</span>
+            <span class="rotator-text">Clean offices look professional. Deep clean offices stay professional.</span>
+          </div>
+        </div>
+        <span class="rotator-underline" aria-hidden="true"></span>
+        <div class="rotator-dots" role="tablist" aria-label="Service types">
+          <button class="dot active" aria-label="Residential Homes" role="tab"></button>
+          <button class="dot" aria-label="Commercial Buildings" role="tab"></button>
+          <button class="dot" aria-label="Offices / Workspaces" role="tab"></button>
+        </div>
+      </div>
+
+      <a href="tel:+1999999999" class="quote-btn-home">Call Now</a>
+      <a href="#services" class="services-btn-home">Our Services</a>
+    </div>
+
+    <div class="image-side">
+      <div class="image-top-diffuse" aria-hidden="true"></div>
+      <img src="cleanuptransformation.jpg" alt="Cleanup transformation image" />
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="services-page">
+    <div class="services-header">
+      <h1>our services</h1>
+      <p>Professional cleaning solutions tailored to your needs. From warehouses to offices, we deliver exceptional results every time.</p>
+    </div>
+
+    <div class="services-grid">
+      <a class="service-card" href="book.html?pkg=industrial&service=Industrial%20%26%20Warehouse%20Deep%20Clean#start">
+        <img src="img/warehouse-deep-clean.jpg" alt="Warehouse deep cleaning with floor scrubber and high-dusting" class="service-image" />
+        <h3>industrial &amp; warehouse deep clean</h3>
+        <p>Heavy-duty cleaning for aisles, docks, and production floors—degreasing, machine wipe-downs, and high-dusting of beams &amp; racking.</p>
+        <span class="service-cta">book this</span>
+      </a>
+
+      <a class="service-card" href="book.html?pkg=office&service=Office%20Deep%20Clean#start">
+        <img src="img/office-deep-clean.jpg" alt="Office deep clean: tidy desks, mopped floors, stocked restrooms" class="service-image" />
+        <h3>office deep clean</h3>
+        <p>Workstations, meeting rooms, and common areas—vacuum &amp; mop, bin service &amp; recycling, restroom sanitization and supply refill.</p>
+        <span class="service-cta">book this</span>
+      </a>
+
+      <a class="service-card" href="book.html?pkg=specialty&service=High-Reach%20Window%20%26%20Rail%20Cleaning%20(Scissor%20Lift)%20%E2%80%94%20Warehouses#start">
+        <img src="img/highreach-warehouse.jpg" alt="Scissor-lift crew cleaning warehouse high windows and rails" class="service-image" />
+        <h3>high-reach window &amp; rail (warehouses)</h3>
+        <p>Clear glass and safe rails at height—performed with scissor lifts (no rope-access). Frames, tracks, and mezzanine rails detailed and sanitized.</p>
+        <span class="service-cta">book this</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT (restored) -->
+  <section id="about" class="about-section">
+    <div class="about-inner">
+      <div class="about-content">
+        <p class="about-intro">A quick reminder of who we are</p>
+        <h2 class="about-title">
+          <span class="about-script">about us</span>
+        </h2>
+        <p class="about-slogan">We scrub with heart so your team can focus on what matters.</p>
+        <p class="about-description">
+          <span>Family-built, people-first cleaning crews who respect every facility we enter.</span>
+          <span>We show up on time, finish the tough jobs, and leave every surface ready to shine.</span>
+          <span>Trusted by Homeowners, Offices and warehouses across Ontario. Get a free, no-obligation quote within one business day.</span>
+        </p>
+      </div>
+      <div class="about-soap" aria-hidden="true">🧼</div>
+    </div>
+  </section>
+
+  <!-- iOS detector -->
+  <script>
+    (function () {
+      var iOS =
+        /iP(hone|od|ad)/.test(navigator.platform) ||
+        (navigator.userAgent.includes('Mac') && navigator.maxTouchPoints > 1);
+      if (iOS) document.documentElement.classList.add('ios');
+    })();
+  </script>
+
+  <!-- Rotator logic (slide + bump + swipe) -->
+  <script>
+    (function(){
+      const box = document.getElementById('service-rotator');
+      if(!box) return;
+
+      const slides = Array.from(box.querySelectorAll('.rotator-line'));
+      const dots   = Array.from(box.querySelectorAll('.rotator-dots .dot'));
+      const underline = box.querySelector('.rotator-underline');
+      let idx = 0, timer = null, touchStartX = 0;
+
+      function show(n, bump=true){
+        // remove current
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+
+        // set new
+        idx = (n + slides.length) % slides.length;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+
+        // restart underline anim
+        underline.style.animation = 'none';
+        requestAnimationFrame(()=>{ underline.style.animation = ''; });
+
+        // nudge the whole box so it feels like it moved
+        if(bump){ box.classList.remove('bump'); void box.offsetWidth; box.classList.add('bump'); }
+      }
+
+      function next(){ show(idx+1); }
+      function start(){ stop(); timer = setInterval(next, 4200); }
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
+
+      // dots
+      dots.forEach((d,i)=> d.addEventListener('click', ()=>{ show(i); start(); }));
+
+      // swipe
+      box.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; }, {passive:true});
+      box.addEventListener('touchend', e=>{
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if(Math.abs(dx) > 40){ show(idx + (dx<0 ? 1 : -1)); start(); }
+      }, {passive:true});
+
+      // hover pause (desktop)
+      box.addEventListener('mouseenter', stop);
+      box.addEventListener('mouseleave', start);
+
+      // init
+      slides.forEach((s,i)=> s.style.zIndex = String(10 - i));
+      show(0,false); start();
+    })();
+  </script>
+</body>
+</html>
 

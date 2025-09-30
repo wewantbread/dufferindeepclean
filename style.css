@@ -817,3 +817,164 @@ index 0b20d0b0893d1dc4b3df65017bd88c8ab164a1ed..57860dcd49adb346da926e55d5068758
  
 EOF
 )
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&display=swap');
+
+/* Global Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; animation-fill-mode: both; }
+
+/* Links */
+a { text-decoration: none !important; }
+a:hover { text-decoration: none !important; }
+a:visited { color: #00d4ff; text-decoration: none !important; }
+a:link { text-decoration: none !important; }
+
+/* =========================
+   GLOBAL BACKGROUND
+   ========================= */
+:root{
+  --bg-tile: url('backgroundbook.png');     /* seamless tile */
+  --tile-w: 1536px;                         /* native size */
+  --tile-h: 1024px;
+  --tile-scale: 0.90;                       /* tweak 0.86–0.96 */
+
+  --tile-w-size: calc(var(--tile-w) * var(--tile-scale));
+  --tile-h-size: calc(var(--tile-h) * var(--tile-scale));
+}
+
+html, body { min-height: 100%; }
+html { background: #000; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: white;
+  min-height: 100vh;
+  background: transparent !important;
+}
+
+/* Animated tiling background */
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: var(--bg-tile);
+  background-repeat: repeat;
+  background-size: var(--tile-w-size) var(--tile-h-size);
+  background-position: 0 0;
+
+  /* seamless diagonal loop */
+  animation: bgInfinite 56s linear infinite;
+}
+
+/* readability overlay */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(1200px 600px at 50% -10%,
+              rgba(0,0,0,0.40), rgba(0,0,0,0.66) 60%, rgba(0,0,0,0.80));
+}
+
+/* lift site content above background */
+.navbar, .announcement, .split-screen, .services-page, main, section, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* background animation */
+@keyframes bgInfinite {
+  from { background-position: 0 0; }
+  to   { background-position: var(--tile-w-size) var(--tile-h-size); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  body::after{ animation: none; }
+}
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+h1, h2, h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+}
+
+/* =========================
+   NAVBAR
+   ========================= */
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5em 3em;
+  background: linear-gradient(to right, #000, #111);
+  position: sticky; top: 0; z-index: 1000;
+}
+
+.logo { display: flex; align-items: center; font-size: 2rem; font-weight: bold; color: #00d4ff;
+  animation: fadeInUp 0.4s ease forwards; transform: translateY(-10px); opacity: 0; animation-delay: 0.2s; position: relative; }
+.logo .soap { font-size: 2.5rem; margin-right: .5rem; transform: scale(1.1); opacity: 1;
+  animation: popIn 1.2s ease; animation-delay: .2s; animation-fill-mode: backwards; position: relative; }
+.logo .soap::after { content: '✨'; position: absolute; font-size: .9rem; top: -10px; right: -8px;
+  animation: sparkle 1.2s ease-in-out infinite; color: #fff; opacity: .8; }
+.logo-text { font-size: 1.8rem; text-transform: lowercase; letter-spacing: 1px;
+  animation: fadeInUp 0.1s ease forwards; opacity: 0; animation-delay: .3s; }
+
+@keyframes popIn { 0%{transform:scale(.5) rotate(-30deg);opacity:0} 60%{transform:scale(1.3) rotate(10deg);opacity:1} 100%{transform:scale(1.1)} }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@keyframes sparkle { 0%,100%{opacity:.8;transform:scale(1) rotate(0)} 50%{opacity:1;transform:scale(1.2) rotate(20deg)} }
+
+/* nav links */
+.nav-links { display: flex; align-items: center; gap: 1.75rem; }
+.nav-links a { color: #eee; font-size: 1rem; transition: color .3s ease; }
+.nav-links a:hover { color: #00d4ff; }
+
+/* =========================
+   HERO SPLIT
+   ========================= */
+.split-screen { display: flex; height: 90vh; width: 100%; position: relative; z-index: 2; }
+.text-side { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4em; }
+.image-side { flex: 1; overflow: hidden; display: flex; justify-content: flex-start; align-items: center; position: relative; z-index: 1; }
+.image-side::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 120px;
+  background: linear-gradient(to right, black, transparent); z-index: 3; pointer-events: none; }
+.image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 0;
+  transform: translateX(-40px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 55%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+/* headline */
+.headline { font-size: 3rem; font-weight: 800; line-height: 1.2; }
+.headline span { display: inline-block; animation: fadeIn 1s ease forwards; opacity: 0; }
+.headline span:nth-child(1){animation-delay:.3s}
+.headline span:nth-child(2){animation-delay:.6s}
+.headline span:nth-child(3){animation-delay:.9s}
+.headline span:nth-child(4){animation-delay:1.2s}
+.headline-image { height: 1em; width: auto; display: inline-block; margin-left: .5rem; vertical-align: baseline;
+  animation: fadeIn 1s ease forwards; opacity: 0; animation-delay: 1.5s; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+
+/* subtext & CTAs */
+.subtext { font-size: 1.1rem; margin-top: 2rem; color: #ccc; max-width: 500px; }
+.quote-btn-home {
+  margin-top: 2.4rem; padding: .8em 2em; background: #00d4ff; color: #000 !important; font-weight: bold;
+  border: none; border-radius: 14px; font-size: 1.5rem; cursor: pointer; align-self: flex-start;
+  animation: fadeInUp 1.5s ease forwards; opacity: 0; transform: translateY(20px);
+  transition: background .3s ease, transform .3s ease;
+}
+.quote-btn-home:hover { background: white; color: black !important; }
+
+.services-btn-home {
+  margin-top: 1.5rem; padding: .8em 2em; background: transparent; color: #00d4ff; font-weight: bold;
+  border: 2px solid #00d4ff; border-radius: 50px; font-size: 1.2rem;

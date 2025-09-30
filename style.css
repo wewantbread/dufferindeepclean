@@ -1295,3 +1295,59 @@ body::before{
   position: absolute;
   left: var(--soap-x);
   top:  var(--soap-y);
+/* ===== 1) ABOUT: precise soap position + centered glow ===== */
+.about-section .about-inner { position: relative; }
+
+/* Choose the target spot once, then fine-tune nudges if needed */
+:root{
+  --soap-x: 62%;        /* left → right (0% = far left, 100% = far right) */
+  --soap-y: 66%;        /* top  → bottom (0% = top, 100% = bottom) */
+  --soap-nudge-x: 0px;  /* small pixel nudge if you want later */
+  --soap-nudge-y: 0px;
+  --soap-visual-fix-y: -8%; /* compensates emoji’s visual center (−8% looks right) */
+}
+
+.about-section .about-soap{
+  position: absolute !important;
+  left: calc(var(--soap-x) + var(--soap-nudge-x)) !important;
+  top:  calc(var(--soap-y) + var(--soap-nudge-y)) !important;
+
+  /* Center visually (emoji sits a tad low inside its box, so lift it) */
+  transform: translate(-50%, calc(-50% + var(--soap-visual-fix-y))) !important;
+
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 !important; padding: 0 !important; line-height: 1;
+  z-index: 2; pointer-events: none;
+}
+
+/* Glow perfectly centered behind the emoji */
+.about-section .about-soap::before{
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,.38) 0%, rgba(0,212,255,0) 70%);
+  filter: blur(20px);
+  z-index: -1;
+}
+
+/* Keep sparkle close to the emoji */
+.about-section .about-soap::after{
+  right: -10px; top: -10px;
+}
+
+/* Mobile: fall back to the original stacked layout */
+@media (max-width: 768px){
+  .about-section .about-soap{
+    position: static !important;
+    transform: none !important;
+    align-self: center !important;
+    margin-top: 2rem !important;
+  }
+  .about-section .about-soap::before{
+    left: 50%; top: 55%; transform: translate(-50%, -50%);
+  }
+}
+
+/* ===== 2) LOGO: use Grea*

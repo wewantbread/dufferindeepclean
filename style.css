@@ -1199,3 +1199,77 @@ h1, h2, h3 {
   80%  { transform: scaleX(1); opacity: 1; }
   100% { transform: scaleX(0); opacity: 0; }
 }
+/* =========================
+   HERO CAROUSEL
+   ========================= */
+.headline-carousel {
+  max-width: 580px;
+  position: relative;
+}
+
+.carousel-track {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: none;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.carousel-slide.active {
+  display: block;
+}
+
+.carousel-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem;
+  color: #00d4ff;
+  margin-bottom: 0.6rem;
+  position: relative;
+  display: inline-block;
+}
+
+.carousel-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.9), rgba(255,255,255,0));
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation: underlineSweep 1s ease forwards;
+}
+
+.carousel-slide p {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+/* dots */
+.carousel-dots {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.carousel-dots .dot {
+  width: 12px; height: 12px;
+  background: #555;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background: #00d4ff;
+}
+
+@keyframes underlineSweep {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}

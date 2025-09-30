@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <!-- Minimal, safe inline styles to guarantee the new background + step bar look -->
+  <!-- Minimal, safe inline styles to match your current page -->
   <style>
     :root{
       --bg-card: rgba(10, 12, 16, 0.72);
@@ -21,10 +21,7 @@
       --active: #ffd166;
     }
 
-    /* Full-page background image */
-    html, body {
-      height: 100%;
-    }
+    html, body { height: 100%; }
     body {
       margin: 0;
       color: var(--text);
@@ -35,8 +32,6 @@
       background-attachment: fixed;
       background-repeat: no-repeat;
     }
-
-    /* Subtle overlay to ensure readability over the background */
     body::before {
       content: "";
       position: fixed;
@@ -46,7 +41,7 @@
       z-index: -1;
     }
 
-    /* NAV (kept minimal) */
+    /* NAV (as you had) */
     .navbar{
       display:flex; justify-content:space-between; align-items:center;
       padding: 14px 22px; backdrop-filter: blur(6px);
@@ -71,12 +66,8 @@
       text-transform: lowercase;
     }
 
-    /* Long centered step bar (rectangle) */
-    .stepper-wrap{
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
+    /* Stepper */
+    .stepper-wrap{ width: 100%; display: flex; justify-content: center; }
     .stepper{
       list-style: none; padding: 10px; margin: 0;
       width: min(100%, 1050px);
@@ -89,12 +80,8 @@
       backdrop-filter: blur(6px);
     }
     .stepper li{
-      padding: 14px 12px;
-      text-align: center;
-      border-radius: 12px;
-      font-weight: 600;
-      text-transform: lowercase;
-      color: var(--muted);
+      padding: 14px 12px; text-align: center; border-radius: 12px;
+      font-weight: 600; text-transform: lowercase; color: var(--muted);
       border: 1px dashed rgba(255,255,255,0.12);
       transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
     }
@@ -110,38 +97,22 @@
       transform: translateY(-1px);
     }
 
-    /* The main “application” card */
+    /* Card */
     .booking-card{
-      margin: 18px auto 0;
-      width: min(100%, 1050px);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-      backdrop-filter: blur(8px);
-      overflow: hidden;
+      margin: 18px auto 0; width: min(100%, 1050px);
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px); overflow: hidden;
     }
+    .booking-form, .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
-    .booking-form, .booking-success{
-      padding: clamp(16px, 3vw, 28px);
-    }
-
-    fieldset{
-      border: none; margin: 0; padding: 0;
-    }
-    legend{
-      font-weight: 800; font-size: 1.2rem; margin-bottom: 14px;
-    }
+    fieldset{ border: none; margin: 0; padding: 0; }
+    legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: var(--muted); }
 
-    .grid-2{
-      display: grid; gap: 14px;
-      grid-template-columns: 1fr;
-    }
+    .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
-    @media (min-width: 720px){
-      .grid-2{ grid-template-columns: 1fr 1fr; }
-    }
+    @media (min-width: 720px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
 
     label{ display:flex; flex-direction:column; gap:6px; font-size: .95rem; }
     input, select, textarea{
@@ -155,14 +126,10 @@
       background: rgba(255,255,255,0.08);
     }
 
-    .plans{
-      display:grid; gap:12px; grid-template-columns: 1fr;
-    }
-    @media (min-width: 840px){
-      .plans{ grid-template-columns: repeat(3, 1fr); }
-    }
-    .plan{ display:block; }
-    .plan input{ display:none; }
+    /* Plans */
+    .plans{ display:grid; gap:12px; grid-template-columns: 1fr; }
+    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, 1fr); } }
+    .plan{ display:block; } .plan input{ display:none; }
     .plan-card{
       border: 1px solid var(--border); border-radius: 14px; padding: 14px;
       background: rgba(255,255,255,0.04);
@@ -177,40 +144,29 @@
     .plan-discount{ color: #00d084; font-weight: 700; }
     .plan-note{ color: var(--muted); font-size: .9rem; }
 
-    .actions{
-      margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap;
-    }
+    .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap; }
     .btn{
       appearance: none; border: 1px solid var(--border); color: #0b0d10;
       background: linear-gradient(180deg, #4cc3ff, #00e0a4);
       font-weight: 800; border-radius: 12px; padding: 10px 16px; cursor: pointer;
     }
-    .btn.back{
-      background: rgba(255,255,255,0.06); color: var(--text);
-    }
+    .btn.back{ background: rgba(255,255,255,0.06); color: var(--text); }
     .btn:hover{ filter: brightness(1.05); }
 
-    /* Package descriptions */
     .package-desc{
       border: 1px dashed rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 12px;
-      background: rgba(255,255,255,0.03);
+      border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03);
     }
 
-    /* Review list */
-    .review{
-      display:grid; gap:10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px;
-      padding: 14px;
-    }
-    .review dt{
-      font-weight: 700; color: var(--muted);
-    }
-    .review dd{
-      margin: 0 0 10px;
+    .review{ display:grid; gap:10px; border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 14px; }
+    .review dt{ font-weight: 700; color: var(--muted); }
+    .review dd{ margin: 0 0 10px; }
+
+    /* Powered by Google note */
+    .powered-by-google {
+      font-size: .8rem; color: var(--muted);
+      margin-top: 6px; display: inline-block;
     }
   </style>
 </head>
@@ -232,7 +188,7 @@
   <section class="booking">
     <h1 class="booking-title">book online</h1>
 
-    <!-- Long, centered step rectangle -->
+    <!-- Stepper -->
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
         <li class="active">1. when &amp; where</li>
@@ -243,11 +199,10 @@
       </ol>
     </div>
 
-    <!-- Application card -->
+    <!-- Card -->
     <div class="booking-card">
-     <form id="bookingForm" class="booking-form" 
-      action="https://formspree.io/f/mrblyqpr" method="POST">
-        <!-- STEP 1: When & Where -->
+     <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
+        <!-- STEP 1 -->
         <fieldset class="step" data-step="1">
           <legend>When &amp; Where</legend>
           <div class="grid-2">
@@ -255,26 +210,28 @@
               Business name (optional)
               <input type="text" name="business" placeholder="ACME Distribution" />
             </label>
-            <label>
+
+            <label class="wide">
               Address
-              <input type="text" name="address" placeholder="123 Main St" required />
+              <input id="address" type="text" name="address" placeholder="Start typing your address…" autocomplete="off" required />
+              <span class="powered-by-google">Powered by Google</span>
             </label>
+
             <label>
               City
-              <input type="text" name="city" placeholder="Orangeville" required />
+              <input id="city" type="text" name="city" placeholder="Mono" required />
             </label>
-            <label>
-              Postal Code
-              <input type="text" name="postal" placeholder="L9W 1A1" required />
-            </label>
+
             <label>
               Preferred date
               <input type="date" name="date" required />
             </label>
+
             <label>
               Preferred time
               <input type="time" name="time" required />
             </label>
+
             <label class="wide">
               Approx. square footage
               <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" required />
@@ -285,7 +242,7 @@
           </div>
         </fieldset>
 
-        <!-- STEP 2: How Often -->
+        <!-- STEP 2 -->
         <fieldset class="step" data-step="2" hidden>
           <legend>How Often?</legend>
           <p class="muted">Save on recurring cleanings. Choose a frequency.</p>
@@ -345,7 +302,7 @@
           </div>
         </fieldset>
 
-        <!-- STEP 3: Cleaning Type + Packages -->
+        <!-- STEP 3 -->
         <fieldset class="step" data-step="3" hidden>
           <legend>What type of cleaning?</legend>
           <div class="grid-2">
@@ -404,7 +361,7 @@
           </div>
         </fieldset>
 
-        <!-- STEP 4: Contact -->
+        <!-- STEP 4 -->
         <fieldset class="step" data-step="4" hidden>
           <legend>Your contact information</legend>
           <div class="grid-2">
@@ -431,12 +388,10 @@
           </div>
         </fieldset>
 
-        <!-- STEP 5: Review & Confirm -->
+        <!-- STEP 5 -->
         <fieldset class="step" data-step="5" hidden>
           <legend>Review &amp; Confirm</legend>
-          <dl class="review" id="reviewList">
-            <!-- Filled by JS -->
-          </dl>
+          <dl class="review" id="reviewList"></dl>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="submit" class="btn submit">Submit</button>
@@ -460,7 +415,7 @@
     })();
   </script>
 
-  <!-- booking wizard JS -->
+  <!-- Booking wizard JS (unchanged structure; updated review to remove postal) -->
   <script>
     (function(){
       const form = document.getElementById('bookingForm');
@@ -476,7 +431,7 @@
           li.classList.toggle('done', idx < i);
         });
         current = i;
-        if (i === 4) buildReview(); // step index 4 = "Step 5"
+        if (i === 4) buildReview(); // step index 4 => Step 5
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
@@ -493,10 +448,10 @@
       });
 
       form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        // TODO: connect to Formspree or backend here
-        form.hidden = true;
-        document.getElementById('bookingSuccess').hidden = false;
+        // keep your Formspree default; comment the preventDefault if you want to actually submit
+        // e.preventDefault();
+        // form.hidden = true;
+        // document.getElementById('bookingSuccess').hidden = false;
       });
 
       // package descriptions toggle
@@ -512,7 +467,7 @@
       }
       if(pkg){ pkg.addEventListener('change', updatePkg); }
 
-      // Build the review summary
+      // Build the review summary (no postal code)
       function buildReview(){
         const fd = new FormData(form);
         const freqMap = {
@@ -531,7 +486,8 @@
 
         const rows = [
           ['Business', fd.get('business') || '—'],
-          ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
+          ['Address', fd.get('address') || '—'],
+          ['City', fd.get('city') || '—'],
           ['Preferred Date', fd.get('date') || '—'],
           ['Preferred Time', fd.get('time') || '—'],
           ['Approx. Sq Ft', fd.get('sqft') || '—'],
@@ -550,6 +506,38 @@
       showStep(0);
     })();
   </script>
+
+  <!-- Google Places Autocomplete -->
+  <script>
+    function initPlaces() {
+      const input = document.getElementById('address');
+      if (!input) return;
+
+      const autocomplete = new google.maps.places.Autocomplete(input, {
+        fields: ['address_components', 'formatted_address', 'geometry'],
+        componentRestrictions: { country: ['ca'] }, // bias to Canada
+        types: ['address']
+      });
+
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace();
+        // Fill the input with formatted result (if needed)
+        if (place.formatted_address) input.value = place.formatted_address;
+
+        // Try to auto-fill City
+        const cityInput = document.getElementById('city');
+        if (place.address_components && cityInput) {
+          const cityComp = place.address_components.find(c => c.types.includes('locality')) 
+                        || place.address_components.find(c => c.types.includes('postal_town'))
+                        || place.address_components.find(c => c.types.includes('administrative_area_level_3'))
+                        || place.address_components.find(c => c.types.includes('administrative_area_level_2'));
+          if (cityComp && !cityInput.value) cityInput.value = cityComp.long_name;
+        }
+      });
+    }
+  </script>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_PLACES_API_KEY&libraries=places&callback=initPlaces">
+  </script>
 </body>
 </html>
-<script src="dufferindeepclean.booking.js"></script>

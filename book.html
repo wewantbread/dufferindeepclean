@@ -1,62 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Book Online — DufferinDeepClean</title>
+
+  <!-- Fonts (match index + About Us script) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&family=Great+Vibes&display=swap" rel="stylesheet" />
+
+  <!-- Site CSS (keep your existing file) -->
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
 
-  <!-- Minimal, safe inline styles to match your current page -->
+  <!-- Page-specific styles to: 
+       1) match index animated background (slightly darker here),
+       2) unify logo font + animation,
+       3) keep your booking UI exactly as-is otherwise. -->
   <style>
+    /* ===== Animated seamless background (same as index, slightly darker) ===== */
     :root{
-      --bg-card: rgba(10, 12, 16, 0.72);
-      --bg-stepper: rgba(0, 0, 0, 0.65);
-      --text: #f2f5f8;
-      --muted: #b6c2cf;
-      --brand: #4cc3ff;
-      --brand-2: #00e0a4;
-      --border: rgba(255,255,255,0.08);
-      --done: #00d084;
-      --active: #ffd166;
+      /* Use the same seamless tile image you use on index */
+      --bg-tile: url('backgroundbook.png');    /* or cleaning-pattern.png if that’s your tile */
+      --tile-w: 1536px;
+      --tile-h: 1024px;
+      --tile-scale: 0.90;
+      --tile-w-size: calc(var(--tile-w) * var(--tile-scale));
+      --tile-h-size: calc(var(--tile-h) * var(--tile-scale));
+
+      /* Darker overlay than index (index ≈ 0.40/0.66/0.80) */
+      --overlay-a: rgba(0,0,0,0.52);
+      --overlay-b: rgba(0,0,0,0.78);
+      --overlay-c: rgba(0,0,0,0.90);
     }
 
-    html, body { height: 100%; }
+    html, body { min-height: 100%; background:#000; }
     body {
-      margin: 0;
-      color: var(--text);
+      color: #f2f5f8;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background-image: url('backgroundbook.png');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,0.45), rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85));
-      pointer-events: none;
-      z-index: -1;
+      background: transparent !important;
     }
 
-    /* NAV (as you had) */
+    /* Animated tile layer (under content) */
+    body::after{
+      content:"";
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: var(--bg-tile);
+      background-repeat: repeat;
+      background-size: var(--tile-w-size) var(--tile-h-size);
+      background-position: 0 0;
+      animation: bgInfinite 56s linear infinite;
+    }
+    @keyframes bgInfinite {
+      from { background-position: 0 0; }
+      to   { background-position: var(--tile-w-size) var(--tile-h-size); }
+    }
+
+    /* Darker readability overlay for booking page */
+    body::before{
+      content:"";
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(1200px 600px at 50% -10%,
+                  var(--overlay-a), var(--overlay-b) 60%, var(--overlay-c));
+    }
+
+    /* Ensure all content sits above background layers */
+    .navbar, main, section, footer { position: relative; z-index: 2; }
+
+    /* ===== NAV: transparent like index, unified logo font + left→right unveil ===== */
     .navbar{
       display:flex; justify-content:space-between; align-items:center;
-      padding: 14px 22px; backdrop-filter: blur(6px);
-      background: rgba(0,0,0,0.5); border-bottom: 1px solid var(--border);
+      padding: 14px 22px;
+      background: rgba(0,0,0,0.20);           /* transparent header over the moving bg */
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky; top: 0; z-index: 1000;
     }
-    .logo{ display:flex; align-items:center; gap:.5rem; }
-    .logo-text{ text-decoration:none; font-weight:800; color:var(--text); text-transform:lowercase; letter-spacing:0.5px; }
-    .nav-links a{ color:var(--muted); text-decoration:none; margin-left:18px; }
-    .nav-links a:hover{ color:var(--text); }
+    .logo{ display:flex; align-items:center; gap:.55rem; }
+    .logo .soap{ font-size: 2.2rem; transform: translateY(2px); }
+    .logo .logo-text{
+      font-family: 'Great Vibes', cursive !important;  /* match About Us */
+      font-size: 2.8rem; line-height: 1; letter-spacing: .4px; color:#fff;
+      position:relative; display:inline-block;
+      clip-path: inset(0 100% 0 0); opacity:0;
+      animation: logoUnveil 1.1s ease forwards .25s;
+      text-decoration: none;
+    }
+    @keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
+    @keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
+    .logo .logo-text::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
+      mix-blend-mode: screen; opacity:0; pointer-events:none;
+      animation: logoSweep 1.1s ease forwards .25s;
+    }
 
-    /* Page section */
+    /* Nav links match site look */
+    .nav-links a{
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: .5px;
+      color: #cfe0ee; text-decoration:none; margin-left:18px;
+      transition: color .25s ease;
+    }
+    .nav-links a:hover{ color:#fff; }
+
+    /* ===== Booking page layout (your original UI, unchanged) ===== */
     .booking{
-      max-width: 1100px;
-      margin: 0 auto;
+      max-width: 1100px; margin: 0 auto;
       padding: clamp(20px, 4vw, 48px);
     }
     .booking-title{
@@ -67,22 +115,20 @@
       text-transform: lowercase;
     }
 
-    /* Stepper */
-    .stepper-wrap{ width: 100%; display: flex; justify-content: center; }
+    .stepper-wrap{ width: 100%; display:flex; justify-content:center; }
     .stepper{
       list-style: none; padding: 10px; margin: 0;
       width: min(100%, 1050px);
-      display: grid; grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      background: var(--bg-stepper);
-      border: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       backdrop-filter: blur(6px);
     }
     .stepper li{
       padding: 14px 12px; text-align: center; border-radius: 12px;
-      font-weight: 600; text-transform: lowercase; color: var(--muted);
+      font-weight: 600; text-transform: lowercase; color: #b6c2cf;
       border: 1px dashed rgba(255,255,255,0.12);
       transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
     }
@@ -94,22 +140,24 @@
     .stepper li.active{
       color: #111; 
       background: linear-gradient(180deg, #ffd166, #ffb703);
-      border-color: rgba(255, 183, 3, 0.65);
+      border-color: rgba(255,183,3,0.65);
       transform: translateY(-1px);
     }
 
-    /* Card */
     .booking-card{
       margin: 18px auto 0; width: min(100%, 1050px);
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-      backdrop-filter: blur(8px); overflow: hidden;
+      background: rgba(10, 12, 16, 0.72);     /* slightly darker card to match page darkness */
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      backdrop-filter: blur(8px);
+      overflow: hidden;
     }
     .booking-form, .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
     fieldset{ border: none; margin: 0; padding: 0; }
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
-    .muted{ color: var(--muted); }
+    .muted{ color: #b6c2cf; }
 
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
@@ -117,22 +165,21 @@
 
     label{ display:flex; flex-direction:column; gap:6px; font-size: .95rem; }
     input, select, textarea{
-      border-radius: 12px; border: 1px solid var(--border); padding: 12px 12px;
-      background: rgba(255,255,255,0.05); color: var(--text);
-      outline: none;
+      border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); padding: 12px 12px;
+      background: rgba(255,255,255,0.05); color: #f2f5f8; outline: none;
     }
     input:focus, select:focus, textarea:focus{
-      border-color: rgba(76, 195, 255, 0.7);
-      box-shadow: 0 0 0 3px rgba(76, 195, 255, 0.25);
+      border-color: rgba(76,195,255,0.7);
+      box-shadow: 0 0 0 3px rgba(76,195,255,0.25);
       background: rgba(255,255,255,0.08);
     }
 
-    /* Plans */
     .plans{ display:grid; gap:12px; grid-template-columns: 1fr; }
     @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, 1fr); } }
-    .plan{ display:block; } .plan input{ display:none; }
+    .plan{ display:block; }
+    .plan input{ display:none; }
     .plan-card{
-      border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px;
       background: rgba(255,255,255,0.04);
       transition: transform .2s ease, border-color .2s ease, background .2s ease;
     }
@@ -143,32 +190,35 @@
     }
     .plan-title{ font-weight: 800; }
     .plan-discount{ color: #00d084; font-weight: 700; }
-    .plan-note{ color: var(--muted); font-size: .9rem; }
+    .plan-note{ color: #b6c2cf; font-size: .9rem; }
 
     .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap; }
     .btn{
-      appearance: none; border: 1px solid var(--border); color: #0b0d10;
+      appearance: none; border: 1px solid rgba(255,255,255,0.08); color: #0b0d10;
       background: linear-gradient(180deg, #4cc3ff, #00e0a4);
       font-weight: 800; border-radius: 12px; padding: 10px 16px; cursor: pointer;
     }
-    .btn.back{ background: rgba(255,255,255,0.06); color: var(--text); }
+    .btn.back{
+      background: rgba(255,255,255,0.06); color: #f2f5f8;
+    }
     .btn:hover{ filter: brightness(1.05); }
 
     .package-desc{
       border: 1px dashed rgba(255,255,255,0.2);
-      border-radius: 12px; padding: 12px; background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
     }
 
-    .review{ display:grid; gap:10px; border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04); border-radius: 12px; padding: 14px; }
-    .review dt{ font-weight: 700; color: var(--muted); }
+    .review{
+      display:grid; gap:10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 14px;
+    }
+    .review dt{ font-weight: 700; color: #b6c2cf; }
     .review dd{ margin: 0 0 10px; }
-
-    /* Powered by Google note */
-    .powered-by-google {
-      font-size: .8rem; color: var(--muted);
-      margin-top: 6px; display: inline-block;
-    }
   </style>
 </head>
 <body>
@@ -176,9 +226,10 @@
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
-      <a class="logo-text" href="index.html">dufferindeepclean</a>
+      <a class="logo-text" href="index.html">DufferinDeepClean</a>
     </div>
     <nav class="nav-links">
+      <a href="index.html#home">Home</a>
       <a href="index.html#services">Services</a>
       <a href="about.html">About Us</a>
       <a href="login.html">Login</a>
@@ -189,7 +240,7 @@
   <section class="booking">
     <h1 class="booking-title">book online</h1>
 
-    <!-- Stepper -->
+    <!-- Long, centered step rectangle -->
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
         <li class="active">1. when &amp; where</li>
@@ -200,10 +251,10 @@
       </ol>
     </div>
 
-    <!-- Card -->
+    <!-- Application card -->
     <div class="booking-card">
-     <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
-        <!-- STEP 1 -->
+      <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
+        <!-- STEP 1: When & Where -->
         <fieldset class="step" data-step="1">
           <legend>When &amp; Where</legend>
           <div class="grid-2">
@@ -211,28 +262,26 @@
               Business name (optional)
               <input type="text" name="business" placeholder="ACME Distribution" />
             </label>
-
-            <label class="wide">
+            <label>
               Address
-              <input id="address" type="text" name="address" placeholder="Start typing your address…" autocomplete="off" required />
-              <span class="powered-by-google">Powered by Google</span>
+              <input id="address" type="text" name="address" placeholder="123 Main St" required autocomplete="address-line1" />
             </label>
-
             <label>
               City
-              <input id="city" type="text" name="city" placeholder="Mono" required />
+              <input id="city" type="text" name="city" placeholder="Mono" required autocomplete="address-level2" />
             </label>
-
+            <label>
+              Postal Code
+              <input id="postal" type="text" name="postal" placeholder="L9W 1A1" required autocomplete="postal-code" />
+            </label>
             <label>
               Preferred date
               <input type="date" name="date" required />
             </label>
-
             <label>
               Preferred time
               <input type="time" name="time" required />
             </label>
-
             <label class="wide">
               Approx. square footage
               <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" required />
@@ -243,7 +292,7 @@
           </div>
         </fieldset>
 
-        <!-- STEP 2 -->
+        <!-- STEP 2: How Often -->
         <fieldset class="step" data-step="2" hidden>
           <legend>How Often?</legend>
           <p class="muted">Save on recurring cleanings. Choose a frequency.</p>
@@ -303,7 +352,7 @@
           </div>
         </fieldset>
 
-        <!-- STEP 3 -->
+        <!-- STEP 3: Cleaning Type + Packages -->
         <fieldset class="step" data-step="3" hidden>
           <legend>What type of cleaning?</legend>
           <div class="grid-2">
@@ -362,7 +411,7 @@
           </div>
         </fieldset>
 
-        <!-- STEP 4 -->
+        <!-- STEP 4: Contact -->
         <fieldset class="step" data-step="4" hidden>
           <legend>Your contact information</legend>
           <div class="grid-2">
@@ -389,10 +438,12 @@
           </div>
         </fieldset>
 
-        <!-- STEP 5 -->
+        <!-- STEP 5: Review & Confirm -->
         <fieldset class="step" data-step="5" hidden>
           <legend>Review &amp; Confirm</legend>
-          <dl class="review" id="reviewList"></dl>
+          <dl class="review" id="reviewList">
+            <!-- Filled by JS -->
+          </dl>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="submit" class="btn submit">Submit</button>
@@ -416,7 +467,7 @@
     })();
   </script>
 
-  <!-- Booking wizard JS (unchanged structure; updated review to remove postal) -->
+  <!-- Booking wizard JS (unchanged, just scoped to this page) -->
   <script>
     (function(){
       const form = document.getElementById('bookingForm');
@@ -432,7 +483,7 @@
           li.classList.toggle('done', idx < i);
         });
         current = i;
-        if (i === 4) buildReview(); // step index 4 => Step 5
+        if (i === 4) buildReview(); // step index 4 = "Step 5"
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
@@ -449,8 +500,10 @@
       });
 
       form.addEventListener('submit', (e)=>{
-        // keep your Formspree default; comment the preventDefault if you want to actually submit
-        // e.preventDefault();
+        e.preventDefault();
+        // Let Formspree submit normally:
+        form.submit();
+        // If you prefer the inline success card instead, uncomment below:
         // form.hidden = true;
         // document.getElementById('bookingSuccess').hidden = false;
       });
@@ -468,7 +521,7 @@
       }
       if(pkg){ pkg.addEventListener('change', updatePkg); }
 
-      // Build the review summary (no postal code)
+      // Build the review summary
       function buildReview(){
         const fd = new FormData(form);
         const freqMap = {
@@ -487,8 +540,7 @@
 
         const rows = [
           ['Business', fd.get('business') || '—'],
-          ['Address', fd.get('address') || '—'],
-          ['City', fd.get('city') || '—'],
+          ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
           ['Preferred Date', fd.get('date') || '—'],
           ['Preferred Time', fd.get('time') || '—'],
           ['Approx. Sq Ft', fd.get('sqft') || '—'],
@@ -508,37 +560,41 @@
     })();
   </script>
 
-  <!-- Google Places Autocomplete -->
+  <!-- OPTIONAL: Google Places Autocomplete (shows "Powered by Google" automatically)
+       Replace YOUR_API_KEY_HERE with your Maps JavaScript API key with Places enabled.
+       If you skip this, the form still works—this block is optional. -->
   <script>
-    function initPlaces() {
-      const input = document.getElementById('address');
-      if (!input) return;
+    (function attachPlaces(){
+      window.initPlaces = function(){
+        if (!window.google || !google.maps || !google.maps.places) return;
+        const addr = document.getElementById('address');
+        if (!addr) return;
+        const ac = new google.maps.places.Autocomplete(addr, {
+          types: ['address'],
+          fields: ['address_components','formatted_address']
+        });
+        ac.addListener('place_changed', () => {
+          const p = ac.getPlace();
+          if (!p || !p.address_components) return;
+          const cityEl = document.getElementById('city');
+          const postalEl = document.getElementById('postal');
+          const comps = p.address_components;
 
-      const autocomplete = new google.maps.places.Autocomplete(input, {
-        fields: ['address_components', 'formatted_address', 'geometry'],
-        componentRestrictions: { country: ['ca'] }, // bias to Canada
-        types: ['address']
-      });
+          const get = (type) => (comps.find(c => c.types.includes(type)) || {}).long_name || '';
+          const city = get('locality') || get('postal_town') || get('administrative_area_level_3') || '';
+          const postal = get('postal_code') || '';
 
-      autocomplete.addListener('place_changed', () => {
-        const place = autocomplete.getPlace();
-        // Fill the input with formatted result (if needed)
-        if (place.formatted_address) input.value = place.formatted_address;
+          if (city && cityEl) cityEl.value = city;
+          if (postal && postalEl) postalEl.value = postal;
+        });
+      };
 
-        // Try to auto-fill City
-        const cityInput = document.getElementById('city');
-        if (place.address_components && cityInput) {
-          const cityComp = place.address_components.find(c => c.types.includes('locality')) 
-                        || place.address_components.find(c => c.types.includes('postal_town'))
-                        || place.address_components.find(c => c.types.includes('administrative_area_level_3'))
-                        || place.address_components.find(c => c.types.includes('administrative_area_level_2'));
-          if (cityComp && !cityInput.value) cityInput.value = cityComp.long_name;
-        }
-      });
-    }
+      // If developer adds the script later, this still works.
+      // (Do nothing if script isn't present yet.)
+    })();
   </script>
-  <script async
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_PLACES_API_KEY&libraries=places&callback=initPlaces">
-  </script>
+  <!-- If you want Places now, uncomment the next line and insert your key:
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=places&callback=initPlaces" async defer></script>
+  -->
 </body>
 </html>

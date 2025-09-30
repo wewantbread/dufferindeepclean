@@ -1448,3 +1448,33 @@ body::before{
 /* Keep your sparkle keyframes available */
 @keyframes sparkle { 0%,100%{opacity:.8;transform:scale(1) rotate(0)} 50%{opacity:1;transform:scale(1.2) rotate(20deg)} }
 </style>
+@keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
+@keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
+
+.navbar .logo .logo-text{
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 2.8rem;                /* bigger like you wanted */
+  line-height: 1;
+  letter-spacing: .4px;
+  color:#fff !important;
+  position:relative;
+  display:inline-block;
+  clip-path: inset(0 100% 0 0);
+  opacity:0;
+  animation: logoUnveil 1.1s ease forwards .25s;
+}
+
+/* subtle sheen during reveal */
+.navbar .logo .logo-text::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
+  mix-blend-mode: screen; opacity:0; pointer-events:none;
+  animation: logoSweep 1.1s ease forwards .25s;
+}
+
+/* nudge the soap so it doesn’t overlap */
+.navbar .logo .soap{
+  margin-right:.55rem;
+  transform: translateY(2px);
+}

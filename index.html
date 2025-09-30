@@ -189,3 +189,27 @@
   </script>
 </body>
 </html>
+<script>
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dots .dot');
+  let current = 0;
+
+  function showSlide(index) {
+    slides.forEach((s,i) => {
+      s.classList.toggle('active', i === index);
+      dots[i].classList.toggle('active', i === index);
+    });
+    current = index;
+  }
+
+  // Auto-rotate every 6s
+  setInterval(() => {
+    let next = (current + 1) % slides.length;
+    showSlide(next);
+  }, 6000);
+
+  // Manual swipe (dot click)
+  dots.forEach((dot,i) => {
+    dot.addEventListener('click', () => showSlide(i));
+  });
+</script>

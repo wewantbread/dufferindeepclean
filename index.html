@@ -213,3 +213,77 @@
     dot.addEventListener('click', () => showSlide(i));
   });
 </script>
+<style id="hotfix-soap-logo">
+/* ===== FORCE the About emoji + glow to the green-circle spot ===== */
+:root{
+  /* adjust these two numbers if you want to nudge later */
+  --soap-x: 62%;
+  --soap-y: 66%;
+}
+
+/* make the card a positioning context */
+body .about-section .about-inner{ position: relative !important; }
+
+/* hard-reset any old styles on the soap */
+body .about-section .about-soap{
+  position: absolute !important;
+  left: var(--soap-x) !important;
+  top: var(--soap-y) !important;
+  transform: translate(-50%, -54%) !important; /* small visual lift to center the emoji drawing */
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 5rem !important; /* keep your size */
+  z-index: 2 !important;
+  pointer-events: none !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+}
+
+/* perfectly centered glow behind the emoji */
+body .about-section .about-soap::before{
+  content:"";
+  position:absolute; left:50%; top:50%;
+  transform: translate(-50%,-50%);
+  width: 220px; height: 220px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,.38) 0%, rgba(0,212,255,0) 70%);
+  filter: blur(20px);
+  z-index: -1;
+}
+
+/* keep the ✨ close but not clipped */
+body .about-section .about-soap::after{
+  content:'✨';
+  position:absolute; right:-10px; top:-10px;
+  font-size: 1.5rem;
+  animation: sparkle 1.6s ease-in-out infinite;
+  opacity:.9;
+}
+
+/* ===== LOGO: match “about us” font + left→right reveal ===== */
+@keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
+@keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
+
+body .navbar .logo .logo-text{
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 2.2rem !important;
+  letter-spacing: .5px !important;
+  color:#fff !important;
+  position:relative !important;
+  display:inline-block !important;
+  clip-path: inset(0 100% 0 0);
+  opacity:0;
+  animation: logoUnveil 1.1s ease forwards .25s;
+}
+
+/* subtle sheen during the reveal */
+body .navbar .logo .logo-text::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
+  mix-blend-mode: screen; opacity:0; pointer-events:none;
+  animation: logoSweep 1.1s ease forwards .25s;
+}
+
+/* keep the soap in the logo floating; reuse your sparkle keyframes if present */
+@keyframes sparkle{0%,100%{opacity:.8;transform:scale(1) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
+</style>

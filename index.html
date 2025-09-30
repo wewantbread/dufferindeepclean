@@ -140,6 +140,51 @@
         /iP(hone|od|ad)/.test(navigator.platform) ||
         (navigator.userAgent.includes('Mac') && navigator.maxTouchPoints > 1);
       if (iOS) document.documentElement.classList.add('ios');
+      <section id="home" class="split-screen">
+  <div class="text-side">
+    <h1 class="headline-carousel">
+      <div class="carousel-track">
+        
+        <!-- Slide 1: Residential Homes -->
+        <div class="carousel-slide active">
+          <h2 class="carousel-title">Residential Homes</h2>
+          <p>“We don’t just tidy houses. We deep clean homes.”</p>
+          <p>“Every room, every surface, every corner—done right.”</p>
+        </div>
+
+        <!-- Slide 2: Commercial Buildings -->
+        <div class="carousel-slide">
+          <h2 class="carousel-title">Commercial Buildings</h2>
+          <p>“Commercial spaces collect more than dust. We remove it all.”</p>
+          <p>“Deep cleaning keeps large buildings safe, healthy, and lasting.”</p>
+        </div>
+
+        <!-- Slide 3: Offices -->
+        <div class="carousel-slide">
+          <h2 class="carousel-title">Offices / Workspaces</h2>
+          <p>“Clean offices look professional. Deep clean offices stay professional.”</p>
+          <p>“A real deep clean keeps employees and clients comfortable.”</p>
+        </div>
+
+      </div>
+      <!-- Navigation dots -->
+      <div class="carousel-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </h1>
+
+    <p class="subtext">Professional deep cleaning services across homes, offices, and commercial spaces.</p>
+    <a href="tel:+1234567890" class="quote-btn-home">Call Now</a>
+    <a href="#services-grid" class="services-btn-home">Our Services</a>
+  </div>
+
+  <div class="image-side">
+    <img src="cleanuptransformation.jpg" alt="Deep Cleaning in action">
+  </div>
+</section>
+
     })();
   </script>
 </body>

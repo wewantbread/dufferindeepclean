@@ -1282,19 +1282,6 @@ body::before{
   from { transform: scaleX(0); opacity: 0; }
   to   { transform: scaleX(1); opacity: 1; }
 }
-/* ===== ABOUT: Reposition soap emoji + glow ===== */
-.about-section .about-inner { position: relative; }
-
-/* Tune these two percentages if you want to nudge it later */
-:root{
-  --soap-x: 62%;   /* left → right (0% = far left, 100% = far right) */
-  --soap-y: 66%;   /* top → bottom (0% = top, 100% = bottom) */
-}
-
-.about-section .about-soap{
-  position: absolute;
-  left: var(--soap-x);
-  top:  var(--soap-y);
 /* ===== 1) ABOUT: precise soap position + centered glow ===== */
 .about-section .about-inner { position: relative; }
 
@@ -1350,4 +1337,38 @@ body::before{
   }
 }
 
-/* ===== 2) LOGO: use Grea*
+/* ===== 2) LOGO: use Great Vibes + left→right reveal sweep ===== */
+.logo .logo-text{
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 2.15rem;                 /* tweak if you want it larger */
+  letter-spacing: .5px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+
+  /* reveal from left to right */
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+  animation: logoUnveil 1.1s ease forwards .25s;
+}
+
+/* subtle sheen passing across during the reveal */
+.logo .logo-text::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,212,255,.8), rgba(255,255,255,.95));
+  mix-blend-mode: screen; opacity: 0;
+  animation: logoSweep 1.1s ease forwards .25s;
+  pointer-events: none;
+}
+
+@keyframes logoUnveil{
+  0%   { clip-path: inset(0 100% 0 0); opacity: 0; }
+  40%  { opacity: 1; }
+  100% { clip-path: inset(0 0 0 0);   opacity: 1; }
+}
+@keyframes logoSweep{
+  0%   { opacity: 1; transform: translateX(-105%); }
+  60%  { opacity: .75; }
+  100% { opacity: 0;  transform: translateX(120%); }
+}

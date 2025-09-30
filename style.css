@@ -1372,3 +1372,79 @@ body::before{
   60%  { opacity: .75; }
   100% { opacity: 0;  transform: translateX(120%); }
 }
+<style id="hotfix-2025-09-30">
+/* ========== ABOUT: place soap inside the outlined card, right-half ========== */
+.about-section .about-inner{ position:relative !important; }
+.about-section .about-content{ max-width: 640px; }
+
+/* Anchor the emoji inside the card, right side, vertically centered */
+.about-section .about-soap{
+  position:absolute !important;
+  right: clamp(16px, 4%, 48px) !important;  /* inside the border */
+  top: 50% !important;
+  transform: translate(0,-50%) !important;
+  margin:0 !important; padding:0 !important; line-height:1 !important;
+  font-size: 5rem !important;
+  pointer-events:none !important; z-index: 2 !important;
+}
+
+/* Soft centered glow */
+.about-section .about-soap::before{
+  content:""; position:absolute; left:50%; top:50%;
+  transform: translate(-50%,-50%);
+  width: 240px; height: 240px; border-radius:50%;
+  background: radial-gradient(circle, rgba(0,212,255,.38) 0%, rgba(0,212,255,0) 70%);
+  filter: blur(20px); z-index:-1;
+}
+
+/* Keep ✨ near the top-right of the emoji */
+.about-section .about-soap::after{
+  content:'✨'; position:absolute; right:-12px; top:-12px; font-size:1.5rem;
+  animation: sparkle 1.6s ease-in-out infinite; opacity:.9;
+}
+
+/* ========== NAVBAR: transparent, bigger logo, nav font ========== */
+.navbar{
+  background: transparent !important;
+  backdrop-filter: none !important;   /* remove dark bar */
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Bigger logo + keep your unveil animation */
+.navbar .logo .logo-text{
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 3rem !important;                 /* bigger */
+  letter-spacing: .5px !important; color:#fff !important;
+  position:relative !important; display:inline-block !important;
+  clip-path: inset(0 100% 0 0); opacity:0;
+  animation: logoUnveil 1.1s ease forwards .25s;
+}
+@keyframes logoUnveil{0%{clip-path:inset(0 100% 0 0);opacity:0}40%{opacity:1}100%{clip-path:inset(0 0 0 0);opacity:1}}
+.navbar .logo .logo-text::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(90deg, rgba(0,212,255,.85), rgba(255,255,255,.95));
+  mix-blend-mode: screen; opacity:0; pointer-events:none;
+  animation: logoSweep 1.1s ease forwards .25s;
+}
+@keyframes logoSweep{0%{opacity:1;transform:translateX(-105%)}60%{opacity:.75}100%{opacity:0;transform:translateX(120%)}}
+
+/* Nav links use same display font */
+.nav-links a{
+  font-family: 'Great Vibes', cursive !important;
+  font-size: 1.35rem !important;
+  letter-spacing: .02em !important;
+  color: #f6fbff !important;
+}
+
+/* ========== HERO IMAGE: push to right edge, no gap ========== */
+.image-side{ justify-content:flex-end !important; align-items:stretch !important; }
+.image-side img{
+  width: 100% !important; height: 100% !important; display:block !important;
+  object-fit: cover !important; object-position: right center !important;
+  transform: none !important;     /* remove the left shift */
+  margin: 0 !important;
+}
+
+/* Keep your sparkle keyframes available */
+@keyframes sparkle { 0%,100%{opacity:.8;transform:scale(1) rotate(0)} 50%{opacity:1;transform:scale(1.2) rotate(20deg)} }
+</style>

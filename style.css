@@ -1282,3 +1282,16 @@ body::before{
   from { transform: scaleX(0); opacity: 0; }
   to   { transform: scaleX(1); opacity: 1; }
 }
+/* ===== ABOUT: Reposition soap emoji + glow ===== */
+.about-section .about-inner { position: relative; }
+
+/* Tune these two percentages if you want to nudge it later */
+:root{
+  --soap-x: 62%;   /* left → right (0% = far left, 100% = far right) */
+  --soap-y: 66%;   /* top → bottom (0% = top, 100% = bottom) */
+}
+
+.about-section .about-soap{
+  position: absolute;
+  left: var(--soap-x);
+  top:  var(--soap-y);

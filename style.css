@@ -1506,3 +1506,74 @@ body::before{
   text-decoration: none;
   border-radius: 6px;
 }
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/style.css b/style.css
+index 847d3a12dda2f43e45eb1fe0950cb551c1dd7512..aa89008ab955711c0ab07787d6741567bc5a250f 100644
+--- a/style.css
++++ b/style.css
+@@ -282,58 +282,58 @@ h1, h2, h3 {
+ .about-soap::before { content: ""; position: absolute; top: 45%; left: 30%; width: 180px; height: 180px; border-radius: 50%;
+   background: radial-gradient(circle, rgba(0,212,255,.3) 0%, rgba(0,212,255,0) 70%); filter: blur(18px); }
+ .about-soap::after { content: '✨'; position: absolute; top: -10px; right: 24px; font-size: 1.5rem;
+   animation: sparkle 1.6s ease-in-out infinite; opacity: .9; }
+ .about-soap span { display: none; }
+ .about-soap { animation: floatSoap 5s ease-in-out infinite; align-items: flex-start; padding-top: .5rem; }
+ 
+ @keyframes scriptReveal { 0% { opacity: 0; transform: translateY(20px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+ @keyframes underlineSweep { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+ @keyframes textReveal { to { opacity: 1; transform: translateY(0); } }
+ 
+ /* Quote section (unchanged) */
+ .quote-form-section { padding: 4em 2em; background: linear-gradient(to bottom, #000, #333); color:#fff; text-align:center; }
+ .quote-form-section h1 { font-size: 2.5rem; margin-bottom: 2rem; color:#00d4ff; }
+ .quote-form { max-width: 600px; margin: 0 auto; text-align: left; }
+ .quote-form label { display:block; margin-top:1.5rem; font-weight:bold; }
+ .quote-form input, .quote-form textarea, .quote-form select {
+   width:100%; padding:.8em; margin-top:.5rem; border:none; border-radius:6px; background:#222; color:#fff;
+ }
+ .quote-form button { margin-top:2rem; padding:.8em 2em; background:#00d4ff; color:#000; font-weight:bold; border:none; border-radius:8px; cursor:pointer; transition: background .3s ease; }
+ .quote-form button:hover { background:#fff; }
+ 
+ /* Announcement (static) */
+ .announcement { width:100%; background:#000; border-bottom:1px solid rgba(255,255,255,.1);
+   padding:.9rem 1.25rem; display:flex; justify-content:center; align-items:center; z-index: 999; position: relative; }
+-.announcement-inner { width:100%; max-width:1200px; display:grid; grid-template-columns:1fr auto; gap:1rem 1.5rem; align-items:center; }
++.announcement-inner { width:100%; max-width:1200px; display:flex; flex-direction:column; align-items:center; justify-content:center;
++  gap:.75rem; text-align:center; }
+ .announce-line { color:#f2f2f2; font-size:1rem; line-height:1.35; opacity:.95; margin:0; }
+-.announcement-cta { justify-self:end; display:inline-block; padding:.55em 1.2em; font-weight:800; font-size:.98rem; line-height:1;
++.announcement-cta { display:inline-block; padding:.55em 1.2em; font-weight:800; font-size:.98rem; line-height:1;
+   border-radius:12px; background:#00d4ff; color:#000 !important; border:2px solid transparent; transition: background .2s ease, transform .2s ease; }
+ .announcement-cta:hover { background:#fff; transform: translateY(-1px); }
+ @media (max-width: 768px){
+-  .announcement-inner { grid-template-columns:1fr; }
+-  .announcement-cta { justify-self:start; }
++  .announcement-inner { gap:.6rem; }
+ }
+ 
+ /* iOS-only tweaks */
+ html.ios .announcement { background:#f6f7f8; border-bottom:1px solid rgba(0,0,0,.1); }
+ html.ios .announce-line { color:#000 !important; }
+ html.ios .announcement-cta { background:#00ff88 !important; color:#000 !important; }
+ html.ios .announcement-cta:hover { background:#00cc6d !important; }
+ 
+ html.ios .split-screen { flex-direction: column; height: auto; }
+ html.ios .image-side { display: none !important; }
+ html.ios .text-side {
+   background:
+     linear-gradient(135deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.6) 45%, rgba(0, 0, 0, 0.35) 100%),
+     url('cleanuptransformation.jpg') center center / cover no-repeat;
+   min-height: 100svh; padding: 4em 1.5em calc(1.5em + env(safe-area-inset-bottom));
+   display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+   border-radius:20px; overflow:hidden; position:relative;
+ }
+ html.ios .text-side::before { display: none; }
+ html.ios .headline { font-size:3rem; line-height:1.15; font-weight:900; color:#f6fbff; position:relative; text-shadow: 0 14px 32px rgba(0,0,0,0.55); }
+ html.ios .subtext { font-size:1.3rem; font-weight:600; color:#e4f4ff; max-width:30ch; position:relative; text-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+ html.ios .quote-btn-home, html.ios .services-btn-home {
+   background:#00d4ff !important; color:#001220 !important; border:none; border-radius:14px; font-weight:800;
+   font-size:1.4rem; padding:.8em 2em; text-transform:lowercase; transition: background .3s ease, transform .3s ease; position:relative; z-index:2;
+ }
+ 
+EOF
+)

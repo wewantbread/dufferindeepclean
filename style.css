@@ -1478,3 +1478,31 @@ body::before{
   margin-right:.55rem;
   transform: translateY(2px);
 }
+.announcement {
+  display: flex;
+  justify-content: center;  /* center horizontally */
+  align-items: center;      /* center vertically */
+  min-height: 200px;        /* adjust height as needed */
+}
+
+.announcement-inner {
+  display: flex;
+  flex-direction: column;   /* stack number & button vertically */
+  align-items: center;      /* center contents horizontally */
+  gap: 10px;                /* spacing between number & button */
+}
+
+.announce-line {
+  font-size: 1.5rem;        /* adjust size */
+  font-weight: bold;
+  margin: 0;
+}
+
+.announcement-cta {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+}

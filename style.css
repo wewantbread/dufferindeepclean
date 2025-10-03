@@ -304,14 +304,14 @@ h1, h2, h3 {
 /* Announcement (static) */
 .announcement { width:100%; background:#000; border-bottom:1px solid rgba(255,255,255,.1);
   padding:.9rem 1.25rem; display:flex; justify-content:center; align-items:center; z-index: 999; position: relative; }
-.announcement-inner { width:100%; max-width:1200px; display:grid; grid-template-columns:1fr auto; gap:1rem 1.5rem; align-items:center; }
+.announcement-inner { width:100%; max-width:1200px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.75rem; text-align:center; }
 .announce-line { color:#f2f2f2; font-size:1rem; line-height:1.35; opacity:.95; margin:0; }
-.announcement-cta { justify-self:end; display:inline-block; padding:.55em 1.2em; font-weight:800; font-size:.98rem; line-height:1;
+.announcement-cta { display:inline-block; padding:.55em 1.2em; font-weight:800; font-size:.98rem; line-height:1;
   border-radius:12px; background:#00d4ff; color:#000 !important; border:2px solid transparent; transition: background .2s ease, transform .2s ease; }
 .announcement-cta:hover { background:#fff; transform: translateY(-1px); }
 @media (max-width: 768px){
-  .announcement-inner { grid-template-columns:1fr; }
-  .announcement-cta { justify-self:start; }
+  .announcement-inner { gap:.6rem; }
 }
 
 /* iOS-only tweaks */

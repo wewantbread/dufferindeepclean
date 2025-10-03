@@ -205,7 +205,26 @@
 
     <div class="image-side">
       <div class="image-top-diffuse" aria-hidden="true"></div>
-      <img src="cleanuptransformation.jpg" alt="Cleanup transformation image" />
+      <div class="hero-carousel" id="hero-carousel" role="region" aria-label="Showcase photos">
+        <div class="hero-slide active" data-index="0">
+          <img src="cleanuptransformation.jpg" alt="Cleanup transformation image" />
+        </div>
+        <div class="hero-slide" data-index="1">
+          <img src="IMG_3541.png" alt="Cleaning crew wiping down stainless steel surfaces" />
+        </div>
+        <div class="hero-slide" data-index="2">
+          <img src="IMG_1629.png" alt="Freshly cleaned office lobby with seating area" />
+        </div>
+        <div class="hero-slide" data-index="3">
+          <img src="IMG_1487.png" alt="Sanitized kitchen counter shining under lights" />
+        </div>
+        <div class="hero-dots" role="tablist" aria-label="Hero image navigation">
+          <button type="button" class="hero-dot active" aria-label="Cleanup transformation image" role="tab"></button>
+          <button type="button" class="hero-dot" aria-label="Cleaning crew wiping down stainless steel surfaces" role="tab"></button>
+          <button type="button" class="hero-dot" aria-label="Freshly cleaned office lobby with seating area" role="tab"></button>
+          <button type="button" class="hero-dot" aria-label="Sanitized kitchen counter shining under lights" role="tab"></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -266,6 +285,55 @@
         /iP(hone|od|ad)/.test(navigator.platform) ||
         (navigator.userAgent.includes('Mac') && navigator.maxTouchPoints > 1);
       if (iOS) document.documentElement.classList.add('ios');
+    })();
+  </script>
+
+  <!-- Hero image carousel -->
+  <script>
+    (function(){
+      const carousel = document.getElementById('hero-carousel');
+      if(!carousel) return;
+
+      const slides = Array.from(carousel.querySelectorAll('.hero-slide'));
+      const dots = Array.from(carousel.querySelectorAll('.hero-dot'));
+      let index = 0;
+      let timer = null;
+
+      function setActive(next){
+        slides[index].classList.remove('active');
+        slides[index].setAttribute('aria-hidden', 'true');
+        dots[index].classList.remove('active');
+        dots[index].setAttribute('aria-selected', 'false');
+
+        index = (next + slides.length) % slides.length;
+
+        slides[index].classList.add('active');
+        slides[index].setAttribute('aria-hidden', 'false');
+        dots[index].classList.add('active');
+        dots[index].setAttribute('aria-selected', 'true');
+      }
+
+      function next(){ setActive(index + 1); }
+
+      function start(){ stop(); timer = setInterval(next, 5000); }
+      function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+
+      dots.forEach((dot, i)=>{
+        dot.addEventListener('click', ()=>{ setActive(i); start(); });
+        dot.addEventListener('keydown', (evt)=>{
+          if(evt.key === 'Enter' || evt.key === ' '){ evt.preventDefault(); setActive(i); start(); }
+        });
+      });
+
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+      carousel.addEventListener('touchstart', stop, {passive:true});
+      carousel.addEventListener('touchend', ()=>{ start(); }, {passive:true});
+
+      slides.forEach((slide, i)=> slide.setAttribute('aria-hidden', i === index ? 'false' : 'true'));
+      dots.forEach((dot, i)=> dot.setAttribute('aria-selected', i === index ? 'true' : 'false'));
+      setActive(0);
+      start();
     })();
   </script>
 

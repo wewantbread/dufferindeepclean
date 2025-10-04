@@ -121,6 +121,20 @@
           <div class="quote-card-header">
             <h2 id="quote-title">custom cleaning quote</h2>
             <p>Answer a few quick questions to unlock a tailored estimate for your space.</p>
+      <h1 class="headline">
+        <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
+        <img src="cleanerguy.png" alt="Cleaner" class="headline-image" />
+      </h1>
+
+      <div class="rotator-card" id="service-rotator">
+        <div class="rotator-window" aria-live="polite">
+          <div class="rotator-line active" data-title="Residential Homes">
+            <span class="rotator-title">Residential Homes</span>
+            <span class="rotator-text">We don’t just tidy houses. We deep clean homes.</span>
+          </div>
+          <div class="rotator-line" data-title="Commercial Buildings">
+            <span class="rotator-title">Commercial Buildings</span>
+            <span class="rotator-text">Commercial spaces collect more than dust. We remove it all.</span>
           </div>
 
           <form id="instant-quote" class="quote-form" novalidate>
@@ -414,6 +428,192 @@
                   </div>
                   <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
                     <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-plant" xlink:href="#icon-plant"></use></svg></span>
+                    <span class="addon-name">Water Plants</span>
+                    <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="quote" class="hero-quote" aria-labelledby="quote-title">
+        <div class="quote-card">
+          <div class="quote-card-header">
+            <h2 id="quote-title">custom cleaning quote</h2>
+            <p>Answer a few quick questions to unlock a tailored estimate for your space.</p>
+          </div>
+
+          <form id="instant-quote" class="quote-form" novalidate>
+            <div class="quote-grid">
+              <label class="field" for="quote-first-name">
+                <span class="field-label">First Name</span>
+                <input id="quote-first-name" name="first-name" type="text" placeholder="e.g. Jordan" autocomplete="given-name" data-required>
+              </label>
+
+              <label class="field" for="quote-email">
+                <span class="field-label">Email</span>
+                <input id="quote-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" data-required>
+              </label>
+
+              <label class="field" for="quote-service">
+                <span class="field-label">Type of Cleaning Service</span>
+                <select id="quote-service" name="service" data-required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="home">Home General Cleaning</option>
+                  <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
+                  <option value="office">Office Workspace Cleaning</option>
+                </select>
+              </label>
+
+              <label class="field" for="quote-square-footage">
+                <span class="field-label">Square Footage</span>
+                <select id="quote-square-footage" name="square-footage" data-required>
+                  <option value="" disabled selected>Select the range</option>
+                  <option value="1000-1500">1,000 – 1,500 sq ft</option>
+                  <option value="1500-2000">1,500 – 2,000 sq ft</option>
+                  <option value="2000-2500">2,000 – 2,500 sq ft</option>
+                  <option value="2500-3000">2,500 – 3,000 sq ft</option>
+                  <option value="3000-3500">3,000 – 3,500 sq ft</option>
+                  <option value="3500-4000">3,500 – 4,000 sq ft</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="quote-summary" aria-live="polite">
+              <div class="quote-summary-line">
+                <span>Base Estimate</span>
+                <strong id="quote-base-price">—</strong>
+              </div>
+              <div class="quote-summary-line total">
+                <span>Total with Customizations</span>
+                <strong id="quote-total-price">—</strong>
+              </div>
+            </div>
+
+            <div id="quote-customize" class="quote-customize" aria-hidden="true">
+              <div class="customize-heading" role="status">Customize your cleaning</div>
+
+              <div class="addon-groups">
+                <div class="addon-group" data-service-group="home">
+                  <p class="addon-group-title">Home &amp; Residential Extras</p>
+                  <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
+                    <span class="addon-icon">✨</span>
+                    <span class="addon-name">Deep Clean Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
+                  </div>
+                  <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
+                    <span class="addon-icon">🚚</span>
+                    <span class="addon-name">Move In/Out Clean Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
+                  </div>
+                  <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
+                    <span class="addon-icon">🛠️</span>
+                    <span class="addon-name">Renovation Clean Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
+                  </div>
+                  <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
+                    <span class="addon-icon">🎓</span>
+                    <span class="addon-name">Move In/Out Package (Student Property)</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
+                  </div>
+                  <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
+                    <span class="addon-icon">🏠</span>
+                    <span class="addon-name">AirBnB Listing</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
+                  </div>
+                  <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
+                    <span class="addon-icon">🐾</span>
+                    <span class="addon-name">I have Pets</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
+                  </div>
+                  <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
+                    <span class="addon-icon">🧊</span>
+                    <span class="addon-name">Inside Fridge</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
+                  </div>
+                  <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
+                    <span class="addon-icon">🔥</span>
+                    <span class="addon-name">Inside Oven</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
+                  </div>
+                  <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
+                    <span class="addon-icon">🗄️</span>
+                    <span class="addon-name">Inside Cabinets</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
+                  </div>
+                  <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
+                    <span class="addon-icon">🍽️</span>
+                    <span class="addon-name">Additional Kitchen</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
+                  </div>
+                  <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
+                    <span class="addon-icon">🪟</span>
+                    <span class="addon-name">Blinds (per window)</span>
+                    <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
+                  </div>
+                  <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
+                    <span class="addon-icon">🔍</span>
+                    <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
+                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
+                  </div>
+                  <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
+                    <span class="addon-icon">🔎</span>
+                    <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
+                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
+                  </div>
+                  <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
+                    <span class="addon-icon">🪟</span>
+                    <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
+                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
+                  </div>
+                  <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
+                    <span class="addon-icon">🛏️</span>
+                    <span class="addon-name">Change Bed Sheets + Load Laundry</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
+                  </div>
+                  <div class="addon-pill color-crimson" data-addon="Load dishwasher" data-price="10">
+                    <span class="addon-icon">🍽️</span>
+                    <span class="addon-name">Load Dishwasher</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
+                  </div>
+                  <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
+                    <span class="addon-icon">🧴</span>
+                    <span class="addon-name">Sanitization Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
+                  </div>
+                </div>
+
+                <div class="addon-group" data-service-group="commercial,office">
+                  <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
+                  <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
+                    <span class="addon-icon">🧼</span>
+                    <span class="addon-name">Carpet Steam Cleaning Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
+                  </div>
+                  <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
+                    <span class="addon-icon">🧽</span>
+                    <span class="addon-name">Tile and Grout Cleaning Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout Cleaning quantity">
+                  </div>
+                  <div class="addon-pill color-mint" data-addon="Restock Bathroom Supply" data-price="40">
+                    <span class="addon-icon">🧻</span>
+                    <span class="addon-name">Restock Bathroom Supply</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Restock Bathroom Supply quantity">
+                  </div>
+                  <div class="addon-pill color-gold" data-addon="Disinfect Electronics" data-price="45">
+                    <span class="addon-icon">💻</span>
+                    <span class="addon-name">Disinfect Electronics</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Disinfect Electronics quantity">
+                  </div>
+                  <div class="addon-pill color-teal" data-addon="Empty Garbage/Recycling" data-price="18">
+                    <span class="addon-icon">🗑️</span>
+                    <span class="addon-name">Empty Garbage/Recycling</span>
+                    <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Empty Garbage/Recycling quantity">
+                  </div>
+                  <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
+                    <span class="addon-icon">🌿</span>
                     <span class="addon-name">Water Plants</span>
                     <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
                   </div>

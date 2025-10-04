@@ -389,6 +389,15 @@ h1, h2, h3 {
   color: rgba(190, 231, 255, 0.78);
   margin-bottom: 0.1rem;
   text-align: center;
+  gap: 1.8rem;
+}
+
+.addon-group-title {
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(190, 231, 255, 0.75);
+  margin-bottom: 1rem;
 }
 
 .addon-group {
@@ -467,6 +476,55 @@ h1, h2, h3 {
   font-size: 0.75rem;
   text-align: center;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.addon-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(16, 32, 48, 0.6);
+  border: 1.5px solid rgba(0, 212, 255, 0.18);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.addon-pill:hover {
+  transform: scale(1.06);
+  box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45);
+}
+
+.addon-pill.active {
+  border-color: rgba(0, 212, 255, 0.65);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25), 0 22px 40px rgba(0, 0, 0, 0.55);
+}
+
+.addon-icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.addon-name {
+  flex: 1;
+  font-size: 1rem;
+  color: rgba(226, 245, 255, 0.9);
+}
+
+.addon-qty {
+  width: 3.5rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0, 212, 255, 0.35);
+  background: rgba(6, 20, 32, 0.75);
+  color: #f2fbff;
+  font-size: 1rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .addon-qty:focus {
@@ -500,6 +558,33 @@ h1, h2, h3 {
 @media (max-width: 900px) {
   .hero-quote {
     justify-content: center;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.18);
+}
+
+.addon-pill:not(.active) .addon-qty {
+  opacity: 0.4;
+}
+
+.addon-pill.color-cyan { background: linear-gradient(135deg, rgba(0, 212, 255, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-lime { background: linear-gradient(135deg, rgba(159, 255, 99, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-magenta { background: linear-gradient(135deg, rgba(255, 99, 189, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-orange { background: linear-gradient(135deg, rgba(255, 171, 94, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-indigo { background: linear-gradient(135deg, rgba(138, 138, 255, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-gold { background: linear-gradient(135deg, rgba(255, 232, 140, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-sky { background: linear-gradient(135deg, rgba(122, 217, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-rose { background: linear-gradient(135deg, rgba(255, 158, 173, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-mint { background: linear-gradient(135deg, rgba(144, 255, 214, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-teal { background: linear-gradient(135deg, rgba(118, 238, 225, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-plum { background: linear-gradient(135deg, rgba(190, 153, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-azure { background: linear-gradient(135deg, rgba(126, 185, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-amber { background: linear-gradient(135deg, rgba(255, 200, 122, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-blue { background: linear-gradient(135deg, rgba(108, 180, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-lavender { background: linear-gradient(135deg, rgba(215, 177, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-crimson { background: linear-gradient(135deg, rgba(255, 134, 134, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-emerald { background: linear-gradient(135deg, rgba(134, 255, 184, 0.35), rgba(10, 30, 48, 0.7)); }
+
+@media (max-width: 768px) {
+  .hero-quote {
     max-width: none;
   }
 
@@ -539,6 +624,32 @@ h1, h2, h3 {
 
   .addon-qty {
     height: 1.75rem;
+    padding: 2.25rem 1.75rem;
+  }
+
+  .quote-card-header p {
+    font-size: 0.95rem;
+  }
+
+  .quote-summary {
+    padding: 1.1rem 1.3rem;
+  }
+
+  .addon-group.active {
+    grid-template-columns: 1fr;
+  }
+
+  .addon-pill {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .addon-name {
+    flex-basis: 100%;
+  }
+
+  .addon-qty {
+    width: 100%;
   }
 }
 .services-btn-home:hover { background:#00d4ff; color:#000; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,212,255,.3); }

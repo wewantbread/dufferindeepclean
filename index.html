@@ -66,52 +66,6 @@
       object-position: right center !important;
     }
 
-    /* ===== Rotator card (with slide animations) ===== */
-    .rotator-card{
-      margin-top: 1.25rem;
-      padding: 1.4rem 1.6rem;
-      max-width: 560px;
-      border-radius: 20px;
-      border:1px solid rgba(0,212,255,0.25);
-      background: rgba(0,0,0,0.55);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 22px rgba(0,212,255,0.12);
-      backdrop-filter: blur(8px);
-      overflow: hidden;
-      position: relative;
-    }
-    .rotator-window{ position:relative; height:auto; min-height: 84px; }
-    .rotator-line{
-      position:absolute; left:0; top:0; width:100%;
-      opacity:0; transform: translateX(24px);
-      transition: transform .45s ease, opacity .45s ease;
-      will-change: transform, opacity;
-    }
-    .rotator-line.active{ opacity:1; transform: translateX(0); }
-    .rotator-title{
-      display:block; font-family:'Bebas Neue',sans-serif; text-transform:uppercase;
-      letter-spacing:.08em; font-size:1.05rem; color:rgba(0,212,255,0.85); margin-bottom:.25rem;
-    }
-    .rotator-text{ display:block; font-size:1.2rem; line-height:1.65; color:#d8ecff; }
-
-    .rotator-underline{
-      display:block; height:3px; width:100%; border-radius:999px; margin-top:.75rem;
-      background:linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,.85), rgba(255,255,255,0));
-      transform-origin:left center; animation: underlineGrow .6s ease both;
-    }
-    @keyframes underlineGrow{ from{ transform:scaleX(0); opacity:.4;} to{ transform:scaleX(1); opacity:1;} }
-
-    .rotator-dots{ display:flex; gap:.5rem; margin-top:.45rem; }
-    .rotator-dots .dot{
-      width:10px; height:10px; border-radius:50%; border:1.5px solid #00d4ff;
-      background:transparent; opacity:.7; cursor:pointer;
-      transition: transform .2s ease, opacity .2s ease, background-color .2s ease;
-    }
-    .rotator-dots .dot.active{ background:#00d4ff; opacity:1; transform:scale(1.05); }
-
-    /* Slight nudge of whole card on change for “box is moving” feel */
-    .rotator-card.bump{ animation: cardBump .35s ease; }
-    @keyframes cardBump{ 0%{ transform:translateX(0);} 40%{ transform:translateX(6px);} 100%{ transform:translateX(0);} }
-
     /* ===== ABOUT (restored) ===== */
     .about-section { padding: 6em 2em 7em; }
     .about-inner{
@@ -159,17 +113,14 @@
     </nav>
   </header>
 
-  <!-- Announcement -->
-  <div class="announcement" role="region" aria-label="Promotion">
-    <div class="announcement-inner">
-      <p class="announce-line">999-999-999</p>
-      <a class="announcement-cta" href="tel:+1999999999">Call Today</a>
-    </div>
-  </div>
-
   <!-- HERO -->
   <section id="home" class="split-screen">
     <div class="text-side">
+      <div id="quote" class="hero-quote" aria-labelledby="quote-title">
+        <div class="quote-card">
+          <div class="quote-card-header">
+            <h2 id="quote-title">custom cleaning quote</h2>
+            <p>Answer a few quick questions to unlock a tailored estimate for your space.</p>
       <h1 class="headline">
         <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
         <img src="cleanerguy.png" alt="Cleaner" class="headline-image" />
@@ -185,16 +136,305 @@
             <span class="rotator-title">Commercial Buildings</span>
             <span class="rotator-text">Commercial spaces collect more than dust. We remove it all.</span>
           </div>
-          <div class="rotator-line" data-title="Offices / Workspaces">
-            <span class="rotator-title">Offices / Workspaces</span>
-            <span class="rotator-text">Clean offices look professional. Deep clean offices stay professional.</span>
-          </div>
-        </div>
-        <span class="rotator-underline" aria-hidden="true"></span>
-        <div class="rotator-dots" role="tablist" aria-label="Service types">
-          <button class="dot active" aria-label="Residential Homes" role="tab"></button>
-          <button class="dot" aria-label="Commercial Buildings" role="tab"></button>
-          <button class="dot" aria-label="Offices / Workspaces" role="tab"></button>
+
+          <form id="instant-quote" class="quote-form" novalidate>
+            <div class="quote-grid">
+              <label class="field" for="quote-first-name">
+                <span class="field-label">First Name</span>
+                <input id="quote-first-name" name="first-name" type="text" placeholder="e.g. Jordan" autocomplete="given-name" data-required>
+              </label>
+
+              <label class="field" for="quote-email">
+                <span class="field-label">Email</span>
+                <input id="quote-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" data-required>
+              </label>
+
+              <label class="field" for="quote-service">
+                <span class="field-label">Type of Cleaning Service</span>
+                <select id="quote-service" name="service" data-required>
+                  <option value="" disabled selected>Select a service</option>
+                  <option value="home">Home General Cleaning</option>
+                  <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
+                  <option value="office">Office Workspace Cleaning</option>
+                </select>
+              </label>
+
+              <label class="field" for="quote-square-footage">
+                <span class="field-label">Square Footage</span>
+                <select id="quote-square-footage" name="square-footage" data-required>
+                  <option value="" disabled selected>Select the range</option>
+                  <option value="1000-1500">1,000 – 1,500 sq ft</option>
+                  <option value="1500-2000">1,500 – 2,000 sq ft</option>
+                  <option value="2000-2500">2,000 – 2,500 sq ft</option>
+                  <option value="2500-3000">2,500 – 3,000 sq ft</option>
+                  <option value="3000-3500">3,000 – 3,500 sq ft</option>
+                  <option value="3500-4000">3,500 – 4,000 sq ft</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="quote-summary" aria-live="polite">
+              <div class="quote-summary-line">
+                <span>Base Estimate</span>
+                <strong id="quote-base-price">—</strong>
+              </div>
+              <div class="quote-summary-line total">
+                <span>Total with Customizations</span>
+                <strong id="quote-total-price">—</strong>
+              </div>
+            </div>
+
+            <div id="quote-customize" class="quote-customize" aria-hidden="true">
+              <svg class="addon-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0;overflow:hidden;">
+                <symbol id="icon-sparkle" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M12 3l1.2 3.6 3.6 1.2-3.6 1.2L12 12l-1.2-3.6L7.2 7.8l3.6-1.2L12 3z" opacity="0.9"></path>
+                  <path fill="currentColor" d="M6 12l.8 2.4L9.2 15l-2.4.8L6 18l-.8-2.2-2.4-.8 2.4-.8L6 12z" opacity="0.6"></path>
+                  <circle cx="16.5" cy="15.5" r="1.5" fill="currentColor" opacity="0.7"></circle>
+                </symbol>
+                <symbol id="icon-moving" viewBox="0 0 24 24">
+                  <rect x="3" y="7" width="11" height="8" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></rect>
+                  <path d="M14 11h2l2 3h1.5c.8 0 1.5.7 1.5 1.5V15" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <circle cx="8" cy="17" r="1.8" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                  <circle cx="17" cy="17" r="1.8" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+                </symbol>
+                <symbol id="icon-renovation" viewBox="0 0 24 24">
+                  <path d="M5 18.5l3.5-3.5 2 2L7 20.5H5v-2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M12.5 4.5l7 7-3 3-7-7V5.5L11.5 4l1 .5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M13.5 7.5l3 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-graduation" viewBox="0 0 24 24">
+                  <path d="M3 9l9-4 9 4-9 4-9-4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M6 11v3.5c0 1.7 2.7 2.8 6 2.8s6-1.1 6-2.8V11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M21 9v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-home" viewBox="0 0 24 24">
+                  <path d="M4.5 10.5l7.5-6 7.5 6v9h-5v-5h-5v5h-5v-9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                </symbol>
+                <symbol id="icon-paw" viewBox="0 0 24 24">
+                  <path d="M12 15c2.8 0 4.5 1.6 4.5 3.2 0 1.1-.9 1.8-1.8 1.8-1 0-1.5-.6-2.7-.6s-1.7.6-2.7.6c-.9 0-1.8-.7-1.8-1.8C7.5 16.6 9.2 15 12 15z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+                  <circle cx="7.5" cy="11" r="1.9" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+                  <circle cx="16.5" cy="11" r="1.9" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+                  <circle cx="10.5" cy="7.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+                  <circle cx="13.5" cy="7.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"></circle>
+                </symbol>
+                <symbol id="icon-fridge" viewBox="0 0 24 24">
+                  <rect x="7" y="3" width="10" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <path d="M7 10h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M10 7v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M10 14v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-oven" viewBox="0 0 24 24">
+                  <rect x="5" y="4" width="14" height="16" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <rect x="7" y="9" width="10" height="7" rx="1.5" ry="1.5" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <circle cx="9" cy="6.5" r=".9" fill="currentColor"></circle>
+                  <circle cx="12" cy="6.5" r=".9" fill="currentColor"></circle>
+                  <circle cx="15" cy="6.5" r=".9" fill="currentColor"></circle>
+                </symbol>
+                <symbol id="icon-cabinet" viewBox="0 0 24 24">
+                  <rect x="4.5" y="5" width="15" height="14" rx="1.8" ry="1.8" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <path d="M12 5v14" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                  <circle cx="9" cy="12" r=".9" fill="currentColor"></circle>
+                  <circle cx="15" cy="12" r=".9" fill="currentColor"></circle>
+                </symbol>
+                <symbol id="icon-utensils" viewBox="0 0 24 24">
+                  <path d="M8.5 5v6.5c0 1-.8 1.8-1.8 1.8S5 12.5 5 11.5V5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M11 5v13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M15 5l2 3h2v10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </symbol>
+                <symbol id="icon-blinds" viewBox="0 0 24 24">
+                  <rect x="4" y="5" width="16" height="3" rx="1" ry="1" fill="currentColor"></rect>
+                  <rect x="4" y="9" width="16" height="3" rx="1" ry="1" fill="currentColor" opacity="0.85"></rect>
+                  <rect x="4" y="13" width="16" height="3" rx="1" ry="1" fill="currentColor" opacity="0.7"></rect>
+                  <path d="M12 16v3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-window" viewBox="0 0 24 24">
+                  <rect x="5" y="4" width="14" height="16" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <path d="M12 4v16" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                  <path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                </symbol>
+                <symbol id="icon-bed" viewBox="0 0 24 24">
+                  <path d="M4 10h16a2 2 0 0 1 2 2v6h-2l-.5-2h-15L4 18H2v-6a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M7 10V8a2 2 0 0 1 2-2h1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-dishwasher" viewBox="0 0 24 24">
+                  <rect x="5" y="4" width="14" height="16" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <path d="M7 9h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M9 14c0 1.1.9 2 2 2s2-.9 2-2M13 14c0 1.1.9 2 2 2s2-.9 2-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <circle cx="9" cy="6.5" r=".9" fill="currentColor"></circle>
+                  <circle cx="12" cy="6.5" r=".9" fill="currentColor"></circle>
+                  <circle cx="15" cy="6.5" r=".9" fill="currentColor"></circle>
+                </symbol>
+                <symbol id="icon-sanitizer" viewBox="0 0 24 24">
+                  <path d="M9.5 6h5L17 8v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V8l2.5-2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M12 2v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M10 11h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M10 14h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-carpet" viewBox="0 0 24 24">
+                  <rect x="5" y="6" width="14" height="12" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <path d="M9 6v-2h6v2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M9 12h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M9 15h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-tile" viewBox="0 0 24 24">
+                  <rect x="4" y="4" width="6" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <rect x="14" y="4" width="6" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <rect x="4" y="14" width="6" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <rect x="14" y="14" width="6" height="6" rx="1" ry="1" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                </symbol>
+                <symbol id="icon-supply" viewBox="0 0 24 24">
+                  <path d="M6 6h12l1 4H5l1-4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+                  <path d="M7.5 10v7.5A2.5 2.5 0 0 0 10 20h4a2.5 2.5 0 0 0 2.5-2.5V10" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                  <path d="M10 14h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-monitor" viewBox="0 0 24 24">
+                  <rect x="4" y="5" width="16" height="11" rx="1.8" ry="1.8" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+                  <path d="M10 20h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M9 16v2h6v-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-trash" viewBox="0 0 24 24">
+                  <path d="M6 7h12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M9 7l.6-2h4.8l.6 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M8 7v11a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V7" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+                  <path d="M10 11v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M14 11v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+                <symbol id="icon-plant" viewBox="0 0 24 24">
+                  <path d="M12 20v-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M12 14s0-4 4-4c0 2.5-1.5 4-4 4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M12 14s0-4-4-4c0 2.5 1.5 4 4 4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                  <path d="M9 20h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                </symbol>
+              </svg>
+
+              <div class="customize-heading" role="status">Customize your cleaning</div>
+
+              <div class="addon-groups">
+                <div class="addon-group" data-service-group="home">
+                  <p class="addon-group-title">Home &amp; Residential Extras</p>
+                  <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-sparkle" xlink:href="#icon-sparkle"></use></svg></span>
+                    <span class="addon-name">Deep Clean Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
+                  </div>
+                  <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-moving" xlink:href="#icon-moving"></use></svg></span>
+                    <span class="addon-name">Move In/Out Clean Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
+                  </div>
+                  <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-renovation" xlink:href="#icon-renovation"></use></svg></span>
+                    <span class="addon-name">Renovation Clean Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
+                  </div>
+                  <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-graduation" xlink:href="#icon-graduation"></use></svg></span>
+                    <span class="addon-name">Move In/Out Package (Student Property)</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
+                  </div>
+                  <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-home" xlink:href="#icon-home"></use></svg></span>
+                    <span class="addon-name">AirBnB Listing</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
+                  </div>
+                  <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-paw" xlink:href="#icon-paw"></use></svg></span>
+                    <span class="addon-name">I have Pets</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
+                  </div>
+                  <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-fridge" xlink:href="#icon-fridge"></use></svg></span>
+                    <span class="addon-name">Inside Fridge</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
+                  </div>
+                  <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-oven" xlink:href="#icon-oven"></use></svg></span>
+                    <span class="addon-name">Inside Oven</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
+                  </div>
+                  <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-cabinet" xlink:href="#icon-cabinet"></use></svg></span>
+                    <span class="addon-name">Inside Cabinets</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
+                  </div>
+                  <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-utensils" xlink:href="#icon-utensils"></use></svg></span>
+                    <span class="addon-name">Additional Kitchen</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
+                  </div>
+                  <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-blinds" xlink:href="#icon-blinds"></use></svg></span>
+                    <span class="addon-name">Blinds (per window)</span>
+                    <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
+                  </div>
+                  <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-window" xlink:href="#icon-window"></use></svg></span>
+                    <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
+                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
+                  </div>
+                  <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-window" xlink:href="#icon-window"></use></svg></span>
+                    <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
+                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
+                  </div>
+                  <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-window" xlink:href="#icon-window"></use></svg></span>
+                    <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
+                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
+                  </div>
+                  <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-bed" xlink:href="#icon-bed"></use></svg></span>
+                    <span class="addon-name">Change Bed Sheets + Load Laundry</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
+                  </div>
+                  <div class="addon-pill color-crimson" data-addon="Load dishwasher" data-price="10">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-dishwasher" xlink:href="#icon-dishwasher"></use></svg></span>
+                    <span class="addon-name">Load Dishwasher</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
+                  </div>
+                  <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-sanitizer" xlink:href="#icon-sanitizer"></use></svg></span>
+                    <span class="addon-name">Sanitization Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
+                  </div>
+                </div>
+
+                <div class="addon-group" data-service-group="commercial,office">
+                  <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
+                  <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-carpet" xlink:href="#icon-carpet"></use></svg></span>
+                    <span class="addon-name">Carpet Steam Cleaning Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
+                  </div>
+                  <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-tile" xlink:href="#icon-tile"></use></svg></span>
+                    <span class="addon-name">Tile and Grout Cleaning Package</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout Cleaning quantity">
+                  </div>
+                  <div class="addon-pill color-mint" data-addon="Restock Bathroom Supply" data-price="40">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-supply" xlink:href="#icon-supply"></use></svg></span>
+                    <span class="addon-name">Restock Bathroom Supply</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Restock Bathroom Supply quantity">
+                  </div>
+                  <div class="addon-pill color-gold" data-addon="Disinfect Electronics" data-price="45">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-monitor" xlink:href="#icon-monitor"></use></svg></span>
+                    <span class="addon-name">Disinfect Electronics</span>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Disinfect Electronics quantity">
+                  </div>
+                  <div class="addon-pill color-teal" data-addon="Empty Garbage/Recycling" data-price="18">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-trash" xlink:href="#icon-trash"></use></svg></span>
+                    <span class="addon-name">Empty Garbage/Recycling</span>
+                    <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Empty Garbage/Recycling quantity">
+                  </div>
+                  <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
+                    <span class="addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><use href="#icon-plant" xlink:href="#icon-plant"></use></svg></span>
+                    <span class="addon-name">Water Plants</span>
+                    <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -707,57 +947,5 @@
     })();
   </script>
 
-  <!-- Rotator logic (slide + bump + swipe) -->
-  <script>
-    (function(){
-      const box = document.getElementById('service-rotator');
-      if(!box) return;
-
-      const slides = Array.from(box.querySelectorAll('.rotator-line'));
-      const dots   = Array.from(box.querySelectorAll('.rotator-dots .dot'));
-      const underline = box.querySelector('.rotator-underline');
-      let idx = 0, timer = null, touchStartX = 0;
-
-      function show(n, bump=true){
-        // remove current
-        slides[idx].classList.remove('active');
-        dots[idx].classList.remove('active');
-
-        // set new
-        idx = (n + slides.length) % slides.length;
-        slides[idx].classList.add('active');
-        dots[idx].classList.add('active');
-
-        // restart underline anim
-        underline.style.animation = 'none';
-        requestAnimationFrame(()=>{ underline.style.animation = ''; });
-
-        // nudge the whole box so it feels like it moved
-        if(bump){ box.classList.remove('bump'); void box.offsetWidth; box.classList.add('bump'); }
-      }
-
-      function next(){ show(idx+1); }
-      function start(){ stop(); timer = setInterval(next, 4200); }
-      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-
-      // dots
-      dots.forEach((d,i)=> d.addEventListener('click', ()=>{ show(i); start(); }));
-
-      // swipe
-      box.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; }, {passive:true});
-      box.addEventListener('touchend', e=>{
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if(Math.abs(dx) > 40){ show(idx + (dx<0 ? 1 : -1)); start(); }
-      }, {passive:true});
-
-      // hover pause (desktop)
-      box.addEventListener('mouseenter', stop);
-      box.addEventListener('mouseleave', start);
-
-      // init
-      slides.forEach((s,i)=> s.style.zIndex = String(10 - i));
-      show(0,false); start();
-    })();
-  </script>
 </body>
 </html>

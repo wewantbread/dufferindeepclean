@@ -139,6 +139,7 @@ h1, h2, h3 {
 .split-screen { display: flex; height: 90vh; width: 100%; position: relative; z-index: 2; }
 .text-side {
   flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4em;
+  gap: 1.5rem;
   /* (grid removed above) */
 }
 .image-side { flex: 1; overflow: hidden; display: flex; justify-content: flex-start; align-items: center; position: relative; z-index: 1; }
@@ -202,6 +203,307 @@ h1, h2, h3 {
   border: 2px solid #00d4ff; border-radius: 50px; font-size: 1.2rem; align-self: flex-start;
   animation: fadeInUp 1.8s ease forwards; opacity: 0; transform: translateY(20px);
   transition: all .3s ease; text-transform: lowercase;
+}
+
+/* =========================
+   QUOTE PANEL
+   ========================= */
+.hero-quote {
+  margin-top: clamp(1.8rem, 4vw, 2.8rem);
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  align-self: flex-start;
+}
+
+.quote-card {
+  width: 100%;
+  flex: 1;
+  padding: clamp(1.8rem, 3vw, 2.45rem);
+  border-radius: 32px;
+  border: 1.5px solid rgba(0, 212, 255, 0.45);
+  background: linear-gradient(135deg, rgba(8, 19, 30, 0.75), rgba(12, 24, 40, 0.55));
+  box-shadow:
+    0 35px 120px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 212, 255, 0.25),
+    inset 0 0 35px rgba(0, 212, 255, 0.08);
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid rgba(0, 212, 255, 0.35);
+  pointer-events: none;
+  box-shadow: 0 0 45px rgba(0, 212, 255, 0.2);
+  opacity: 0.6;
+}
+
+.quote-card-header {
+  margin-bottom: 1.75rem;
+}
+
+.quote-card-header h2 {
+  font-size: clamp(1.9rem, 3vw, 2.55rem);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e6f8ff;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 22px rgba(0, 212, 255, 0.45);
+}
+
+.quote-card-header p {
+  color: rgba(212, 235, 255, 0.78);
+  font-size: 0.98rem;
+  max-width: 32ch;
+}
+
+.quote-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.65rem;
+}
+
+.quote-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.field-label {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(173, 214, 255, 0.85);
+}
+
+.field input,
+.field select {
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  border: 1.5px solid rgba(0, 212, 255, 0.25);
+  background: rgba(8, 19, 32, 0.75);
+  color: #f2fbff;
+  font-size: 1rem;
+  box-shadow: inset 0 0 18px rgba(0, 212, 255, 0.06);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: rgba(0, 212, 255, 0.65);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.quote-summary {
+  padding: 1.2rem 1.4rem;
+  border-radius: 24px;
+  background: rgba(10, 22, 34, 0.65);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  box-shadow: inset 0 0 22px rgba(0, 212, 255, 0.08);
+  display: grid;
+  gap: 0.85rem;
+  opacity: 0.55;
+  transition: opacity 0.35s ease;
+}
+
+.quote-form.quote-ready .quote-summary {
+  opacity: 1;
+}
+
+.quote-summary-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.05rem;
+  color: rgba(214, 238, 255, 0.85);
+}
+
+.quote-summary-line strong {
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  color: #f7fdff;
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.35);
+}
+
+.quote-summary-line.total {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.quote-customize {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: max-height 0.6s ease, opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.quote-customize.visible {
+  max-height: 1600px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.customize-heading {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: #b5f3ff;
+  text-shadow: 0 0 18px rgba(0, 212, 255, 0.45);
+  margin-bottom: 1.4rem;
+  animation: customizeGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes customizeGlow {
+  0%, 100% { text-shadow: 0 0 18px rgba(0, 212, 255, 0.35), 0 0 36px rgba(76, 198, 255, 0.25); }
+  50% { text-shadow: 0 0 28px rgba(0, 212, 255, 0.55), 0 0 48px rgba(76, 198, 255, 0.35); }
+}
+
+.addon-groups {
+  display: grid;
+  gap: 1.8rem;
+}
+
+.addon-group-title {
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(190, 231, 255, 0.75);
+  margin-bottom: 1rem;
+}
+
+.addon-group {
+  display: none;
+}
+
+.addon-group.active {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.addon-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(16, 32, 48, 0.6);
+  border: 1.5px solid rgba(0, 212, 255, 0.18);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.addon-pill:hover {
+  transform: scale(1.06);
+  box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45);
+}
+
+.addon-pill.active {
+  border-color: rgba(0, 212, 255, 0.65);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.25), 0 22px 40px rgba(0, 0, 0, 0.55);
+}
+
+.addon-icon {
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.addon-name {
+  flex: 1;
+  font-size: 1rem;
+  color: rgba(226, 245, 255, 0.9);
+}
+
+.addon-qty {
+  width: 3.5rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0, 212, 255, 0.35);
+  background: rgba(6, 20, 32, 0.75);
+  color: #f2fbff;
+  font-size: 1rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.addon-qty:focus {
+  outline: none;
+  border-color: rgba(0, 212, 255, 0.7);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.18);
+}
+
+.addon-pill:not(.active) .addon-qty {
+  opacity: 0.4;
+}
+
+.addon-pill.color-cyan { background: linear-gradient(135deg, rgba(0, 212, 255, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-lime { background: linear-gradient(135deg, rgba(159, 255, 99, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-magenta { background: linear-gradient(135deg, rgba(255, 99, 189, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-orange { background: linear-gradient(135deg, rgba(255, 171, 94, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-indigo { background: linear-gradient(135deg, rgba(138, 138, 255, 0.32), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-gold { background: linear-gradient(135deg, rgba(255, 232, 140, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-sky { background: linear-gradient(135deg, rgba(122, 217, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-rose { background: linear-gradient(135deg, rgba(255, 158, 173, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-mint { background: linear-gradient(135deg, rgba(144, 255, 214, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-teal { background: linear-gradient(135deg, rgba(118, 238, 225, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-plum { background: linear-gradient(135deg, rgba(190, 153, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-azure { background: linear-gradient(135deg, rgba(126, 185, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-amber { background: linear-gradient(135deg, rgba(255, 200, 122, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-blue { background: linear-gradient(135deg, rgba(108, 180, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-lavender { background: linear-gradient(135deg, rgba(215, 177, 255, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-crimson { background: linear-gradient(135deg, rgba(255, 134, 134, 0.35), rgba(10, 30, 48, 0.7)); }
+.addon-pill.color-emerald { background: linear-gradient(135deg, rgba(134, 255, 184, 0.35), rgba(10, 30, 48, 0.7)); }
+
+@media (max-width: 768px) {
+  .hero-quote {
+    max-width: none;
+  }
+
+  .quote-card {
+    padding: 2.25rem 1.75rem;
+  }
+
+  .quote-card-header p {
+    font-size: 0.95rem;
+  }
+
+  .quote-summary {
+    padding: 1.1rem 1.3rem;
+  }
+
+  .addon-group.active {
+    grid-template-columns: 1fr;
+  }
+
+  .addon-pill {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .addon-name {
+    flex-basis: 100%;
+  }
+
+  .addon-qty {
+    width: 100%;
+  }
 }
 .services-btn-home:hover { background:#00d4ff; color:#000; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,212,255,.3); }
 

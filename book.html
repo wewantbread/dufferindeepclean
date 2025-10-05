@@ -42,8 +42,7 @@
       from { background-position: 0 0; }
       to   { background-position: var(--tile-w-size) var(--tile-h-size); }
     }
-export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9jtInuutAfuZ6JLfRe1cu-ihq7X>"
-    export PAYPAL_CLIENT_SECRET="<EMYkPkF_9C61BGAbivdoneMwRSsG2x7XQmP_K8U36h5QjyuCAqi4H8d6Kggpc5rMaHxMYFt-OlLejbqK>"
+
     body::before{
       content:"";
       position: fixed; inset: 0; z-index: 1; pointer-events: none;
@@ -391,6 +390,29 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
     .payment-option-title{ font-weight: 700; color: #f5fbff; }
     .payment-option-note{ color: rgba(214, 238, 255, 0.75); font-size: 0.9rem; line-height: 1.5; }
     .payment-option-note a{ color: #7ce9ff; }
+    .payment-option-actions{
+      margin-top: 0.65rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+    .payment-option-actions[hidden]{
+      display: none;
+    }
+    .payment-option-helper{
+      font-size: 0.82rem;
+      color: rgba(214, 238, 255, 0.72);
+      line-height: 1.5;
+    }
+    .payment-option-helper strong{ color: #f5fbff; }
+    .payment-option-helper.status{
+      color: #9fd8ff;
+    }
+    .payment-option-helper.error{
+      color: #ff9fba;
+    }
+    #paypal-buttons > div{
+      max-width: 360px;
+    }
 
     .payment-guides{
       border: 1px dashed rgba(0,212,255,0.22);
@@ -434,7 +456,7 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
     .payment-wall .review dd{ color: #f2f5f8; }
   </style>
 </head>
-<body>
+<body data-paypal-client-id="" data-paypal-currency="CAD">
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
@@ -478,6 +500,9 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
           <input type="hidden" name="selected_addons" id="input-selected-addons">
           <input type="hidden" name="origin_quote" id="input-origin" value="">
           <input type="hidden" name="package" id="input-package">
+          <input type="hidden" name="paypal_order_id" id="input-paypal-order-id">
+          <input type="hidden" name="paypal_payer_id" id="input-paypal-payer-id">
+          <input type="hidden" name="paypal_capture_id" id="input-paypal-capture-id">
 
           <fieldset class="step" data-step="1">
           <legend>Your base package</legend>
@@ -696,132 +721,37 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
           </div>
         </fieldset>
 
-        <fieldset class="step" data-step="2" hidden>
-          <legend>Add extra services</legend>
-          <p class="muted">Add speciality tasks for this visit. Select a tile to include it and adjust the quantity if needed.</p>
-          <div class="addon-groups" id="addon-groups">
-            <div class="addon-group" data-service-group="home">
-              <p class="addon-group-title">Home &amp; Residential Extras</p>
-              <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
-                <span class="addon-icon">✨</span>
-                <span class="addon-name">Deep Clean Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
-              </div>
-              <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
-                <span class="addon-icon">🚚</span>
-                <span class="addon-name">Move In/Out Clean Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
-              </div>
-              <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
-                <span class="addon-icon">🛠️</span>
-                <span class="addon-name">Renovation Clean Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
-              </div>
-              <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
-                <span class="addon-icon">🎓</span>
-                <span class="addon-name">Move In/Out Package (Student Property)</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
-              </div>
-              <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
-                <span class="addon-icon">🏠</span>
-                <span class="addon-name">AirBnB Listing</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
-              </div>
-              <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
-                <span class="addon-icon">🐾</span>
-                <span class="addon-name">I have Pets</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
-              </div>
-              <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
-                <span class="addon-icon">🧊</span>
-                <span class="addon-name">Inside Fridge</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
-              </div>
-              <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
-                <span class="addon-icon">🔥</span>
-                <span class="addon-name">Inside Oven</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
-              </div>
-              <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
-                <span class="addon-icon">🗄️</span>
-                <span class="addon-name">Inside Cabinets</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
-              </div>
-              <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
-                <span class="addon-icon">🍽️</span>
-                <span class="addon-name">Additional Kitchen</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
-              </div>
-              <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
-                <span class="addon-icon">🪟</span>
-                <span class="addon-name">Blinds (per window)</span>
-                <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
-              </div>
-              <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
-                <span class="addon-icon">🔍</span>
-                <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
-                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
-              </div>
-              <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
-                <span class="addon-icon">🔎</span>
-                <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
-                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
-              </div>
-              <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
-                <span class="addon-icon">🪟</span>
-                <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
-                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
-              </div>
-              <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
-                <span class="addon-icon">🛏️</span>
-                <span class="addon-name">Change Bed Sheets + Load Laundry</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
-              </div>
-              <div class="addon-pill color-crimson" data-addon="Load Dishwasher" data-price="10">
-                <span class="addon-icon">🍽️</span>
-                <span class="addon-name">Load Dishwasher</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
-              </div>
-              <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
-                <span class="addon-icon">🧴</span>
-                <span class="addon-name">Sanitization Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
-              </div>
-            </div>
-
-            <div class="addon-group" data-service-group="commercial,office">
-              <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
-              <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
-                <span class="addon-icon">🧼</span>
-                <span class="addon-name">Carpet Steam Cleaning Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
-              </div>
-              <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
-                <span class="addon-icon">🧽</span>
-                <span class="addon-name">Tile and Grout Cleaning Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout Cleaning quantity">
-              </div>
-              <div class="addon-pill color-mint" data-addon="Restock Bathroom Supply" data-price="40">
-                <span class="addon-icon">🧻</span>
-                <span class="addon-name">Restock Bathroom Supply</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Restock Bathroom Supply quantity">
-              </div>
-              <div class="addon-pill color-gold" data-addon="Disinfect Electronics" data-price="45">
-                <span class="addon-icon">💻</span>
-                <span class="addon-name">Disinfect Electronics</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Disinfect Electronics quantity">
-              </div>
-              <div class="addon-pill color-teal" data-addon="Empty Garbage/Recycling" data-price="18">
-                <span class="addon-icon">🗑️</span>
-                <span class="addon-name">Empty Garbage/Recycling</span>
-                <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Empty Garbage/Recycling quantity">
-              </div>
-              <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
-                <span class="addon-icon">🌿</span>
-                <span class="addon-name">Water Plants</span>
-                <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
-              </div>
-            </div>
+        <fieldset class="step" data-step="3" hidden>
+          <legend>When &amp; where</legend>
+          <div class="grid-2">
+            <label>
+              Business name (optional)
+              <input type="text" name="business" placeholder="ACME Distribution" />
+            </label>
+            <label>
+              Address
+              <input id="address" type="text" name="address" placeholder="123 Main St" required autocomplete="address-line1" />
+            </label>
+            <label>
+              City
+              <input id="city" type="text" name="city" placeholder="Mono" required autocomplete="address-level2" />
+            </label>
+            <label>
+              Postal Code
+              <input id="postal" type="text" name="postal" placeholder="L9W 1A1" required autocomplete="postal-code" />
+            </label>
+            <label>
+              Preferred date
+              <input type="date" name="date" required />
+            </label>
+            <label>
+              Preferred time
+              <input type="time" name="time" required />
+            </label>
+            <label class="wide">
+              Approx. square footage
+              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" />
+            </label>
           </div>
           <p class="addon-empty" id="addon-empty-message" hidden>No add-ons available for this service. Continue to scheduling.</p>
           <div class="actions">
@@ -916,6 +846,11 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
                 <span class="payment-option-card">
                   <span class="payment-option-title">PayPal</span>
                   <span class="payment-option-note">Use your PayPal balance or linked card. <a href="https://developer.paypal.com/docs/checkout/standard/" target="_blank" rel="noopener">Integration guide</a>.</span>
+                  <div class="payment-option-actions" data-payment-ui="paypal" hidden>
+                    <div id="paypal-buttons" aria-live="polite"></div>
+                    <p class="payment-option-helper">Complete your 50% deposit securely with PayPal. Once approved you can submit your booking.</p>
+                    <p class="payment-option-helper status" id="paypal-status" role="status" aria-live="polite"></p>
+                  </div>
                 </span>
               </label>
               <label class="payment-option">
@@ -1301,10 +1236,14 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
       const hiddenTotalPrice = document.getElementById('input-total-price');
       const hiddenSelectedAddons = document.getElementById('input-selected-addons');
       const hiddenPackage = document.getElementById('input-package');
+      const hiddenPayPalOrder = document.getElementById('input-paypal-order-id');
+      const hiddenPayPalPayer = document.getElementById('input-paypal-payer-id');
+      const hiddenPayPalCapture = document.getElementById('input-paypal-capture-id');
       const originField = document.getElementById('input-origin');
 
       const depositText = document.getElementById('deposit-due-text');
       const balanceText = document.getElementById('balance-due-text');
+      const submitBtn = form.querySelector('.submit');
 
       const recapBase = document.querySelector('[data-recap-base]');
       const recapDetailRow = document.querySelector('[data-recap-detail-row]');
@@ -1319,8 +1258,18 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
       const frequencyInputs = Array.from(form.querySelectorAll('input[name="frequency"]'));
       const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
       const addonPills = Array.from(form.querySelectorAll('.addon-pill'));
+      const paymentRadios = Array.from(form.querySelectorAll('input[name="payment_method"]'));
+      const paypalUi = document.querySelector('[data-payment-ui="paypal"]');
+      const paypalButtonsContainer = document.getElementById('paypal-buttons');
+      const paypalStatus = document.getElementById('paypal-status');
 
       const DEPOSIT_RATE = 0.5;
+      const PAYPAL_CURRENCY = ((document.body && document.body.dataset && document.body.dataset.paypalCurrency) || 'CAD').toUpperCase();
+
+      let paypalButtonsInstance = null;
+      let paypalApproved = false;
+      let paypalApprovedAmount = 0;
+      let paypalScriptPromise = null;
 
       const params = new URLSearchParams(window.location.search);
       const serviceKey = params.get('service') || '';
@@ -1427,6 +1376,221 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
         return extrasState.map(item => `${item.name} ×${item.qty}`).join(', ');
       }
 
+      function getSelectedPayment(){
+        const selected = paymentRadios.find(radio => radio.checked);
+        return selected ? selected.value : null;
+      }
+
+      function clearPayPalHidden(){
+        if(hiddenPayPalOrder) hiddenPayPalOrder.value = '';
+        if(hiddenPayPalPayer) hiddenPayPalPayer.value = '';
+        if(hiddenPayPalCapture) hiddenPayPalCapture.value = '';
+      }
+
+      function setPayPalStatus(message, tone){
+        if(!paypalStatus) return;
+        paypalStatus.textContent = message || '';
+        paypalStatus.classList.toggle('error', tone === 'error');
+      }
+
+      function syncSubmitDisabled(){
+        if(!submitBtn) return;
+        const method = getSelectedPayment();
+        submitBtn.disabled = method === 'paypal' && !paypalApproved;
+      }
+
+      function togglePayPalUi(show){
+        if(paypalUi){
+          paypalUi.hidden = !show;
+        }
+        if(!show){
+          setPayPalStatus('', 'info');
+        }
+      }
+
+      function resetPayPalApproval(message, tone){
+        paypalApproved = false;
+        paypalApprovedAmount = 0;
+        clearPayPalHidden();
+        if(message && getSelectedPayment() === 'paypal'){
+          setPayPalStatus(message, tone || 'info');
+        } else if(!message){
+          setPayPalStatus('', 'info');
+        }
+        syncSubmitDisabled();
+      }
+
+      function resolvePayPalClientId(){
+        if(document.body && document.body.dataset && document.body.dataset.paypalClientId){
+          return document.body.dataset.paypalClientId.trim();
+        }
+        if(typeof window !== 'undefined' && window.PAYPAL_CLIENT_ID){
+          return String(window.PAYPAL_CLIENT_ID).trim();
+        }
+        return '';
+      }
+
+      function loadPayPalSdk(){
+        if(window.paypal && typeof window.paypal.Buttons === 'function'){
+          return Promise.resolve(window.paypal);
+        }
+        if(paypalScriptPromise){
+          return paypalScriptPromise;
+        }
+
+        const clientId = resolvePayPalClientId();
+        if(!clientId){
+          const err = new Error('PayPal client ID is not configured. Add your client ID to data-paypal-client-id on <body> or set window.PAYPAL_CLIENT_ID before this script runs.');
+          paypalScriptPromise = Promise.reject(err);
+          paypalScriptPromise.catch(() => { paypalScriptPromise = null; });
+          return paypalScriptPromise;
+        }
+
+        paypalScriptPromise = new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          const params = new URLSearchParams({
+            'client-id': clientId,
+            currency: PAYPAL_CURRENCY,
+            intent: 'capture'
+          });
+          script.src = `https://www.paypal.com/sdk/js?${params.toString()}`;
+          script.async = true;
+          script.onload = () => {
+            if(window.paypal && typeof window.paypal.Buttons === 'function'){
+              resolve(window.paypal);
+            } else {
+              reject(new Error('PayPal SDK loaded but Buttons API is unavailable.'));
+            }
+          };
+          script.onerror = () => {
+            reject(new Error('PayPal SDK failed to load.'));
+          };
+          document.head.appendChild(script);
+        }).catch(err => {
+          paypalScriptPromise = null;
+          throw err;
+        });
+
+        return paypalScriptPromise;
+      }
+
+      function ensurePayPalButtons(){
+        if(!paypalUi || !paypalButtonsContainer) return;
+        if(paypalButtonsInstance){
+          return;
+        }
+
+        setPayPalStatus('Loading PayPal…');
+        loadPayPalSdk().then(() => {
+          if(paypalButtonsInstance){
+            return paypalButtonsInstance;
+          }
+
+          paypalButtonsContainer.innerHTML = '';
+          paypalButtonsInstance = window.paypal.Buttons({
+            style: {
+              layout: 'vertical',
+              color: 'gold',
+              label: 'pay',
+              shape: 'rect'
+            },
+            onClick(data, actions){
+              const deposit = Number(hiddenDepositPrice.value || 0);
+              if(!(deposit > 0)){
+                setPayPalStatus('Finish selecting your services so we can calculate the deposit before paying with PayPal.', 'error');
+                return actions.reject();
+              }
+              paypalApproved = false;
+              paypalApprovedAmount = 0;
+              clearPayPalHidden();
+              syncSubmitDisabled();
+              setPayPalStatus('Redirecting to PayPal…');
+              return actions.resolve();
+            },
+            createOrder(data, actions){
+              const deposit = Number(hiddenDepositPrice.value || 0);
+              if(!(deposit > 0)){
+                setPayPalStatus('Your deposit total is missing. Adjust your booking details before checking out with PayPal.', 'error');
+                return actions.reject();
+              }
+              const amount = (Math.round(deposit * 100) / 100).toFixed(2);
+              return actions.order.create({
+                purchase_units: [{
+                  amount: {
+                    currency_code: PAYPAL_CURRENCY,
+                    value: amount
+                  },
+                  description: 'Dufferin Deep Clean 50% deposit'
+                }],
+                application_context: {
+                  shipping_preference: 'NO_SHIPPING'
+                }
+              });
+            },
+            onApprove(data, actions){
+              setPayPalStatus('Processing your PayPal payment…');
+              return actions.order.capture().then(details => {
+                paypalApproved = true;
+                paypalApprovedAmount = Math.round(Number(hiddenDepositPrice.value || 0) * 100) / 100;
+                if(hiddenPayPalOrder) hiddenPayPalOrder.value = data.orderID || details.id || '';
+                if(hiddenPayPalPayer) hiddenPayPalPayer.value = details?.payer?.payer_id || '';
+                const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
+                if(hiddenPayPalCapture) hiddenPayPalCapture.value = capture?.id || '';
+                const payerName = details?.payer?.name?.given_name || 'PayPal customer';
+                setPayPalStatus(`Deposit received from ${payerName}. You can now submit your booking.`);
+                syncSubmitDisabled();
+                buildReview();
+              }).catch(err => {
+                console.error('PayPal capture error', err);
+                resetPayPalApproval();
+                setPayPalStatus('PayPal could not capture the payment. Please try again.', 'error');
+                throw err;
+              });
+            },
+            onCancel(){
+              resetPayPalApproval('PayPal checkout was cancelled. You can try again or choose another method.', 'error');
+            },
+            onError(err){
+              console.error('PayPal error', err);
+              resetPayPalApproval('PayPal reported an error. Please try again or choose another method.', 'error');
+            }
+          });
+
+          return paypalButtonsInstance.render('#paypal-buttons').catch(err => {
+            console.error('PayPal render error', err);
+            paypalButtonsInstance = null;
+            resetPayPalApproval('PayPal could not initialize. Refresh the page or choose another method.', 'error');
+            throw err;
+          });
+        }).catch(err => {
+          console.error('PayPal load error', err);
+          paypalButtonsInstance = null;
+          const message = err && err.message && err.message.includes('client ID')
+            ? 'Add your live PayPal client ID to the page before using PayPal checkout.'
+            : 'PayPal couldn\'t load. Reload the page or choose another method.';
+          setPayPalStatus(message, 'error');
+        });
+      }
+
+      function applyPaymentSelection(){
+        const method = getSelectedPayment();
+        if(method === 'paypal'){
+          togglePayPalUi(true);
+          ensurePayPalButtons();
+          if(paypalApproved){
+            if(!paypalStatus || !paypalStatus.textContent.trim()){
+              setPayPalStatus('PayPal deposit approved. You can submit your booking.');
+            }
+          } else if(!paypalStatus || !paypalStatus.textContent.trim()){
+            setPayPalStatus('Complete your PayPal deposit to enable submission.');
+          }
+        } else {
+          togglePayPalUi(false);
+          resetPayPalApproval('');
+        }
+        syncSubmitDisabled();
+      }
+
       function selectedFrequency(){
         return frequencyInputs.find(input => input.checked) || null;
       }
@@ -1483,6 +1647,18 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
         if(hiddenBalancePrice) hiddenBalancePrice.value = balanceDue.toFixed(2);
         if(hiddenTotalPrice) hiddenTotalPrice.value = finalTotal.toFixed(2);
         if(hiddenSelectedAddons) hiddenSelectedAddons.value = buildExtrasLabel();
+
+        const normalizedDeposit = Math.round(depositDue * 100) / 100;
+        if(paypalApproved && Math.abs(normalizedDeposit - paypalApprovedAmount) > 0.01){
+          paypalApproved = false;
+          paypalApprovedAmount = 0;
+          clearPayPalHidden();
+          if(getSelectedPayment() === 'paypal'){
+            setPayPalStatus('Your deposit total changed. Please approve the PayPal payment again.');
+          }
+        }
+
+        syncSubmitDisabled();
       }
 
       addonPills.forEach(pill => {
@@ -1534,6 +1710,10 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
         input.addEventListener('change', updateSummary);
       });
 
+      paymentRadios.forEach(radio => {
+        radio.addEventListener('change', applyPaymentSelection);
+      });
+
       let current = 0;
       function showStep(i){
         steps.forEach((step, idx) => { step.hidden = idx !== i; });
@@ -1545,6 +1725,7 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
         window.scrollTo({ top: 0, behavior: 'smooth' });
         if(i === steps.length - 1){
           buildReview();
+          applyPaymentSelection();
         }
       }
 
@@ -1597,6 +1778,7 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
           ['Balance at Service', hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'],
           ['Estimated Visit Total', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
           ['Payment Method', paymentMap[fd.get('payment_method')] || '—'],
+          ['PayPal Reference', hiddenPayPalCapture.value || hiddenPayPalOrder.value || '—'],
           ['Business', fd.get('business') || '—'],
           ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
           ['Preferred Date', fd.get('date') || '—'],
@@ -1613,7 +1795,12 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const submitBtn = form.querySelector('.submit');
+        const method = getSelectedPayment();
+        if(method === 'paypal' && !paypalApproved){
+          setPayPalStatus('Please complete your PayPal deposit before submitting your booking.', 'error');
+          return;
+        }
+
         const allButtons = form.querySelectorAll('button');
         allButtons.forEach(btn => btn.disabled = true);
         if(submitBtn) submitBtn.textContent = 'Sending…';
@@ -1637,7 +1824,7 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
           'debit': 'Direct Debit / Card on File'
         };
 
-        const pricingSummary = [
+        const summaryLines = [
           `Service: ${hiddenServiceLabel.value || serviceKey || '—'}`,
           `Square Footage: ${hiddenSqftLabel.value || fd.get('sqft') || '—'}`,
           `Details: ${hiddenDetailSummary.value || '—'}`,
@@ -1651,7 +1838,13 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
           `Balance at Service: ${hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'}`,
           `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
           `Payment Method: ${paymentMapShort[fd.get('payment_method')] || fd.get('payment_method') || '—'}`
-        ].join('\n');
+        ];
+
+        if(fd.get('payment_method') === 'paypal'){
+          summaryLines.push(`PayPal Reference: ${hiddenPayPalCapture.value || hiddenPayPalOrder.value || 'Pending'}`);
+        }
+
+        const pricingSummary = summaryLines.join('\n');
 
         fd.append('pricing_summary', pricingSummary);
 
@@ -1685,6 +1878,7 @@ export PAYPAL_CLIENT_ID="<AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9
       });
 
       updateSummary();
+      applyPaymentSelection();
       showStep(0);
     })();
   </script>

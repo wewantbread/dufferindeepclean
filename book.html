@@ -665,6 +665,32 @@
               </div>
             </label>
           </div>
+          <div class="pricing-recap" id="pricingRecap">
+            <h3 class="pricing-recap-title">Pricing summary</h3>
+            <div class="pricing-breakdown">
+              <div class="pricing-line">
+                <span class="pricing-label">Base package</span>
+                <span class="pricing-value" data-recap-base>—</span>
+              </div>
+              <div class="pricing-line" data-recap-detail-row hidden>
+                <span class="pricing-label">Service details</span>
+                <span class="pricing-value" data-recap-detail>—</span>
+              </div>
+              <div class="pricing-line" data-recap-extras-row hidden>
+                <span class="pricing-label">Add-ons</span>
+                <span class="pricing-value" data-recap-extras>—</span>
+              </div>
+              <div class="pricing-line" data-recap-discount-row hidden>
+                <span class="pricing-label">Frequency savings</span>
+                <span class="pricing-value" data-recap-discount>—</span>
+              </div>
+              <div class="pricing-line total">
+                <span class="pricing-label">Visit total</span>
+                <span class="pricing-value" data-recap-total>—</span>
+              </div>
+            </div>
+            <p class="pricing-recap-details" data-recap-description hidden></p>
+          </div>
           <div class="actions">
             <button type="button" class="btn next">Next</button>
           </div>
@@ -1643,6 +1669,82 @@
           if(active) visibleGroups += 1;
         });
         if(addonEmptyMessage){ addonEmptyMessage.hidden = visibleGroups !== 0; }
+      }
+      updateAddonVisibility();
+
+      const extrasState = [];
+      function computeExtras(){
+        extrasState.length = 0;
+        addonPills.forEach(pill => {
+          const parent = pill.closest('.addon-group');
+          if(!parent || !parent.classList.contains('active')) return;
+          if(!pill.classList.contains('active')) return;
+          const qtyInput = pill.querySelector('.addon-qty');
+          const qty = qtyInput ? Math.max(Number(qtyInput.value) || 1, Number(qtyInput.min) || 1) : 1;
+          const price = Number(pill.dataset.price || 0);
+          const name = pill.querySelector('.addon-name')?.textContent.trim() || pill.dataset.addon || 'Addon';
+          extrasState.push({ name, qty, price });
+        });
+        return extrasState;
+      }
+
+      function buildExtrasLabel(){
+        if(!extrasState.length) return '';
+        return extrasState.map(item => `${item.name} ×${item.qty}`).join(', ');
+      }
+
+      function getSelectedPayment(){
+        const selected = paymentRadios.find(radio => radio.checked);
+        return selected ? selected.value : null;
+      }
+
+      function clearPayPalHidden(){
+        if(hiddenPayPalOrder) hiddenPayPalOrder.value = '';
+        if(hiddenPayPalPayer) hiddenPayPalPayer.value = '';
+        if(hiddenPayPalCapture) hiddenPayPalCapture.value = '';
+      }
+
+      function setPayPalStatus(message, tone){
+        if(!paypalStatus) return;
+        paypalStatus.textContent = message || '';
+        paypalStatus.classList.toggle('error', tone === 'error');
+      }
+
+      function syncSubmitDisabled(){
+        if(!submitBtn) return;
+        const method = getSelectedPayment();
+        submitBtn.disabled = method === 'paypal' && !paypalApproved;
+      }
+
+      function togglePayPalUi(show){
+        if(paypalUi){
+          paypalUi.hidden = !show;
+        }
+        if(!show){
+          setPayPalStatus('', 'info');
+        }
+      }
+
+      function resetPayPalApproval(message, tone){
+        paypalApproved = false;
+        paypalApprovedAmount = 0;
+        clearPayPalHidden();
+        if(message && getSelectedPayment() === 'paypal'){
+          setPayPalStatus(message, tone || 'info');
+        } else if(!message){
+          setPayPalStatus('', 'info');
+        }
+        syncSubmitDisabled();
+      }
+
+      function resolvePayPalClientId(){
+        if(document.body && document.body.dataset && document.body.dataset.paypalClientId){
+          return document.body.dataset.paypalClientId.trim();
+        }
+        if(typeof window !== 'undefined' && window.PAYPAL_CLIENT_ID){
+          return String(window.PAYPAL_CLIENT_ID).trim();
+        }
+        return '';
       }
       updateAddonVisibility();
 

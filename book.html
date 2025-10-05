@@ -155,6 +155,34 @@
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: #b6c2cf; }
 
+    .booking-summary-card{
+      margin-bottom: clamp(18px, 3vw, 28px);
+      display: grid;
+      gap: 0.75rem;
+    }
+    .booking-summary-title{
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      letter-spacing: 0.16em;
+      text-transform: lowercase;
+      margin: 0;
+    }
+    .summary-note{
+      margin: 0;
+      font-size: 0.95rem;
+      color: rgba(207, 224, 238, 0.85);
+    }
+    .summary-details{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+      color: rgba(214, 238, 255, 0.85);
+    }
+    .summary-details strong{ color: #f7fdff; font-weight: 700; }
+
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
     @media (min-width: 720px){ .grid-2{ grid-template-columns: 1fr 1fr; } }

@@ -52,7 +52,10 @@
     .navbar, main, section, footer { position: relative; z-index: 2; }
 
     .navbar{
-      display:flex; justify-content:space-between; align-items:center;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: clamp(1rem, 2vw, 2.4rem);
       padding: 14px 22px;
       background: rgba(0,0,0,0.20);
       backdrop-filter: blur(6px);
@@ -90,6 +93,23 @@
       transition: color .25s ease;
     }
     .nav-links a:hover{ color:#fff; }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap: clamp(0.6rem, 1.2vw, 1.1rem);
+    }
+
+    .nav-cart{
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(0,212,255,0.32);
+      padding: 0.5em 1em;
+      color: #f1fbff;
+    }
+
+    .nav-checkout{
+      box-shadow: 0 12px 26px rgba(0, 145, 255, 0.28);
+    }
 
     .booking{
       max-width: 1100px; margin: 0 auto;
@@ -489,7 +509,19 @@
       <a href="index.html#home">Home</a>
       <a href="index.html#services">Services</a>
       <a href="about.html">About Us</a>
+      <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
+    <div class="nav-actions">
+      <a class="nav-cart" href="#cartSummary">
+        <span class="nav-cart-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="nav-cart-label">Cart</span>
+      </a>
+      <a class="nav-checkout" href="#start">Checkout</a>
+    </div>
   </header>
 
   <section class="booking" id="start">
@@ -719,139 +751,6 @@
               <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
                 <span class="addon-icon">🧽</span>
                 <span class="addon-name">Tile and Grout Cleaning Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout Cleaning quantity">
-              </div>
-              <div class="addon-pill color-mint" data-addon="Restock Bathroom Supply" data-price="40">
-                <span class="addon-icon">🧻</span>
-                <span class="addon-name">Restock Bathroom Supply</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Restock Bathroom Supply quantity">
-              </div>
-              <div class="addon-pill color-gold" data-addon="Disinfect Electronics" data-price="45">
-                <span class="addon-icon">💻</span>
-                <span class="addon-name">Disinfect Electronics</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Disinfect Electronics quantity">
-              </div>
-              <div class="addon-pill color-teal" data-addon="Empty Garbage/Recycling" data-price="18">
-                <span class="addon-icon">🗑️</span>
-                <span class="addon-name">Empty Garbage/Recycling</span>
-                <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Empty Garbage/Recycling quantity">
-              </div>
-              <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
-                <span class="addon-icon">🌿</span>
-                <span class="addon-name">Water Plants</span>
-                <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
-              </div>
-            </div>
-          </div>
-          <p class="addon-empty" id="addon-empty-message" hidden>No add-ons available for this service. Continue to scheduling.</p>
-          <div class="actions">
-            <button type="button" class="btn next">Next</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="step" data-step="2" hidden>
-          <legend>Add extra services</legend>
-          <p class="muted">Add speciality tasks for this visit. Select a tile to include it and adjust the quantity if needed.</p>
-          <div class="addon-groups" id="addon-groups">
-            <div class="addon-group" data-service-group="home">
-              <p class="addon-group-title">Home &amp; Residential Extras</p>
-              <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
-                <span class="addon-icon">✨</span>
-                <span class="addon-name">Deep Clean Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
-              </div>
-              <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
-                <span class="addon-icon">🚚</span>
-                <span class="addon-name">Move In/Out Clean Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
-              </div>
-              <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
-                <span class="addon-icon">🛠️</span>
-                <span class="addon-name">Renovation Clean Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
-              </div>
-              <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
-                <span class="addon-icon">🎓</span>
-                <span class="addon-name">Move In/Out Package (Student Property)</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
-              </div>
-              <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
-                <span class="addon-icon">🏠</span>
-                <span class="addon-name">AirBnB Listing</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
-              </div>
-              <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
-                <span class="addon-icon">🐾</span>
-                <span class="addon-name">I have Pets</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
-              </div>
-              <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
-                <span class="addon-icon">🧊</span>
-                <span class="addon-name">Inside Fridge</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
-              </div>
-              <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
-                <span class="addon-icon">🔥</span>
-                <span class="addon-name">Inside Oven</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
-              </div>
-              <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
-                <span class="addon-icon">🗄️</span>
-                <span class="addon-name">Inside Cabinets</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
-              </div>
-              <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
-                <span class="addon-icon">🍽️</span>
-                <span class="addon-name">Additional Kitchen</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
-              </div>
-              <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
-                <span class="addon-icon">🪟</span>
-                <span class="addon-name">Blinds (per window)</span>
-                <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
-              </div>
-              <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
-                <span class="addon-icon">🔍</span>
-                <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
-                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
-              </div>
-              <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
-                <span class="addon-icon">🔎</span>
-                <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
-                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
-              </div>
-              <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
-                <span class="addon-icon">🪟</span>
-                <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
-                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
-              </div>
-              <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
-                <span class="addon-icon">🛏️</span>
-                <span class="addon-name">Change Bed Sheets + Load Laundry</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
-              </div>
-              <div class="addon-pill color-crimson" data-addon="Load Dishwasher" data-price="10">
-                <span class="addon-icon">🍽️</span>
-                <span class="addon-name">Load Dishwasher</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
-              </div>
-              <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
-                <span class="addon-icon">🧴</span>
-                <span class="addon-name">Sanitization Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
-              </div>
-            </div>
-
-            <div class="addon-group" data-service-group="commercial,office">
-              <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
-              <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
-                <span class="addon-icon">🧼</span>
-                <span class="addon-name">Carpet Steam Cleaning Package</span>
-                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
-              </div>
-              <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
-                <span class="addon-icon">🧽</span>
-                <span class="addon-name">Tile and Grout Cleaning Package</span>
                 <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout quantity">
               </div>
               <div class="addon-pill color-coral" data-addon="Window Detailing" data-price="120">
@@ -965,7 +864,7 @@
 
             <aside class="cart-summary" id="cartSummary" aria-label="Cart summary">
               <header>
-                <img src="deepcleanpackageoptimized1000.png" alt="Custom cleaning package" loading="lazy" />
+                <img id="cartSummaryImage" alt="Custom cleaning package" loading="lazy" />
                 <div>
                   <h2 class="cart-summary-title">Custom Package</h2>
                   <p class="cart-summary-subtitle" data-cart-service>Choose a service to view details.</p>
@@ -1052,8 +951,6 @@
           </div>
 
         </form>
-
-      </div>
 
       </div>
 
@@ -1407,6 +1304,34 @@
       const hiddenPayPalPayer = document.getElementById('input-paypal-payer-id');
       const hiddenPayPalCapture = document.getElementById('input-paypal-capture-id');
       const hiddenCartStatus = document.getElementById('input-cart-status');
+      const CART_IMAGE_DATA_URI = 'data:image/png;base64,' +
+        'iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAE0UlEQVR42u3VMQ0AAAgEsdeCXXyi' +
+        'AxNsNKmCWy7VAwBvRQIAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
+        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
+        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAI1QB' +
+        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
+        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
+        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEwAgBwAgBwAgBwAgBwAgBwAgB' +
+        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
+        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
+        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBMEIVADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+        'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+        'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+        'ADBCADBCAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
+        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
+        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQACOUAAAjBAAjBAAj' +
+        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
+        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
+        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBMAIVQDACAHACAHACAHACAHACAHACAHACAHA' +
+        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
+        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
+        'CAHACAHACAHACAHACAHACAEwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
+        'QgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
+        'QgAwQgAwQgAwQgAwQgC4sEMVKv0E08xMAAAAAElFTkSuQmCC';
+      const cartImage = document.getElementById('cartSummaryImage');
+      if(cartImage && !cartImage.src){
+        cartImage.src = CART_IMAGE_DATA_URI;
+      }
       const hiddenFullName = document.getElementById('input-full-name');
       const originField = document.getElementById('input-origin');
 

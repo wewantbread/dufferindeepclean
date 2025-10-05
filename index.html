@@ -185,6 +185,28 @@
                     <button type="button" class="mini-pill" data-target-input="home-pets" data-value="yes" data-label="Yes, pets">Yes</button>
                   </div>
                 </div>
+                <div class="detail-inline-field detail-inline-basement" data-detail-basement>
+                  <span class="detail-card-label">Basement?</span>
+                  <input type="hidden" name="home-basement" data-required data-service-required="home">
+                  <div class="mini-pill-group tight" role="radiogroup" aria-label="Is a basement included?">
+                    <button type="button" class="mini-pill" data-target-input="home-basement" data-value="no" data-label="No basement">No</button>
+                    <button type="button" class="mini-pill" data-target-input="home-basement" data-value="yes" data-label="Basement included">Yes</button>
+                  </div>
+                </div>
+                <div class="detail-basement-extra" data-basement-extra hidden aria-hidden="true">
+                  <label class="detail-inline-field" for="home-basement-rooms">
+                    <span class="detail-card-label">Basement rooms</span>
+                    <div class="number-wrap">
+                      <input id="home-basement-rooms" name="home-basement-rooms" type="number" min="1" max="8" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-dependent-on="home-basement" data-dependent-value="yes" data-label-prefix="basement room" data-label-plural="basement rooms" data-detail-key="homeBasementRooms">
+                    </div>
+                  </label>
+                  <label class="detail-inline-field" for="home-basement-bathrooms">
+                    <span class="detail-card-label">Basement bathrooms</span>
+                    <div class="number-wrap">
+                      <input id="home-basement-bathrooms" name="home-basement-bathrooms" type="number" min="1" max="4" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-dependent-on="home-basement" data-dependent-value="yes" data-label-prefix="basement bathroom" data-label-plural="basement bathrooms" data-detail-key="homeBasementBathrooms">
+                    </div>
+                  </label>
+                </div>
               </div>
 
               <div class="service-detail-group" data-service-detail="office" aria-hidden="true">
@@ -350,7 +372,10 @@
         home: {
           rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
           bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
-          pets: { no: 0, yes: 25 }
+          pets: { no: 0, yes: 25 },
+          basement: { no: 0, yes: 45 },
+          basementRooms: { '1-2': 25, '3-4': 45, '5+': 65 },
+          basementBathrooms: { '1': 18, '2': 32, '3+': 46 }
         },
         office: {
           offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
@@ -373,6 +398,11 @@
         const seePriceBtn = form.querySelector('.quote-see-price');
         const pillControls = Array.from(form.querySelectorAll('[data-target-input]'));
         const numberFields = Array.from(form.querySelectorAll('input[type="number"][data-detail-key]'));
+        const basementField = form.querySelector('[name="home-basement"]');
+        const basementExtras = form.querySelector('[data-basement-extra]');
+        const basementExtraNumbers = basementExtras ? Array.from(basementExtras.querySelectorAll('input[type="number"]')) : [];
+        const basementRoomsField = form.querySelector('[name="home-basement-rooms"]');
+        const basementBathsField = form.querySelector('[name="home-basement-bathrooms"]');
 
         function formatCountLabel(count, input){
           if(!input) return `${count}`;
@@ -400,11 +430,27 @@
           return { key: '4+', label };
         }
 
+        function mapBasementRooms(count, input){
+          const label = formatCountLabel(count, input);
+          if(count <= 2) return { key: '1-2', label };
+          if(count <= 4) return { key: '3-4', label };
+          return { key: '5+', label };
+        }
+
+        function mapBasementBathrooms(count, input){
+          const label = formatCountLabel(count, input);
+          if(count <= 1) return { key: '1', label };
+          if(count <= 2) return { key: '2', label };
+          return { key: '3+', label };
+        }
+
         function detailMapperFor(input){
           if(!input) return null;
           const key = input.dataset.detailKey;
           if(key === 'homeRooms') return mapHomeRooms;
           if(key === 'homeBathrooms') return mapHomeBathrooms;
+          if(key === 'homeBasementRooms') return mapBasementRooms;
+          if(key === 'homeBasementBathrooms') return mapBasementBathrooms;
           return null;
         }
 
@@ -445,12 +491,27 @@
           return { value: raw, label, key };
         }
 
+        function dependencySatisfied(field){
+          const dependencyName = field.dataset.dependentOn;
+          if(!dependencyName) return true;
+          const dependencyField = form.querySelector(`[name="${dependencyName}"]`);
+          if(!dependencyField) return false;
+          const expected = (field.dataset.dependentValue || '').split(',').map(val => val.trim()).filter(Boolean);
+          const actual = dependencyField.value || '';
+          if(expected.length){
+            return expected.includes(actual);
+          }
+          return actual !== '';
+        }
+
         function fieldIsRelevant(field){
           const requirement = field.dataset.serviceRequired;
-          if(!requirement) return true;
-          const serviceKey = serviceInput ? serviceInput.value : '';
-          if(!serviceKey) return false;
-          return requirement.split(',').includes(serviceKey);
+          if(requirement){
+            const serviceKey = serviceInput ? serviceInput.value : '';
+            if(!serviceKey) return false;
+            if(!requirement.split(',').includes(serviceKey)) return false;
+          }
+          return dependencySatisfied(field);
         }
 
         function hasAllRequired(){
@@ -492,6 +553,12 @@
             btn.classList.remove('active');
             btn.setAttribute('aria-pressed', 'false');
           });
+          const basementExtras = Array.from(group.querySelectorAll('[data-basement-extra]'));
+          basementExtras.forEach(extra => {
+            extra.hidden = true;
+            extra.classList.remove('visible');
+            extra.setAttribute('aria-hidden', 'true');
+          });
         }
 
         function updateServiceDetails(serviceKey){
@@ -510,6 +577,36 @@
           });
           serviceDetailsWrapper.classList.toggle('visible', activeCount > 0);
           serviceDetailsWrapper.setAttribute('aria-hidden', activeCount > 0 ? 'false' : 'true');
+          syncBasementExtras(serviceKey);
+        }
+
+        function setBasementExtrasVisible(show){
+          if(!basementExtras) return;
+          if(show){
+            basementExtras.hidden = false;
+            basementExtras.classList.add('visible');
+            basementExtras.setAttribute('aria-hidden', 'false');
+            basementExtraNumbers.forEach(updateNumberMeta);
+          } else {
+            basementExtras.hidden = true;
+            basementExtras.classList.remove('visible');
+            basementExtras.setAttribute('aria-hidden', 'true');
+            basementExtraNumbers.forEach(input => {
+              input.value = '';
+              input.dataset.label = '';
+              input.dataset.pricingKey = '';
+              updateNumberMeta(input);
+            });
+          }
+        }
+
+        function syncBasementExtras(serviceKey){
+          if(!basementField){
+            setBasementExtrasVisible(false);
+            return;
+          }
+          const shouldShow = serviceKey === 'home' && basementField.value === 'yes';
+          setBasementExtrasVisible(shouldShow);
         }
 
         function selectionInfo(input){
@@ -554,6 +651,9 @@
             const roomsInfo = numberSelection(roomsField);
             const bathsInfo = numberSelection(bathsField);
             const petsInfo = selectionInfo(petsField);
+            const basementInfo = selectionInfo(basementField);
+            const basementRoomsInfo = basementInfo && basementInfo.value === 'yes' ? numberSelection(basementRoomsField) : null;
+            const basementBathsInfo = basementInfo && basementInfo.value === 'yes' ? numberSelection(basementBathsField) : null;
 
             if(roomsInfo){
               if(roomsInfo.key){ detailAdjustment += detailPricing.home.rooms[roomsInfo.key] || 0; }
@@ -566,6 +666,21 @@
             if(petsInfo){
               detailAdjustment += detailPricing.home.pets[petsInfo.value] || 0;
               selections.homePets = petsInfo;
+            }
+            if(basementInfo){
+              const basementPricing = detailPricing.home.basement || {};
+              if(Object.prototype.hasOwnProperty.call(basementPricing, basementInfo.value)){
+                detailAdjustment += basementPricing[basementInfo.value] || 0;
+              }
+              selections.homeBasement = basementInfo;
+            }
+            if(basementRoomsInfo){
+              if(basementRoomsInfo.key){ detailAdjustment += detailPricing.home.basementRooms[basementRoomsInfo.key] || 0; }
+              selections.homeBasementRooms = { value: basementRoomsInfo.value, label: basementRoomsInfo.label };
+            }
+            if(basementBathsInfo){
+              if(basementBathsInfo.key){ detailAdjustment += detailPricing.home.basementBathrooms[basementBathsInfo.key] || 0; }
+              selections.homeBasementBathrooms = { value: basementBathsInfo.value, label: basementBathsInfo.label };
             }
           }
 
@@ -665,6 +780,13 @@
 
         numberFields.forEach(updateNumberMeta);
 
+        if(basementField){
+          basementField.addEventListener('change', () => {
+            syncBasementExtras(serviceInput ? serviceInput.value : '');
+            updateTotals();
+          });
+        }
+
         if(serviceInput){
           serviceInput.addEventListener('change', () => {
             updateServiceDetails(serviceInput.value);
@@ -727,6 +849,7 @@
         }
 
         updateServiceDetails(serviceInput ? serviceInput.value : '');
+        syncBasementExtras(serviceInput ? serviceInput.value : '');
         updateTotals();
       }
     })();

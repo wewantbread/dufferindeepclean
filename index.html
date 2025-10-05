@@ -317,7 +317,6 @@
         </div>
       </div>
 
-      <a href="tel:+1999999999" class="quote-btn-home">Call Now</a>
       <a href="#services" class="services-btn-home">Our Services</a>
     </div>
 
@@ -771,57 +770,5 @@
     })();
   </script>
 
-  <!-- Rotator logic (slide + bump + swipe) -->
-  <script>
-    (function(){
-      const box = document.getElementById('service-rotator');
-      if(!box) return;
-
-      const slides = Array.from(box.querySelectorAll('.rotator-line'));
-      const dots   = Array.from(box.querySelectorAll('.rotator-dots .dot'));
-      const underline = box.querySelector('.rotator-underline');
-      let idx = 0, timer = null, touchStartX = 0;
-
-      function show(n, bump=true){
-        // remove current
-        slides[idx].classList.remove('active');
-        dots[idx].classList.remove('active');
-
-        // set new
-        idx = (n + slides.length) % slides.length;
-        slides[idx].classList.add('active');
-        dots[idx].classList.add('active');
-
-        // restart underline anim
-        underline.style.animation = 'none';
-        requestAnimationFrame(()=>{ underline.style.animation = ''; });
-
-        // nudge the whole box so it feels like it moved
-        if(bump){ box.classList.remove('bump'); void box.offsetWidth; box.classList.add('bump'); }
-      }
-
-      function next(){ show(idx+1); }
-      function start(){ stop(); timer = setInterval(next, 4200); }
-      function stop(){ if(timer){ clearInterval(timer); timer=null; } }
-
-      // dots
-      dots.forEach((d,i)=> d.addEventListener('click', ()=>{ show(i); start(); }));
-
-      // swipe
-      box.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; }, {passive:true});
-      box.addEventListener('touchend', e=>{
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if(Math.abs(dx) > 40){ show(idx + (dx<0 ? 1 : -1)); start(); }
-      }, {passive:true});
-
-      // hover pause (desktop)
-      box.addEventListener('mouseenter', stop);
-      box.addEventListener('mouseleave', start);
-
-      // init
-      slides.forEach((s,i)=> s.style.zIndex = String(10 - i));
-      show(0,false); start();
-    })();
-  </script>
 </body>
 </html>

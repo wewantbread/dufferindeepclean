@@ -19,6 +19,7 @@
   <!-- Fonts + CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <script src="nav-cart.js" defer></script>
 
   <!-- Page-specific tweaks (safe to keep inline) -->
   <style>
@@ -114,17 +115,46 @@
       <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-cart" href="book.html#cartSummary">
+      <button class="nav-cart" type="button" data-cart-toggle aria-haspopup="dialog" aria-controls="navCartPopover" aria-expanded="false">
         <span class="nav-cart-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
             <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
           </svg>
         </span>
         <span class="nav-cart-label">Cart</span>
-      </a>
+        <span class="nav-cart-count" data-cart-count hidden>0</span>
+      </button>
       <a class="nav-checkout" href="book.html#start">Checkout</a>
     </div>
   </header>
+  <aside class="nav-cart-popover" id="navCartPopover" role="dialog" aria-modal="false" aria-label="Cart summary" hidden>
+    <div class="nav-cart-popover-inner">
+      <button type="button" class="cart-popover-close" data-cart-close aria-label="Close cart">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <header class="cart-popover-header">
+        <img data-cart-popover-image alt="Cart package preview" loading="lazy" />
+        <div>
+          <p class="cart-popover-title" data-popover-service>Your cart is empty</p>
+          <p class="cart-popover-subtitle" data-popover-frequency>Build a package to see pricing here.</p>
+        </div>
+      </header>
+      <p class="cart-popover-status" data-popover-status hidden></p>
+      <p class="cart-popover-empty" data-popover-empty>Use “Book Online” to customise your cleaning package.</p>
+      <dl class="cart-popover-details" data-popover-details hidden></dl>
+      <div class="cart-popover-totals" data-popover-totals hidden>
+        <div><span>Visit total</span><span data-popover-total>—</span></div>
+        <div><span>Deposit (50%)</span><span data-popover-deposit>—</span></div>
+        <div><span>Balance</span><span data-popover-balance>—</span></div>
+      </div>
+      <div class="cart-popover-payments" data-popover-payments hidden>
+        <div id="nav-paypal-buttons" data-paypal-container="nav"></div>
+        <p class="cart-popover-paypal-status" id="nav-paypal-status" role="status" aria-live="polite"></p>
+        <button type="button" class="btn cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
+      </div>
+      <a class="btn cart-popover-checkout" data-popover-checkout href="book.html#start">Go to checkout</a>
+    </div>
+  </aside>
 
   <!-- HERO -->
   <section id="home" class="split-screen">
@@ -181,13 +211,17 @@
                 <label class="detail-inline-field" for="home-rooms">
                   <span class="detail-card-label">Number of bedrooms</span>
                   <div class="number-wrap">
+                    <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease bedrooms" aria-controls="home-rooms"><span aria-hidden="true">−</span></button>
                     <input id="home-rooms" name="home-rooms" type="number" min="1" max="12" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-label-prefix="bedroom" data-label-plural="bedrooms" data-detail-key="homeRooms">
+                    <button type="button" class="stepper-button" data-step="1" aria-label="Increase bedrooms" aria-controls="home-rooms"><span aria-hidden="true">+</span></button>
                   </div>
                 </label>
                 <label class="detail-inline-field" for="home-bathrooms">
                   <span class="detail-card-label">Number of bathrooms</span>
                   <div class="number-wrap">
+                    <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease bathrooms" aria-controls="home-bathrooms"><span aria-hidden="true">−</span></button>
                     <input id="home-bathrooms" name="home-bathrooms" type="number" min="1" max="10" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-label-prefix="bathroom" data-label-plural="bathrooms" data-detail-key="homeBathrooms">
+                    <button type="button" class="stepper-button" data-step="1" aria-label="Increase bathrooms" aria-controls="home-bathrooms"><span aria-hidden="true">+</span></button>
                   </div>
                 </label>
                 <div class="detail-inline-field detail-inline-pets" data-detail-pets>
@@ -210,13 +244,17 @@
                   <label class="detail-inline-field" for="home-basement-rooms">
                     <span class="detail-card-label">Basement rooms</span>
                     <div class="number-wrap">
+                      <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease basement rooms" aria-controls="home-basement-rooms"><span aria-hidden="true">−</span></button>
                       <input id="home-basement-rooms" name="home-basement-rooms" type="number" min="1" max="8" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-dependent-on="home-basement" data-dependent-value="yes" data-label-prefix="basement room" data-label-plural="basement rooms" data-detail-key="homeBasementRooms">
+                      <button type="button" class="stepper-button" data-step="1" aria-label="Increase basement rooms" aria-controls="home-basement-rooms"><span aria-hidden="true">+</span></button>
                     </div>
                   </label>
                   <label class="detail-inline-field" for="home-basement-bathrooms">
                     <span class="detail-card-label">Basement bathrooms</span>
                     <div class="number-wrap">
+                      <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease basement bathrooms" aria-controls="home-basement-bathrooms"><span aria-hidden="true">−</span></button>
                       <input id="home-basement-bathrooms" name="home-basement-bathrooms" type="number" min="1" max="4" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-dependent-on="home-basement" data-dependent-value="yes" data-label-prefix="basement bathroom" data-label-plural="basement bathrooms" data-detail-key="homeBasementBathrooms">
+                      <button type="button" class="stepper-button" data-step="1" aria-label="Increase basement bathrooms" aria-controls="home-basement-bathrooms"><span aria-hidden="true">+</span></button>
                     </div>
                   </label>
                 </div>
@@ -411,6 +449,37 @@
         const seePriceBtn = form.querySelector('.quote-see-price');
         const pillControls = Array.from(form.querySelectorAll('[data-target-input]'));
         const numberFields = Array.from(form.querySelectorAll('input[type="number"][data-detail-key]'));
+
+        function adjustNumericInput(input, delta){
+          if(!input || !Number.isFinite(delta)) return;
+          const step = Number(input.step || 1) || 1;
+          const min = input.min !== '' ? Number(input.min) : null;
+          const max = input.max !== '' ? Number(input.max) : null;
+          const currentValue = input.value === '' ? null : Number(input.value);
+          let next = Number.isFinite(currentValue) ? currentValue + delta * step : (min !== null ? min : step);
+          if(min !== null && Number.isFinite(min)) next = Math.max(next, min);
+          if(max !== null && Number.isFinite(max)) next = Math.min(next, max);
+          if(!Number.isFinite(next)) next = min !== null ? min : step;
+          input.value = String(next);
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        function wireNumberSteppers(){
+          const wrappers = Array.from(form.querySelectorAll('.number-wrap'));
+          wrappers.forEach(wrapper => {
+            const input = wrapper.querySelector('input[type="number"]');
+            if(!input) return;
+            wrapper.querySelectorAll('.stepper-button').forEach(button => {
+              button.addEventListener('click', (event) => {
+                event.preventDefault();
+                const delta = Number(button.dataset.step || 0);
+                if(!delta) return;
+                adjustNumericInput(input, delta);
+              });
+            });
+          });
+        }
         const basementField = form.querySelector('[name="home-basement"]');
         const basementExtras = form.querySelector('[data-basement-extra]');
         const basementExtraNumbers = basementExtras ? Array.from(basementExtras.querySelectorAll('input[type="number"]')) : [];
@@ -792,6 +861,7 @@
         });
 
         numberFields.forEach(updateNumberMeta);
+        wireNumberSteppers();
 
         if(basementField){
           basementField.addEventListener('change', () => {

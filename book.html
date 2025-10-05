@@ -79,9 +79,14 @@
     }
 
     .nav-links a{
-      font-family: 'Bebas Neue', sans-serif;
-      letter-spacing: .5px;
-      color: #cfe0ee; text-decoration:none; margin-left:18px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.95rem;
+      color: #e9f7ff;
+      text-decoration:none;
+      margin-left:18px;
       transition: color .25s ease;
     }
     .nav-links a:hover{ color:#fff; }
@@ -215,6 +220,57 @@
     .plan-title{ font-weight: 800; }
     .plan-discount{ color: #00d084; font-weight: 700; }
     .plan-note{ color: #b6c2cf; font-size: .9rem; }
+
+    .pricing-recap{
+      margin-top: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(0,212,255,0.18);
+      background: rgba(4, 18, 28, 0.55);
+      padding: clamp(14px, 2.4vw, 20px);
+      display: grid;
+      gap: 0.6rem;
+    }
+    .pricing-recap-title{
+      margin: 0;
+      font-size: 0.9rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(214, 238, 255, 0.8);
+    }
+    .pricing-breakdown{
+      display: grid;
+      gap: 0.45rem;
+    }
+    .pricing-line{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .pricing-label{
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(214, 238, 255, 0.65);
+    }
+    .pricing-value{
+      font-weight: 700;
+      color: #f5fbff;
+    }
+    .pricing-line.total{
+      margin-top: 0.4rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .pricing-line.total .pricing-value{
+      font-size: 1.05rem;
+    }
+    .pricing-recap-details{
+      margin: 0;
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: rgba(214, 238, 255, 0.7);
+    }
 
     .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap; }
     .btn{
@@ -475,6 +531,165 @@
               </div>
             </label>
           </div>
+          <div class="pricing-recap" id="pricingRecap">
+            <h3 class="pricing-recap-title">Pricing summary</h3>
+            <div class="pricing-breakdown">
+              <div class="pricing-line">
+                <span class="pricing-label">Base package</span>
+                <span class="pricing-value" data-recap-base>—</span>
+              </div>
+              <div class="pricing-line" data-recap-detail-row hidden>
+                <span class="pricing-label">Service details</span>
+                <span class="pricing-value" data-recap-detail>—</span>
+              </div>
+              <div class="pricing-line" data-recap-extras-row hidden>
+                <span class="pricing-label">Add-ons</span>
+                <span class="pricing-value" data-recap-extras>—</span>
+              </div>
+              <div class="pricing-line" data-recap-discount-row hidden>
+                <span class="pricing-label">Frequency savings</span>
+                <span class="pricing-value" data-recap-discount>—</span>
+              </div>
+              <div class="pricing-line total">
+                <span class="pricing-label">Visit total</span>
+                <span class="pricing-value" data-recap-total>—</span>
+              </div>
+            </div>
+            <p class="pricing-recap-details" data-recap-description hidden></p>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2" hidden>
+          <legend>Add extra services</legend>
+          <p class="muted">Add speciality tasks for this visit. Select a tile to include it and adjust the quantity if needed.</p>
+          <div class="addon-groups" id="addon-groups">
+            <div class="addon-group" data-service-group="home">
+              <p class="addon-group-title">Home &amp; Residential Extras</p>
+              <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
+                <span class="addon-icon">✨</span>
+                <span class="addon-name">Deep Clean Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
+              </div>
+              <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
+                <span class="addon-icon">🚚</span>
+                <span class="addon-name">Move In/Out Clean Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
+              </div>
+              <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
+                <span class="addon-icon">🛠️</span>
+                <span class="addon-name">Renovation Clean Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
+              </div>
+              <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
+                <span class="addon-icon">🎓</span>
+                <span class="addon-name">Move In/Out Package (Student Property)</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
+              </div>
+              <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
+                <span class="addon-icon">🏠</span>
+                <span class="addon-name">AirBnB Listing</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
+              </div>
+              <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
+                <span class="addon-icon">🐾</span>
+                <span class="addon-name">I have Pets</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
+              </div>
+              <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
+                <span class="addon-icon">🧊</span>
+                <span class="addon-name">Inside Fridge</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
+              </div>
+              <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
+                <span class="addon-icon">🔥</span>
+                <span class="addon-name">Inside Oven</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
+              </div>
+              <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
+                <span class="addon-icon">🗄️</span>
+                <span class="addon-name">Inside Cabinets</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
+              </div>
+              <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
+                <span class="addon-icon">🍽️</span>
+                <span class="addon-name">Additional Kitchen</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
+              </div>
+              <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
+                <span class="addon-icon">🪟</span>
+                <span class="addon-name">Blinds (per window)</span>
+                <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
+              </div>
+              <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
+                <span class="addon-icon">🔍</span>
+                <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
+                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
+              </div>
+              <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
+                <span class="addon-icon">🔎</span>
+                <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
+                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
+              </div>
+              <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
+                <span class="addon-icon">🪟</span>
+                <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
+                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
+              </div>
+              <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
+                <span class="addon-icon">🛏️</span>
+                <span class="addon-name">Change Bed Sheets + Load Laundry</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
+              </div>
+              <div class="addon-pill color-crimson" data-addon="Load Dishwasher" data-price="10">
+                <span class="addon-icon">🍽️</span>
+                <span class="addon-name">Load Dishwasher</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
+              </div>
+              <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
+                <span class="addon-icon">🧴</span>
+                <span class="addon-name">Sanitization Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
+              </div>
+            </div>
+
+            <div class="addon-group" data-service-group="commercial,office">
+              <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
+              <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
+                <span class="addon-icon">🧼</span>
+                <span class="addon-name">Carpet Steam Cleaning Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
+              </div>
+              <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
+                <span class="addon-icon">🧽</span>
+                <span class="addon-name">Tile and Grout Cleaning Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout Cleaning quantity">
+              </div>
+              <div class="addon-pill color-mint" data-addon="Restock Bathroom Supply" data-price="40">
+                <span class="addon-icon">🧻</span>
+                <span class="addon-name">Restock Bathroom Supply</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Restock Bathroom Supply quantity">
+              </div>
+              <div class="addon-pill color-gold" data-addon="Disinfect Electronics" data-price="45">
+                <span class="addon-icon">💻</span>
+                <span class="addon-name">Disinfect Electronics</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Disinfect Electronics quantity">
+              </div>
+              <div class="addon-pill color-teal" data-addon="Empty Garbage/Recycling" data-price="18">
+                <span class="addon-icon">🗑️</span>
+                <span class="addon-name">Empty Garbage/Recycling</span>
+                <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Empty Garbage/Recycling quantity">
+              </div>
+              <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
+                <span class="addon-icon">🌿</span>
+                <span class="addon-name">Water Plants</span>
+                <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
+              </div>
+            </div>
+          </div>
+          <p class="addon-empty" id="addon-empty-message" hidden>No add-ons available for this service. Continue to scheduling.</p>
           <div class="actions">
             <button type="button" class="btn next">Next</button>
           </div>
@@ -1090,6 +1305,16 @@
       const depositText = document.getElementById('deposit-due-text');
       const balanceText = document.getElementById('balance-due-text');
 
+      const recapBase = document.querySelector('[data-recap-base]');
+      const recapDetailRow = document.querySelector('[data-recap-detail-row]');
+      const recapDetail = document.querySelector('[data-recap-detail]');
+      const recapExtrasRow = document.querySelector('[data-recap-extras-row]');
+      const recapExtras = document.querySelector('[data-recap-extras]');
+      const recapDiscountRow = document.querySelector('[data-recap-discount-row]');
+      const recapDiscount = document.querySelector('[data-recap-discount]');
+      const recapTotal = document.querySelector('[data-recap-total]');
+      const recapDescription = document.querySelector('[data-recap-description]');
+
       const frequencyInputs = Array.from(form.querySelectorAll('input[name="frequency"]'));
       const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
       const addonPills = Array.from(form.querySelectorAll('.addon-pill'));
@@ -1127,6 +1352,16 @@
       hiddenBasePrice.value = basePrice.toFixed(2);
       hiddenDetailPrice.value = detailPrice.toFixed(2);
       hiddenPackage.value = serviceLabel || serviceKey;
+
+      if(recapDescription){
+        if(detailSelections.length){
+          recapDescription.hidden = false;
+          recapDescription.textContent = detailSelections.join(' • ');
+        } else {
+          recapDescription.hidden = true;
+          recapDescription.textContent = '';
+        }
+      }
 
       if(originField){
         originField.value = serviceKey ? 'instant-quote' : 'book-page';
@@ -1208,6 +1443,38 @@
 
         if(depositText){ depositText.textContent = depositDue > 0 ? `$${Math.round(depositDue)}` : '—'; }
         if(balanceText){ balanceText.textContent = balanceDue > 0 ? `$${Math.round(balanceDue)}` : '—'; }
+
+        if(recapBase){ recapBase.textContent = basePrice > 0 ? `$${Math.round(basePrice)}` : '—'; }
+        if(recapDetailRow && recapDetail){
+          if(detailPrice > 0){
+            recapDetailRow.hidden = false;
+            recapDetail.textContent = `+$${Math.round(detailPrice)}`;
+          } else {
+            recapDetailRow.hidden = true;
+            recapDetail.textContent = '—';
+          }
+        }
+        if(recapExtrasRow && recapExtras){
+          if(extrasTotal > 0){
+            recapExtrasRow.hidden = false;
+            recapExtras.textContent = `+$${Math.round(extrasTotal)}`;
+          } else {
+            recapExtrasRow.hidden = true;
+            recapExtras.textContent = '—';
+          }
+        }
+        if(recapDiscountRow && recapDiscount){
+          if(discount > 0){
+            recapDiscountRow.hidden = false;
+            recapDiscount.textContent = `-$${Math.round(discount)}`;
+          } else {
+            recapDiscountRow.hidden = true;
+            recapDiscount.textContent = '—';
+          }
+        }
+        if(recapTotal){
+          recapTotal.textContent = finalTotal > 0 ? `$${Math.round(finalTotal)}` : '—';
+        }
 
         if(hiddenAddonsPrice) hiddenAddonsPrice.value = extrasTotal.toFixed(2);
         if(hiddenDiscountPrice) hiddenDiscountPrice.value = discount.toFixed(2);

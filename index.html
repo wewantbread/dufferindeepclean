@@ -66,54 +66,6 @@
       object-position: right center !important;
     }
 
-    /* ===== Rotator card (with slide animations) ===== */
-    .rotator-card{
-      margin-top: 1.25rem;
-      padding: 1.4rem 1.6rem;
-      max-width: 560px;
-      border-radius: 20px;
-      border:1px solid rgba(0,212,255,0.25);
-      outline: 1.5px solid rgba(0,212,255,0.35);
-      outline-offset: 10px;
-      background: rgba(0,0,0,0.55);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 22px rgba(0,212,255,0.12);
-      backdrop-filter: blur(8px);
-      overflow: hidden;
-      position: relative;
-    }
-    .rotator-window{ position:relative; height:auto; min-height: 84px; }
-    .rotator-line{
-      position:absolute; left:0; top:0; width:100%;
-      opacity:0; transform: translateX(24px);
-      transition: transform .45s ease, opacity .45s ease;
-      will-change: transform, opacity;
-    }
-    .rotator-line.active{ opacity:1; transform: translateX(0); }
-    .rotator-title{
-      display:block; font-family:'Bebas Neue',sans-serif; text-transform:uppercase;
-      letter-spacing:.08em; font-size:1.05rem; color:rgba(0,212,255,0.85); margin-bottom:.25rem;
-    }
-    .rotator-text{ display:block; font-size:1.2rem; line-height:1.65; color:#d8ecff; }
-
-    .rotator-underline{
-      display:block; height:3px; width:100%; border-radius:999px; margin-top:.75rem;
-      background:linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,.85), rgba(255,255,255,0));
-      transform-origin:left center; animation: underlineGrow .6s ease both;
-    }
-    @keyframes underlineGrow{ from{ transform:scaleX(0); opacity:.4;} to{ transform:scaleX(1); opacity:1;} }
-
-    .rotator-dots{ display:flex; gap:.5rem; margin-top:.45rem; }
-    .rotator-dots .dot{
-      width:10px; height:10px; border-radius:50%; border:1.5px solid #00d4ff;
-      background:transparent; opacity:.7; cursor:pointer;
-      transition: transform .2s ease, opacity .2s ease, background-color .2s ease;
-    }
-    .rotator-dots .dot.active{ background:#00d4ff; opacity:1; transform:scale(1.05); }
-
-    /* Slight nudge of whole card on change for “box is moving” feel */
-    .rotator-card.bump{ animation: cardBump .35s ease; }
-    @keyframes cardBump{ 0%{ transform:translateX(0);} 40%{ transform:translateX(6px);} 100%{ transform:translateX(0);} }
-
     /* ===== ABOUT (restored) ===== */
     .about-section { padding: 6em 2em 7em; }
     .about-inner{
@@ -164,29 +116,6 @@
   <!-- HERO -->
   <section id="home" class="split-screen">
     <div class="text-side">
-      <div class="rotator-card" id="service-rotator">
-        <div class="rotator-window" aria-live="polite">
-          <div class="rotator-line active" data-title="Residential Homes">
-            <span class="rotator-title">Residential Homes</span>
-            <span class="rotator-text">We don’t just tidy houses. We deep clean homes.</span>
-          </div>
-          <div class="rotator-line" data-title="Commercial Buildings">
-            <span class="rotator-title">Commercial Buildings</span>
-            <span class="rotator-text">Commercial spaces collect more than dust. We remove it all.</span>
-          </div>
-          <div class="rotator-line" data-title="Offices / Workspaces">
-            <span class="rotator-title">Offices / Workspaces</span>
-            <span class="rotator-text">Clean offices look professional. Deep clean offices stay professional.</span>
-          </div>
-        </div>
-        <span class="rotator-underline" aria-hidden="true"></span>
-        <div class="rotator-dots" role="tablist" aria-label="Service types">
-          <button class="dot active" aria-label="Residential Homes" role="tab"></button>
-          <button class="dot" aria-label="Commercial Buildings" role="tab"></button>
-          <button class="dot" aria-label="Offices / Workspaces" role="tab"></button>
-        </div>
-      </div>
-
       <div id="quote" class="hero-quote" aria-labelledby="quote-title">
         <div class="quote-card">
           <div class="quote-card-header">
@@ -234,79 +163,68 @@
               </label>
             </div>
 
-            <div class="quote-summary" aria-live="polite">
-              <div class="quote-summary-line">
-                <span>Base Package</span>
-                <strong id="quote-base-price">—</strong>
-              </div>
-              <div class="quote-summary-line" id="quote-detail-row" hidden>
-                <span>Service Details</span>
-                <strong id="quote-detail-price">—</strong>
-              </div>
-              <div class="quote-summary-line total">
-                <span>Estimated Visit Total</span>
-                <strong id="quote-total-price">—</strong>
-              </div>
-            </div>
-
             <div id="service-details" class="service-details" aria-live="polite">
-              <div class="service-detail-group" data-service-detail="home" aria-hidden="true">
-                <p class="service-detail-title">Home Cleaning Details</p>
-                <div class="service-detail-grid">
-                  <label class="field" for="home-rooms">
-                    <span class="field-label">Number of Rooms</span>
-                    <select id="home-rooms" name="home-rooms" data-required data-service-required="home">
-                      <option value="" disabled selected>Select rooms</option>
-                      <option value="1-2">1 – 2 rooms</option>
-                      <option value="3-4">3 – 4 rooms</option>
-                      <option value="5-6">5 – 6 rooms</option>
-                      <option value="7+">7+ rooms</option>
-                    </select>
-                  </label>
-                  <label class="field" for="home-bathrooms">
-                    <span class="field-label">Number of Bathrooms</span>
-                    <select id="home-bathrooms" name="home-bathrooms" data-required data-service-required="home">
-                      <option value="" disabled selected>Select bathrooms</option>
-                      <option value="1">1 bathroom</option>
-                      <option value="2">2 bathrooms</option>
-                      <option value="3">3 bathrooms</option>
-                      <option value="4+">4+ bathrooms</option>
-                    </select>
-                  </label>
-                  <div class="field field-choice">
-                    <span class="field-label">Are there pets?</span>
-                    <div class="choice-buttons" role="group" aria-label="Are there pets?">
-                      <button type="button" class="choice-button" data-value="no" data-target="home-pets">No</button>
-                      <button type="button" class="choice-button" data-value="yes" data-target="home-pets">Yes</button>
-                    </div>
-                    <input type="hidden" id="home-pets" name="home-pets" data-required data-service-required="home">
+              <div class="service-detail-group detail-inline" data-service-detail="home" aria-hidden="true">
+                <label class="detail-inline-field" for="home-rooms">
+                  <span class="detail-card-label">Number of bedrooms</span>
+                  <div class="number-wrap">
+                    <input id="home-rooms" name="home-rooms" type="number" min="1" max="12" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-label-prefix="bedroom" data-label-plural="bedrooms" data-detail-key="homeRooms">
+                  </div>
+                </label>
+                <label class="detail-inline-field" for="home-bathrooms">
+                  <span class="detail-card-label">Number of bathrooms</span>
+                  <div class="number-wrap">
+                    <input id="home-bathrooms" name="home-bathrooms" type="number" min="1" max="10" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-label-prefix="bathroom" data-label-plural="bathrooms" data-detail-key="homeBathrooms">
+                  </div>
+                </label>
+                <div class="detail-inline-field detail-inline-pets" data-detail-pets>
+                  <span class="detail-card-label">Pets on site?</span>
+                  <input type="hidden" name="home-pets" data-required data-service-required="home">
+                  <div class="mini-pill-group tight" role="radiogroup" aria-label="Are there pets?">
+                    <button type="button" class="mini-pill" data-target-input="home-pets" data-value="no" data-label="No pets">No</button>
+                    <button type="button" class="mini-pill" data-target-input="home-pets" data-value="yes" data-label="Yes, pets">Yes</button>
                   </div>
                 </div>
               </div>
 
               <div class="service-detail-group" data-service-detail="office" aria-hidden="true">
                 <p class="service-detail-title">Office Workspace Details</p>
-                <div class="service-detail-grid">
-                  <label class="field" for="office-offices">
-                    <span class="field-label">Number of Offices</span>
-                    <select id="office-offices" name="office-offices" data-required data-service-required="office">
-                      <option value="" disabled selected>Select offices</option>
-                      <option value="1-5">1 – 5 offices</option>
-                      <option value="6-10">6 – 10 offices</option>
-                      <option value="11-20">11 – 20 offices</option>
-                      <option value="21+">21+ offices</option>
-                    </select>
-                  </label>
-                  <label class="field" for="office-bathrooms">
-                    <span class="field-label">Number of Bathrooms</span>
-                    <select id="office-bathrooms" name="office-bathrooms" data-required data-service-required="office">
-                      <option value="" disabled selected>Select bathrooms</option>
-                      <option value="1-2">1 – 2 bathrooms</option>
-                      <option value="3-4">3 – 4 bathrooms</option>
-                      <option value="5+">5+ bathrooms</option>
-                    </select>
-                  </label>
+                <div class="detail-card-grid">
+                  <div class="detail-card">
+                    <span class="detail-card-label">Number of Offices</span>
+                    <input type="hidden" name="office-offices" data-required data-service-required="office">
+                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Number of offices">
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="1-5" data-label="1 – 5 offices">1–5</button>
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="6-10" data-label="6 – 10 offices">6–10</button>
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="11-20" data-label="11 – 20 offices">11–20</button>
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="21+" data-label="21+ offices">21+</button>
+                    </div>
+                  </div>
+                  <div class="detail-card">
+                    <span class="detail-card-label">Number of Bathrooms</span>
+                    <input type="hidden" name="office-bathrooms" data-required data-service-required="office">
+                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Number of bathrooms">
+                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="1-2" data-label="1 – 2 bathrooms">1–2</button>
+                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="3-4" data-label="3 – 4 bathrooms">3–4</button>
+                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="5+" data-label="5+ bathrooms">5+</button>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="quote-summary" aria-live="polite">
+              <div class="quote-summary-line">
+                <span>Base Package</span>
+                <strong data-quote-base>—</strong>
+              </div>
+              <div class="quote-summary-line" data-quote-detail-row hidden>
+                <span>Service Details</span>
+                <strong data-quote-detail>—</strong>
+              </div>
+              <div class="quote-summary-line total">
+                <span>Estimated Visit Total</span>
+                <strong data-quote-total>—</strong>
               </div>
             </div>
 
@@ -398,20 +316,8 @@
   <!-- Quote logic -->
   <script>
     (function(){
-      const form = document.getElementById('instant-quote');
-      if(!form) return;
-
-      const requiredFields = Array.from(form.querySelectorAll('[data-required]'));
-      const basePriceEl = document.getElementById('quote-base-price');
-      const totalPriceEl = document.getElementById('quote-total-price');
-      const serviceSelect = document.getElementById('quote-service');
-      const sqftSelect = document.getElementById('quote-square-footage');
-      const serviceDetailsWrapper = document.getElementById('service-details');
-      const detailGroups = serviceDetailsWrapper ? Array.from(serviceDetailsWrapper.querySelectorAll('[data-service-detail]')) : [];
-      const detailSummaryRow = document.getElementById('quote-detail-row');
-      const detailSummaryEl = document.getElementById('quote-detail-price');
-      const choiceButtons = Array.from(form.querySelectorAll('.choice-button'));
-      const seePriceBtn = document.getElementById('quote-see-price');
+      const quoteForms = Array.from(document.querySelectorAll('form.quote-form'));
+      if(!quoteForms.length) return;
 
       const basePricing = {
         home: {
@@ -442,272 +348,425 @@
 
       const detailPricing = {
         home: {
-          rooms: {
-            '1-2': 0,
-            '3-4': 25,
-            '5-6': 55,
-            '7+': 85
-          },
-          bathrooms: {
-            '1': 0,
-            '2': 18,
-            '3': 36,
-            '4+': 54
-          },
-          pets: {
-            no: 0,
-            yes: 25
-          }
+          rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
+          bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
+          pets: { no: 0, yes: 25 }
         },
         office: {
-          offices: {
-            '1-5': 0,
-            '6-10': 45,
-            '11-20': 90,
-            '21+': 135
-          },
-          bathrooms: {
-            '1-2': 0,
-            '3-4': 40,
-            '5+': 70
-          }
+          offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
+          bathrooms: { '1-2': 0, '3-4': 40, '5+': 70 }
         }
       };
 
-      function fieldIsRelevant(field){
-        const serviceRequirement = field.dataset.serviceRequired;
-        if(!serviceRequirement) return true;
-        const serviceKey = serviceSelect.value;
-        if(!serviceKey) return false;
-        return serviceRequirement.split(',').includes(serviceKey);
-      }
+      quoteForms.forEach(setupQuoteForm);
 
-      function hasAllRequired(){
-        return requiredFields.every(field => {
-          if(!fieldIsRelevant(field)) return true;
-          if(field.type === 'email'){
-            return field.value.trim() !== '' && field.value.includes('@');
-          }
-          if(field.tagName === 'SELECT'){
-            return field.value.trim() !== '';
-          }
-          return field.value.trim() !== '';
-        });
-      }
+      function setupQuoteForm(form){
+        const requiredFields = Array.from(form.querySelectorAll('[data-required]'));
+        const basePriceEl = form.querySelector('[data-quote-base]');
+        const detailRow = form.querySelector('[data-quote-detail-row]');
+        const detailPriceEl = form.querySelector('[data-quote-detail]');
+        const totalPriceEl = form.querySelector('[data-quote-total]');
+        const serviceInput = form.querySelector('[name="service"]');
+        const sqftInput = form.querySelector('[name="square-footage"]');
+        const serviceDetailsWrapper = form.querySelector('.service-details');
+        const detailGroups = serviceDetailsWrapper ? Array.from(serviceDetailsWrapper.querySelectorAll('[data-service-detail]')) : [];
+        const seePriceBtn = form.querySelector('.quote-see-price');
+        const pillControls = Array.from(form.querySelectorAll('[data-target-input]'));
+        const numberFields = Array.from(form.querySelectorAll('input[type="number"][data-detail-key]'));
 
-      function resetServiceGroup(group){
-        const inputs = Array.from(group.querySelectorAll('[data-service-required]'));
-        inputs.forEach(input => {
-          if(input.tagName === 'SELECT'){
-            input.selectedIndex = 0;
+        function formatCountLabel(count, input){
+          if(!input) return `${count}`;
+          const singular = input.dataset.labelPrefix || '';
+          if(!singular) return `${count}`;
+          const plural = input.dataset.labelPlural;
+          const fallbackPlural = plural || (singular.endsWith('s') ? `${singular}es` : `${singular}s`);
+          const word = count === 1 ? singular : (plural || fallbackPlural);
+          return `${count} ${word}`;
+        }
+
+        function mapHomeRooms(count, input){
+          const label = formatCountLabel(count, input);
+          if(count <= 2) return { key: '1-2', label };
+          if(count <= 4) return { key: '3-4', label };
+          if(count <= 6) return { key: '5-6', label };
+          return { key: '7+', label };
+        }
+
+        function mapHomeBathrooms(count, input){
+          const label = formatCountLabel(count, input);
+          if(count <= 1) return { key: '1', label };
+          if(count <= 2) return { key: '2', label };
+          if(count <= 3) return { key: '3', label };
+          return { key: '4+', label };
+        }
+
+        function detailMapperFor(input){
+          if(!input) return null;
+          const key = input.dataset.detailKey;
+          if(key === 'homeRooms') return mapHomeRooms;
+          if(key === 'homeBathrooms') return mapHomeBathrooms;
+          return null;
+        }
+
+        function updateNumberMeta(input){
+          if(!input) return;
+          const raw = input.value ? input.value.trim() : '';
+          if(!raw){
+            input.dataset.label = '';
+            input.dataset.pricingKey = '';
+            return;
+          }
+          const count = Number(raw);
+          if(!Number.isFinite(count) || count <= 0){
+            input.dataset.label = '';
+            input.dataset.pricingKey = '';
+            return;
+          }
+          const mapper = detailMapperFor(input);
+          const mapping = mapper ? mapper(count, input) : null;
+          if(mapping){
+            input.dataset.label = mapping.label;
+            input.dataset.pricingKey = mapping.key || '';
           } else {
+            input.dataset.label = formatCountLabel(count, input);
+            input.dataset.pricingKey = '';
+          }
+        }
+
+        function numberSelection(input){
+          if(!input) return null;
+          updateNumberMeta(input);
+          const raw = input.value ? input.value.trim() : '';
+          if(!raw) return null;
+          const count = Number(raw);
+          if(!Number.isFinite(count) || count <= 0) return null;
+          const label = input.dataset.label || formatCountLabel(count, input);
+          const key = input.dataset.pricingKey || '';
+          return { value: raw, label, key };
+        }
+
+        function fieldIsRelevant(field){
+          const requirement = field.dataset.serviceRequired;
+          if(!requirement) return true;
+          const serviceKey = serviceInput ? serviceInput.value : '';
+          if(!serviceKey) return false;
+          return requirement.split(',').includes(serviceKey);
+        }
+
+        function hasAllRequired(){
+          return requiredFields.every(field => {
+            if(!fieldIsRelevant(field)) return true;
+            const value = field.value ? field.value.trim() : '';
+            if(field.type === 'email'){
+              return value !== '' && value.includes('@');
+            }
+            if(field.type === 'number'){
+              if(value === '') return false;
+              const numeric = Number(value);
+              if(!Number.isFinite(numeric) || numeric <= 0) return false;
+              if(field.min !== '' && !Number.isNaN(Number(field.min)) && numeric < Number(field.min)) return false;
+              return true;
+            }
+            return value !== '';
+          });
+        }
+
+        function resetServiceGroup(group){
+          const hiddenInputs = Array.from(group.querySelectorAll('input[type="hidden"]'));
+          hiddenInputs.forEach(input => {
             input.value = '';
-          }
-        });
-
-        const buttons = Array.from(group.querySelectorAll('.choice-button'));
-        buttons.forEach(btn => {
-          btn.classList.remove('active');
-          btn.setAttribute('aria-pressed', 'false');
-        });
-      }
-
-      function updateServiceDetails(serviceKey){
-        if(!serviceDetailsWrapper) return;
-        let activeCount = 0;
-        detailGroups.forEach(group => {
-          const services = group.dataset.serviceDetail.split(',');
-          const match = serviceKey && services.includes(serviceKey);
-          group.classList.toggle('active', !!match);
-          group.setAttribute('aria-hidden', match ? 'false' : 'true');
-          if(match){
-            activeCount += 1;
-          } else {
-            resetServiceGroup(group);
-          }
-        });
-        serviceDetailsWrapper.classList.toggle('visible', activeCount > 0);
-        serviceDetailsWrapper.setAttribute('aria-hidden', activeCount > 0 ? 'false' : 'true');
-      }
-
-      function calculateTotals(){
-        const serviceKey = serviceSelect.value;
-        const sqftKey = sqftSelect.value;
-        if(!serviceKey || !sqftKey || !basePricing[serviceKey]){
-          return { ready: false, base: 0, detail: 0, total: 0, selections: {} };
+            input.dataset.label = '';
+          });
+          const selects = Array.from(group.querySelectorAll('select'));
+          selects.forEach(select => {
+            select.selectedIndex = 0;
+          });
+          const numbers = Array.from(group.querySelectorAll('input[type="number"]'));
+          numbers.forEach(input => {
+            input.value = '';
+            input.dataset.label = '';
+            input.dataset.pricingKey = '';
+          });
+          const buttons = Array.from(group.querySelectorAll('[data-target-input]'));
+          buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
         }
 
-        const base = basePricing[serviceKey][sqftKey] || 0;
-        let detailAdjustment = 0;
-        const selections = {};
-
-        if(serviceKey === 'home'){
-          const roomsField = document.getElementById('home-rooms');
-          const bathField = document.getElementById('home-bathrooms');
-          const petsField = document.getElementById('home-pets');
-
-          if(roomsField && roomsField.value){
-            detailAdjustment += detailPricing.home.rooms[roomsField.value] || 0;
-            selections.homeRooms = {
-              value: roomsField.value,
-              label: roomsField.selectedOptions[0] ? roomsField.selectedOptions[0].text : roomsField.value
-            };
-          }
-          if(bathField && bathField.value){
-            detailAdjustment += detailPricing.home.bathrooms[bathField.value] || 0;
-            selections.homeBathrooms = {
-              value: bathField.value,
-              label: bathField.selectedOptions[0] ? bathField.selectedOptions[0].text : bathField.value
-            };
-          }
-          if(petsField && petsField.value){
-            detailAdjustment += detailPricing.home.pets[petsField.value] || 0;
-            selections.homePets = {
-              value: petsField.value,
-              label: petsField.value === 'yes' ? 'Yes' : 'No'
-            };
-          }
-        }
-
-        if(serviceKey === 'office'){
-          const officeField = document.getElementById('office-offices');
-          const officeBathField = document.getElementById('office-bathrooms');
-
-          if(officeField && officeField.value){
-            detailAdjustment += detailPricing.office.offices[officeField.value] || 0;
-            selections.officeOffices = {
-              value: officeField.value,
-              label: officeField.selectedOptions[0] ? officeField.selectedOptions[0].text : officeField.value
-            };
-          }
-          if(officeBathField && officeBathField.value){
-            detailAdjustment += detailPricing.office.bathrooms[officeBathField.value] || 0;
-            selections.officeBathrooms = {
-              value: officeBathField.value,
-              label: officeBathField.selectedOptions[0] ? officeBathField.selectedOptions[0].text : officeBathField.value
-            };
-          }
-        }
-
-        return {
-          ready: true,
-          base,
-          detail: detailAdjustment,
-          total: base + detailAdjustment,
-          selections
-        };
-      }
-
-      function updateTotals(){
-        const totals = calculateTotals();
-
-        if(!totals.ready){
-          basePriceEl.textContent = '—';
-          totalPriceEl.textContent = '—';
-          if(detailSummaryRow && detailSummaryEl){
-            detailSummaryRow.hidden = true;
-            detailSummaryEl.textContent = '—';
-          }
-        } else {
-          basePriceEl.textContent = `$${totals.base.toFixed(0)}`;
-          totalPriceEl.textContent = `$${totals.total.toFixed(0)}`;
-          if(detailSummaryRow && detailSummaryEl){
-            if(totals.detail > 0){
-              detailSummaryRow.hidden = false;
-              detailSummaryEl.textContent = `$${totals.detail.toFixed(0)}`;
+        function updateServiceDetails(serviceKey){
+          if(!serviceDetailsWrapper) return;
+          let activeCount = 0;
+          detailGroups.forEach(group => {
+            const services = (group.dataset.serviceDetail || '').split(',');
+            const match = serviceKey && services.includes(serviceKey);
+            group.classList.toggle('active', !!match);
+            group.setAttribute('aria-hidden', match ? 'false' : 'true');
+            if(match){
+              activeCount += 1;
             } else {
-              detailSummaryRow.hidden = true;
-              detailSummaryEl.textContent = '—';
+              resetServiceGroup(group);
+            }
+          });
+          serviceDetailsWrapper.classList.toggle('visible', activeCount > 0);
+          serviceDetailsWrapper.setAttribute('aria-hidden', activeCount > 0 ? 'false' : 'true');
+        }
+
+        function selectionInfo(input){
+          if(!input || !input.value) return null;
+          return {
+            value: input.value,
+            label: resolveLabel(input)
+          };
+        }
+
+        function resolveLabel(input){
+          if(!input) return '';
+          if(input.tagName === 'SELECT'){
+            const option = input.options[input.selectedIndex];
+            if(option){
+              return option.dataset.label || option.textContent.trim();
+            }
+            return '';
+          }
+          if(input.dataset && input.dataset.label){
+            return input.dataset.label;
+          }
+          return input.value || '';
+        }
+
+        function calculateTotals(){
+          const serviceKey = serviceInput ? serviceInput.value : '';
+          const sqftKey = sqftInput ? sqftInput.value : '';
+          if(!serviceKey || !sqftKey || !basePricing[serviceKey]){
+            return { ready: false, base: 0, detail: 0, total: 0, selections: {}, serviceLabel: '', sqftLabel: '' };
+          }
+
+          const base = basePricing[serviceKey][sqftKey] || 0;
+          let detailAdjustment = 0;
+          const selections = {};
+
+          if(serviceKey === 'home'){
+            const roomsField = form.querySelector('[name="home-rooms"]');
+            const bathsField = form.querySelector('[name="home-bathrooms"]');
+            const petsField = form.querySelector('[name="home-pets"]');
+
+            const roomsInfo = numberSelection(roomsField);
+            const bathsInfo = numberSelection(bathsField);
+            const petsInfo = selectionInfo(petsField);
+
+            if(roomsInfo){
+              if(roomsInfo.key){ detailAdjustment += detailPricing.home.rooms[roomsInfo.key] || 0; }
+              selections.homeRooms = { value: roomsInfo.value, label: roomsInfo.label };
+            }
+            if(bathsInfo){
+              if(bathsInfo.key){ detailAdjustment += detailPricing.home.bathrooms[bathsInfo.key] || 0; }
+              selections.homeBathrooms = { value: bathsInfo.value, label: bathsInfo.label };
+            }
+            if(petsInfo){
+              detailAdjustment += detailPricing.home.pets[petsInfo.value] || 0;
+              selections.homePets = petsInfo;
             }
           }
+
+          if(serviceKey === 'office'){
+            const officesField = form.querySelector('[name="office-offices"]');
+            const officeBathsField = form.querySelector('[name="office-bathrooms"]');
+
+            const officesInfo = selectionInfo(officesField);
+            const officeBathsInfo = selectionInfo(officeBathsField);
+
+            if(officesInfo){
+              detailAdjustment += detailPricing.office.offices[officesInfo.value] || 0;
+              selections.officeOffices = officesInfo;
+            }
+            if(officeBathsInfo){
+              detailAdjustment += detailPricing.office.bathrooms[officeBathsInfo.value] || 0;
+              selections.officeBathrooms = officeBathsInfo;
+            }
+          }
+
+          return {
+            ready: true,
+            base,
+            detail: detailAdjustment,
+            total: base + detailAdjustment,
+            selections,
+            serviceLabel: resolveLabel(serviceInput) || serviceKey,
+            sqftLabel: resolveLabel(sqftInput) || sqftKey
+          };
         }
 
-        const ready = hasAllRequired() && totals.ready;
-        form.classList.toggle('quote-ready', ready);
-        if(seePriceBtn){
-          seePriceBtn.disabled = !ready;
+        function formatCurrency(value){
+          if(!value) return '—';
+          return `$${Math.round(value)}`;
         }
 
-        return totals;
-      }
+        function updateTotals(){
+          const totals = calculateTotals();
 
-      choiceButtons.forEach(button => {
-        const targetId = button.dataset.target;
-        const hiddenInput = targetId ? document.getElementById(targetId) : null;
-        if(!hiddenInput) return;
-        button.setAttribute('aria-pressed', 'false');
-        button.addEventListener('click', () => {
-          const group = button.closest('.choice-buttons');
-          if(group){
-            const buttons = Array.from(group.querySelectorAll('.choice-button'));
-            buttons.forEach(btn => {
-              const isActive = btn === button;
-              btn.classList.toggle('active', isActive);
-              btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-            });
-          }
-          hiddenInput.value = button.dataset.value || '';
-          updateTotals();
-        });
-      });
+          if(basePriceEl){ basePriceEl.textContent = totals.ready ? formatCurrency(totals.base) : '—'; }
+          if(totalPriceEl){ totalPriceEl.textContent = totals.ready ? formatCurrency(totals.total) : '—'; }
 
-      requiredFields.forEach(field => {
-        const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
-        field.addEventListener(eventName, updateTotals);
-      });
-
-      serviceSelect.addEventListener('change', () => {
-        updateServiceDetails(serviceSelect.value);
-        updateTotals();
-      });
-
-      sqftSelect.addEventListener('change', () => {
-        updateTotals();
-      });
-
-      if(seePriceBtn){
-        seePriceBtn.addEventListener('click', () => {
-          if(seePriceBtn.disabled) return;
-          const totals = updateTotals();
-          if(!totals.ready) return;
-
-          const url = new URL('book.html', window.location.origin);
-          const params = url.searchParams;
-
-          const serviceOption = serviceSelect.selectedOptions[0];
-          const sqftOption = sqftSelect.selectedOptions[0];
-
-          params.set('service', serviceSelect.value);
-          if(serviceOption){ params.set('serviceLabel', serviceOption.text); }
-
-          params.set('sqft', sqftSelect.value);
-          if(sqftOption){ params.set('sqftLabel', sqftOption.text); }
-
-          params.set('basePrice', totals.base.toFixed(2));
-          params.set('detailPrice', totals.detail.toFixed(2));
-          params.set('total', totals.total.toFixed(2));
-
-          const firstName = document.getElementById('quote-first-name');
-          if(firstName && firstName.value.trim()){
-            params.set('firstName', firstName.value.trim());
+          if(detailRow && detailPriceEl){
+            if(totals.ready && totals.detail > 0){
+              detailRow.hidden = false;
+              detailPriceEl.textContent = `+$${Math.round(totals.detail)}`;
+            } else {
+              detailRow.hidden = true;
+              detailPriceEl.textContent = '—';
+            }
           }
 
-          const email = document.getElementById('quote-email');
-          if(email && email.value.trim()){
-            params.set('email', email.value.trim());
-          }
+          const ready = totals.ready && hasAllRequired();
+          form.classList.toggle('quote-ready', ready);
+          if(seePriceBtn){ seePriceBtn.disabled = !ready; }
 
-          Object.entries(totals.selections || {}).forEach(([key, info]) => {
-            if(info.value){ params.set(key, info.value); }
-            if(info.label){ params.set(`${key}Label`, info.label); }
+          return totals;
+        }
+
+        pillControls.forEach(control => {
+          const targetName = control.dataset.targetInput;
+          if(!targetName) return;
+          const hiddenInput = form.querySelector(`input[name="${targetName}"]`);
+          if(!hiddenInput) return;
+
+          control.setAttribute('aria-pressed', 'false');
+
+          control.addEventListener('click', () => {
+            const group = control.closest('[role="radiogroup"]') || control.parentElement;
+            if(group){
+              Array.from(group.querySelectorAll('[data-target-input="' + targetName + '"]')).forEach(btn => {
+                const active = btn === control;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+            }
+
+            hiddenInput.value = control.dataset.value || '';
+            hiddenInput.dataset.label = control.dataset.label || hiddenInput.value;
+            hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+            updateServiceDetails(serviceInput ? serviceInput.value : '');
+            updateTotals();
           });
-
-          window.location.href = `${url.toString()}#start`;
         });
-      }
 
-      updateServiceDetails(serviceSelect.value);
-      updateTotals();
+        requiredFields.forEach(field => {
+          const isSelect = field.tagName === 'SELECT';
+          const eventName = isSelect ? 'change' : 'input';
+          const handler = () => {
+            if(field.type === 'number'){
+              updateNumberMeta(field);
+            }
+            updateTotals();
+          };
+          field.addEventListener(eventName, handler);
+        });
+
+        numberFields.forEach(updateNumberMeta);
+
+        if(serviceInput){
+          serviceInput.addEventListener('change', () => {
+            updateServiceDetails(serviceInput.value);
+            updateTotals();
+          });
+        }
+
+        if(sqftInput){
+          sqftInput.addEventListener('change', updateTotals);
+        }
+
+        if(seePriceBtn){
+          seePriceBtn.addEventListener('click', () => {
+            if(seePriceBtn.disabled) return;
+            const totals = updateTotals();
+            if(!totals.ready) return;
+
+            const mode = form.dataset.quoteMode || 'redirect';
+            if(mode !== 'redirect') return;
+
+            const redirectTarget = form.dataset.redirect || 'book.html';
+            const url = new URL(redirectTarget, window.location.origin);
+            const params = url.searchParams;
+
+            const serviceValue = serviceInput ? serviceInput.value : '';
+            if(serviceValue){
+              params.set('service', serviceValue);
+              if(totals.serviceLabel){ params.set('serviceLabel', totals.serviceLabel); }
+            }
+
+            const sqftValue = sqftInput ? sqftInput.value : '';
+            if(sqftValue){
+              params.set('sqft', sqftValue);
+              if(totals.sqftLabel){ params.set('sqftLabel', totals.sqftLabel); }
+            }
+
+            params.set('basePrice', totals.base.toFixed(2));
+            params.set('detailPrice', totals.detail.toFixed(2));
+            params.set('total', totals.total.toFixed(2));
+
+            const firstName = form.querySelector('input[name="first-name"]');
+            if(firstName && firstName.value.trim()){
+              params.set('firstName', firstName.value.trim());
+            }
+
+            const email = form.querySelector('input[name="email"]');
+            if(email && email.value.trim()){
+              params.set('email', email.value.trim());
+            }
+
+            Object.entries(totals.selections || {}).forEach(([key, info]) => {
+              if(info.value){ params.set(key, info.value); }
+              if(info.label){ params.set(`${key}Label`, info.label); }
+            });
+
+            const anchor = form.dataset.redirectAnchor;
+            const finalUrl = anchor ? `${url.toString()}#${anchor}` : url.toString();
+            window.location.href = finalUrl;
+          });
+        }
+
+        updateServiceDetails(serviceInput ? serviceInput.value : '');
+        updateTotals();
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const navQuoteLink = document.querySelector('.nav-links .quote-btn');
+      const quoteSection = document.getElementById('quote');
+      if(!navQuoteLink || !quoteSection) return;
+
+      let spotlightTimer = null;
+
+      navQuoteLink.addEventListener('click', (event) => {
+        if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if(typeof event.button === 'number' && event.button !== 0) return;
+        event.preventDefault();
+        quoteSection.classList.remove('quote-spotlight');
+        void quoteSection.offsetWidth;
+        quoteSection.classList.add('quote-spotlight');
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const focusTarget = quoteSection.querySelector('input, button');
+        if(focusTarget){
+          try {
+            focusTarget.focus({ preventScroll: true });
+          } catch(_){
+            focusTarget.focus();
+          }
+        }
+
+        if(spotlightTimer){
+          window.clearTimeout(spotlightTimer);
+        }
+
+        spotlightTimer = window.setTimeout(() => {
+          quoteSection.classList.remove('quote-spotlight');
+          spotlightTimer = null;
+        }, 1600);
+      });
     })();
   </script>
 

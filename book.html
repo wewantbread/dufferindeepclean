@@ -122,9 +122,10 @@
       background: linear-gradient(180deg, rgba(0,208,132,0.12), rgba(0,208,132,0.05));
     }
     .stepper li.active{
-      color: #111;
-      background: linear-gradient(180deg, #ffd166, #ffb703);
-      border-color: rgba(255,183,3,0.65);
+      color: #fff;
+      background: linear-gradient(180deg, #ff90dc, #ff4fc3);
+      border-color: rgba(255, 128, 210, 0.7);
+      box-shadow: 0 12px 28px rgba(255, 110, 205, 0.25);
       transform: translateY(-1px);
     }
 
@@ -138,15 +139,10 @@
       overflow: hidden;
     }
     .booking-layout{
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: clamp(18px, 3vw, 32px);
       padding: clamp(18px, 3vw, 32px);
-    }
-    @media (min-width: 960px){
-      .booking-layout{
-        grid-template-columns: minmax(260px, 320px) 1fr;
-        align-items: flex-start;
-      }
     }
     .booking-form{
       padding: 0;
@@ -242,6 +238,143 @@
     .review dd{ margin: 0 0 10px; }
 
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
+
+    .payment-wall{
+      display: grid;
+      gap: clamp(16px, 3vw, 24px);
+      padding: clamp(18px, 3vw, 26px);
+      border-radius: 18px;
+      border: 1px solid rgba(0,212,255,0.18);
+      background: linear-gradient(160deg, rgba(6, 24, 36, 0.85), rgba(4, 16, 28, 0.65));
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    @media (min-width: 960px){
+      .payment-wall{
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        align-items: start;
+      }
+      .payment-wall .payment-guides,
+      .payment-wall .review{
+        grid-column: 1 / -1;
+      }
+    }
+    .payment-overview{
+      display: grid;
+      gap: clamp(14px, 3vw, 20px);
+      background: rgba(4, 18, 28, 0.6);
+      border: 1px solid rgba(0,212,255,0.16);
+      border-radius: 16px;
+      padding: clamp(14px, 2.5vw, 20px);
+    }
+    @media (min-width: 720px){
+      .payment-overview{
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        align-items: flex-start;
+      }
+    }
+    .payment-policy h3{
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #eaf9ff;
+    }
+    .payment-policy p{
+      margin: 0;
+      color: rgba(214, 238, 255, 0.8);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .payment-breakdown{
+      display: grid;
+      gap: 0.4rem;
+      color: rgba(214, 238, 255, 0.86);
+      font-size: 0.95rem;
+    }
+    .payment-breakdown .label{ color: rgba(214, 238, 255, 0.7); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; margin-right: 0.35rem; }
+    .payment-breakdown strong{ font-size: 1.05rem; color: #f7fffe; }
+    .payment-deposit-note{ margin: 0; font-size: 0.85rem; color: rgba(214, 238, 255, 0.7); }
+
+    .payment-methods{
+      border: 1px solid rgba(0,212,255,0.14);
+      border-radius: 16px;
+      padding: clamp(14px, 2.5vw, 20px);
+      background: rgba(2, 12, 20, 0.55);
+    }
+    .payment-methods .sublegend{
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      color: rgba(214, 238, 255, 0.78);
+    }
+    .payment-option{
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.75rem;
+      align-items: start;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .payment-option:last-of-type{ border-bottom: none; }
+    .payment-option input{ margin-top: 0.35rem; }
+    .payment-option-card{
+      display: grid;
+      gap: 0.35rem;
+      background: linear-gradient(150deg, rgba(0, 44, 66, 0.55), rgba(0, 18, 30, 0.65));
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 0.65rem 0.8rem;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+    .payment-option input:checked + .payment-option-card{
+      border-color: rgba(0,212,255,0.5);
+      box-shadow: 0 18px 32px rgba(0,0,0,0.4);
+    }
+    .payment-option-title{ font-weight: 700; color: #f5fbff; }
+    .payment-option-note{ color: rgba(214, 238, 255, 0.75); font-size: 0.9rem; line-height: 1.5; }
+    .payment-option-note a{ color: #7ce9ff; }
+
+    .payment-guides{
+      border: 1px dashed rgba(0,212,255,0.22);
+      border-radius: 16px;
+      padding: clamp(12px, 2vw, 18px);
+      background: rgba(4, 18, 28, 0.45);
+      display: grid;
+      gap: 0.6rem;
+    }
+    .payment-guides h3{
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #e6f8ff;
+    }
+    .payment-guides p{ margin: 0; color: rgba(214, 238, 255, 0.72); font-size: 0.88rem; }
+    .payment-guides-list{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.45rem;
+    }
+    .payment-guides-list li{
+      font-size: 0.88rem;
+      color: rgba(214, 238, 255, 0.78);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      align-items: baseline;
+    }
+    .payment-guides-list a{ color: #7ce9ff; }
+
+    .payment-wall .review{
+      background: rgba(2, 12, 20, 0.55);
+      border-color: rgba(0,212,255,0.14);
+      padding: clamp(12px, 2.5vw, 18px);
+    }
+    .payment-wall .review dt{ color: rgba(173, 214, 255, 0.78); }
+    .payment-wall .review dd{ color: #f2f5f8; }
   </style>
 </head>
 <body>
@@ -271,49 +404,25 @@
     </div>
 
     <div class="booking-card">
-      <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
-        <div class="booking-summary-card">
-          <h2 class="booking-summary-title">price summary</h2>
-          <div class="quote-summary" id="booking-summary" aria-live="polite">
-            <div class="quote-summary-line">
-              <span>Base Package</span>
-              <strong id="summary-base-price">—</strong>
-            </div>
-            <div class="quote-summary-line" id="summary-detail-row" hidden>
-              <span>Service Details</span>
-              <strong id="summary-detail-price">—</strong>
-            </div>
-            <div class="quote-summary-line" id="summary-extras-row" hidden>
-              <span>Add-ons</span>
-              <strong id="summary-extras-price">—</strong>
-            </div>
-            <div class="quote-summary-line" id="summary-discount-row" hidden>
-              <span>Frequency Savings</span>
-              <strong id="summary-discount-price">—</strong>
-            </div>
-            <div class="quote-summary-line total">
-              <span>Estimated Visit Total</span>
-              <strong id="summary-total-price">—</strong>
-            </div>
-          </div>
-          <p class="summary-note" id="summary-frequency-note"></p>
-          <ul class="summary-details" id="summary-detail-list"></ul>
-        </div>
+      <div class="booking-layout" id="bookingLayout">
+        <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
 
-        <input type="hidden" name="service_key" id="input-service-key">
-        <input type="hidden" name="service_label" id="input-service-label">
-        <input type="hidden" name="square_footage_range" id="input-sqft-label">
-        <input type="hidden" name="detail_summary" id="input-detail-summary">
-        <input type="hidden" name="base_package_price" id="input-base-price">
-        <input type="hidden" name="service_detail_price" id="input-detail-price">
-        <input type="hidden" name="addons_price" id="input-addons-price">
-        <input type="hidden" name="frequency_savings" id="input-discount-price">
-        <input type="hidden" name="final_visit_total" id="input-total-price">
-        <input type="hidden" name="selected_addons" id="input-selected-addons">
-        <input type="hidden" name="origin_quote" value="index">
-        <input type="hidden" name="package" id="input-package">
+          <input type="hidden" name="service_key" id="input-service-key">
+          <input type="hidden" name="service_label" id="input-service-label">
+          <input type="hidden" name="square_footage_range" id="input-sqft-label">
+          <input type="hidden" name="detail_summary" id="input-detail-summary">
+          <input type="hidden" name="base_package_price" id="input-base-price">
+          <input type="hidden" name="service_detail_price" id="input-detail-price">
+          <input type="hidden" name="addons_price" id="input-addons-price">
+          <input type="hidden" name="frequency_savings" id="input-discount-price">
+          <input type="hidden" name="deposit_due" id="input-deposit-price">
+          <input type="hidden" name="balance_due" id="input-balance-price">
+          <input type="hidden" name="final_visit_total" id="input-total-price">
+          <input type="hidden" name="selected_addons" id="input-selected-addons">
+          <input type="hidden" name="origin_quote" id="input-origin" value="">
+          <input type="hidden" name="package" id="input-package">
 
-        <fieldset class="step" data-step="1">
+          <fieldset class="step" data-step="1">
           <legend>Your base package</legend>
           <p class="muted">Review the base price we created from your instant quote and choose how often you'd like us to clean.</p>
           <div class="plans">
@@ -570,8 +679,57 @@
         </fieldset>
 
         <fieldset class="step" data-step="5" hidden>
-          <legend>Review &amp; confirm</legend>
-          <dl class="review" id="reviewList"></dl>
+          <legend>Review, book &amp; pay</legend>
+          <div class="payment-wall">
+            <div class="payment-overview">
+              <div class="payment-policy">
+                <h3>Payment Policy</h3>
+                <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
+              </div>
+              <div class="payment-breakdown">
+                <p><span class="label">Deposit Due Today:</span> <strong id="deposit-due-text">—</strong></p>
+                <p><span class="label">Balance at Service:</span> <strong id="balance-due-text">—</strong></p>
+              </div>
+              <p class="payment-deposit-note">Your deposit total updates automatically as you add services so you always see the 50% due today.</p>
+            </div>
+
+            <fieldset class="payment-methods">
+              <legend class="sublegend">Choose your payment method</legend>
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="paypal" required>
+                <span class="payment-option-card">
+                  <span class="payment-option-title">PayPal</span>
+                  <span class="payment-option-note">Use your PayPal balance or linked card. <a href="https://developer.paypal.com/docs/checkout/standard/" target="_blank" rel="noopener">Integration guide</a>.</span>
+                </span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="google-pay">
+                <span class="payment-option-card">
+                  <span class="payment-option-title">Google Pay</span>
+                  <span class="payment-option-note">Tap-to-pay convenience across devices. <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">Web API docs</a>.</span>
+                </span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="payment_method" value="debit">
+                <span class="payment-option-card">
+                  <span class="payment-option-title">Direct Debit / Card on File</span>
+                  <span class="payment-option-note">Securely store a business debit or credit card for the remaining balance. <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">ACH / debit setup guide</a>.</span>
+                </span>
+              </label>
+            </fieldset>
+
+            <div class="payment-guides">
+              <h3>Connect your payment gateway</h3>
+              <p>Ready to accept deposits online? Use these quick-start guides to plug in the provider of your choice.</p>
+              <ul class="payment-guides-list">
+                <li><strong>PayPal Checkout:</strong> <a href="https://developer.paypal.com/docs/checkout/" target="_blank" rel="noopener">developer.paypal.com/docs/checkout/</a></li>
+                <li><strong>Google Pay on Web:</strong> <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">developers.google.com/pay/api/web</a></li>
+                <li><strong>ACH / Debit via Stripe:</strong> <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">stripe.com/docs/payments/ach-debit</a></li>
+              </ul>
+            </div>
+
+            <dl class="review" id="reviewList"></dl>
+          </div>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="submit" class="btn submit">Submit</button>
@@ -598,6 +756,311 @@
 
   <script>
     (function(){
+      const quoteForms = Array.from(document.querySelectorAll('form.quote-form'));
+      if(!quoteForms.length) return;
+
+      const basePricing = {
+        home: {
+          '1000-1500': 165,
+          '1500-2000': 185,
+          '2000-2500': 215,
+          '2500-3000': 245,
+          '3000-3500': 285,
+          '3500-4000': 325
+        },
+        commercial: {
+          '1000-1500': 240,
+          '1500-2000': 285,
+          '2000-2500': 330,
+          '2500-3000': 380,
+          '3000-3500': 425,
+          '3500-4000': 470
+        },
+        office: {
+          '1000-1500': 210,
+          '1500-2000': 250,
+          '2000-2500': 295,
+          '2500-3000': 335,
+          '3000-3500': 375,
+          '3500-4000': 420
+        }
+      };
+
+      const detailPricing = {
+        home: {
+          rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
+          bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
+          pets: { no: 0, yes: 25 }
+        },
+        office: {
+          offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
+          bathrooms: { '1-2': 0, '3-4': 40, '5+': 70 }
+        }
+      };
+
+      quoteForms.forEach(setupQuoteForm);
+
+      function setupQuoteForm(form){
+        const requiredFields = Array.from(form.querySelectorAll('[data-required]'));
+        const basePriceEl = form.querySelector('[data-quote-base]');
+        const detailRow = form.querySelector('[data-quote-detail-row]');
+        const detailPriceEl = form.querySelector('[data-quote-detail]');
+        const totalPriceEl = form.querySelector('[data-quote-total]');
+        const serviceInput = form.querySelector('input[name="service"]');
+        const sqftInput = form.querySelector('input[name="square-footage"]');
+        const serviceDetailsWrapper = form.querySelector('.service-details');
+        const detailGroups = serviceDetailsWrapper ? Array.from(serviceDetailsWrapper.querySelectorAll('[data-service-detail]')) : [];
+        const seePriceBtn = form.querySelector('.quote-see-price');
+        const pillControls = Array.from(form.querySelectorAll('[data-target-input]'));
+
+        function fieldIsRelevant(field){
+          const requirement = field.dataset.serviceRequired;
+          if(!requirement) return true;
+          const serviceKey = serviceInput ? serviceInput.value : '';
+          if(!serviceKey) return false;
+          return requirement.split(',').includes(serviceKey);
+        }
+
+        function hasAllRequired(){
+          return requiredFields.every(field => {
+            if(!fieldIsRelevant(field)) return true;
+            const value = field.value ? field.value.trim() : '';
+            if(field.type === 'email'){
+              return value !== '' && value.includes('@');
+            }
+            return value !== '';
+          });
+        }
+
+        function resetServiceGroup(group){
+          const hiddenInputs = Array.from(group.querySelectorAll('input[type="hidden"]'));
+          hiddenInputs.forEach(input => {
+            input.value = '';
+            input.dataset.label = '';
+          });
+          const buttons = Array.from(group.querySelectorAll('[data-target-input]'));
+          buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+        }
+
+        function updateServiceDetails(serviceKey){
+          if(!serviceDetailsWrapper) return;
+          let activeCount = 0;
+          detailGroups.forEach(group => {
+            const services = (group.dataset.serviceDetail || '').split(',');
+            const match = serviceKey && services.includes(serviceKey);
+            group.classList.toggle('active', !!match);
+            group.setAttribute('aria-hidden', match ? 'false' : 'true');
+            if(match){
+              activeCount += 1;
+            } else {
+              resetServiceGroup(group);
+            }
+          });
+          serviceDetailsWrapper.classList.toggle('visible', activeCount > 0);
+          serviceDetailsWrapper.setAttribute('aria-hidden', activeCount > 0 ? 'false' : 'true');
+        }
+
+        function selectionInfo(input){
+          if(!input || !input.value) return null;
+          return {
+            value: input.value,
+            label: input.dataset.label || input.value
+          };
+        }
+
+        function calculateTotals(){
+          const serviceKey = serviceInput ? serviceInput.value : '';
+          const sqftKey = sqftInput ? sqftInput.value : '';
+          if(!serviceKey || !sqftKey || !basePricing[serviceKey]){
+            return { ready: false, base: 0, detail: 0, total: 0, selections: {}, serviceLabel: '', sqftLabel: '' };
+          }
+
+          const base = basePricing[serviceKey][sqftKey] || 0;
+          let detailAdjustment = 0;
+          const selections = {};
+
+          if(serviceKey === 'home'){
+            const roomsField = form.querySelector('input[name="home-rooms"]');
+            const bathsField = form.querySelector('input[name="home-bathrooms"]');
+            const petsField = form.querySelector('input[name="home-pets"]');
+
+            const roomsInfo = selectionInfo(roomsField);
+            const bathsInfo = selectionInfo(bathsField);
+            const petsInfo = selectionInfo(petsField);
+
+            if(roomsInfo){
+              detailAdjustment += detailPricing.home.rooms[roomsInfo.value] || 0;
+              selections.homeRooms = roomsInfo;
+            }
+            if(bathsInfo){
+              detailAdjustment += detailPricing.home.bathrooms[bathsInfo.value] || 0;
+              selections.homeBathrooms = bathsInfo;
+            }
+            if(petsInfo){
+              detailAdjustment += detailPricing.home.pets[petsInfo.value] || 0;
+              selections.homePets = petsInfo;
+            }
+          }
+
+          if(serviceKey === 'office'){
+            const officesField = form.querySelector('input[name="office-offices"]');
+            const officeBathsField = form.querySelector('input[name="office-bathrooms"]');
+
+            const officesInfo = selectionInfo(officesField);
+            const officeBathsInfo = selectionInfo(officeBathsField);
+
+            if(officesInfo){
+              detailAdjustment += detailPricing.office.offices[officesInfo.value] || 0;
+              selections.officeOffices = officesInfo;
+            }
+            if(officeBathsInfo){
+              detailAdjustment += detailPricing.office.bathrooms[officeBathsInfo.value] || 0;
+              selections.officeBathrooms = officeBathsInfo;
+            }
+          }
+
+          return {
+            ready: true,
+            base,
+            detail: detailAdjustment,
+            total: base + detailAdjustment,
+            selections,
+            serviceLabel: serviceInput?.dataset.label || serviceKey,
+            sqftLabel: sqftInput?.dataset.label || sqftKey
+          };
+        }
+
+        function formatCurrency(value){
+          if(!value) return '—';
+          return `$${Math.round(value)}`;
+        }
+
+        function updateTotals(){
+          const totals = calculateTotals();
+
+          if(basePriceEl){ basePriceEl.textContent = totals.ready ? formatCurrency(totals.base) : '—'; }
+          if(totalPriceEl){ totalPriceEl.textContent = totals.ready ? formatCurrency(totals.total) : '—'; }
+
+          if(detailRow && detailPriceEl){
+            if(totals.ready && totals.detail > 0){
+              detailRow.hidden = false;
+              detailPriceEl.textContent = `+$${Math.round(totals.detail)}`;
+            } else {
+              detailRow.hidden = true;
+              detailPriceEl.textContent = '—';
+            }
+          }
+
+          const ready = totals.ready && hasAllRequired();
+          form.classList.toggle('quote-ready', ready);
+          if(seePriceBtn){ seePriceBtn.disabled = !ready; }
+
+          return totals;
+        }
+
+        pillControls.forEach(control => {
+          const targetName = control.dataset.targetInput;
+          if(!targetName) return;
+          const hiddenInput = form.querySelector(`input[name="${targetName}"]`);
+          if(!hiddenInput) return;
+
+          control.setAttribute('aria-pressed', 'false');
+
+          control.addEventListener('click', () => {
+            const group = control.closest('[role="radiogroup"]') || control.parentElement;
+            if(group){
+              Array.from(group.querySelectorAll('[data-target-input="' + targetName + '"]')).forEach(btn => {
+                const active = btn === control;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+            }
+
+            hiddenInput.value = control.dataset.value || '';
+            hiddenInput.dataset.label = control.dataset.label || hiddenInput.value;
+            hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+            updateServiceDetails(serviceInput ? serviceInput.value : '');
+            updateTotals();
+          });
+        });
+
+        requiredFields.forEach(field => {
+          const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
+          field.addEventListener(eventName, updateTotals);
+        });
+
+        if(serviceInput){
+          serviceInput.addEventListener('change', () => {
+            updateServiceDetails(serviceInput.value);
+            updateTotals();
+          });
+        }
+
+        if(sqftInput){
+          sqftInput.addEventListener('change', updateTotals);
+        }
+
+        if(seePriceBtn){
+          seePriceBtn.addEventListener('click', () => {
+            if(seePriceBtn.disabled) return;
+            const totals = updateTotals();
+            if(!totals.ready) return;
+
+            const mode = form.dataset.quoteMode || 'redirect';
+            if(mode !== 'redirect') return;
+
+            const redirectTarget = form.dataset.redirect || 'book.html';
+            const url = new URL(redirectTarget, window.location.origin);
+            const params = url.searchParams;
+
+            const serviceValue = serviceInput ? serviceInput.value : '';
+            if(serviceValue){
+              params.set('service', serviceValue);
+              if(totals.serviceLabel){ params.set('serviceLabel', totals.serviceLabel); }
+            }
+
+            const sqftValue = sqftInput ? sqftInput.value : '';
+            if(sqftValue){
+              params.set('sqft', sqftValue);
+              if(totals.sqftLabel){ params.set('sqftLabel', totals.sqftLabel); }
+            }
+
+            params.set('basePrice', totals.base.toFixed(2));
+            params.set('detailPrice', totals.detail.toFixed(2));
+            params.set('total', totals.total.toFixed(2));
+
+            const firstName = form.querySelector('input[name="first-name"]');
+            if(firstName && firstName.value.trim()){
+              params.set('firstName', firstName.value.trim());
+            }
+
+            const email = form.querySelector('input[name="email"]');
+            if(email && email.value.trim()){
+              params.set('email', email.value.trim());
+            }
+
+            Object.entries(totals.selections || {}).forEach(([key, info]) => {
+              if(info.value){ params.set(key, info.value); }
+              if(info.label){ params.set(`${key}Label`, info.label); }
+            });
+
+            const anchor = form.dataset.redirectAnchor;
+            const finalUrl = anchor ? `${url.toString()}#${anchor}` : url.toString();
+            window.location.href = finalUrl;
+          });
+        }
+
+        updateServiceDetails(serviceInput ? serviceInput.value : '');
+        updateTotals();
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
       const form = document.getElementById('bookingForm');
       if(!form) return;
 
@@ -605,17 +1068,8 @@
       const stepper = Array.from(document.getElementById('stepper').children || []);
       const reviewList = document.getElementById('reviewList');
       const successEl = document.getElementById('bookingSuccess');
+      const layoutEl = document.getElementById('bookingLayout');
 
-      const summaryBaseEl = document.getElementById('summary-base-price');
-      const summaryDetailEl = document.getElementById('summary-detail-price');
-      const summaryDetailRow = document.getElementById('summary-detail-row');
-      const summaryExtrasEl = document.getElementById('summary-extras-price');
-      const summaryExtrasRow = document.getElementById('summary-extras-row');
-      const summaryDiscountEl = document.getElementById('summary-discount-price');
-      const summaryDiscountRow = document.getElementById('summary-discount-row');
-      const summaryTotalEl = document.getElementById('summary-total-price');
-      const summaryNoteEl = document.getElementById('summary-frequency-note');
-      const summaryDetailList = document.getElementById('summary-detail-list');
       const addonEmptyMessage = document.getElementById('addon-empty-message');
 
       const hiddenServiceKey = document.getElementById('input-service-key');
@@ -626,13 +1080,21 @@
       const hiddenDetailPrice = document.getElementById('input-detail-price');
       const hiddenAddonsPrice = document.getElementById('input-addons-price');
       const hiddenDiscountPrice = document.getElementById('input-discount-price');
+      const hiddenDepositPrice = document.getElementById('input-deposit-price');
+      const hiddenBalancePrice = document.getElementById('input-balance-price');
       const hiddenTotalPrice = document.getElementById('input-total-price');
       const hiddenSelectedAddons = document.getElementById('input-selected-addons');
       const hiddenPackage = document.getElementById('input-package');
+      const originField = document.getElementById('input-origin');
+
+      const depositText = document.getElementById('deposit-due-text');
+      const balanceText = document.getElementById('balance-due-text');
 
       const frequencyInputs = Array.from(form.querySelectorAll('input[name="frequency"]'));
       const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
       const addonPills = Array.from(form.querySelectorAll('.addon-pill'));
+
+      const DEPOSIT_RATE = 0.5;
 
       const params = new URLSearchParams(window.location.search);
       const serviceKey = params.get('service') || '';
@@ -647,8 +1109,8 @@
       function pushDetail(label, value){
         if(value){ detailSelections.push(label + ': ' + value); }
       }
-      pushDetail('Service', serviceLabel);
-      pushDetail('Square Footage', sqftLabel);
+      pushDetail('Service', serviceLabel || serviceKey);
+      pushDetail('Square Footage', sqftLabel || sqftKey);
       pushDetail('Rooms', params.get('homeRoomsLabel'));
       pushDetail('Bathrooms', params.get('homeBathroomsLabel'));
       pushDetail('Pets', params.get('homePetsLabel'));
@@ -662,6 +1124,10 @@
       hiddenBasePrice.value = basePrice.toFixed(2);
       hiddenDetailPrice.value = detailPrice.toFixed(2);
       hiddenPackage.value = serviceLabel || serviceKey;
+
+      if(originField){
+        originField.value = serviceKey ? 'instant-quote' : 'book-page';
+      }
 
       const sqftInput = form.querySelector('input[name="sqft"]');
       if(sqftInput && sqftKey){
@@ -688,17 +1154,6 @@
         if(!value) return '—';
         return `$${Math.round(value).toString()}`;
       }
-
-      function updateDetailList(){
-        summaryDetailList.innerHTML = '';
-        detailSelections.forEach(item => {
-          const [label, val] = item.split(':');
-          const li = document.createElement('li');
-          li.innerHTML = `<strong>${label.trim()}:</strong> ${val ? val.trim() : ''}`;
-          summaryDetailList.appendChild(li);
-        });
-      }
-      updateDetailList();
 
       function updateAddonVisibility(){
         let visibleGroups = 0;
@@ -745,57 +1200,18 @@
         const subtotal = totalBase + extrasTotal;
         const discount = subtotal * discountRate;
         const finalTotal = subtotal - discount;
+        const depositDue = finalTotal > 0 ? finalTotal * DEPOSIT_RATE : 0;
+        const balanceDue = finalTotal > 0 ? Math.max(finalTotal - depositDue, 0) : 0;
 
-        summaryBaseEl.textContent = formatCurrency(basePrice);
+        if(depositText){ depositText.textContent = depositDue > 0 ? `$${Math.round(depositDue)}` : '—'; }
+        if(balanceText){ balanceText.textContent = balanceDue > 0 ? `$${Math.round(balanceDue)}` : '—'; }
 
-        if(detailPrice > 0){
-          summaryDetailRow.hidden = false;
-          summaryDetailEl.textContent = `+$${Math.round(detailPrice)}`;
-        } else {
-          summaryDetailRow.hidden = true;
-          summaryDetailEl.textContent = '—';
-        }
-
-        if(extrasTotal > 0){
-          summaryExtrasRow.hidden = false;
-          summaryExtrasEl.textContent = `+$${Math.round(extrasTotal)}`;
-        } else {
-          summaryExtrasRow.hidden = true;
-          summaryExtrasEl.textContent = '—';
-        }
-
-        if(discount > 0){
-          summaryDiscountRow.hidden = false;
-          summaryDiscountEl.textContent = `−$${Math.round(discount)}`;
-        } else {
-          summaryDiscountRow.hidden = true;
-          summaryDiscountEl.textContent = '—';
-        }
-
-        summaryTotalEl.textContent = finalTotal ? formatCurrency(finalTotal) : '—';
-
-        if(summaryNoteEl){
-          if(totalBase <= 0){
-            summaryNoteEl.textContent = 'Start with an instant quote to unlock pricing.';
-          } else if(freqInput){
-            const freqLabelMap = {
-              weekly: 'Weekly (25% off)',
-              biweekly: 'Bi-Weekly (20% off)',
-              triweekly: 'Tri-Weekly (15% off)',
-              monthly: 'Monthly (10% off)',
-              biannual: 'Biannual (5% off)',
-              onetime: 'One-time'
-            };
-            summaryNoteEl.textContent = `Includes ${freqLabelMap[freqInput.value] || 'your chosen frequency'} pricing.`;
-          } else {
-            summaryNoteEl.textContent = 'Choose a frequency to see recurring savings.';
-          }
-        }
-
-        hiddenAddonsPrice.value = extrasTotal.toFixed(2);
-        hiddenDiscountPrice.value = discount.toFixed(2);
-        hiddenTotalPrice.value = finalTotal.toFixed(2);
-        hiddenSelectedAddons.value = buildExtrasLabel();
+        if(hiddenAddonsPrice) hiddenAddonsPrice.value = extrasTotal.toFixed(2);
+        if(hiddenDiscountPrice) hiddenDiscountPrice.value = discount.toFixed(2);
+        if(hiddenDepositPrice) hiddenDepositPrice.value = depositDue.toFixed(2);
+        if(hiddenBalancePrice) hiddenBalancePrice.value = balanceDue.toFixed(2);
+        if(hiddenTotalPrice) hiddenTotalPrice.value = finalTotal.toFixed(2);
+        if(hiddenSelectedAddons) hiddenSelectedAddons.value = buildExtrasLabel();
       }
 
       addonPills.forEach(pill => {
@@ -890,6 +1306,11 @@
           biannual: 'Biannual (5% off)',
           onetime: 'One-time'
         };
+        const paymentMap = {
+          'paypal': 'PayPal',
+          'google-pay': 'Google Pay',
+          'debit': 'Direct Debit / Card on File'
+        };
 
         const rows = [
           ['Service', hiddenServiceLabel.value || '—'],
@@ -901,7 +1322,10 @@
           ['Service Details', hiddenDetailPrice.value ? `$${Math.round(Number(hiddenDetailPrice.value))}` : '—'],
           ['Add-on Total', hiddenAddonsPrice.value ? `$${Math.round(Number(hiddenAddonsPrice.value))}` : '—'],
           ['Frequency Savings', hiddenDiscountPrice.value && Number(hiddenDiscountPrice.value) ? `-$${Math.round(Number(hiddenDiscountPrice.value))}` : '—'],
+          ['Deposit Due Today', hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'],
+          ['Balance at Service', hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'],
           ['Estimated Visit Total', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
+          ['Payment Method', paymentMap[fd.get('payment_method')] || '—'],
           ['Business', fd.get('business') || '—'],
           ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
           ['Preferred Date', fd.get('date') || '—'],
@@ -936,6 +1360,11 @@
           biannual: 'Biannual (5%)',
           onetime: 'One-time'
         };
+        const paymentMapShort = {
+          'paypal': 'PayPal',
+          'google-pay': 'Google Pay',
+          'debit': 'Direct Debit / Card on File'
+        };
 
         const pricingSummary = [
           `Service: ${hiddenServiceLabel.value || serviceKey || '—'}`,
@@ -947,7 +1376,10 @@
           `Add-ons: ${hiddenSelectedAddons.value || 'None'}`,
           `Add-on Total: ${hiddenAddonsPrice.value ? `$${Math.round(Number(hiddenAddonsPrice.value))}` : '—'}`,
           `Frequency Savings: ${hiddenDiscountPrice.value && Number(hiddenDiscountPrice.value) ? `-$${Math.round(Number(hiddenDiscountPrice.value))}` : '—'}`,
-          `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`
+          `Deposit Due Today: ${hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'}`,
+          `Balance at Service: ${hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'}`,
+          `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
+          `Payment Method: ${paymentMapShort[fd.get('payment_method')] || fd.get('payment_method') || '—'}`
         ].join('\n');
 
         fd.append('pricing_summary', pricingSummary);
@@ -961,6 +1393,7 @@
 
           if(res.ok){
             form.hidden = true;
+            if(layoutEl) layoutEl.hidden = true;
             if(successEl) successEl.hidden = false;
           } else {
             let message = 'There was a problem sending your booking request. Please try again.';

@@ -23,7 +23,7 @@
   <!-- Page-specific tweaks (safe to keep inline) -->
   <style>
     /* keep sections above animated bg from style.css */
-    .navbar, .announcement, .split-screen, .services-page, .about-section, main, section, footer { position:relative; z-index:2; }
+    .navbar, .split-screen, .services-page, .about-section, main, section, footer { position:relative; z-index:2; }
 
     /* Transparent header over infinite bg */
     .navbar{
@@ -73,6 +73,8 @@
       max-width: 560px;
       border-radius: 20px;
       border:1px solid rgba(0,212,255,0.25);
+      outline: 1.5px solid rgba(0,212,255,0.35);
+      outline-offset: 10px;
       background: rgba(0,0,0,0.55);
       box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 22px rgba(0,212,255,0.12);
       backdrop-filter: blur(8px);
@@ -158,14 +160,6 @@
       <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
   </header>
-
-  <!-- Announcement -->
-  <div class="announcement" role="region" aria-label="Promotion">
-    <div class="announcement-inner">
-      <p class="announce-line">999-999-999</p>
-      <a class="announcement-cta" href="tel:+1999999999">Call Today</a>
-    </div>
-  </div>
 
   <!-- HERO -->
   <section id="home" class="split-screen">

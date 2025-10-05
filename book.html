@@ -160,6 +160,34 @@
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: #b6c2cf; }
 
+    .booking-summary-card{
+      margin-bottom: clamp(18px, 3vw, 28px);
+      display: grid;
+      gap: 0.75rem;
+    }
+    .booking-summary-title{
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      letter-spacing: 0.16em;
+      text-transform: lowercase;
+      margin: 0;
+    }
+    .summary-note{
+      margin: 0;
+      font-size: 0.95rem;
+      color: rgba(207, 224, 238, 0.85);
+    }
+    .summary-details{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.95rem;
+      color: rgba(214, 238, 255, 0.85);
+    }
+    .summary-details strong{ color: #f7fdff; font-weight: 700; }
+
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
     @media (min-width: 720px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
@@ -686,6 +714,44 @@
                 <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
               </div>
             </div>
+          </div>
+          <p class="addon-empty" id="addon-empty-message" hidden>No add-ons available for this service. Continue to scheduling.</p>
+          <div class="actions">
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="3" hidden>
+          <legend>When &amp; where</legend>
+          <div class="grid-2">
+            <label>
+              Business name (optional)
+              <input type="text" name="business" placeholder="ACME Distribution" />
+            </label>
+            <label>
+              Address
+              <input id="address" type="text" name="address" placeholder="123 Main St" required autocomplete="address-line1" />
+            </label>
+            <label>
+              City
+              <input id="city" type="text" name="city" placeholder="Mono" required autocomplete="address-level2" />
+            </label>
+            <label>
+              Postal Code
+              <input id="postal" type="text" name="postal" placeholder="L9W 1A1" required autocomplete="postal-code" />
+            </label>
+            <label>
+              Preferred date
+              <input type="date" name="date" required />
+            </label>
+            <label>
+              Preferred time
+              <input type="time" name="time" required />
+            </label>
+            <label class="wide">
+              Approx. square footage
+              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" />
+            </label>
           </div>
           <p class="addon-empty" id="addon-empty-message" hidden>No add-ons available for this service. Continue to scheduling.</p>
           <div class="actions">

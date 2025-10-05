@@ -155,7 +155,7 @@
       <a href="#home">Home</a>
       <a href="#services">Services</a>
       <a href="#about">About Us</a>
-      <a href="book.html" class="quote-btn">Book Online</a>
+      <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
   </header>
 
@@ -170,11 +170,6 @@
   <!-- HERO -->
   <section id="home" class="split-screen">
     <div class="text-side">
-      <h1 class="headline">
-        <span>We</span> <span>Scrub</span> <span>You</span> <span>Shine</span>
-        <img src="cleanerguy.png" alt="Cleaner" class="headline-image" />
-      </h1>
-
       <div class="rotator-card" id="service-rotator">
         <div class="rotator-window" aria-live="polite">
           <div class="rotator-line active" data-title="Residential Homes">
@@ -205,7 +200,7 @@
             <p>Answer a few quick questions to unlock a tailored estimate for your space.</p>
           </div>
 
-          <form id="instant-quote" class="quote-form" novalidate>
+          <form id="instant-quote" class="quote-form" data-quote-mode="redirect" data-redirect="book.html" data-redirect-anchor="start" novalidate>
             <div class="quote-grid">
               <label class="field" for="quote-first-name">
                 <span class="field-label">First Name</span>
@@ -217,168 +212,116 @@
                 <input id="quote-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" data-required>
               </label>
 
-              <label class="field" for="quote-service">
-                <span class="field-label">Type of Cleaning Service</span>
-                <select id="quote-service" name="service" data-required>
-                  <option value="" disabled selected>Select a service</option>
-                  <option value="home">Home General Cleaning</option>
-                  <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
-                  <option value="office">Office Workspace Cleaning</option>
-                </select>
+              <label class="field field-inline" for="quote-service">
+                <span class="field-label">Type of Service</span>
+                <div class="select-wrap">
+                  <select id="quote-service" name="service" data-required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="home">Home General Cleaning</option>
+                    <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
+                    <option value="office">Office Workspace Cleaning</option>
+                  </select>
+                </div>
               </label>
 
-              <label class="field" for="quote-square-footage">
+              <label class="field field-inline" for="quote-sqft">
                 <span class="field-label">Square Footage</span>
-                <select id="quote-square-footage" name="square-footage" data-required>
-                  <option value="" disabled selected>Select the range</option>
-                  <option value="1000-1500">1,000 – 1,500 sq ft</option>
-                  <option value="1500-2000">1,500 – 2,000 sq ft</option>
-                  <option value="2000-2500">2,000 – 2,500 sq ft</option>
-                  <option value="2500-3000">2,500 – 3,000 sq ft</option>
-                  <option value="3000-3500">3,000 – 3,500 sq ft</option>
-                  <option value="3500-4000">3,500 – 4,000 sq ft</option>
-                </select>
+                <div class="select-wrap">
+                  <select id="quote-sqft" name="square-footage" data-required>
+                    <option value="" disabled selected>Select an approximate size</option>
+                    <option value="1000-1500">1,000 – 1,500 sq ft</option>
+                    <option value="1500-2000">1,500 – 2,000 sq ft</option>
+                    <option value="2000-2500">2,000 – 2,500 sq ft</option>
+                    <option value="2500-3000">2,500 – 3,000 sq ft</option>
+                    <option value="3000-3500">3,000 – 3,500 sq ft</option>
+                    <option value="3500-4000">3,500 – 4,000 sq ft</option>
+                  </select>
+                </div>
               </label>
             </div>
 
             <div class="quote-summary" aria-live="polite">
               <div class="quote-summary-line">
-                <span>Base Estimate</span>
-                <strong id="quote-base-price">—</strong>
+                <span>Base Package</span>
+                <strong data-quote-base>—</strong>
+              </div>
+              <div class="quote-summary-line" data-quote-detail-row hidden>
+                <span>Service Details</span>
+                <strong data-quote-detail>—</strong>
               </div>
               <div class="quote-summary-line total">
-                <span>Total with Customizations</span>
-                <strong id="quote-total-price">—</strong>
+                <span>Estimated Visit Total</span>
+                <strong data-quote-total>—</strong>
               </div>
             </div>
 
-            <div id="quote-customize" class="quote-customize" aria-hidden="true">
-              <div class="customize-heading" role="status">Customize your cleaning</div>
-
-              <div class="addon-groups">
-                <div class="addon-group" data-service-group="home">
-                  <p class="addon-group-title">Home &amp; Residential Extras</p>
-                  <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
-                    <span class="addon-icon">✨</span>
-                    <span class="addon-name">Deep Clean Package</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
-                  </div>
-                  <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
-                    <span class="addon-icon">🚚</span>
-                    <span class="addon-name">Move In/Out Clean Package</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
-                  </div>
-                  <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
-                    <span class="addon-icon">🛠️</span>
-                    <span class="addon-name">Renovation Clean Package</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
-                  </div>
-                  <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
-                    <span class="addon-icon">🎓</span>
-                    <span class="addon-name">Move In/Out Package (Student Property)</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
-                  </div>
-                  <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
-                    <span class="addon-icon">🏠</span>
-                    <span class="addon-name">AirBnB Listing</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
-                  </div>
-                  <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
-                    <span class="addon-icon">🐾</span>
-                    <span class="addon-name">I have Pets</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
-                  </div>
-                  <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
-                    <span class="addon-icon">🧊</span>
-                    <span class="addon-name">Inside Fridge</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
-                  </div>
-                  <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
-                    <span class="addon-icon">🔥</span>
-                    <span class="addon-name">Inside Oven</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
-                  </div>
-                  <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
-                    <span class="addon-icon">🗄️</span>
-                    <span class="addon-name">Inside Cabinets</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
-                  </div>
-                  <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
-                    <span class="addon-icon">🍽️</span>
-                    <span class="addon-name">Additional Kitchen</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
-                  </div>
-                  <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
-                    <span class="addon-icon">🪟</span>
-                    <span class="addon-name">Blinds (per window)</span>
-                    <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
-                  </div>
-                  <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
-                    <span class="addon-icon">🔍</span>
-                    <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
-                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
-                  </div>
-                  <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
-                    <span class="addon-icon">🔎</span>
-                    <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
-                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
-                  </div>
-                  <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
-                    <span class="addon-icon">🪟</span>
-                    <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
-                    <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
-                  </div>
-                  <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
-                    <span class="addon-icon">🛏️</span>
-                    <span class="addon-name">Change Bed Sheets + Load Laundry</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
-                  </div>
-                  <div class="addon-pill color-crimson" data-addon="Load dishwasher" data-price="10">
-                    <span class="addon-icon">🍽️</span>
-                    <span class="addon-name">Load Dishwasher</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
-                  </div>
-                  <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
-                    <span class="addon-icon">🧴</span>
-                    <span class="addon-name">Sanitization Package</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
-                  </div>
-                </div>
-
-                <div class="addon-group" data-service-group="commercial,office">
-                  <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
-                  <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
-                    <span class="addon-icon">🧼</span>
-                    <span class="addon-name">Carpet Steam Cleaning Package</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
-                  </div>
-                  <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
-                    <span class="addon-icon">🧽</span>
-                    <span class="addon-name">Tile and Grout Cleaning Package</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout Cleaning quantity">
-                  </div>
-                  <div class="addon-pill color-mint" data-addon="Restock Bathroom Supply" data-price="40">
-                    <span class="addon-icon">🧻</span>
-                    <span class="addon-name">Restock Bathroom Supply</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Restock Bathroom Supply quantity">
-                  </div>
-                  <div class="addon-pill color-gold" data-addon="Disinfect Electronics" data-price="45">
-                    <span class="addon-icon">💻</span>
-                    <span class="addon-name">Disinfect Electronics</span>
-                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Disinfect Electronics quantity">
-                  </div>
-                  <div class="addon-pill color-teal" data-addon="Empty Garbage/Recycling" data-price="18">
-                    <span class="addon-icon">🗑️</span>
-                    <span class="addon-name">Empty Garbage/Recycling</span>
-                    <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Empty Garbage/Recycling quantity">
-                  </div>
-                  <div class="addon-pill color-lime" data-addon="Water Plants" data-price="15">
-                    <span class="addon-icon">🌿</span>
-                    <span class="addon-name">Water Plants</span>
-                    <input class="addon-qty" type="number" min="1" max="20" value="1" aria-label="Water Plants quantity">
+            <div id="service-details" class="service-details" aria-live="polite">
+              <div class="service-detail-group" data-service-detail="home" aria-hidden="true">
+                <p class="service-detail-title">Home Cleaning Details</p>
+                <div class="detail-card-grid">
+                  <label class="detail-card" for="home-rooms">
+                    <span class="detail-card-label">Bedrooms</span>
+                    <div class="select-wrap compact">
+                      <select id="home-rooms" name="home-rooms" data-required data-service-required="home">
+                        <option value="" disabled selected>Select rooms</option>
+                        <option value="1-2">1 – 2 rooms</option>
+                        <option value="3-4">3 – 4 rooms</option>
+                        <option value="5-6">5 – 6 rooms</option>
+                        <option value="7+">7+ rooms</option>
+                      </select>
+                    </div>
+                  </label>
+                  <label class="detail-card" for="home-bathrooms">
+                    <span class="detail-card-label">Bathrooms</span>
+                    <div class="select-wrap compact">
+                      <select id="home-bathrooms" name="home-bathrooms" data-required data-service-required="home">
+                        <option value="" disabled selected>Select bathrooms</option>
+                        <option value="1">1 bathroom</option>
+                        <option value="2">2 bathrooms</option>
+                        <option value="3">3 bathrooms</option>
+                        <option value="4+">4+ bathrooms</option>
+                      </select>
+                    </div>
+                  </label>
+                  <div class="detail-card" data-detail-pets>
+                    <span class="detail-card-label">Pets on site?</span>
+                    <input type="hidden" name="home-pets" data-required data-service-required="home">
+                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Are there pets?">
+                      <button type="button" class="mini-pill" data-target-input="home-pets" data-value="no" data-label="No pets">No</button>
+                      <button type="button" class="mini-pill" data-target-input="home-pets" data-value="yes" data-label="Yes, pets">Yes</button>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              <div class="service-detail-group" data-service-detail="office" aria-hidden="true">
+                <p class="service-detail-title">Office Workspace Details</p>
+                <div class="detail-card-grid">
+                  <div class="detail-card">
+                    <span class="detail-card-label">Number of Offices</span>
+                    <input type="hidden" name="office-offices" data-required data-service-required="office">
+                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Number of offices">
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="1-5" data-label="1 – 5 offices">1–5</button>
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="6-10" data-label="6 – 10 offices">6–10</button>
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="11-20" data-label="11 – 20 offices">11–20</button>
+                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="21+" data-label="21+ offices">21+</button>
+                    </div>
+                  </div>
+                  <div class="detail-card">
+                    <span class="detail-card-label">Number of Bathrooms</span>
+                    <input type="hidden" name="office-bathrooms" data-required data-service-required="office">
+                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Number of bathrooms">
+                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="1-2" data-label="1 – 2 bathrooms">1–2</button>
+                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="3-4" data-label="3 – 4 bathrooms">3–4</button>
+                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="5+" data-label="5+ bathrooms">5+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="quote-actions">
+              <button type="button" id="quote-see-price" class="quote-see-price" disabled>See My Price</button>
             </div>
           </form>
         </div>
@@ -466,17 +409,8 @@
   <!-- Quote logic -->
   <script>
     (function(){
-      const form = document.getElementById('instant-quote');
-      if(!form) return;
-
-      const requiredFields = Array.from(form.querySelectorAll('[data-required]'));
-      const basePriceEl = document.getElementById('quote-base-price');
-      const totalPriceEl = document.getElementById('quote-total-price');
-      const customizeBlock = document.getElementById('quote-customize');
-      const serviceSelect = document.getElementById('quote-service');
-      const sqftSelect = document.getElementById('quote-square-footage');
-      const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
-      const addonPills = Array.from(form.querySelectorAll('.addon-pill'));
+      const quoteForms = Array.from(document.querySelectorAll('form.quote-form'));
+      if(!quoteForms.length) return;
 
       const basePricing = {
         home: {
@@ -505,146 +439,333 @@
         }
       };
 
-      function hasAllRequired(){
-        return requiredFields.every(field => {
-          if(field.type === 'email'){
-            return field.value.trim() !== '' && field.value.includes('@');
-          }
-          return field.value.trim() !== '';
-        });
-      }
+      const detailPricing = {
+        home: {
+          rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
+          bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
+          pets: { no: 0, yes: 25 }
+        },
+        office: {
+          offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
+          bathrooms: { '1-2': 0, '3-4': 40, '5+': 70 }
+        }
+      };
 
-      function resetAddons(){
-        addonPills.forEach(pill => {
-          pill.classList.remove('active');
-          const qty = pill.querySelector('.addon-qty');
-          if(qty){
-            qty.value = 1;
-            qty.disabled = true;
-          }
-          pill.setAttribute('aria-pressed', 'false');
-        });
-      }
+      quoteForms.forEach(setupQuoteForm);
 
-      function updateAddonAvailability(serviceKey){
-        addonGroups.forEach(group => {
-          const services = group.dataset.serviceGroup.split(',');
-          const match = services.includes(serviceKey);
-          group.classList.toggle('active', match);
-        });
+      function setupQuoteForm(form){
+        const requiredFields = Array.from(form.querySelectorAll('[data-required]'));
+        const basePriceEl = form.querySelector('[data-quote-base]');
+        const detailRow = form.querySelector('[data-quote-detail-row]');
+        const detailPriceEl = form.querySelector('[data-quote-detail]');
+        const totalPriceEl = form.querySelector('[data-quote-total]');
+        const serviceInput = form.querySelector('[name="service"]');
+        const sqftInput = form.querySelector('[name="square-footage"]');
+        const serviceDetailsWrapper = form.querySelector('.service-details');
+        const detailGroups = serviceDetailsWrapper ? Array.from(serviceDetailsWrapper.querySelectorAll('[data-service-detail]')) : [];
+        const seePriceBtn = form.querySelector('.quote-see-price');
+        const pillControls = Array.from(form.querySelectorAll('[data-target-input]'));
 
-        addonPills.forEach(pill => {
-          const parent = pill.closest('.addon-group');
-          const enabled = parent && parent.classList.contains('active');
-          pill.style.display = enabled ? '' : 'none';
-          if(!enabled){
-            pill.classList.remove('active');
-            const qty = pill.querySelector('.addon-qty');
-            if(qty){
-              qty.value = 1;
-              qty.disabled = true;
-            }
-            pill.setAttribute('aria-pressed', 'false');
-          }
-        });
-      }
-
-      function calculateTotal(){
-        const serviceKey = serviceSelect.value;
-        const sqftKey = sqftSelect.value;
-        if(!serviceKey || !sqftKey || !basePricing[serviceKey]){
-          basePriceEl.textContent = '—';
-          totalPriceEl.textContent = '—';
-          return;
+        function fieldIsRelevant(field){
+          const requirement = field.dataset.serviceRequired;
+          if(!requirement) return true;
+          const serviceKey = serviceInput ? serviceInput.value : '';
+          if(!serviceKey) return false;
+          return requirement.split(',').includes(serviceKey);
         }
 
-        const base = basePricing[serviceKey][sqftKey] || 0;
-        let total = base;
-
-        addonPills.forEach(pill => {
-          if(!pill.classList.contains('active')) return;
-          const parent = pill.closest('.addon-group');
-          if(!parent || !parent.classList.contains('active')) return;
-
-          const price = Number(pill.dataset.price || 0);
-          const qtyInput = pill.querySelector('.addon-qty');
-          const qty = qtyInput ? Math.max(1, Number(qtyInput.value) || 1) : 1;
-          total += price * qty;
-        });
-
-        basePriceEl.textContent = base ? `$${base.toFixed(0)}` : '—';
-        totalPriceEl.textContent = total ? `$${total.toFixed(0)}` : '—';
-      }
-
-      function toggleCustomize(){
-        const ready = hasAllRequired();
-        customizeBlock.classList.toggle('visible', ready);
-        customizeBlock.setAttribute('aria-hidden', ready ? 'false' : 'true');
-        form.classList.toggle('quote-ready', ready);
-        if(!ready){
-          basePriceEl.textContent = '—';
-          totalPriceEl.textContent = '—';
-          resetAddons();
-        } else {
-          updateAddonAvailability(serviceSelect.value);
-          calculateTotal();
-        }
-      }
-
-      addonPills.forEach(pill => {
-        pill.addEventListener('click', (event) => {
-          if(!customizeBlock.classList.contains('visible')) return;
-          const qtyInput = pill.querySelector('.addon-qty');
-          if(event.target === qtyInput) return;
-
-          pill.classList.toggle('active');
-          if(qtyInput){
-            qtyInput.disabled = !pill.classList.contains('active');
-          }
-          pill.setAttribute('aria-pressed', pill.classList.contains('active') ? 'true' : 'false');
-          calculateTotal();
-        });
-
-        const qtyInput = pill.querySelector('.addon-qty');
-        if(qtyInput){
-          qtyInput.disabled = true;
-          qtyInput.addEventListener('input', () => {
-            if(!pill.classList.contains('active')) return;
-            if(qtyInput.value === '' || Number(qtyInput.value) < Number(qtyInput.min)){
-              qtyInput.value = qtyInput.min;
+        function hasAllRequired(){
+          return requiredFields.every(field => {
+            if(!fieldIsRelevant(field)) return true;
+            const value = field.value ? field.value.trim() : '';
+            if(field.type === 'email'){
+              return value !== '' && value.includes('@');
             }
-            calculateTotal();
+            return value !== '';
           });
         }
 
-        pill.addEventListener('keydown', (evt) => {
-          if(evt.key === 'Enter' || evt.key === ' '){
-            evt.preventDefault();
-            pill.click();
+        function resetServiceGroup(group){
+          const hiddenInputs = Array.from(group.querySelectorAll('input[type="hidden"]'));
+          hiddenInputs.forEach(input => {
+            input.value = '';
+            input.dataset.label = '';
+          });
+          const selects = Array.from(group.querySelectorAll('select'));
+          selects.forEach(select => {
+            select.selectedIndex = 0;
+          });
+          const buttons = Array.from(group.querySelectorAll('[data-target-input]'));
+          buttons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-pressed', 'false');
+          });
+        }
+
+        function updateServiceDetails(serviceKey){
+          if(!serviceDetailsWrapper) return;
+          let activeCount = 0;
+          detailGroups.forEach(group => {
+            const services = (group.dataset.serviceDetail || '').split(',');
+            const match = serviceKey && services.includes(serviceKey);
+            group.classList.toggle('active', !!match);
+            group.setAttribute('aria-hidden', match ? 'false' : 'true');
+            if(match){
+              activeCount += 1;
+            } else {
+              resetServiceGroup(group);
+            }
+          });
+          serviceDetailsWrapper.classList.toggle('visible', activeCount > 0);
+          serviceDetailsWrapper.setAttribute('aria-hidden', activeCount > 0 ? 'false' : 'true');
+        }
+
+        function selectionInfo(input){
+          if(!input || !input.value) return null;
+          return {
+            value: input.value,
+            label: resolveLabel(input)
+          };
+        }
+
+        function resolveLabel(input){
+          if(!input) return '';
+          if(input.tagName === 'SELECT'){
+            const option = input.options[input.selectedIndex];
+            if(option){
+              return option.dataset.label || option.textContent.trim();
+            }
+            return '';
           }
+          if(input.dataset && input.dataset.label){
+            return input.dataset.label;
+          }
+          return input.value || '';
+        }
+
+        function calculateTotals(){
+          const serviceKey = serviceInput ? serviceInput.value : '';
+          const sqftKey = sqftInput ? sqftInput.value : '';
+          if(!serviceKey || !sqftKey || !basePricing[serviceKey]){
+            return { ready: false, base: 0, detail: 0, total: 0, selections: {}, serviceLabel: '', sqftLabel: '' };
+          }
+
+          const base = basePricing[serviceKey][sqftKey] || 0;
+          let detailAdjustment = 0;
+          const selections = {};
+
+          if(serviceKey === 'home'){
+            const roomsField = form.querySelector('[name="home-rooms"]');
+            const bathsField = form.querySelector('[name="home-bathrooms"]');
+            const petsField = form.querySelector('[name="home-pets"]');
+
+            const roomsInfo = selectionInfo(roomsField);
+            const bathsInfo = selectionInfo(bathsField);
+            const petsInfo = selectionInfo(petsField);
+
+            if(roomsInfo){
+              detailAdjustment += detailPricing.home.rooms[roomsInfo.value] || 0;
+              selections.homeRooms = roomsInfo;
+            }
+            if(bathsInfo){
+              detailAdjustment += detailPricing.home.bathrooms[bathsInfo.value] || 0;
+              selections.homeBathrooms = bathsInfo;
+            }
+            if(petsInfo){
+              detailAdjustment += detailPricing.home.pets[petsInfo.value] || 0;
+              selections.homePets = petsInfo;
+            }
+          }
+
+          if(serviceKey === 'office'){
+            const officesField = form.querySelector('[name="office-offices"]');
+            const officeBathsField = form.querySelector('[name="office-bathrooms"]');
+
+            const officesInfo = selectionInfo(officesField);
+            const officeBathsInfo = selectionInfo(officeBathsField);
+
+            if(officesInfo){
+              detailAdjustment += detailPricing.office.offices[officesInfo.value] || 0;
+              selections.officeOffices = officesInfo;
+            }
+            if(officeBathsInfo){
+              detailAdjustment += detailPricing.office.bathrooms[officeBathsInfo.value] || 0;
+              selections.officeBathrooms = officeBathsInfo;
+            }
+          }
+
+          return {
+            ready: true,
+            base,
+            detail: detailAdjustment,
+            total: base + detailAdjustment,
+            selections,
+            serviceLabel: resolveLabel(serviceInput) || serviceKey,
+            sqftLabel: resolveLabel(sqftInput) || sqftKey
+          };
+        }
+
+        function formatCurrency(value){
+          if(!value) return '—';
+          return `$${Math.round(value)}`;
+        }
+
+        function updateTotals(){
+          const totals = calculateTotals();
+
+          if(basePriceEl){ basePriceEl.textContent = totals.ready ? formatCurrency(totals.base) : '—'; }
+          if(totalPriceEl){ totalPriceEl.textContent = totals.ready ? formatCurrency(totals.total) : '—'; }
+
+          if(detailRow && detailPriceEl){
+            if(totals.ready && totals.detail > 0){
+              detailRow.hidden = false;
+              detailPriceEl.textContent = `+$${Math.round(totals.detail)}`;
+            } else {
+              detailRow.hidden = true;
+              detailPriceEl.textContent = '—';
+            }
+          }
+
+          const ready = totals.ready && hasAllRequired();
+          form.classList.toggle('quote-ready', ready);
+          if(seePriceBtn){ seePriceBtn.disabled = !ready; }
+
+          return totals;
+        }
+
+        pillControls.forEach(control => {
+          const targetName = control.dataset.targetInput;
+          if(!targetName) return;
+          const hiddenInput = form.querySelector(`input[name="${targetName}"]`);
+          if(!hiddenInput) return;
+
+          control.setAttribute('aria-pressed', 'false');
+
+          control.addEventListener('click', () => {
+            const group = control.closest('[role="radiogroup"]') || control.parentElement;
+            if(group){
+              Array.from(group.querySelectorAll('[data-target-input="' + targetName + '"]')).forEach(btn => {
+                const active = btn === control;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+              });
+            }
+
+            hiddenInput.value = control.dataset.value || '';
+            hiddenInput.dataset.label = control.dataset.label || hiddenInput.value;
+            hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+            updateServiceDetails(serviceInput ? serviceInput.value : '');
+            updateTotals();
+          });
         });
-        pill.setAttribute('tabindex', '0');
-        pill.setAttribute('role', 'button');
-        pill.setAttribute('aria-pressed', 'false');
+
+        requiredFields.forEach(field => {
+          const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
+          field.addEventListener(eventName, updateTotals);
+        });
+
+        if(serviceInput){
+          serviceInput.addEventListener('change', () => {
+            updateServiceDetails(serviceInput.value);
+            updateTotals();
+          });
+        }
+
+        if(sqftInput){
+          sqftInput.addEventListener('change', updateTotals);
+        }
+
+        if(seePriceBtn){
+          seePriceBtn.addEventListener('click', () => {
+            if(seePriceBtn.disabled) return;
+            const totals = updateTotals();
+            if(!totals.ready) return;
+
+            const mode = form.dataset.quoteMode || 'redirect';
+            if(mode !== 'redirect') return;
+
+            const redirectTarget = form.dataset.redirect || 'book.html';
+            const url = new URL(redirectTarget, window.location.origin);
+            const params = url.searchParams;
+
+            const serviceValue = serviceInput ? serviceInput.value : '';
+            if(serviceValue){
+              params.set('service', serviceValue);
+              if(totals.serviceLabel){ params.set('serviceLabel', totals.serviceLabel); }
+            }
+
+            const sqftValue = sqftInput ? sqftInput.value : '';
+            if(sqftValue){
+              params.set('sqft', sqftValue);
+              if(totals.sqftLabel){ params.set('sqftLabel', totals.sqftLabel); }
+            }
+
+            params.set('basePrice', totals.base.toFixed(2));
+            params.set('detailPrice', totals.detail.toFixed(2));
+            params.set('total', totals.total.toFixed(2));
+
+            const firstName = form.querySelector('input[name="first-name"]');
+            if(firstName && firstName.value.trim()){
+              params.set('firstName', firstName.value.trim());
+            }
+
+            const email = form.querySelector('input[name="email"]');
+            if(email && email.value.trim()){
+              params.set('email', email.value.trim());
+            }
+
+            Object.entries(totals.selections || {}).forEach(([key, info]) => {
+              if(info.value){ params.set(key, info.value); }
+              if(info.label){ params.set(`${key}Label`, info.label); }
+            });
+
+            const anchor = form.dataset.redirectAnchor;
+            const finalUrl = anchor ? `${url.toString()}#${anchor}` : url.toString();
+            window.location.href = finalUrl;
+          });
+        }
+
+        updateServiceDetails(serviceInput ? serviceInput.value : '');
+        updateTotals();
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const navQuoteLink = document.querySelector('.nav-links .quote-btn');
+      const quoteSection = document.getElementById('quote');
+      if(!navQuoteLink || !quoteSection) return;
+
+      let spotlightTimer = null;
+
+      navQuoteLink.addEventListener('click', (event) => {
+        if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if(typeof event.button === 'number' && event.button !== 0) return;
+        event.preventDefault();
+        quoteSection.classList.remove('quote-spotlight');
+        void quoteSection.offsetWidth;
+        quoteSection.classList.add('quote-spotlight');
+        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        const focusTarget = quoteSection.querySelector('input, button');
+        if(focusTarget){
+          try {
+            focusTarget.focus({ preventScroll: true });
+          } catch(_){
+            focusTarget.focus();
+          }
+        }
+
+        if(spotlightTimer){
+          window.clearTimeout(spotlightTimer);
+        }
+
+        spotlightTimer = window.setTimeout(() => {
+          quoteSection.classList.remove('quote-spotlight');
+          spotlightTimer = null;
+        }, 1600);
       });
-
-      requiredFields.forEach(field => {
-        const eventName = field.tagName === 'SELECT' ? 'change' : 'input';
-        field.addEventListener(eventName, toggleCustomize);
-      });
-
-      serviceSelect.addEventListener('change', () => {
-        updateAddonAvailability(serviceSelect.value);
-        calculateTotal();
-      });
-
-      sqftSelect.addEventListener('change', calculateTotal);
-
-      addonPills.forEach(pill => {
-        pill.setAttribute('aria-pressed', 'false');
-      });
-
-      toggleCustomize();
     })();
   </script>
 

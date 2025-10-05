@@ -151,6 +151,14 @@
     }
     .booking-form{
       padding: 0;
+    }
+
+    .form-columns{
+      display: grid;
+      gap: clamp(18px, 3vw, 32px);
+    }
+
+    .form-steps{
       display: grid;
       gap: clamp(18px, 3vw, 28px);
     }
@@ -160,33 +168,206 @@
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: #b6c2cf; }
 
-    .booking-summary-card{
-      margin-bottom: clamp(18px, 3vw, 28px);
+    .cart-summary{
+      background: rgba(7, 18, 32, 0.72);
+      border: 1px solid rgba(0, 212, 255, 0.18);
+      border-radius: 20px;
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
       display: grid;
-      gap: 0.75rem;
+      gap: clamp(16px, 2.5vw, 24px);
     }
-    .booking-summary-title{
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.2rem);
-      letter-spacing: 0.16em;
-      text-transform: lowercase;
-      margin: 0;
+
+    .cart-summary header{
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
-    .summary-note{
+
+    .cart-summary img{
+      width: 88px;
+      height: 88px;
+      object-fit: cover;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .cart-summary-title{
       margin: 0;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: clamp(26px, 4vw, 38px);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cart-summary-subtitle{
+      color: #b6c2cf;
       font-size: 0.95rem;
-      color: rgba(207, 224, 238, 0.85);
+      margin: 4px 0 0;
     }
-    .summary-details{
-      list-style: none;
-      margin: 0;
-      padding: 0;
+
+    .cart-details{
+      font-size: 0.9rem;
+      color: #99b3cc;
+      line-height: 1.4;
+    }
+
+    .cart-pricing{
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      background: rgba(4, 18, 28, 0.65);
+      padding: 18px;
       display: grid;
-      gap: 0.35rem;
-      font-size: 0.95rem;
-      color: rgba(214, 238, 255, 0.85);
+      gap: 10px;
     }
-    .summary-details strong{ color: #f7fdff; font-weight: 700; }
+
+    .cart-line{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.95rem;
+      color: #d7e7f8;
+    }
+
+    .cart-line.total{
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .cart-line.deposit{
+      color: #00d084;
+      font-weight: 600;
+    }
+
+    .cart-line.balance{
+      color: #fbd38d;
+    }
+
+    .cart-divider{
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.45), rgba(0,212,255,0));
+    }
+
+    .cart-btn{
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+    }
+
+    .cart-btn.is-added{
+      background: linear-gradient(180deg, rgba(0,208,132,0.18), rgba(0,208,132,0.08));
+      border-color: rgba(0,208,132,0.45);
+      color: #9ff7d1;
+    }
+
+    .cart-status{
+      min-height: 1em;
+      font-size: 0.9rem;
+      color: #9ad4ff;
+    }
+
+    .cart-status.error{ color: #ff6b9a; }
+
+    .payment-methods{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .payment-methods legend{
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: #eaf6ff;
+    }
+
+    .payment-option{ display: block; }
+    .payment-option input{ display: none; }
+
+    .payment-option-card{
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 12px 14px;
+      display: grid;
+      gap: 4px;
+      background: rgba(0,0,0,0.25);
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
+    }
+
+    .payment-option input:checked + .payment-option-card{
+      border-color: rgba(0,212,255,0.45);
+      background: linear-gradient(180deg, rgba(0,212,255,0.15), rgba(0,212,255,0.04));
+      transform: translateY(-1px);
+    }
+
+    .payment-option-title{ font-weight: 700; }
+    .payment-option-note{ font-size: 0.85rem; color: #9ab6d3; }
+    .payment-option-note a{ color: #7ce9ff; }
+
+    .payment-option-actions{
+      margin-top: 8px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .payment-option-actions[hidden]{ display: none; }
+
+    .payment-option-helper{
+      font-size: 0.85rem;
+      color: #9ab6d3;
+      line-height: 1.5;
+    }
+
+    .payment-option-helper strong{ color: #f5fbff; }
+    .payment-option-helper.status{ color: #9fd8ff; }
+    .payment-option-helper.error{ color: #ff6b9a; }
+    #paypal-buttons > div{ max-width: 360px; }
+
+    .payment-policy{
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      padding: 14px;
+      font-size: 0.9rem;
+      color: #d7e7f8;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .payment-policy h3{
+      margin-top: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ffe0f7;
+    }
+
+    .payment-policy p{ margin: 0; }
+
+    .payment-guides{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      font-size: 0.9rem;
+      color: #c2d7ea;
+    }
+
+    .payment-guides h3{
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #fff;
+    }
+
+    .payment-guides p{ margin: 0 0 6px; }
+    .payment-guides-list{ margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+    .payment-guides-list a{ color: #73cfff; }
 
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
@@ -295,165 +476,7 @@
 
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
 
-    .payment-wall{
-      display: grid;
-      gap: clamp(16px, 3vw, 24px);
-      padding: clamp(18px, 3vw, 26px);
-      border-radius: 18px;
-      border: 1px solid rgba(0,212,255,0.18);
-      background: linear-gradient(160deg, rgba(6, 24, 36, 0.85), rgba(4, 16, 28, 0.65));
-      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-    }
-    @media (min-width: 960px){
-      .payment-wall{
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-        align-items: start;
-      }
-      .payment-wall .payment-guides,
-      .payment-wall .review{
-        grid-column: 1 / -1;
-      }
-    }
-    .payment-overview{
-      display: grid;
-      gap: clamp(14px, 3vw, 20px);
-      background: rgba(4, 18, 28, 0.6);
-      border: 1px solid rgba(0,212,255,0.16);
-      border-radius: 16px;
-      padding: clamp(14px, 2.5vw, 20px);
-    }
-    @media (min-width: 720px){
-      .payment-overview{
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-        align-items: flex-start;
-      }
-    }
-    .payment-policy h3{
-      margin: 0 0 0.5rem;
-      font-size: 1.1rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #eaf9ff;
-    }
-    .payment-policy p{
-      margin: 0;
-      color: rgba(214, 238, 255, 0.8);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .payment-breakdown{
-      display: grid;
-      gap: 0.4rem;
-      color: rgba(214, 238, 255, 0.86);
-      font-size: 0.95rem;
-    }
-    .payment-breakdown .label{ color: rgba(214, 238, 255, 0.7); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; margin-right: 0.35rem; }
-    .payment-breakdown strong{ font-size: 1.05rem; color: #f7fffe; }
-    .payment-deposit-note{ margin: 0; font-size: 0.85rem; color: rgba(214, 238, 255, 0.7); }
-
-    .payment-methods{
-      border: 1px solid rgba(0,212,255,0.14);
-      border-radius: 16px;
-      padding: clamp(14px, 2.5vw, 20px);
-      background: rgba(2, 12, 20, 0.55);
-    }
-    .payment-methods .sublegend{
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      color: rgba(214, 238, 255, 0.78);
-    }
-    .payment-option{
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.75rem;
-      align-items: start;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .payment-option:last-of-type{ border-bottom: none; }
-    .payment-option input{ margin-top: 0.35rem; }
-    .payment-option-card{
-      display: grid;
-      gap: 0.35rem;
-      background: linear-gradient(150deg, rgba(0, 44, 66, 0.55), rgba(0, 18, 30, 0.65));
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 12px;
-      padding: 0.65rem 0.8rem;
-      transition: border-color .2s ease, box-shadow .2s ease;
-    }
-    .payment-option input:checked + .payment-option-card{
-      border-color: rgba(0,212,255,0.5);
-      box-shadow: 0 18px 32px rgba(0,0,0,0.4);
-    }
-    .payment-option-title{ font-weight: 700; color: #f5fbff; }
-    .payment-option-note{ color: rgba(214, 238, 255, 0.75); font-size: 0.9rem; line-height: 1.5; }
-    .payment-option-note a{ color: #7ce9ff; }
-    .payment-option-actions{
-      margin-top: 0.65rem;
-      display: grid;
-      gap: 0.55rem;
-    }
-    .payment-option-actions[hidden]{
-      display: none;
-    }
-    .payment-option-helper{
-      font-size: 0.82rem;
-      color: rgba(214, 238, 255, 0.72);
-      line-height: 1.5;
-    }
-    .payment-option-helper strong{ color: #f5fbff; }
-    .payment-option-helper.status{
-      color: #9fd8ff;
-    }
-    .payment-option-helper.error{
-      color: #ff9fba;
-    }
-    #paypal-buttons > div{
-      max-width: 360px;
-    }
-
-    .payment-guides{
-      border: 1px dashed rgba(0,212,255,0.22);
-      border-radius: 16px;
-      padding: clamp(12px, 2vw, 18px);
-      background: rgba(4, 18, 28, 0.45);
-      display: grid;
-      gap: 0.6rem;
-    }
-    .payment-guides h3{
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #e6f8ff;
-    }
-    .payment-guides p{ margin: 0; color: rgba(214, 238, 255, 0.72); font-size: 0.88rem; }
-    .payment-guides-list{
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.45rem;
-    }
-    .payment-guides-list li{
-      font-size: 0.88rem;
-      color: rgba(214, 238, 255, 0.78);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      align-items: baseline;
-    }
-    .payment-guides-list a{ color: #7ce9ff; }
-
-    .payment-wall .review{
-      background: rgba(2, 12, 20, 0.55);
-      border-color: rgba(0,212,255,0.14);
-      padding: clamp(12px, 2.5vw, 18px);
-    }
-    .payment-wall .review dt{ color: rgba(173, 214, 255, 0.78); }
-    .payment-wall .review dd{ color: #f2f5f8; }
+    
   </style>
 </head>
 <body data-paypal-client-id="" data-paypal-currency="CAD">
@@ -476,15 +499,15 @@
       <ol class="stepper" id="stepper">
         <li class="active">1. price summary</li>
         <li>2. add extras</li>
-        <li>3. when &amp; where</li>
-        <li>4. your details</li>
+        <li>3. your details</li>
+        <li>4. when &amp; where</li>
         <li>5. review &amp; confirm</li>
       </ol>
     </div>
 
     <div class="booking-card">
       <div class="booking-layout" id="bookingLayout">
-        <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
+                <form id="bookingForm" class="booking-form" action="https://formspree.io/f/mrblyqpr" method="POST">
 
           <input type="hidden" name="service_key" id="input-service-key">
           <input type="hidden" name="service_label" id="input-service-label">
@@ -503,6 +526,11 @@
           <input type="hidden" name="paypal_order_id" id="input-paypal-order-id">
           <input type="hidden" name="paypal_payer_id" id="input-paypal-payer-id">
           <input type="hidden" name="paypal_capture_id" id="input-paypal-capture-id">
+          <input type="hidden" name="cart_status" id="input-cart-status" value="pending">
+          <input type="hidden" name="name" id="input-full-name" value="">
+
+          <div class="form-columns">
+            <div class="form-steps">
 
           <fieldset class="step" data-step="1">
           <legend>Your base package</legend>
@@ -721,39 +749,129 @@
           </div>
         </fieldset>
 
-        <fieldset class="step" data-step="3" hidden>
-          <legend>When &amp; where</legend>
-          <div class="grid-2">
-            <label>
-              Business name (optional)
-              <input type="text" name="business" placeholder="ACME Distribution" />
-            </label>
-            <label>
-              Address
-              <input id="address" type="text" name="address" placeholder="123 Main St" required autocomplete="address-line1" />
-            </label>
-            <label>
-              City
-              <input id="city" type="text" name="city" placeholder="Mono" required autocomplete="address-level2" />
-            </label>
-            <label>
-              Postal Code
-              <input id="postal" type="text" name="postal" placeholder="L9W 1A1" required autocomplete="postal-code" />
-            </label>
-            <label>
-              Preferred date
-              <input type="date" name="date" required />
-            </label>
-            <label>
-              Preferred time
-              <input type="time" name="time" required />
-            </label>
-            <label class="wide">
-              Approx. square footage
-              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" />
-            </label>
+        <fieldset class="step" data-step="2" hidden>
+          <legend>Add extra services</legend>
+          <p class="muted">Add speciality tasks for this visit. Select a tile to include it and adjust the quantity if needed.</p>
+          <div class="addon-groups" id="addon-groups">
+            <div class="addon-group" data-service-group="home">
+              <p class="addon-group-title">Home &amp; Residential Extras</p>
+              <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
+                <span class="addon-icon">✨</span>
+                <span class="addon-name">Deep Clean Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
+              </div>
+              <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
+                <span class="addon-icon">🚚</span>
+                <span class="addon-name">Move In/Out Clean Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
+              </div>
+              <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
+                <span class="addon-icon">🛠️</span>
+                <span class="addon-name">Renovation Clean Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
+              </div>
+              <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
+                <span class="addon-icon">🎓</span>
+                <span class="addon-name">Move In/Out Package (Student Property)</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
+              </div>
+              <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
+                <span class="addon-icon">🏠</span>
+                <span class="addon-name">AirBnB Listing</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
+              </div>
+              <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
+                <span class="addon-icon">🐾</span>
+                <span class="addon-name">I have Pets</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
+              </div>
+              <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
+                <span class="addon-icon">🧊</span>
+                <span class="addon-name">Inside Fridge</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
+              </div>
+              <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
+                <span class="addon-icon">🔥</span>
+                <span class="addon-name">Inside Oven</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
+              </div>
+              <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
+                <span class="addon-icon">🗄️</span>
+                <span class="addon-name">Inside Cabinets</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
+              </div>
+              <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
+                <span class="addon-icon">🍽️</span>
+                <span class="addon-name">Additional Kitchen</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
+              </div>
+              <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
+                <span class="addon-icon">🪟</span>
+                <span class="addon-name">Blinds (per window)</span>
+                <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
+              </div>
+              <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
+                <span class="addon-icon">🔍</span>
+                <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
+                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
+              </div>
+              <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
+                <span class="addon-icon">🔎</span>
+                <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
+                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
+              </div>
+              <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
+                <span class="addon-icon">🪟</span>
+                <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
+                <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
+              </div>
+              <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
+                <span class="addon-icon">🛏️</span>
+                <span class="addon-name">Change Bed Sheets + Load Laundry</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets quantity">
+              </div>
+              <div class="addon-pill color-crimson" data-addon="Load Dishwasher" data-price="10">
+                <span class="addon-icon">🍽️</span>
+                <span class="addon-name">Load Dishwasher</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
+              </div>
+              <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
+                <span class="addon-icon">🧴</span>
+                <span class="addon-name">Sanitization Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
+              </div>
+            </div>
+
+            <div class="addon-group" data-service-group="commercial,office">
+              <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
+              <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
+                <span class="addon-icon">🧼</span>
+                <span class="addon-name">Carpet Steam Cleaning Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
+              </div>
+              <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
+                <span class="addon-icon">🧽</span>
+                <span class="addon-name">Tile and Grout Cleaning Package</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout quantity">
+              </div>
+              <div class="addon-pill color-coral" data-addon="Window Detailing" data-price="120">
+                <span class="addon-icon">🪟</span>
+                <span class="addon-name">Window Detailing</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Window Detailing quantity">
+              </div>
+              <div class="addon-pill color-lime" data-addon="Pressure Washing" data-price="165">
+                <span class="addon-icon">💦</span>
+                <span class="addon-name">Pressure Washing</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Pressure Washing quantity">
+              </div>
+              <div class="addon-pill color-rose" data-addon="Floor Strip &amp; Wax" data-price="185">
+                <span class="addon-icon">🧹</span>
+                <span class="addon-name">Floor Strip &amp; Wax</span>
+                <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Floor Strip and Wax quantity">
+              </div>
+            </div>
           </div>
-          <p class="addon-empty" id="addon-empty-message" hidden>No add-ons available for this service. Continue to scheduling.</p>
+          <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>
@@ -761,57 +879,23 @@
         </fieldset>
 
         <fieldset class="step" data-step="3" hidden>
-          <legend>When &amp; where</legend>
-          <div class="grid-2">
-            <label>
-              Business name (optional)
-              <input type="text" name="business" placeholder="ACME Distribution" />
-            </label>
-            <label>
-              Address
-              <input id="address" type="text" name="address" placeholder="123 Main St" required autocomplete="address-line1" />
-            </label>
-            <label>
-              City
-              <input id="city" type="text" name="city" placeholder="Mono" required autocomplete="address-level2" />
-            </label>
-            <label>
-              Postal Code
-              <input id="postal" type="text" name="postal" placeholder="L9W 1A1" required autocomplete="postal-code" />
-            </label>
-            <label>
-              Preferred date
-              <input type="date" name="date" required />
-            </label>
-            <label>
-              Preferred time
-              <input type="time" name="time" required />
-            </label>
-            <label class="wide">
-              Approx. square footage
-              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" />
-            </label>
-          </div>
-          <div class="actions">
-            <button type="button" class="btn back">Back</button>
-            <button type="button" class="btn next">Next</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="step" data-step="4" hidden>
           <legend>Your contact information</legend>
           <div class="grid-2">
             <label>
-              Full name
-              <input type="text" name="name" placeholder="Jane Smith" required />
+              First name
+              <input type="text" name="first_name" placeholder="Jane" autocomplete="given-name" required />
+            </label>
+            <label>
+              Last name (optional)
+              <input type="text" name="last_name" placeholder="Smith" autocomplete="family-name" />
             </label>
             <label>
               Email
-              <input type="email" name="email" placeholder="you@company.com" required />
+              <input type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
             </label>
             <label>
               Phone
-              <input type="tel" name="phone" placeholder="(555) 555-5555" required />
+              <input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" />
             </label>
             <label class="wide">
               Notes (optional)
@@ -824,69 +908,152 @@
           </div>
         </fieldset>
 
-        <fieldset class="step" data-step="5" hidden>
-          <legend>Review, book &amp; pay</legend>
-          <div class="payment-wall">
-            <div class="payment-overview">
-              <div class="payment-policy">
-                <h3>Payment Policy</h3>
-                <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
-              </div>
-              <div class="payment-breakdown">
-                <p><span class="label">Deposit Due Today:</span> <strong id="deposit-due-text">—</strong></p>
-                <p><span class="label">Balance at Service:</span> <strong id="balance-due-text">—</strong></p>
-              </div>
-              <p class="payment-deposit-note">Your deposit total updates automatically as you add services so you always see the 50% due today.</p>
-            </div>
-
-            <fieldset class="payment-methods">
-              <legend class="sublegend">Choose your payment method</legend>
-              <label class="payment-option">
-                <input type="radio" name="payment_method" value="paypal" required>
-                <span class="payment-option-card">
-                  <span class="payment-option-title">PayPal</span>
-                  <span class="payment-option-note">Use your PayPal balance or linked card. <a href="https://developer.paypal.com/docs/checkout/standard/" target="_blank" rel="noopener">Integration guide</a>.</span>
-                  <div class="payment-option-actions" data-payment-ui="paypal" hidden>
-                    <div id="paypal-buttons" aria-live="polite"></div>
-                    <p class="payment-option-helper">Complete your 50% deposit securely with PayPal. Once approved you can submit your booking.</p>
-                    <p class="payment-option-helper status" id="paypal-status" role="status" aria-live="polite"></p>
-                  </div>
-                </span>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="payment_method" value="google-pay">
-                <span class="payment-option-card">
-                  <span class="payment-option-title">Google Pay</span>
-                  <span class="payment-option-note">Tap-to-pay convenience across devices. <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">Web API docs</a>.</span>
-                </span>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="payment_method" value="debit">
-                <span class="payment-option-card">
-                  <span class="payment-option-title">Direct Debit / Card on File</span>
-                  <span class="payment-option-note">Securely store a business debit or credit card for the remaining balance. <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">ACH / debit setup guide</a>.</span>
-                </span>
-              </label>
-            </fieldset>
-
-            <div class="payment-guides">
-              <h3>Connect your payment gateway</h3>
-              <p>Ready to accept deposits online? Use these quick-start guides to plug in the provider of your choice.</p>
-              <ul class="payment-guides-list">
-                <li><strong>PayPal Checkout:</strong> <a href="https://developer.paypal.com/docs/checkout/" target="_blank" rel="noopener">developer.paypal.com/docs/checkout/</a></li>
-                <li><strong>Google Pay on Web:</strong> <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">developers.google.com/pay/api/web</a></li>
-                <li><strong>ACH / Debit via Stripe:</strong> <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">stripe.com/docs/payments/ach-debit</a></li>
-              </ul>
-            </div>
-
-            <dl class="review" id="reviewList"></dl>
+        <fieldset class="step" data-step="4" hidden>
+          <legend>When &amp; where should we clean?</legend>
+          <div class="grid-2">
+            <label>
+              Business / Building Name
+              <input type="text" name="business" placeholder="Company or building" autocomplete="organization" />
+            </label>
+            <label>
+              Street Address
+              <input type="text" name="address" placeholder="123 Queen St" autocomplete="street-address" required />
+            </label>
+            <label>
+              City
+              <input type="text" name="city" placeholder="Toronto" autocomplete="address-level2" required />
+            </label>
+            <label>
+              Postal Code
+              <input type="text" name="postal" placeholder="M5H 2N2" autocomplete="postal-code" required />
+            </label>
+            <label>
+              Preferred Date
+              <input type="date" name="date" required />
+            </label>
+            <label>
+              Preferred Time Window
+              <select name="time" required>
+                <option value="">Select a time window</option>
+                <option value="morning">Morning (8am – 11am)</option>
+                <option value="midday">Midday (11am – 2pm)</option>
+                <option value="afternoon">Afternoon (2pm – 5pm)</option>
+              </select>
+            </label>
+            <label class="wide">
+              Square Footage (approx.)
+              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" />
+            </label>
           </div>
+          <div class="actions">
+            <button type="button" class="btn back">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="5" hidden>
+          <legend>Review &amp; confirm</legend>
+          <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary and payment options stay on the right for quick checkout.</p>
+          <dl class="review" id="reviewList"></dl>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="submit" class="btn submit">Submit</button>
           </div>
         </fieldset>
-      </form>
+
+            </div>
+
+            <aside class="cart-summary" id="cartSummary" aria-label="Cart summary">
+              <header>
+                <img src="deepcleanpackageoptimized1000.png" alt="Custom cleaning package" loading="lazy" />
+                <div>
+                  <h2 class="cart-summary-title">Custom Package</h2>
+                  <p class="cart-summary-subtitle" data-cart-service>Choose a service to view details.</p>
+                </div>
+              </header>
+              <div class="cart-details" data-cart-description hidden></div>
+              <div class="cart-pricing" id="pricingRecap">
+                <div class="cart-line">
+                  <span>Base package</span>
+                  <span data-recap-base>—</span>
+                </div>
+                <div class="cart-line" data-recap-detail-row hidden>
+                  <span>Service details</span>
+                  <span data-recap-detail>—</span>
+                </div>
+                <div class="cart-line" data-recap-extras-row hidden>
+                  <span>Add-ons</span>
+                  <span data-recap-extras>—</span>
+                </div>
+                <div class="cart-line" data-recap-discount-row hidden>
+                  <span>Frequency savings</span>
+                  <span data-recap-discount>—</span>
+                </div>
+                <div class="cart-divider"></div>
+                <div class="cart-line total">
+                  <span>Visit total</span>
+                  <span data-recap-total>—</span>
+                </div>
+                <div class="cart-line deposit">
+                  <span>Deposit (50%)</span>
+                  <span id="deposit-due-text">—</span>
+                </div>
+                <div class="cart-line balance">
+                  <span>Balance at service</span>
+                  <span id="balance-due-text">—</span>
+                </div>
+              </div>
+              <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>Add package to cart</button>
+              <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
+              <fieldset class="payment-methods">
+                <legend>Payment method</legend>
+                <label class="payment-option">
+                  <input type="radio" name="payment_method" value="paypal" required>
+                  <span class="payment-option-card">
+                    <span class="payment-option-title">PayPal</span>
+                    <span class="payment-option-note">Use your PayPal balance or linked card. <a href="https://developer.paypal.com/docs/checkout/standard/" target="_blank" rel="noopener">Integration guide</a>.</span>
+                    <div class="payment-option-actions" data-payment-ui="paypal" hidden>
+                      <div id="paypal-buttons" aria-live="polite"></div>
+                      <p class="payment-option-helper">Complete your 50% deposit securely with PayPal. Once approved you can submit your booking.</p>
+                      <p class="payment-option-helper status" id="paypal-status" role="status" aria-live="polite"></p>
+                    </div>
+                  </span>
+                </label>
+                <label class="payment-option">
+                  <input type="radio" name="payment_method" value="google-pay">
+                  <span class="payment-option-card">
+                    <span class="payment-option-title">Google Pay</span>
+                    <span class="payment-option-note">Tap-to-pay convenience across devices. <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">Web API docs</a>.</span>
+                  </span>
+                </label>
+                <label class="payment-option">
+                  <input type="radio" name="payment_method" value="debit">
+                  <span class="payment-option-card">
+                    <span class="payment-option-title">Direct Debit / Card on File</span>
+                    <span class="payment-option-note">Securely store a business debit or credit card for the remaining balance. <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">ACH / debit setup guide</a>.</span>
+                  </span>
+                </label>
+              </fieldset>
+              <div class="payment-policy">
+                <h3>Payment Policy</h3>
+                <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
+              </div>
+              <div class="payment-guides">
+                <h3>Connect your payment gateway</h3>
+                <p>Ready to accept deposits online? Use these quick-start guides to plug in the provider of your choice.</p>
+                <ul class="payment-guides-list">
+                  <li><strong>PayPal Checkout:</strong> <a href="https://developer.paypal.com/docs/checkout/" target="_blank" rel="noopener">developer.paypal.com/docs/checkout/</a></li>
+                  <li><strong>Google Pay on Web:</strong> <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">developers.google.com/pay/api/web</a></li>
+                  <li><strong>ACH / Debit via Stripe:</strong> <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">stripe.com/docs/payments/ach-debit</a></li>
+                </ul>
+              </div>
+            </aside>
+
+          </div>
+
+        </form>
+
+      </div>
 
       </div>
 
@@ -1239,6 +1406,8 @@
       const hiddenPayPalOrder = document.getElementById('input-paypal-order-id');
       const hiddenPayPalPayer = document.getElementById('input-paypal-payer-id');
       const hiddenPayPalCapture = document.getElementById('input-paypal-capture-id');
+      const hiddenCartStatus = document.getElementById('input-cart-status');
+      const hiddenFullName = document.getElementById('input-full-name');
       const originField = document.getElementById('input-origin');
 
       const depositText = document.getElementById('deposit-due-text');
@@ -1253,7 +1422,10 @@
       const recapDiscountRow = document.querySelector('[data-recap-discount-row]');
       const recapDiscount = document.querySelector('[data-recap-discount]');
       const recapTotal = document.querySelector('[data-recap-total]');
-      const recapDescription = document.querySelector('[data-recap-description]');
+      const recapDescription = document.querySelector('[data-cart-description]');
+      const cartService = document.querySelector('[data-cart-service]');
+      const addToCartBtn = document.getElementById('addToCartBtn');
+      const cartStatus = document.getElementById('cartStatus');
 
       const frequencyInputs = Array.from(form.querySelectorAll('input[name="frequency"]'));
       const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
@@ -1265,11 +1437,22 @@
 
       const DEPOSIT_RATE = 0.5;
       const PAYPAL_CURRENCY = ((document.body && document.body.dataset && document.body.dataset.paypalCurrency) || 'CAD').toUpperCase();
+      const FREQUENCY_LABELS = {
+        weekly: 'Weekly (25% off)',
+        biweekly: 'Bi-Weekly (20% off)',
+        triweekly: 'Tri-Weekly (15% off)',
+        monthly: 'Monthly (10% off)',
+        biannual: 'Biannual (5% off)',
+        onetime: 'One-time'
+      };
 
       let paypalButtonsInstance = null;
       let paypalApproved = false;
       let paypalApprovedAmount = 0;
       let paypalScriptPromise = null;
+      let current = 0;
+      let cartAdded = false;
+      let lastCartSignature = '';
 
       const params = new URLSearchParams(window.location.search);
       const serviceKey = params.get('service') || '';
@@ -1313,6 +1496,10 @@
         }
       }
 
+      if(cartService){
+        cartService.textContent = (serviceLabel || serviceKey || 'Custom Package');
+      }
+
       if(originField){
         originField.value = serviceKey ? 'instant-quote' : 'book-page';
       }
@@ -1331,12 +1518,39 @@
         if(avg) sqftInput.value = avg;
       }
 
-      const nameField = form.querySelector('input[name="name"]');
+      const firstNameField = form.querySelector('input[name="first_name"]');
+      const lastNameField = form.querySelector('input[name="last_name"]');
       const emailField = form.querySelector('input[name="email"]');
-      const quoteName = params.get('firstName');
+      const quoteFirst = params.get('firstName') || '';
+      const quoteLast = params.get('lastName') || '';
+      const quoteFull = params.get('fullName') || '';
       const quoteEmail = params.get('email');
-      if(nameField && quoteName) nameField.value = quoteName.trim();
+      if(firstNameField){
+        if(quoteFirst){
+          firstNameField.value = quoteFirst.trim();
+        } else if(quoteFull){
+          firstNameField.value = quoteFull.trim().split(/\s+/)[0] || '';
+        }
+      }
+      if(lastNameField){
+        if(quoteLast){
+          lastNameField.value = quoteLast.trim();
+        } else if(quoteFull){
+          const parts = quoteFull.trim().split(/\s+/);
+          if(parts.length > 1){ lastNameField.value = parts.slice(1).join(' '); }
+        }
+      }
       if(emailField && quoteEmail) emailField.value = quoteEmail.trim();
+
+      function syncFullName(){
+        if(!hiddenFullName) return;
+        const first = firstNameField ? firstNameField.value.trim() : '';
+        const last = lastNameField ? lastNameField.value.trim() : '';
+        hiddenFullName.value = [first, last].filter(Boolean).join(' ');
+      }
+      syncFullName();
+      if(firstNameField) firstNameField.addEventListener('input', syncFullName);
+      if(lastNameField) lastNameField.addEventListener('input', syncFullName);
 
       function formatCurrency(value){
         if(!value) return '—';
@@ -1595,6 +1809,16 @@
         return frequencyInputs.find(input => input.checked) || null;
       }
 
+      function refreshCartButton(){
+        if(addToCartBtn){
+          addToCartBtn.textContent = cartAdded ? 'Added to cart' : 'Add package to cart';
+          addToCartBtn.classList.toggle('is-added', cartAdded);
+        }
+        if(hiddenCartStatus){
+          hiddenCartStatus.value = cartAdded ? 'added' : 'pending';
+        }
+      }
+
       function updateSummary(){
         const extras = computeExtras();
         const extrasTotal = extras.reduce((sum, item) => sum + item.price * item.qty, 0);
@@ -1605,6 +1829,12 @@
         const finalTotal = subtotal - discount;
         const depositDue = finalTotal > 0 ? finalTotal * DEPOSIT_RATE : 0;
         const balanceDue = finalTotal > 0 ? Math.max(finalTotal - depositDue, 0) : 0;
+
+        if(cartService){
+          const baseLabel = hiddenServiceLabel.value || serviceLabel || serviceKey || 'Custom Package';
+          const freqLabel = freqInput ? (FREQUENCY_LABELS[freqInput.value] || freqInput.value) : '';
+          cartService.textContent = freqLabel ? `${baseLabel} • ${freqLabel}` : baseLabel;
+        }
 
         if(depositText){ depositText.textContent = depositDue > 0 ? `$${Math.round(depositDue)}` : '—'; }
         if(balanceText){ balanceText.textContent = balanceDue > 0 ? `$${Math.round(balanceDue)}` : '—'; }
@@ -1648,6 +1878,22 @@
         if(hiddenTotalPrice) hiddenTotalPrice.value = finalTotal.toFixed(2);
         if(hiddenSelectedAddons) hiddenSelectedAddons.value = buildExtrasLabel();
 
+        const signature = [basePrice, detailPrice, extrasTotal, discount, finalTotal].map(value => Math.round(value * 100) / 100).join('|');
+        if(signature !== lastCartSignature){
+          const wasAdded = cartAdded;
+          lastCartSignature = signature;
+          if(wasAdded){
+            cartAdded = false;
+            refreshCartButton();
+            if(cartStatus){
+              cartStatus.classList.remove('error');
+              cartStatus.textContent = 'Totals updated. Add the package to your cart again when ready.';
+            }
+          } else if(cartStatus && cartStatus.textContent && cartStatus.textContent.includes('Totals updated')){
+            cartStatus.textContent = '';
+          }
+        }
+
         const normalizedDeposit = Math.round(depositDue * 100) / 100;
         if(paypalApproved && Math.abs(normalizedDeposit - paypalApprovedAmount) > 0.01){
           paypalApproved = false;
@@ -1658,6 +1904,20 @@
           }
         }
 
+        if(addToCartBtn){
+          const canAdd = current >= 1 && !!freqInput;
+          addToCartBtn.disabled = !canAdd;
+          if(!canAdd){
+            if(!cartAdded && cartStatus){
+              cartStatus.classList.remove('error');
+              cartStatus.textContent = 'Finish steps 1–2 to add this package to your cart.';
+            }
+          } else if(!cartAdded && cartStatus && cartStatus.textContent === 'Finish steps 1–2 to add this package to your cart.'){
+            cartStatus.textContent = '';
+          }
+        }
+
+        refreshCartButton();
         syncSubmitDisabled();
       }
 
@@ -1714,7 +1974,18 @@
         radio.addEventListener('change', applyPaymentSelection);
       });
 
-      let current = 0;
+      if(addToCartBtn){
+        addToCartBtn.addEventListener('click', () => {
+          if(addToCartBtn.disabled) return;
+          cartAdded = true;
+          refreshCartButton();
+          if(cartStatus){
+            cartStatus.classList.remove('error');
+            cartStatus.textContent = 'Package added to your cart. Continue through the steps to finalize.';
+          }
+        });
+      }
+
       function showStep(i){
         steps.forEach((step, idx) => { step.hidden = idx !== i; });
         stepper.forEach((item, idx) => {
@@ -1722,6 +1993,7 @@
           item.classList.toggle('done', idx < i);
         });
         current = i;
+        updateSummary();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         if(i === steps.length - 1){
           buildReview();
@@ -1749,26 +2021,29 @@
 
       function buildReview(){
         if(!reviewList) return;
+        syncFullName();
         const fd = new FormData(form);
-        const freqMap = {
-          weekly: 'Weekly (25% off)',
-          biweekly: 'Bi-Weekly (20% off)',
-          triweekly: 'Tri-Weekly (15% off)',
-          monthly: 'Monthly (10% off)',
-          biannual: 'Biannual (5% off)',
-          onetime: 'One-time'
-        };
         const paymentMap = {
           'paypal': 'PayPal',
           'google-pay': 'Google Pay',
           'debit': 'Direct Debit / Card on File'
         };
 
+        const fullName = (() => {
+          const fields = [fd.get('first_name'), fd.get('last_name')].filter(Boolean).map(v => v.trim());
+          if(hiddenFullName && hiddenFullName.value) return hiddenFullName.value;
+          if(fields.length) return fields.join(' ');
+          return '';
+        })();
+        if(hiddenFullName && !hiddenFullName.value){
+          hiddenFullName.value = fullName;
+        }
+
         const rows = [
           ['Service', hiddenServiceLabel.value || '—'],
           ['Square Footage', hiddenSqftLabel.value || fd.get('sqft') || '—'],
           ['Details', hiddenDetailSummary.value || '—'],
-          ['Frequency', freqMap[fd.get('frequency')] || '—'],
+          ['Frequency', FREQUENCY_LABELS[fd.get('frequency')] || '—'],
           ['Add-ons', hiddenSelectedAddons.value || 'None'],
           ['Base Package', hiddenBasePrice.value ? `$${Math.round(Number(hiddenBasePrice.value))}` : '—'],
           ['Service Details', hiddenDetailPrice.value ? `$${Math.round(Number(hiddenDetailPrice.value))}` : '—'],
@@ -1783,10 +2058,11 @@
           ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
           ['Preferred Date', fd.get('date') || '—'],
           ['Preferred Time', fd.get('time') || '—'],
-          ['Full Name', fd.get('name') || '—'],
+          ['Full Name', fullName || '—'],
           ['Email', fd.get('email') || '—'],
           ['Phone', fd.get('phone') || '—'],
-          ['Notes', fd.get('notes') || '—']
+          ['Notes', fd.get('notes') || '—'],
+          ['Cart Status', hiddenCartStatus && hiddenCartStatus.value === 'added' ? 'Added to cart' : 'Not added yet']
         ];
 
         reviewList.innerHTML = rows.map(([label, value]) => `<dt>${label}</dt><dd>${String(value)}</dd>`).join('');
@@ -1801,15 +2077,27 @@
           return;
         }
 
+        if(hiddenCartStatus && hiddenCartStatus.value !== 'added'){
+          if(cartStatus){
+            cartStatus.classList.add('error');
+            cartStatus.textContent = 'Please add the package to your cart before confirming.';
+          }
+          if(addToCartBtn) addToCartBtn.focus();
+          return;
+        }
+
         const allButtons = form.querySelectorAll('button');
         allButtons.forEach(btn => btn.disabled = true);
         if(submitBtn) submitBtn.textContent = 'Sending…';
 
+        syncFullName();
         const fd = new FormData(form);
         if(!fd.get('_subject')){
           fd.append('_subject', 'New Booking Request — Dufferin Deep Clean');
         }
 
+        const fullName = hiddenFullName ? hiddenFullName.value : [fd.get('first_name'), fd.get('last_name')].filter(Boolean).join(' ');
+        if(fullName){ fd.set('name', fullName); }
         const freqMapShort = {
           weekly: 'Weekly (25%)',
           biweekly: 'Bi-Weekly (20%)',
@@ -1829,6 +2117,7 @@
           `Square Footage: ${hiddenSqftLabel.value || fd.get('sqft') || '—'}`,
           `Details: ${hiddenDetailSummary.value || '—'}`,
           `Frequency: ${freqMapShort[fd.get('frequency')] || '—'}`,
+          `Cart Status: ${hiddenCartStatus && hiddenCartStatus.value === 'added' ? 'Added to cart' : 'Not added yet'}`,
           `Base Package: ${hiddenBasePrice.value ? `$${Math.round(Number(hiddenBasePrice.value))}` : '—'}`,
           `Service Details: ${hiddenDetailPrice.value ? `$${Math.round(Number(hiddenDetailPrice.value))}` : '—'}`,
           `Add-ons: ${hiddenSelectedAddons.value || 'None'}`,
@@ -1837,7 +2126,10 @@
           `Deposit Due Today: ${hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'}`,
           `Balance at Service: ${hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'}`,
           `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
-          `Payment Method: ${paymentMapShort[fd.get('payment_method')] || fd.get('payment_method') || '—'}`
+          `Payment Method: ${paymentMapShort[fd.get('payment_method')] || fd.get('payment_method') || '—'}`,
+          `Full Name: ${fullName || '—'}`,
+          `Email: ${fd.get('email') || '—'}`,
+          `Phone: ${fd.get('phone') || '—'}`
         ];
 
         if(fd.get('payment_method') === 'paypal'){

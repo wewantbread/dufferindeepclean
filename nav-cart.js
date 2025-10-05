@@ -1,31 +1,65 @@
 (function(){
-  const DATA_URI = window.CART_IMAGE_DATA_URI || 'data:image/png;base64,' +
-    'iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAE0UlEQVR42u3VMQ0AAAgEsdeCXXyi' +
-    'AxNsNKmCWy7VAwBvRQIAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
-    'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
-    'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAI1QB' +
-    'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
-    'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
-    'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEwAgBwAgBwAgBwAgBwAgBwAgB' +
-    'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
-    'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
-    'wAgBwAgBwAgBwAgBwAgBwAgBwAgBMEIVADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-    'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-    'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-    'ADBCADBCAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
-    'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
-    'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQACOUAAAjBAAjBAAj' +
-    'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
-    'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
-    'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBMAIVQDACAHACAHACAHACAHACAHACAHACAHA' +
-    'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
-    'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
-    'CAHACAHACAHACAHACAHACAEwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
-    'QgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
-    'QgAwQgAwQgAwQgAwQgC4sEMVKv0E08xMAAAAAElFTkSuQmCC';
+  const CART_IMAGE_DATA_URI = window.CART_IMAGE_DATA_URI || 'data:image/png;base64,' +
+    'iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAE0UlEQVR42u3VMQ0AAAgEsdeCXXyiAxNsNKmCWy7VAwBvRQIAjBAA' +
+    'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
+    'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
+    'I1QBACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
+    'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
+    'ACMEwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
+    'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
+    'wAgBwAgBwAgBMEIVADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+    'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+    'ADBCADBCADBCADBCADBCAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
+    'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
+    'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQACOUAAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
+    'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
+    'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBMAIVQDACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
+    'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
+    'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAEwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
+    'QgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgC4sEMVKv0E08xMAAAAAElFTkSuQmCC';
 
   if(!window.CART_IMAGE_DATA_URI){
-    window.CART_IMAGE_DATA_URI = DATA_URI;
+    window.CART_IMAGE_DATA_URI = CART_IMAGE_DATA_URI;
+  }
+
+  function resolveCartImagePath(){
+    const candidates = [];
+    if(window.CART_IMAGE_PATH && typeof window.CART_IMAGE_PATH === 'string'){
+      candidates.push(window.CART_IMAGE_PATH);
+    }
+    if(document.body && document.body.dataset && typeof document.body.dataset.cartImage === 'string'){
+      candidates.push(document.body.dataset.cartImage);
+    }
+    for(const candidate of candidates){
+      if(candidate && typeof candidate === 'string' && candidate.trim()){
+        return candidate.trim();
+      }
+    }
+    return CART_IMAGE_DATA_URI;
+  }
+
+  const CART_IMAGE_PATH = resolveCartImagePath();
+
+  if(!window.CART_IMAGE_PATH){
+    window.CART_IMAGE_PATH = CART_IMAGE_PATH;
+  }
+
+  function applyCartImage(img){
+    if(!img){ return; }
+    const fallback = CART_IMAGE_DATA_URI;
+    const targetSrc = CART_IMAGE_PATH || fallback;
+    const shouldListenForErrors = fallback && targetSrc !== fallback;
+
+    function handleError(){
+      img.removeEventListener('error', handleError);
+      img.src = fallback;
+    }
+
+    if(shouldListenForErrors){
+      img.addEventListener('error', handleError);
+    }
+
+    img.src = targetSrc;
   }
 
   function clamp(value, min, max){
@@ -51,14 +85,13 @@
     const depositValue = navPopover.querySelector('[data-popover-deposit]');
     const balanceValue = navPopover.querySelector('[data-popover-balance]');
     const paymentsEl = navPopover.querySelector('[data-popover-payments]');
-    const checkoutLink = navPopover.querySelector('[data-popover-checkout]');
     const statusEl = navPopover.querySelector('[data-popover-status]');
     const closeBtn = navPopover.querySelector('[data-cart-close]');
     const googleBtn = navPopover.querySelector('[data-google-pay-button]');
     const navPayPalStatus = navPopover.querySelector('#nav-paypal-status');
 
     if(navImage && !navImage.getAttribute('src')){
-      navImage.src = window.CART_IMAGE_DATA_URI;
+      applyCartImage(navImage);
     }
 
     let isOpen = false;
@@ -202,11 +235,6 @@
         if(googleBtn){
           googleBtn.disabled = !showPayments;
         }
-      }
-
-      if(checkoutLink){
-        const href = state && state.checkoutUrl ? state.checkoutUrl : 'book.html#start';
-        checkoutLink.setAttribute('href', href);
       }
 
       if(state && state.justAdded){

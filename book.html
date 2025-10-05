@@ -108,10 +108,6 @@
       color: #f1fbff;
     }
 
-    .nav-checkout{
-      box-shadow: 0 12px 26px rgba(0, 145, 255, 0.28);
-    }
-
     .booking{
       max-width: 1100px; margin: 0 auto;
       padding: clamp(20px, 4vw, 48px);
@@ -192,11 +188,13 @@
     .cart-summary{
       background: rgba(7, 18, 32, 0.72);
       border: 1px solid rgba(0, 212, 255, 0.18);
-      border-radius: 20px;
-      padding: clamp(18px, 3vw, 28px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+      border-radius: 18px;
+      padding: clamp(14px, 2vw, 20px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
       display: grid;
-      gap: clamp(16px, 2.5vw, 24px);
+      gap: clamp(12px, 2vw, 18px);
+      width: 100%;
+      max-width: 280px;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
@@ -213,59 +211,59 @@
     .cart-summary header{
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     .cart-summary img{
-      width: 88px;
-      height: 88px;
+      width: 72px;
+      height: 72px;
       object-fit: cover;
-      border-radius: 16px;
+      border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.12);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
     }
 
     .cart-summary-title{
       margin: 0;
       font-family: "Bebas Neue", system-ui, sans-serif;
-      font-size: clamp(26px, 4vw, 38px);
-      letter-spacing: 0.08em;
+      font-size: clamp(22px, 3.5vw, 30px);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .cart-summary-subtitle{
       color: #b6c2cf;
-      font-size: 0.95rem;
-      margin: 4px 0 0;
+      font-size: 0.85rem;
+      margin: 2px 0 0;
     }
 
     .cart-details{
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #99b3cc;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     .cart-pricing{
       border-radius: 16px;
       border: 1px solid rgba(0, 212, 255, 0.2);
       background: rgba(4, 18, 28, 0.65);
-      padding: 18px;
+      padding: 14px;
       display: grid;
-      gap: 10px;
+      gap: 8px;
     }
 
     .cart-line{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #d7e7f8;
     }
 
     .cart-line.total{
       font-weight: 700;
-      font-size: 1.05rem;
+      font-size: 1rem;
     }
 
     .cart-line.deposit{
@@ -280,6 +278,7 @@
     .cart-divider{
       height: 1px;
       background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.45), rgba(0,212,255,0));
+      margin: 2px 0;
     }
 
     @keyframes cartSummaryFlight{
@@ -293,12 +292,23 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-weight: 700;
+      background: linear-gradient(180deg, #ff8edb, #ff4fc3);
+      border-color: rgba(255, 112, 210, 0.75);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(255, 110, 205, 0.35);
+    }
+
+    .cart-btn:disabled{
+      background: linear-gradient(180deg, rgba(255, 142, 219, 0.28), rgba(255, 79, 195, 0.2));
+      border-color: rgba(255, 112, 210, 0.35);
+      color: rgba(255,255,255,0.68);
+      box-shadow: none;
     }
 
     .cart-btn.is-added{
-      background: linear-gradient(180deg, rgba(0,208,132,0.18), rgba(0,208,132,0.08));
-      border-color: rgba(0,208,132,0.45);
-      color: #9ff7d1;
+      background: linear-gradient(180deg, #ff9ee4, #ff64d0);
+      border-color: rgba(255, 140, 220, 0.85);
+      color: #fff;
     }
 
     .cart-status{
@@ -366,7 +376,7 @@
     .payment-option-helper strong{ color: #f5fbff; }
     .payment-option-helper.status{ color: #9fd8ff; }
     .payment-option-helper.error{ color: #ff6b9a; }
-    #paypal-buttons > div{ max-width: 360px; }
+    #paypal-buttons > div{ max-width: 320px; }
 
     .payment-policy{
       border-radius: 14px;
@@ -423,8 +433,8 @@
       background: rgba(255,255,255,0.08);
     }
 
-    .plans{ display:grid; gap:12px; grid-template-columns: 1fr; }
-    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, 1fr); } }
+    .plans{ display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, minmax(200px, 1fr)); } }
     .plan{ display:block; }
     .plan input{ display:none; }
     .plan-card{
@@ -493,6 +503,7 @@
     }
 
     .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap; }
+    .step[data-step="1"] .actions{ justify-content:flex-start; }
     .btn{
       appearance: none; border: 1px solid rgba(255,255,255,0.08); color: #0b0d10;
       background: linear-gradient(180deg, #4cc3ff, #00e0a4);
@@ -514,6 +525,21 @@
     .review dd{ margin: 0 0 10px; }
 
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
+
+    @media (min-width: 960px){
+      .booking-layout{
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(240px, 280px);
+        align-items: start;
+      }
+      .form-columns{ min-width: 0; }
+      .cart-summary{
+        position: sticky;
+        top: 24px;
+        max-height: calc(100vh - 80px);
+        overflow: auto;
+      }
+    }
 
     
   </style>
@@ -540,7 +566,6 @@
         <span class="nav-cart-label">Cart</span>
         <span class="nav-cart-count" data-cart-count hidden>0</span>
       </button>
-      <a class="nav-checkout" href="#start">Checkout</a>
     </div>
   </header>
   <aside class="nav-cart-popover" id="navCartPopover" role="dialog" aria-modal="false" aria-label="Cart summary" hidden>
@@ -568,7 +593,6 @@
         <p class="cart-popover-paypal-status" id="nav-paypal-status" role="status" aria-live="polite"></p>
         <button type="button" class="btn cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
       </div>
-      <a class="btn cart-popover-checkout" data-popover-checkout href="#cartSummary">Go to checkout</a>
     </div>
   </aside>
 
@@ -577,7 +601,7 @@
 
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
-        <li class="active">1. price summary</li>
+        <li class="active">1. frequency</li>
         <li>2. add extras</li>
         <li>3. your details</li>
         <li>4. when &amp; where</li>
@@ -613,8 +637,7 @@
             <div class="form-steps">
 
           <fieldset class="step" data-step="1">
-          <legend>Your base package</legend>
-          <p class="muted">Review the base price we created from your instant quote and choose how often you'd like us to clean.</p>
+          <legend>Choose your visit frequency</legend>
           <div class="plans">
             <label class="plan">
               <input type="radio" name="frequency" value="weekly" data-discount="0.25" required />
@@ -1440,33 +1463,59 @@
       const hiddenPayPalPayer = document.getElementById('input-paypal-payer-id');
       const hiddenPayPalCapture = document.getElementById('input-paypal-capture-id');
       const hiddenCartStatus = document.getElementById('input-cart-status');
-      const CART_IMAGE_DATA_URI = 'data:image/png;base64,' +
-        'iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAE0UlEQVR42u3VMQ0AAAgEsdeCXXyi' +
-        'AxNsNKmCWy7VAwBvRQIAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
-        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
-        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAI1QB' +
-        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
-        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
-        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEwAgBwAgBwAgBwAgBwAgBwAgB' +
-        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
-        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
-        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBMEIVADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-        'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-        'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-        'ADBCADBCAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
-        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
-        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQACOUAAAjBAAjBAAj' +
-        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
-        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
-        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBMAIVQDACAHACAHACAHACAHACAHACAHACAHA' +
-        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
-        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
-        'CAHACAHACAHACAHACAHACAEwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
-        'QgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
-        'QgAwQgAwQgAwQgAwQgC4sEMVKv0E08xMAAAAAElFTkSuQmCC';
+      const CART_IMAGE_DATA_URI = window.CART_IMAGE_DATA_URI || 'data:image/png;base64,' +
+        'iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAE0UlEQVR42u3VMQ0AAAgEsdeCXXyiAxNsNKmCWy7VAwBvRQIAjBAA' +
+        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
+        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
+        'I1QBACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
+        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
+        'ACMEwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
+        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
+        'wAgBwAgBwAgBMEIVADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+        'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
+        'ADBCADBCADBCADBCADBCAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
+        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
+        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQACOUAAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
+        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
+        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBMAIVQDACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
+        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
+        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAEwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
+        'QgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgC4sEMVKv0E08xMAAAAAElFTkSuQmCC';
+      if(!window.CART_IMAGE_DATA_URI){
+        window.CART_IMAGE_DATA_URI = CART_IMAGE_DATA_URI;
+      }
+      const resolveCartImagePath = () => {
+        const candidates = [];
+        if(window.CART_IMAGE_PATH && typeof window.CART_IMAGE_PATH === 'string'){
+          candidates.push(window.CART_IMAGE_PATH);
+        }
+        if(document.body && document.body.dataset && typeof document.body.dataset.cartImage === 'string'){
+          candidates.push(document.body.dataset.cartImage);
+        }
+        for(const candidate of candidates){
+          if(candidate && typeof candidate === 'string' && candidate.trim()){
+            return candidate.trim();
+          }
+        }
+        return CART_IMAGE_DATA_URI;
+      };
+      const CART_IMAGE_PATH = resolveCartImagePath();
+      if(!window.CART_IMAGE_PATH){
+        window.CART_IMAGE_PATH = CART_IMAGE_PATH;
+      }
       const cartImage = document.getElementById('cartSummaryImage');
-      if(cartImage && !cartImage.src){
-        cartImage.src = CART_IMAGE_DATA_URI;
+      if(cartImage && !cartImage.getAttribute('src')){
+        const fallback = CART_IMAGE_DATA_URI;
+        const targetSrc = CART_IMAGE_PATH || fallback;
+        const shouldListen = fallback && targetSrc !== fallback;
+        const handleImageError = () => {
+          cartImage.removeEventListener('error', handleImageError);
+          cartImage.src = fallback;
+        };
+        if(shouldListen){
+          cartImage.addEventListener('error', handleImageError);
+        }
+        cartImage.src = targetSrc;
       }
       const hiddenFullName = document.getElementById('input-full-name');
       const originField = document.getElementById('input-origin');
@@ -1558,20 +1607,181 @@
       let latestCartState = null;
 
       const params = new URLSearchParams(window.location.search);
+      const SERVICE_LABELS = {
+        home: 'Home General Cleaning',
+        commercial: 'Factory / Commercial / Industrial Cleaning',
+        office: 'Office Workspace Cleaning'
+      };
+      const BASE_PRICE_TABLE = {
+        home: {
+          '1000-1500': 165,
+          '1500-2000': 185,
+          '2000-2500': 215,
+          '2500-3000': 245,
+          '3000-3500': 285,
+          '3500-4000': 325
+        },
+        commercial: {
+          '1000-1500': 240,
+          '1500-2000': 285,
+          '2000-2500': 330,
+          '2500-3000': 380,
+          '3000-3500': 425,
+          '3500-4000': 470
+        },
+        office: {
+          '1000-1500': 210,
+          '1500-2000': 250,
+          '2000-2500': 295,
+          '2500-3000': 335,
+          '3000-3500': 375,
+          '3500-4000': 420
+        }
+      };
+      const DETAIL_PRICE_TABLE = {
+        home: {
+          rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
+          bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
+          pets: { no: 0, yes: 25 },
+          basement: { no: 0, yes: 45 },
+          basementRooms: { '1-2': 25, '3-4': 45, '5+': 65 },
+          basementBathrooms: { '1': 18, '2': 32, '3+': 46 }
+        },
+        office: {
+          offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
+          bathrooms: { '1-2': 0, '3-4': 40, '5+': 70 }
+        }
+      };
+
       const serviceKey = params.get('service') || '';
-      const serviceLabel = params.get('serviceLabel') || '';
+      const rawServiceLabel = params.get('serviceLabel') || '';
       const sqftKey = params.get('sqft') || '';
-      const sqftLabel = params.get('sqftLabel') || '';
-      const basePrice = Number(params.get('basePrice') || params.get('total') || 0);
-      const detailPrice = Number(params.get('detailPrice') || 0);
-      const totalBase = basePrice + detailPrice;
+      const rawSqftLabel = params.get('sqftLabel') || '';
+      let basePrice = Number(params.get('basePrice') || params.get('total') || 0);
+      let detailPrice = Number(params.get('detailPrice') || 0);
+      const totalParam = Number(params.get('total') || 0);
+      let totalBase = 0;
+
+      function formatSqftLabel(label, key){
+        if(label) return label;
+        if(!key) return '';
+        if(key.includes('-')){
+          const parts = key.split('-').map(part => parseInt(part, 10));
+          if(parts.length === 2 && parts.every(num => !Number.isNaN(num))){
+            return `${parts[0].toLocaleString()} – ${parts[1].toLocaleString()} sq ft`;
+          }
+        }
+        return key;
+      }
+
+      function deriveDetailPrice(service){
+        if(service === 'home'){
+          let total = 0;
+          const rooms = Number(params.get('homeRooms') || 0);
+          if(rooms){
+            if(rooms <= 2){ total += DETAIL_PRICE_TABLE.home.rooms['1-2'] || 0; }
+            else if(rooms <= 4){ total += DETAIL_PRICE_TABLE.home.rooms['3-4'] || 0; }
+            else if(rooms <= 6){ total += DETAIL_PRICE_TABLE.home.rooms['5-6'] || 0; }
+            else { total += DETAIL_PRICE_TABLE.home.rooms['7+'] || 0; }
+          }
+          const baths = Number(params.get('homeBathrooms') || 0);
+          if(baths){
+            if(baths <= 1){ total += DETAIL_PRICE_TABLE.home.bathrooms['1'] || 0; }
+            else if(baths <= 2){ total += DETAIL_PRICE_TABLE.home.bathrooms['2'] || 0; }
+            else if(baths <= 3){ total += DETAIL_PRICE_TABLE.home.bathrooms['3'] || 0; }
+            else { total += DETAIL_PRICE_TABLE.home.bathrooms['4+'] || 0; }
+          }
+          const pets = params.get('homePets');
+          if(pets && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.pets, pets)){
+            total += DETAIL_PRICE_TABLE.home.pets[pets] || 0;
+          }
+          const basement = params.get('homeBasement');
+          if(basement && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.basement, basement)){
+            total += DETAIL_PRICE_TABLE.home.basement[basement] || 0;
+            if(basement === 'yes'){
+              const basementRooms = Number(params.get('homeBasementRooms') || 0);
+              if(basementRooms){
+                if(basementRooms <= 2){ total += DETAIL_PRICE_TABLE.home.basementRooms['1-2'] || 0; }
+                else if(basementRooms <= 4){ total += DETAIL_PRICE_TABLE.home.basementRooms['3-4'] || 0; }
+                else { total += DETAIL_PRICE_TABLE.home.basementRooms['5+'] || 0; }
+              }
+              const basementBaths = Number(params.get('homeBasementBathrooms') || 0);
+              if(basementBaths){
+                if(basementBaths <= 1){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['1'] || 0; }
+                else if(basementBaths <= 2){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['2'] || 0; }
+                else { total += DETAIL_PRICE_TABLE.home.basementBathrooms['3+'] || 0; }
+              }
+            }
+          }
+          return total;
+        }
+        if(service === 'office'){
+          let total = 0;
+          const officesValue = params.get('officeOffices');
+          if(officesValue){
+            const officesKey = DETAIL_PRICE_TABLE.office.offices[officesValue] !== undefined
+              ? officesValue
+              : (() => {
+                  const count = Number(officesValue);
+                  if(!(count > 0)) return '';
+                  if(count <= 5) return '1-5';
+                  if(count <= 10) return '6-10';
+                  if(count <= 20) return '11-20';
+                  return '21+';
+                })();
+            if(officesKey && DETAIL_PRICE_TABLE.office.offices[officesKey] !== undefined){
+              total += DETAIL_PRICE_TABLE.office.offices[officesKey] || 0;
+            }
+          }
+          const officeBathsValue = params.get('officeBathrooms');
+          if(officeBathsValue){
+            const bathsKey = DETAIL_PRICE_TABLE.office.bathrooms[officeBathsValue] !== undefined
+              ? officeBathsValue
+              : (() => {
+                  const count = Number(officeBathsValue);
+                  if(!(count > 0)) return '';
+                  if(count <= 2) return '1-2';
+                  if(count <= 4) return '3-4';
+                  return '5+';
+                })();
+            if(bathsKey && DETAIL_PRICE_TABLE.office.bathrooms[bathsKey] !== undefined){
+              total += DETAIL_PRICE_TABLE.office.bathrooms[bathsKey] || 0;
+            }
+          }
+          return total;
+        }
+        return 0;
+      }
+
+      if(!(detailPrice > 0)){
+        const derivedDetail = deriveDetailPrice(serviceKey);
+        if(derivedDetail > 0){
+          detailPrice = derivedDetail;
+        }
+      }
+
+      if(!(basePrice > 0) && totalParam > 0){
+        const possibleBase = totalParam - detailPrice;
+        if(possibleBase > 0){
+          basePrice = possibleBase;
+        }
+      }
+
+      if(!(basePrice > 0) && serviceKey && sqftKey && BASE_PRICE_TABLE[serviceKey] && BASE_PRICE_TABLE[serviceKey][sqftKey]){
+        basePrice = BASE_PRICE_TABLE[serviceKey][sqftKey];
+      }
+
+      totalBase = basePrice + detailPrice;
+
+      const resolvedServiceLabel = rawServiceLabel || SERVICE_LABELS[serviceKey] || 'Custom Package';
+      const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
 
       const detailSelections = [];
       function pushDetail(label, value){
         if(value){ detailSelections.push(label + ': ' + value); }
       }
-      pushDetail('Service', serviceLabel || serviceKey);
-      pushDetail('Square Footage', sqftLabel || sqftKey);
+      pushDetail('Service', resolvedServiceLabel || serviceKey);
+      pushDetail('Square Footage', resolvedSqftLabel || sqftKey);
       pushDetail('Rooms', params.get('homeRoomsLabel'));
       pushDetail('Bathrooms', params.get('homeBathroomsLabel'));
       pushDetail('Pets', params.get('homePetsLabel'));
@@ -1582,17 +1792,21 @@
       pushDetail('Office Bathrooms', params.get('officeBathroomsLabel'));
 
       hiddenServiceKey.value = serviceKey;
-      hiddenServiceLabel.value = serviceLabel;
-      hiddenSqftLabel.value = sqftLabel;
-      hiddenDetailSummary.value = detailSelections.join(' | ');
+      hiddenServiceLabel.value = resolvedServiceLabel;
+      hiddenSqftLabel.value = resolvedSqftLabel;
+      const detailSummaryValue = detailSelections.join(' | ');
+      const detailSummaryDisplay = detailSelections.length
+        ? detailSelections.join(' • ')
+        : (totalBase > 0 ? 'Base package from instant quote.' : '');
+      hiddenDetailSummary.value = detailSummaryValue || (totalBase > 0 ? 'Base package from instant quote.' : '');
       hiddenBasePrice.value = basePrice.toFixed(2);
       hiddenDetailPrice.value = detailPrice.toFixed(2);
-      hiddenPackage.value = serviceLabel || serviceKey;
+      hiddenPackage.value = resolvedServiceLabel;
 
       if(recapDescription){
-        if(detailSelections.length){
+        if(detailSummaryDisplay){
           recapDescription.hidden = false;
-          recapDescription.textContent = detailSelections.join(' • ');
+          recapDescription.textContent = detailSummaryDisplay;
         } else {
           recapDescription.hidden = true;
           recapDescription.textContent = '';
@@ -1600,7 +1814,7 @@
       }
 
       if(cartService){
-        cartService.textContent = (serviceLabel || serviceKey || 'Custom Package');
+        cartService.textContent = (resolvedServiceLabel || 'Custom Package');
       }
 
       if(originField){
@@ -1669,82 +1883,6 @@
           if(active) visibleGroups += 1;
         });
         if(addonEmptyMessage){ addonEmptyMessage.hidden = visibleGroups !== 0; }
-      }
-      updateAddonVisibility();
-
-      const extrasState = [];
-      function computeExtras(){
-        extrasState.length = 0;
-        addonPills.forEach(pill => {
-          const parent = pill.closest('.addon-group');
-          if(!parent || !parent.classList.contains('active')) return;
-          if(!pill.classList.contains('active')) return;
-          const qtyInput = pill.querySelector('.addon-qty');
-          const qty = qtyInput ? Math.max(Number(qtyInput.value) || 1, Number(qtyInput.min) || 1) : 1;
-          const price = Number(pill.dataset.price || 0);
-          const name = pill.querySelector('.addon-name')?.textContent.trim() || pill.dataset.addon || 'Addon';
-          extrasState.push({ name, qty, price });
-        });
-        return extrasState;
-      }
-
-      function buildExtrasLabel(){
-        if(!extrasState.length) return '';
-        return extrasState.map(item => `${item.name} ×${item.qty}`).join(', ');
-      }
-
-      function getSelectedPayment(){
-        const selected = paymentRadios.find(radio => radio.checked);
-        return selected ? selected.value : null;
-      }
-
-      function clearPayPalHidden(){
-        if(hiddenPayPalOrder) hiddenPayPalOrder.value = '';
-        if(hiddenPayPalPayer) hiddenPayPalPayer.value = '';
-        if(hiddenPayPalCapture) hiddenPayPalCapture.value = '';
-      }
-
-      function setPayPalStatus(message, tone){
-        if(!paypalStatus) return;
-        paypalStatus.textContent = message || '';
-        paypalStatus.classList.toggle('error', tone === 'error');
-      }
-
-      function syncSubmitDisabled(){
-        if(!submitBtn) return;
-        const method = getSelectedPayment();
-        submitBtn.disabled = method === 'paypal' && !paypalApproved;
-      }
-
-      function togglePayPalUi(show){
-        if(paypalUi){
-          paypalUi.hidden = !show;
-        }
-        if(!show){
-          setPayPalStatus('', 'info');
-        }
-      }
-
-      function resetPayPalApproval(message, tone){
-        paypalApproved = false;
-        paypalApprovedAmount = 0;
-        clearPayPalHidden();
-        if(message && getSelectedPayment() === 'paypal'){
-          setPayPalStatus(message, tone || 'info');
-        } else if(!message){
-          setPayPalStatus('', 'info');
-        }
-        syncSubmitDisabled();
-      }
-
-      function resolvePayPalClientId(){
-        if(document.body && document.body.dataset && document.body.dataset.paypalClientId){
-          return document.body.dataset.paypalClientId.trim();
-        }
-        if(typeof window !== 'undefined' && window.PAYPAL_CLIENT_ID){
-          return String(window.PAYPAL_CLIENT_ID).trim();
-        }
-        return '';
       }
       updateAddonVisibility();
 
@@ -2104,7 +2242,7 @@
         const depositDue = finalTotal > 0 ? finalTotal * DEPOSIT_RATE : 0;
         const balanceDue = finalTotal > 0 ? Math.max(finalTotal - depositDue, 0) : 0;
 
-        const baseLabel = hiddenServiceLabel.value || serviceLabel || serviceKey || 'Custom Package';
+        const baseLabel = hiddenServiceLabel.value || resolvedServiceLabel || serviceKey || 'Custom Package';
         const freqLabel = freqInput ? (FREQUENCY_LABELS[freqInput.value] || freqInput.value) : '';
 
         if(cartService){

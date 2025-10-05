@@ -155,7 +155,7 @@
       <a href="#home">Home</a>
       <a href="#services">Services</a>
       <a href="#about">About Us</a>
-      <a href="book.html" class="quote-btn">Book Online</a>
+      <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
   </header>
 
@@ -200,7 +200,7 @@
             <p>Answer a few quick questions to unlock a tailored estimate for your space.</p>
           </div>
 
-          <form id="instant-quote" class="quote-form" novalidate>
+          <form id="instant-quote" class="quote-form" data-quote-mode="redirect" data-redirect="book.html" data-redirect-anchor="start" novalidate>
             <div class="quote-grid">
               <label class="field" for="quote-first-name">
                 <span class="field-label">First Name</span>
@@ -212,27 +212,31 @@
                 <input id="quote-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" data-required>
               </label>
 
-              <label class="field" for="quote-service">
-                <span class="field-label">Type of Cleaning Service</span>
-                <select id="quote-service" name="service" data-required>
-                  <option value="" disabled selected>Select a service</option>
-                  <option value="home">Home General Cleaning</option>
-                  <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
-                  <option value="office">Office Workspace Cleaning</option>
-                </select>
+              <label class="field field-inline" for="quote-service">
+                <span class="field-label">Type of Service</span>
+                <div class="select-wrap">
+                  <select id="quote-service" name="service" data-required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option value="home">Home General Cleaning</option>
+                    <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
+                    <option value="office">Office Workspace Cleaning</option>
+                  </select>
+                </div>
               </label>
 
-              <label class="field" for="quote-square-footage">
+              <label class="field field-inline" for="quote-sqft">
                 <span class="field-label">Square Footage</span>
-                <select id="quote-square-footage" name="square-footage" data-required>
-                  <option value="" disabled selected>Select the range</option>
-                  <option value="1000-1500">1,000 – 1,500 sq ft</option>
-                  <option value="1500-2000">1,500 – 2,000 sq ft</option>
-                  <option value="2000-2500">2,000 – 2,500 sq ft</option>
-                  <option value="2500-3000">2,500 – 3,000 sq ft</option>
-                  <option value="3000-3500">3,000 – 3,500 sq ft</option>
-                  <option value="3500-4000">3,500 – 4,000 sq ft</option>
-                </select>
+                <div class="select-wrap">
+                  <select id="quote-sqft" name="square-footage" data-required>
+                    <option value="" disabled selected>Select an approximate size</option>
+                    <option value="1000-1500">1,000 – 1,500 sq ft</option>
+                    <option value="1500-2000">1,500 – 2,000 sq ft</option>
+                    <option value="2000-2500">2,000 – 2,500 sq ft</option>
+                    <option value="2500-3000">2,500 – 3,000 sq ft</option>
+                    <option value="3000-3500">3,000 – 3,500 sq ft</option>
+                    <option value="3500-4000">3,500 – 4,000 sq ft</option>
+                  </select>
+                </div>
               </label>
             </div>
 

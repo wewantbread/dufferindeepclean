@@ -137,7 +137,23 @@
       backdrop-filter: blur(8px);
       overflow: hidden;
     }
-    .booking-form, .booking-success{ padding: clamp(16px, 3vw, 28px); }
+    .booking-layout{
+      display: grid;
+      gap: clamp(18px, 3vw, 32px);
+      padding: clamp(18px, 3vw, 32px);
+    }
+    @media (min-width: 960px){
+      .booking-layout{
+        grid-template-columns: minmax(260px, 320px) 1fr;
+        align-items: flex-start;
+      }
+    }
+    .booking-form{
+      padding: 0;
+      display: grid;
+      gap: clamp(18px, 3vw, 28px);
+    }
+    .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
     fieldset{ border: none; margin: 0; padding: 0; }
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
@@ -562,6 +578,8 @@
           </div>
         </fieldset>
       </form>
+
+      </div>
 
       <div id="bookingSuccess" class="booking-success" hidden>
         <h2>Thanks! Your request has been received.</h2>

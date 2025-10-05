@@ -178,6 +178,7 @@
     .form-steps{
       display: grid;
       gap: clamp(18px, 3vw, 28px);
+      min-width: 0;
     }
     .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
@@ -189,12 +190,12 @@
       background: rgba(7, 18, 32, 0.72);
       border: 1px solid rgba(0, 212, 255, 0.18);
       border-radius: 18px;
-      padding: clamp(14px, 2vw, 20px);
+      padding: clamp(12px, 1.8vw, 18px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
       display: grid;
-      gap: clamp(12px, 2vw, 18px);
+      gap: clamp(10px, 1.6vw, 16px);
       width: 100%;
-      max-width: 280px;
+      max-width: 250px;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
@@ -215,8 +216,8 @@
     }
 
     .cart-summary img{
-      width: 72px;
-      height: 72px;
+      width: 64px;
+      height: 64px;
       object-fit: cover;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.12);
@@ -227,7 +228,7 @@
     .cart-summary-title{
       margin: 0;
       font-family: "Bebas Neue", system-ui, sans-serif;
-      font-size: clamp(22px, 3.5vw, 30px);
+      font-size: clamp(20px, 3vw, 26px);
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
@@ -248,9 +249,9 @@
       border-radius: 16px;
       border: 1px solid rgba(0, 212, 255, 0.2);
       background: rgba(4, 18, 28, 0.65);
-      padding: 14px;
+      padding: 12px;
       display: grid;
-      gap: 8px;
+      gap: 6px;
     }
 
     .cart-line{
@@ -319,65 +320,6 @@
 
     .cart-status.error{ color: #ff6b9a; }
 
-    .payment-methods{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 16px;
-      display: grid;
-      gap: 12px;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .payment-methods legend{
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      color: #eaf6ff;
-    }
-
-    .payment-option{ display: block; }
-    .payment-option input{ display: none; }
-
-    .payment-option-card{
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 12px 14px;
-      display: grid;
-      gap: 4px;
-      background: rgba(0,0,0,0.25);
-      transition: border-color .2s ease, transform .2s ease, background .2s ease;
-    }
-
-    .payment-option input:checked + .payment-option-card{
-      border-color: rgba(0,212,255,0.45);
-      background: linear-gradient(180deg, rgba(0,212,255,0.15), rgba(0,212,255,0.04));
-      transform: translateY(-1px);
-    }
-
-    .payment-option-title{ font-weight: 700; }
-    .payment-option-note{ font-size: 0.85rem; color: #9ab6d3; }
-    .payment-option-note a{ color: #7ce9ff; }
-
-    .payment-option-actions{
-      margin-top: 8px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .payment-option-actions[hidden]{ display: none; }
-
-    .payment-option-helper{
-      font-size: 0.85rem;
-      color: #9ab6d3;
-      line-height: 1.5;
-    }
-
-    .payment-option-helper strong{ color: #f5fbff; }
-    .payment-option-helper.status{ color: #9fd8ff; }
-    .payment-option-helper.error{ color: #ff6b9a; }
-    #paypal-buttons > div{ max-width: 320px; }
-
     .payment-policy{
       border-radius: 14px;
       border: 1px dashed rgba(255,255,255,0.18);
@@ -397,27 +339,6 @@
 
     .payment-policy p{ margin: 0; }
 
-    .payment-guides{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.03);
-      padding: 16px;
-      font-size: 0.9rem;
-      color: #c2d7ea;
-    }
-
-    .payment-guides h3{
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #fff;
-    }
-
-    .payment-guides p{ margin: 0 0 6px; }
-    .payment-guides-list{ margin: 0; padding-left: 18px; display: grid; gap: 6px; }
-    .payment-guides-list a{ color: #73cfff; }
-
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
     @media (min-width: 720px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
@@ -433,14 +354,15 @@
       background: rgba(255,255,255,0.08);
     }
 
-    .plans{ display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, minmax(200px, 1fr)); } }
+    .plans{ display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, minmax(220px, 1fr)); } }
     .plan{ display:block; }
     .plan input{ display:none; }
     .plan-card{
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 14px;
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: clamp(16px, 2.6vw, 24px);
       background: rgba(255,255,255,0.04);
       transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      min-height: 140px;
     }
     .plan input:checked + .plan-card{
       border-color: rgba(0,208,132,0.6);
@@ -526,13 +448,11 @@
 
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
 
-    @media (min-width: 960px){
-      .booking-layout{
-        display: grid;
+    @media (min-width: 900px){
+      .form-columns{
         grid-template-columns: minmax(0, 1fr) minmax(240px, 280px);
         align-items: start;
       }
-      .form-columns{ min-width: 0; }
       .cart-summary{
         position: sticky;
         top: 24px;
@@ -1011,7 +931,7 @@
 
         <fieldset class="step" data-step="5" hidden>
           <legend>Review &amp; confirm</legend>
-          <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary and payment options stay on the right for quick checkout.</p>
+          <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
@@ -1063,47 +983,9 @@
               </div>
               <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>Add package to cart</button>
               <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
-              <fieldset class="payment-methods">
-                <legend>Payment method</legend>
-                <label class="payment-option">
-                  <input type="radio" name="payment_method" value="paypal" required>
-                  <span class="payment-option-card">
-                    <span class="payment-option-title">PayPal</span>
-                    <span class="payment-option-note">Use your PayPal balance or linked card. <a href="https://developer.paypal.com/docs/checkout/standard/" target="_blank" rel="noopener">Integration guide</a>.</span>
-                    <div class="payment-option-actions" data-payment-ui="paypal" hidden>
-                      <div id="paypal-buttons" aria-live="polite"></div>
-                      <p class="payment-option-helper">Complete your 50% deposit securely with PayPal. Once approved you can submit your booking.</p>
-                      <p class="payment-option-helper status" id="paypal-status" role="status" aria-live="polite"></p>
-                    </div>
-                  </span>
-                </label>
-                <label class="payment-option">
-                  <input type="radio" name="payment_method" value="google-pay">
-                  <span class="payment-option-card">
-                    <span class="payment-option-title">Google Pay</span>
-                    <span class="payment-option-note">Tap-to-pay convenience across devices. <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">Web API docs</a>.</span>
-                  </span>
-                </label>
-                <label class="payment-option">
-                  <input type="radio" name="payment_method" value="debit">
-                  <span class="payment-option-card">
-                    <span class="payment-option-title">Direct Debit / Card on File</span>
-                    <span class="payment-option-note">Securely store a business debit or credit card for the remaining balance. <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">ACH / debit setup guide</a>.</span>
-                  </span>
-                </label>
-              </fieldset>
               <div class="payment-policy">
                 <h3>Payment Policy</h3>
                 <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
-              </div>
-              <div class="payment-guides">
-                <h3>Connect your payment gateway</h3>
-                <p>Ready to accept deposits online? Use these quick-start guides to plug in the provider of your choice.</p>
-                <ul class="payment-guides-list">
-                  <li><strong>PayPal Checkout:</strong> <a href="https://developer.paypal.com/docs/checkout/" target="_blank" rel="noopener">developer.paypal.com/docs/checkout/</a></li>
-                  <li><strong>Google Pay on Web:</strong> <a href="https://developers.google.com/pay/api/web" target="_blank" rel="noopener">developers.google.com/pay/api/web</a></li>
-                  <li><strong>ACH / Debit via Stripe:</strong> <a href="https://stripe.com/docs/payments/ach-debit" target="_blank" rel="noopener">stripe.com/docs/payments/ach-debit</a></li>
-                </ul>
               </div>
             </aside>
 
@@ -1581,10 +1463,13 @@
       const paypalUi = document.querySelector('[data-payment-ui="paypal"]');
       const paypalButtonsContainer = document.getElementById('paypal-buttons');
       const paypalStatus = document.getElementById('paypal-status');
-      const PAYPAL_CONTEXTS = {
-        main: { container: paypalButtonsContainer, status: paypalStatus },
-        nav: { container: navPayPalContainer, status: navPayPalStatus }
-      };
+      const PAYPAL_CONTEXTS = {};
+      if(paypalButtonsContainer){
+        PAYPAL_CONTEXTS.main = { container: paypalButtonsContainer, status: paypalStatus };
+      }
+      if(navPayPalContainer){
+        PAYPAL_CONTEXTS.nav = { container: navPayPalContainer, status: navPayPalStatus };
+      }
 
       const DEPOSIT_RATE = 0.5;
       const PAYPAL_CURRENCY = ((document.body && document.body.dataset && document.body.dataset.paypalCurrency) || 'CAD').toUpperCase();
@@ -2048,7 +1933,7 @@
 
         const clientId = resolvePayPalClientId();
         if(!clientId){
-          const err = new Error('PayPal client ID is not configured. Add your client ID to data-paypal-client-id on <body> or set window.PAYPAL_CLIENT_ID before this script runs.');
+          const err = new Error('PayPal client ID is not configured.');
           paypalScriptPromise = Promise.reject(err);
           paypalScriptPromise.catch(() => { paypalScriptPromise = null; });
           return paypalScriptPromise;
@@ -2166,11 +2051,11 @@
               });
             },
             onCancel(){
-              resetPayPalApproval('PayPal checkout was cancelled. You can try again or choose another method.', 'error');
+              resetPayPalApproval('PayPal checkout was cancelled. You can try again or contact us for assistance.', 'error');
             },
             onError(err){
               console.error('PayPal error', err);
-              resetPayPalApproval('PayPal reported an error. Please try again or choose another method.', 'error');
+              resetPayPalApproval('PayPal reported an error. Please try again or contact us for assistance.', 'error');
             }
           });
 
@@ -2178,15 +2063,13 @@
           return buttons.render(entry.container).catch(err => {
             console.error('PayPal render error', err);
             destroyPayPalButtons(context);
-            resetPayPalApproval('PayPal could not initialize. Refresh the page or choose another method.', 'error');
+            resetPayPalApproval('PayPal could not initialize. Refresh the page or contact us for assistance.', 'error');
             throw err;
           });
         }).catch(err => {
           console.error('PayPal load error', err);
           destroyPayPalButtons(context);
-          const message = err && err.message && err.message.includes('client ID')
-            ? 'Add your live PayPal client ID to the page before using PayPal checkout.'
-            : 'PayPal couldn\'t load. Reload the page or choose another method.';
+          const message = 'PayPal checkout is currently unavailable. Please contact us to complete your deposit.';
           setPayPalStatus(message, 'error', context);
         });
       }
@@ -2497,12 +2380,6 @@
         if(!reviewList) return;
         syncFullName();
         const fd = new FormData(form);
-        const paymentMap = {
-          'paypal': 'PayPal',
-          'google-pay': 'Google Pay',
-          'debit': 'Direct Debit / Card on File'
-        };
-
         const fullName = (() => {
           const fields = [fd.get('first_name'), fd.get('last_name')].filter(Boolean).map(v => v.trim());
           if(hiddenFullName && hiddenFullName.value) return hiddenFullName.value;
@@ -2526,7 +2403,6 @@
           ['Deposit Due Today', hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'],
           ['Balance at Service', hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'],
           ['Estimated Visit Total', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
-          ['Payment Method', paymentMap[fd.get('payment_method')] || '—'],
           ['PayPal Reference', hiddenPayPalCapture.value || hiddenPayPalOrder.value || '—'],
           ['Business', fd.get('business') || '—'],
           ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
@@ -2580,12 +2456,6 @@
           biannual: 'Biannual (5%)',
           onetime: 'One-time'
         };
-        const paymentMapShort = {
-          'paypal': 'PayPal',
-          'google-pay': 'Google Pay',
-          'debit': 'Direct Debit / Card on File'
-        };
-
         const summaryLines = [
           `Service: ${hiddenServiceLabel.value || serviceKey || '—'}`,
           `Square Footage: ${hiddenSqftLabel.value || fd.get('sqft') || '—'}`,
@@ -2600,14 +2470,13 @@
           `Deposit Due Today: ${hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'}`,
           `Balance at Service: ${hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'}`,
           `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
-          `Payment Method: ${paymentMapShort[fd.get('payment_method')] || fd.get('payment_method') || '—'}`,
           `Full Name: ${fullName || '—'}`,
           `Email: ${fd.get('email') || '—'}`,
           `Phone: ${fd.get('phone') || '—'}`
         ];
 
-        if(fd.get('payment_method') === 'paypal'){
-          summaryLines.push(`PayPal Reference: ${hiddenPayPalCapture.value || hiddenPayPalOrder.value || 'Pending'}`);
+        if(hiddenPayPalCapture.value || hiddenPayPalOrder.value){
+          summaryLines.push(`PayPal Reference: ${hiddenPayPalCapture.value || hiddenPayPalOrder.value}`);
         }
 
         const pricingSummary = summaryLines.join('\n');
@@ -2642,6 +2511,249 @@
           if(submitBtn) submitBtn.textContent = 'Submit';
         }
       });
+      const paymentRadios = Array.from(form.querySelectorAll('input[name="payment_method"]'));
+      const paypalUi = document.querySelector('[data-payment-ui="paypal"]');
+      const paypalButtonsContainer = document.getElementById('paypal-buttons');
+      const paypalStatus = document.getElementById('paypal-status');
+      const PAYPAL_CONTEXTS = {
+        main: { container: paypalButtonsContainer, status: paypalStatus },
+        nav: { container: navPayPalContainer, status: navPayPalStatus }
+      };
+
+      const DEPOSIT_RATE = 0.5;
+      const PAYPAL_CURRENCY = ((document.body && document.body.dataset && document.body.dataset.paypalCurrency) || 'CAD').toUpperCase();
+      const FREQUENCY_LABELS = {
+        weekly: 'Weekly (25% off)',
+        biweekly: 'Bi-Weekly (20% off)',
+        triweekly: 'Tri-Weekly (15% off)',
+        monthly: 'Monthly (10% off)',
+        biannual: 'Biannual (5% off)',
+        onetime: 'One-time'
+      };
+
+      const paypalButtonsInstances = {};
+      let paypalApproved = false;
+      let paypalApprovedAmount = 0;
+      let paypalScriptPromise = null;
+      let current = 0;
+      let cartAdded = false;
+      let lastCartSignature = '';
+      let latestCartState = null;
+
+      const params = new URLSearchParams(window.location.search);
+      const SERVICE_LABELS = {
+        home: 'Home General Cleaning',
+        commercial: 'Factory / Commercial / Industrial Cleaning',
+        office: 'Office Workspace Cleaning'
+      };
+      const BASE_PRICE_TABLE = {
+        home: {
+          '1000-1500': 165,
+          '1500-2000': 185,
+          '2000-2500': 215,
+          '2500-3000': 245,
+          '3000-3500': 285,
+          '3500-4000': 325
+        },
+        commercial: {
+          '1000-1500': 240,
+          '1500-2000': 285,
+          '2000-2500': 330,
+          '2500-3000': 380,
+          '3000-3500': 425,
+          '3500-4000': 470
+        },
+        office: {
+          '1000-1500': 210,
+          '1500-2000': 250,
+          '2000-2500': 295,
+          '2500-3000': 335,
+          '3000-3500': 375,
+          '3500-4000': 420
+        }
+      };
+      const DETAIL_PRICE_TABLE = {
+        home: {
+          rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
+          bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
+          pets: { no: 0, yes: 25 },
+          basement: { no: 0, yes: 45 },
+          basementRooms: { '1-2': 25, '3-4': 45, '5+': 65 },
+          basementBathrooms: { '1': 18, '2': 32, '3+': 46 }
+        },
+        office: {
+          offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
+          bathrooms: { '1-2': 0, '3-4': 40, '5+': 70 }
+        }
+      };
+
+      const serviceKey = params.get('service') || '';
+      const rawServiceLabel = params.get('serviceLabel') || '';
+      const sqftKey = params.get('sqft') || '';
+      const rawSqftLabel = params.get('sqftLabel') || '';
+      let basePrice = Number(params.get('basePrice') || params.get('total') || 0);
+      let detailPrice = Number(params.get('detailPrice') || 0);
+      const totalParam = Number(params.get('total') || 0);
+      let totalBase = 0;
+
+      function formatSqftLabel(label, key){
+        if(label) return label;
+        if(!key) return '';
+        if(key.includes('-')){
+          const parts = key.split('-').map(part => parseInt(part, 10));
+          if(parts.length === 2 && parts.every(num => !Number.isNaN(num))){
+            return `${parts[0].toLocaleString()} – ${parts[1].toLocaleString()} sq ft`;
+          }
+        }
+        return key;
+      }
+
+      function deriveDetailPrice(service){
+        if(service === 'home'){
+          let total = 0;
+          const rooms = Number(params.get('homeRooms') || 0);
+          if(rooms){
+            if(rooms <= 2){ total += DETAIL_PRICE_TABLE.home.rooms['1-2'] || 0; }
+            else if(rooms <= 4){ total += DETAIL_PRICE_TABLE.home.rooms['3-4'] || 0; }
+            else if(rooms <= 6){ total += DETAIL_PRICE_TABLE.home.rooms['5-6'] || 0; }
+            else { total += DETAIL_PRICE_TABLE.home.rooms['7+'] || 0; }
+          }
+          const baths = Number(params.get('homeBathrooms') || 0);
+          if(baths){
+            if(baths <= 1){ total += DETAIL_PRICE_TABLE.home.bathrooms['1'] || 0; }
+            else if(baths <= 2){ total += DETAIL_PRICE_TABLE.home.bathrooms['2'] || 0; }
+            else if(baths <= 3){ total += DETAIL_PRICE_TABLE.home.bathrooms['3'] || 0; }
+            else { total += DETAIL_PRICE_TABLE.home.bathrooms['4+'] || 0; }
+          }
+          const pets = params.get('homePets');
+          if(pets && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.pets, pets)){
+            total += DETAIL_PRICE_TABLE.home.pets[pets] || 0;
+          }
+          const basement = params.get('homeBasement');
+          if(basement && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.basement, basement)){
+            total += DETAIL_PRICE_TABLE.home.basement[basement] || 0;
+            if(basement === 'yes'){
+              const basementRooms = Number(params.get('homeBasementRooms') || 0);
+              if(basementRooms){
+                if(basementRooms <= 2){ total += DETAIL_PRICE_TABLE.home.basementRooms['1-2'] || 0; }
+                else if(basementRooms <= 4){ total += DETAIL_PRICE_TABLE.home.basementRooms['3-4'] || 0; }
+                else { total += DETAIL_PRICE_TABLE.home.basementRooms['5+'] || 0; }
+              }
+              const basementBaths = Number(params.get('homeBasementBathrooms') || 0);
+              if(basementBaths){
+                if(basementBaths <= 1){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['1'] || 0; }
+                else if(basementBaths <= 2){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['2'] || 0; }
+                else { total += DETAIL_PRICE_TABLE.home.basementBathrooms['3+'] || 0; }
+              }
+            }
+          }
+          return total;
+        }
+        if(service === 'office'){
+          let total = 0;
+          const officesValue = params.get('officeOffices');
+          if(officesValue){
+            const officesKey = DETAIL_PRICE_TABLE.office.offices[officesValue] !== undefined
+              ? officesValue
+              : (() => {
+                  const count = Number(officesValue);
+                  if(!(count > 0)) return '';
+                  if(count <= 5) return '1-5';
+                  if(count <= 10) return '6-10';
+                  if(count <= 20) return '11-20';
+                  return '21+';
+                })();
+            if(officesKey && DETAIL_PRICE_TABLE.office.offices[officesKey] !== undefined){
+              total += DETAIL_PRICE_TABLE.office.offices[officesKey] || 0;
+            }
+          }
+          const officeBathsValue = params.get('officeBathrooms');
+          if(officeBathsValue){
+            const bathsKey = DETAIL_PRICE_TABLE.office.bathrooms[officeBathsValue] !== undefined
+              ? officeBathsValue
+              : (() => {
+                  const count = Number(officeBathsValue);
+                  if(!(count > 0)) return '';
+                  if(count <= 2) return '1-2';
+                  if(count <= 4) return '3-4';
+                  return '5+';
+                })();
+            if(bathsKey && DETAIL_PRICE_TABLE.office.bathrooms[bathsKey] !== undefined){
+              total += DETAIL_PRICE_TABLE.office.bathrooms[bathsKey] || 0;
+            }
+          }
+          return total;
+        }
+        return 0;
+      }
+
+      if(!(detailPrice > 0)){
+        const derivedDetail = deriveDetailPrice(serviceKey);
+        if(derivedDetail > 0){
+          detailPrice = derivedDetail;
+        }
+      }
+
+      if(!(basePrice > 0) && totalParam > 0){
+        const possibleBase = totalParam - detailPrice;
+        if(possibleBase > 0){
+          basePrice = possibleBase;
+        }
+      }
+
+      if(!(basePrice > 0) && serviceKey && sqftKey && BASE_PRICE_TABLE[serviceKey] && BASE_PRICE_TABLE[serviceKey][sqftKey]){
+        basePrice = BASE_PRICE_TABLE[serviceKey][sqftKey];
+      }
+
+      totalBase = basePrice + detailPrice;
+
+      const resolvedServiceLabel = rawServiceLabel || SERVICE_LABELS[serviceKey] || 'Custom Package';
+      const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
+
+      const detailSelections = [];
+      function pushDetail(label, value){
+        if(value){ detailSelections.push(label + ': ' + value); }
+      }
+      pushDetail('Service', resolvedServiceLabel || serviceKey);
+      pushDetail('Square Footage', resolvedSqftLabel || sqftKey);
+      pushDetail('Rooms', params.get('homeRoomsLabel'));
+      pushDetail('Bathrooms', params.get('homeBathroomsLabel'));
+      pushDetail('Pets', params.get('homePetsLabel'));
+      pushDetail('Basement', params.get('homeBasementLabel'));
+      pushDetail('Basement Rooms', params.get('homeBasementRoomsLabel'));
+      pushDetail('Basement Bathrooms', params.get('homeBasementBathroomsLabel'));
+      pushDetail('Offices', params.get('officeOfficesLabel'));
+      pushDetail('Office Bathrooms', params.get('officeBathroomsLabel'));
+
+      hiddenServiceKey.value = serviceKey;
+      hiddenServiceLabel.value = resolvedServiceLabel;
+      hiddenSqftLabel.value = resolvedSqftLabel;
+      const detailSummaryValue = detailSelections.join(' | ');
+      const detailSummaryDisplay = detailSelections.length
+        ? detailSelections.join(' • ')
+        : (totalBase > 0 ? 'Base package from instant quote.' : '');
+      hiddenDetailSummary.value = detailSummaryValue || (totalBase > 0 ? 'Base package from instant quote.' : '');
+      hiddenBasePrice.value = basePrice.toFixed(2);
+      hiddenDetailPrice.value = detailPrice.toFixed(2);
+      hiddenPackage.value = resolvedServiceLabel;
+
+      if(recapDescription){
+        if(detailSummaryDisplay){
+          recapDescription.hidden = false;
+          recapDescription.textContent = detailSummaryDisplay;
+        } else {
+          recapDescription.hidden = true;
+          recapDescription.textContent = '';
+        }
+      }
+
+      if(cartService){
+        cartService.textContent = (resolvedServiceLabel || 'Custom Package');
+      }
+
+      if(originField){
+        originField.value = serviceKey ? 'instant-quote' : 'book-page';
+      }
 
       updateSummary();
       applyPaymentSelection();

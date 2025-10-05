@@ -898,7 +898,7 @@ h1, h2, h3 {
 
 .addon-groups {
   display: grid;
-  gap: 1.8rem;
+  gap: 1.4rem;
 }
 
 .addon-group-title {
@@ -916,22 +916,21 @@ h1, h2, h3 {
 
 .addon-group.active {
   display: grid;
-  gap: 0.85rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.7rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .addon-pill {
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  gap: 0.85rem;
-  padding: 0.85rem 1.1rem;
-  border-radius: 20px;
+  gap: 0.65rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 18px;
   background: rgba(10, 24, 38, 0.72);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.36);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
   overflow: hidden;
@@ -971,20 +970,19 @@ h1, h2, h3 {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(0, 212, 255, 0.35);
 }
 
-
 .addon-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   color: #f6fbff;
   flex-shrink: 0;
 }
 
 .addon-icon svg {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   transition: transform 0.35s ease;
 }
 
@@ -996,8 +994,8 @@ h1, h2, h3 {
 
 .addon-name {
   flex: 1;
-  font-size: 0.85rem;
-  line-height: 1.25;
+  font-size: 0.78rem;
+  line-height: 1.2;
   color: rgba(226, 245, 255, 0.92);
   font-weight: 600;
 }
@@ -1005,18 +1003,18 @@ h1, h2, h3 {
 .addon-stepper {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.35rem;
-  border-radius: 14px;
+  gap: 0.25rem;
+  padding: 0.18rem 0.3rem;
+  border-radius: 12px;
   background: rgba(3, 18, 30, 0.65);
   border: 1px solid rgba(0, 212, 255, 0.22);
   transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .addon-stepper .stepper-button {
-  width: 30px;
-  height: 30px;
-  font-size: 1rem;
+  width: 26px;
+  height: 26px;
+  font-size: 0.95rem;
 }
 
 @media (max-width: 720px) {
@@ -1038,13 +1036,13 @@ h1, h2, h3 {
 }
 
 .addon-qty {
-  width: 2.65rem;
+  width: 2.3rem;
   background: transparent;
   border: none;
   color: #f2fbff;
   text-align: center;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
 }
 
 .addon-qty:focus {

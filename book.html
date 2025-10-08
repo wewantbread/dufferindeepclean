@@ -172,7 +172,13 @@
 
     .form-columns{
       display: grid;
-      gap: clamp(18px, 3vw, 32px);
+      gap: clamp(20px, 3vw, 36px);
+      align-items: start;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .form-columns.cart-summary-hidden{
+      grid-template-columns: 1fr !important;
     }
 
     .form-steps{
@@ -194,21 +200,22 @@
     }
 
     .cart-summary{
-      background: rgba(7, 18, 32, 0.72);
-      border: 1px solid rgba(0, 212, 255, 0.18);
+      background: rgba(7, 18, 32, 0.74);
+      border: 1px solid rgba(255, 140, 220, 0.32);
       border-radius: 18px;
-      padding: clamp(12px, 1.8vw, 18px);
+      padding: clamp(14px, 2vw, 20px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
       display: grid;
       gap: clamp(10px, 1.6vw, 16px);
       width: 100%;
-      max-width: 250px;
+      max-width: 340px;
+      min-width: 0;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
     .cart-summary.is-added{
-      border-color: rgba(0, 212, 255, 0.45);
-      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(0, 212, 255, 0.12);
+      border-color: rgba(255, 140, 220, 0.6);
+      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(255, 140, 220, 0.18);
       opacity: 0.96;
     }
 
@@ -296,7 +303,10 @@
     }
 
     .cart-btn{
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
+      gap: 0.55rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-weight: 700;
@@ -319,157 +329,18 @@
       color: #fff;
     }
 
-    .cart-status{
-      min-height: 1em;
-      font-size: 0.9rem;
-      color: #9ad4ff;
-    }
-
-    .cart-status.error{ color: #ff6b9a; }
-
-    .payment-policy{
-      border-radius: 14px;
-      border: 1px dashed rgba(255,255,255,0.18);
-      padding: 14px;
-      font-size: 0.9rem;
-      color: #d7e7f8;
-      background: rgba(255,255,255,0.02);
-    }
-
-    .payment-policy h3{
-      margin-top: 0;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: #ffe0f7;
-    }
-
-    .payment-policy p{ margin: 0; }
-
-    .cart-summary{
-      background: rgba(7, 18, 32, 0.72);
-      border: 1px solid rgba(0, 212, 255, 0.18);
-      border-radius: 18px;
-      padding: clamp(12px, 1.8vw, 18px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-      display: grid;
-      gap: clamp(10px, 1.6vw, 16px);
-      width: 100%;
-      max-width: 250px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-
-    .cart-summary.is-added{
-      border-color: rgba(0, 212, 255, 0.45);
-      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(0, 212, 255, 0.12);
-      opacity: 0.96;
-    }
-
-    .cart-summary-flight{
-      animation: cartSummaryFlight 0.65s ease;
-    }
-
-    .cart-summary header{
-      display: flex;
+    .cart-btn-icon{
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-    }
-
-    .cart-summary img{
-      width: 64px;
-      height: 64px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.1);
-      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
-    }
-
-    .cart-summary-title{
-      margin: 0;
-      font-family: "Bebas Neue", system-ui, sans-serif;
-      font-size: clamp(20px, 3vw, 26px);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .cart-summary-subtitle{
-      color: #b6c2cf;
-      font-size: 0.85rem;
-      margin: 2px 0 0;
-    }
-
-    .cart-details{
-      font-size: 0.85rem;
-      color: #99b3cc;
-      line-height: 1.45;
-    }
-
-    .cart-pricing{
-      border-radius: 16px;
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      background: rgba(4, 18, 28, 0.65);
-      padding: 12px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .cart-line{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.9rem;
-      color: #d7e7f8;
-    }
-
-    .cart-line.total{
-      font-weight: 700;
-      font-size: 1rem;
-    }
-
-    .cart-line.deposit{
-      color: #00d084;
-      font-weight: 600;
-    }
-
-    .cart-line.balance{
-      color: #fbd38d;
-    }
-
-    .cart-divider{
-      height: 1px;
-      background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.45), rgba(0,212,255,0));
-      margin: 2px 0;
-    }
-
-    @keyframes cartSummaryFlight{
-      0% { transform: translateY(0); opacity: 1; }
-      40% { transform: translateY(-6px); opacity: 0.92; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    .cart-btn{
       justify-content: center;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      background: linear-gradient(180deg, #ff8edb, #ff4fc3);
-      border-color: rgba(255, 112, 210, 0.75);
-      color: #fff;
-      box-shadow: 0 12px 32px rgba(255, 110, 205, 0.35);
+      width: 1.2rem;
+      height: 1.2rem;
     }
 
-    .cart-btn:disabled{
-      background: linear-gradient(180deg, rgba(255, 142, 219, 0.28), rgba(255, 79, 195, 0.2));
-      border-color: rgba(255, 112, 210, 0.35);
-      color: rgba(255,255,255,0.68);
-      box-shadow: none;
-    }
+    .cart-btn-icon svg{ width: 100%; height: 100%; }
 
-    .cart-btn.is-added{
-      background: linear-gradient(180deg, #ff9ee4, #ff64d0);
-      border-color: rgba(255, 140, 220, 0.85);
-      color: #fff;
+    .cart-btn.is-added .cart-btn-icon{
+      filter: drop-shadow(0 0 6px rgba(255, 160, 224, 0.55));
     }
 
     .cart-status{
@@ -615,8 +486,8 @@
 
     @media (min-width: 900px){
       .form-columns{
-        grid-template-columns: minmax(0, 1fr) minmax(240px, 280px);
-        align-items: start;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.9fr);
+        gap: clamp(32px, 5vw, 58px);
       }
       .cart-summary{
         position: sticky;
@@ -1147,7 +1018,14 @@
                   <span id="balance-due-text">—</span>
                 </div>
               </div>
-              <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>Add package to cart</button>
+              <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>
+                <span class="cart-btn-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="cart-btn-text">Add to Cart</span>
+              </button>
               <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
               <div class="payment-policy">
                 <h3>Payment Policy</h3>
@@ -1511,24 +1389,7 @@
       const hiddenPayPalPayer = document.getElementById('input-paypal-payer-id');
       const hiddenPayPalCapture = document.getElementById('input-paypal-capture-id');
       const hiddenCartStatus = document.getElementById('input-cart-status');
-      const CART_IMAGE_DATA_URI = window.CART_IMAGE_DATA_URI || 'data:image/png;base64,' +
-        'iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQCAIAAAD9V4nPAAAE0UlEQVR42u3VMQ0AAAgEsdeCXXyiAxNsNKmCWy7VAwBvRQIAjBAA' +
-        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
-        'jBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAA' +
-        'I1QBACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
-        'ACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACMEACME' +
-        'ACMEwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
-        'wAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgBwAgB' +
-        'wAgBwAgBwAgBMEIVADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-        'ADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBCADBC' +
-        'ADBCADBCADBCADBCADBCAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
-        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQ' +
-        'AIwQAIwQAIwQAIwQAIwQAIwQAIwQAIwQACOUAAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
-        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAj' +
-        'BAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBAAjBMAIVQDACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
-        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHA' +
-        'CAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAHACAEwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAw' +
-        'QgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgAwQgC4sEMVKv0E08xMAAAAAElFTkSuQmCC';
+      const CART_IMAGE_DATA_URI = (window.CART_IMAGE_DATA_URI && typeof window.CART_IMAGE_DATA_URI === 'string' && window.CART_IMAGE_DATA_URI.trim()) ? window.CART_IMAGE_DATA_URI : 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgNjAwIDYwMCI+ICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iYmciIGN4PSI1MCUiIGN5PSI0NSUiIHI9IjY1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3NDQ2ZmYiIHN0b3Atb3BhY2l0eT0iMC45NSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iIzVhMmFjNCIgc3RvcC1vcGFjaXR5PSIwLjkyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkMTA1OCIgc3RvcC1vcGFjaXR5PSIwLjk4Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnbG93IiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmN2I1ZmYiIHN0b3Atb3BhY2l0eT0iMC45Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UxNmVmZiIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJidWNrZXQiIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzUyMmI4NSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IjZmMzViNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaGFuZGxlIiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlZmU1ZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjY2JkM2ZmIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJicm9vbSIgeDE9IjAiIHgyPSIxIiB5MT0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjdkMjdjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZiYjE0YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0idmFjIiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0MjI1NjgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMmYxMzRiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTgiIGZsb29kLWNvbG9yPSIjMTIwNjI2IiBmbG9vZC1vcGFjaXR5PSIwLjYiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8ZWxsaXBzZSBjeD0iMzAwIiBjeT0iNDcwIiByeD0iMjIwIiByeT0iNzAiIGZpbGw9IiMxODA3MzAiIG9wYWNpdHk9IjAuNzUiLz4KICA8ZyBmaWx0ZXI9InVybCgjc2hhZG93KSI+CiAgICA8cGF0aCBkPSJNMTc0IDE3MGgyNTJhMTQgMTQgMCAwIDEgMTQgMTR2MzRhMTQgMTQgMCAwIDEtMTQgMTRIMTc0YTE0IDE0IDAgMCAxLTE0LTE0di0zNGExNCAxNCAwIDAgMSAxNC0xNHoiIGZpbGw9InVybCgjZ2xvdykiIG9wYWNpdHk9IjAuODUiLz4KICAgIDx0ZXh0IHg9IjMwMCIgeT0iMjA1IiBmb250LWZhbWlseT0iJ0JlYmFzIE5ldWUnLCAnQXJpYWwgQmxhY2snLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmQwZjQ3IiBsZXR0ZXItc3BhY2luZz0iNiI+ZHVmZmVyaW5kZWVwY2xlYW48L3RleHQ+CiAgPC9nPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1MCAyNDApIj4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0MCAtMjApIj4KICAgICAgPHBhdGggZD0iTTExMCAwYzI4IDAgNTIgMjEgNTUgNDlsMTYgMTYyYzEgOS02IDE3LTE1IDE3SDU0Yy05IDAtMTYtOC0xNS0xN2wxNi0xNjJDNTggMjEgODIgMCAxMTAgMHoiIGZpbGw9InVybCgjYnVja2V0KSIvPgogICAgICA8cGF0aCBkPSJNNDYgNzZoMTI4bDcgNzBIMzl6IiBmaWxsPSIjN2M0OWQwIiBvcGFjaXR5PSIwLjQiLz4KICAgICAgPHBhdGggZD0iTTg4IC0zMmg0NGwyMCA3MEg2OHoiIGZpbGw9InVybCgjaGFuZGxlKSIvPgogICAgICA8cmVjdCB4PSI5MiIgeT0iLTUwIiB3aWR0aD0iMzYiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iI2ZlZjZmZiIgc3Ryb2tlPSIjY2JjOWZmIiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwIDIwKSI+CiAgICAgIDxwYXRoIGQ9Ik00NiAtNDBoMjRsMjQgMzIwaC0yNHoiIGZpbGw9IiNmOGU5ZmYiIHN0cm9rZT0iI2Q0YzBmZiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICAgIDxwYXRoIGQ9Ik0tMTAgMjYwaDE2MGwxMiA1NGMyIDgtNCAxNi0xMiAxNkgtMzRjLTggMC0xNC04LTEyLTE2eiIgZmlsbD0idXJsKCNicm9vbSkiIHN0cm9rZT0iI2Y1OWQzMiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICAgIDxwYXRoIGQ9Ik0tMjQgMjYwaDIwMCIgc3Ryb2tlPSIjZmFjYTY2IiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNjUiLz4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2MCAxMCkiPgogICAgICA8cGF0aCBkPSJNMTIwIC0yMGMxNCAwIDI2IDEwIDI4IDI0bDI2IDI1MGMyIDE2LTEwIDMwLTI2IDMwSDY2Yy0xNiAwLTI4LTE0LTI2LTMwbDI2LTI1MGMyLTE0IDE0LTI0IDI4LTI0eiIgZmlsbD0idXJsKCN2YWMpIi8+CiAgICAgIDxwYXRoIGQ9Ik0xMDQgLTU0aDMybDEwIDM4aC01MnoiIGZpbGw9IiM1ZDJmOGYiLz4KICAgICAgPHJlY3QgeD0iOTIiIHk9Ii05NiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjQ4IiByeD0iMjIiIGZpbGw9IiNmMGU3ZmYiIHN0cm9rZT0iI2QzYzlmZiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICAgIDxyZWN0IHg9IjEyIiB5PSIyMzYiIHdpZHRoPSIyMDAiIGhlaWdodD0iNDIiIHJ4PSIxOCIgZmlsbD0iIzYyMzQ5YSIvPgogICAgPC9nPgogICAgPGcgb3BhY2l0eT0iMC43MiI+CiAgICAgIDxjaXJjbGUgY3g9IjIwNiIgY3k9IjI2IiByPSI4IiBmaWxsPSIjZmVmNmZmIi8+CiAgICAgIDxjaXJjbGUgY3g9IjIzNiIgY3k9Ii0xNiIgcj0iNiIgZmlsbD0iI2ZlZjZmZiIvPgogICAgICA8Y2lyY2xlIGN4PSIxNzYiIGN5PSItMTIiIHI9IjUiIGZpbGw9IiNmZWY2ZmYiLz4KICAgICAgPGNpcmNsZSBjeD0iMjQ2IiBjeT0iNTYiIHI9IjUiIGZpbGw9IiNmZWY2ZmYiLz4KICAgICAgPGNpcmNsZSBjeD0iMTE2IiBjeT0iMTYiIHI9IjYiIGZpbGw9IiNmZWY2ZmYiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==';
       if(!window.CART_IMAGE_DATA_URI){
         window.CART_IMAGE_DATA_URI = CART_IMAGE_DATA_URI;
       }
@@ -1585,6 +1446,7 @@
       const addToCartBtn = document.getElementById('addToCartBtn');
       const cartStatus = document.getElementById('cartStatus');
       const cartSummaryEl = document.getElementById('cartSummary');
+      const formColumnsEl = document.querySelector('.form-columns');
       const navCartButton = document.querySelector('[data-cart-toggle]');
       const navPayPalContainer = document.getElementById('nav-paypal-buttons');
       const navPayPalStatus = document.getElementById('nav-paypal-status');
@@ -2291,7 +2153,13 @@
 
       function refreshCartButton(){
         if(addToCartBtn){
-          addToCartBtn.textContent = cartAdded ? 'Added to cart' : 'Add package to cart';
+          const label = addToCartBtn.querySelector('.cart-btn-text');
+          const labelText = cartAdded ? 'Added to Cart' : 'Add to Cart';
+          if(label){
+            label.textContent = labelText;
+          } else {
+            addToCartBtn.textContent = labelText;
+          }
           addToCartBtn.classList.toggle('is-added', cartAdded);
         }
         if(hiddenCartStatus){
@@ -2302,7 +2170,16 @@
         }
       }
 
+      function applyCartVisibility(stepIndex){
+        if(!cartSummaryEl || !formColumnsEl) return;
+        const hide = stepIndex > 1;
+        cartSummaryEl.hidden = hide;
+        cartSummaryEl.setAttribute('aria-hidden', hide ? 'true' : 'false');
+        formColumnsEl.classList.toggle('cart-summary-hidden', hide);
+      }
+
       function updateSummary(){
+        applyCartVisibility(current);
         const extras = computeExtras();
         const extrasTotal = extras.reduce((sum, item) => sum + item.price * item.qty, 0);
         const freqInput = selectedFrequency();
@@ -2372,7 +2249,7 @@
             refreshCartButton();
             if(cartStatus){
               cartStatus.classList.remove('error');
-              cartStatus.textContent = 'Totals updated. Add the package to your cart again when ready.';
+              cartStatus.textContent = "Totals updated. Add to cart again when you're ready.";
             }
           } else if(cartStatus && cartStatus.textContent && cartStatus.textContent.includes('Totals updated')){
             cartStatus.textContent = '';
@@ -2394,10 +2271,14 @@
           addToCartBtn.disabled = cartAdded ? true : !canAdd;
           if(!canAdd){
             if(!cartAdded && cartStatus){
-              cartStatus.classList.remove('error');
-              cartStatus.textContent = 'Finish steps 1–2 to add this package to your cart.';
+              if(current >= 1){
+                cartStatus.classList.remove('error');
+                cartStatus.textContent = 'Select a visit frequency to add this package to your cart.';
+              } else if(cartStatus.textContent === 'Select a visit frequency to add this package to your cart.'){
+                cartStatus.textContent = '';
+              }
             }
-          } else if(!cartAdded && cartStatus && cartStatus.textContent === 'Finish steps 1–2 to add this package to your cart.'){
+          } else if(!cartAdded && cartStatus && cartStatus.textContent === 'Select a visit frequency to add this package to your cart.'){
             cartStatus.textContent = '';
           }
         }
@@ -2504,7 +2385,17 @@
       });
 
       frequencyInputs.forEach(input => {
-        input.addEventListener('change', updateSummary);
+        input.addEventListener('change', () => {
+          if(cartStatus){
+            cartStatus.classList.remove('error');
+            if(cartStatus.textContent === 'Select a visit frequency to add this package to your cart.' ||
+               cartStatus.textContent === 'Please choose how often we should visit before moving on.'){
+              cartStatus.textContent = '';
+            }
+          }
+          updateSummary();
+          ensureCartAdded({ animate: true });
+        });
       });
 
       paymentRadios.forEach(radio => {
@@ -2533,6 +2424,7 @@
           item.classList.toggle('done', idx < i);
         });
         current = i;
+        applyCartVisibility(i);
         updateSummary();
         window.scrollTo({ top: 0, behavior: 'smooth' });
         if(i === steps.length - 1){
@@ -2552,6 +2444,19 @@
           return;
         }
         if(event.target.matches('.next')){
+          if(current === 1){
+            const freqCheck = selectedFrequency();
+            if(!freqCheck){
+              if(cartStatus){
+                cartStatus.classList.add('error');
+                cartStatus.textContent = 'Please choose how often we should visit before moving on.';
+              }
+              if(frequencyInputs.length){
+                frequencyInputs[0].focus();
+              }
+              return;
+            }
+          }
           const visible = steps[current];
           const required = Array.from(visible.querySelectorAll('[required]'));
           for(const field of required){

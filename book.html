@@ -861,8 +861,33 @@
               </div>
             </label>
           </div>
+          <div class="pricing-recap" id="pricingRecap">
+            <h3 class="pricing-recap-title">Pricing summary</h3>
+            <div class="pricing-breakdown">
+              <div class="pricing-line">
+                <span class="pricing-label">Base package</span>
+                <span class="pricing-value" data-recap-base>—</span>
+              </div>
+              <div class="pricing-line" data-recap-detail-row hidden>
+                <span class="pricing-label">Service details</span>
+                <span class="pricing-value" data-recap-detail>—</span>
+              </div>
+              <div class="pricing-line" data-recap-extras-row hidden>
+                <span class="pricing-label">Add-ons</span>
+                <span class="pricing-value" data-recap-extras>—</span>
+              </div>
+              <div class="pricing-line" data-recap-discount-row hidden>
+                <span class="pricing-label">Frequency savings</span>
+                <span class="pricing-value" data-recap-discount>—</span>
+              </div>
+              <div class="pricing-line total">
+                <span class="pricing-label">Visit total</span>
+                <span class="pricing-value" data-recap-total>—</span>
+              </div>
+            </div>
+            <p class="pricing-recap-details" data-recap-description hidden></p>
+          </div>
           <div class="actions">
-            <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>
           </div>
         </fieldset>
@@ -891,6 +916,7 @@
               <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
             </label>
           </div>
+          <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>

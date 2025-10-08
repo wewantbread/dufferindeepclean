@@ -346,6 +346,159 @@
 
     .payment-policy p{ margin: 0; }
 
+    .cart-summary{
+      background: rgba(7, 18, 32, 0.72);
+      border: 1px solid rgba(0, 212, 255, 0.18);
+      border-radius: 18px;
+      padding: clamp(12px, 1.8vw, 18px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      display: grid;
+      gap: clamp(10px, 1.6vw, 16px);
+      width: 100%;
+      max-width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .cart-summary.is-added{
+      border-color: rgba(0, 212, 255, 0.45);
+      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(0, 212, 255, 0.12);
+      opacity: 0.96;
+    }
+
+    .cart-summary-flight{
+      animation: cartSummaryFlight 0.65s ease;
+    }
+
+    .cart-summary header{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-summary img{
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+
+    .cart-summary-title{
+      margin: 0;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: clamp(20px, 3vw, 26px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cart-summary-subtitle{
+      color: #b6c2cf;
+      font-size: 0.85rem;
+      margin: 2px 0 0;
+    }
+
+    .cart-details{
+      font-size: 0.85rem;
+      color: #99b3cc;
+      line-height: 1.45;
+    }
+
+    .cart-pricing{
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      background: rgba(4, 18, 28, 0.65);
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .cart-line{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #d7e7f8;
+    }
+
+    .cart-line.total{
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .cart-line.deposit{
+      color: #00d084;
+      font-weight: 600;
+    }
+
+    .cart-line.balance{
+      color: #fbd38d;
+    }
+
+    .cart-divider{
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.45), rgba(0,212,255,0));
+      margin: 2px 0;
+    }
+
+    @keyframes cartSummaryFlight{
+      0% { transform: translateY(0); opacity: 1; }
+      40% { transform: translateY(-6px); opacity: 0.92; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .cart-btn{
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      background: linear-gradient(180deg, #ff8edb, #ff4fc3);
+      border-color: rgba(255, 112, 210, 0.75);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(255, 110, 205, 0.35);
+    }
+
+    .cart-btn:disabled{
+      background: linear-gradient(180deg, rgba(255, 142, 219, 0.28), rgba(255, 79, 195, 0.2));
+      border-color: rgba(255, 112, 210, 0.35);
+      color: rgba(255,255,255,0.68);
+      box-shadow: none;
+    }
+
+    .cart-btn.is-added{
+      background: linear-gradient(180deg, #ff9ee4, #ff64d0);
+      border-color: rgba(255, 140, 220, 0.85);
+      color: #fff;
+    }
+
+    .cart-status{
+      min-height: 1em;
+      font-size: 0.9rem;
+      color: #9ad4ff;
+    }
+
+    .cart-status.error{ color: #ff6b9a; }
+
+    .payment-policy{
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      padding: 14px;
+      font-size: 0.9rem;
+      color: #d7e7f8;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .payment-policy h3{
+      margin-top: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ffe0f7;
+    }
+
+    .payment-policy p{ margin: 0; }
+
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
     @media (min-width: 720px){ .grid-2{ grid-template-columns: 1fr 1fr; } }
@@ -837,8 +990,33 @@
               </div>
             </label>
           </div>
+          <div class="pricing-recap" id="pricingRecap">
+            <h3 class="pricing-recap-title">Pricing summary</h3>
+            <div class="pricing-breakdown">
+              <div class="pricing-line">
+                <span class="pricing-label">Base package</span>
+                <span class="pricing-value" data-recap-base>—</span>
+              </div>
+              <div class="pricing-line" data-recap-detail-row hidden>
+                <span class="pricing-label">Service details</span>
+                <span class="pricing-value" data-recap-detail>—</span>
+              </div>
+              <div class="pricing-line" data-recap-extras-row hidden>
+                <span class="pricing-label">Add-ons</span>
+                <span class="pricing-value" data-recap-extras>—</span>
+              </div>
+              <div class="pricing-line" data-recap-discount-row hidden>
+                <span class="pricing-label">Frequency savings</span>
+                <span class="pricing-value" data-recap-discount>—</span>
+              </div>
+              <div class="pricing-line total">
+                <span class="pricing-label">Visit total</span>
+                <span class="pricing-value" data-recap-total>—</span>
+              </div>
+            </div>
+            <p class="pricing-recap-details" data-recap-description hidden></p>
+          </div>
           <div class="actions">
-            <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>
           </div>
         </fieldset>
@@ -867,6 +1045,7 @@
               <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
             </label>
           </div>
+          <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>

@@ -185,6 +185,166 @@
     fieldset{ border: none; margin: 0; padding: 0; }
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: #b6c2cf; }
+    .legend-note{
+      display: block;
+      margin-top: 4px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #b6c2cf;
+    }
+
+    .cart-summary{
+      background: rgba(7, 18, 32, 0.72);
+      border: 1px solid rgba(0, 212, 255, 0.18);
+      border-radius: 18px;
+      padding: clamp(12px, 1.8vw, 18px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      display: grid;
+      gap: clamp(10px, 1.6vw, 16px);
+      width: 100%;
+      max-width: 250px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .cart-summary.is-added{
+      border-color: rgba(0, 212, 255, 0.45);
+      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(0, 212, 255, 0.12);
+      opacity: 0.96;
+    }
+
+    .cart-summary-flight{
+      animation: cartSummaryFlight 0.65s ease;
+    }
+
+    .cart-summary header{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-summary img{
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.1);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+    }
+
+    .cart-summary-title{
+      margin: 0;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: clamp(20px, 3vw, 26px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cart-summary-subtitle{
+      color: #b6c2cf;
+      font-size: 0.85rem;
+      margin: 2px 0 0;
+    }
+
+    .cart-details{
+      font-size: 0.85rem;
+      color: #99b3cc;
+      line-height: 1.45;
+    }
+
+    .cart-pricing{
+      border-radius: 16px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      background: rgba(4, 18, 28, 0.65);
+      padding: 12px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .cart-line{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #d7e7f8;
+    }
+
+    .cart-line.total{
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .cart-line.deposit{
+      color: #00d084;
+      font-weight: 600;
+    }
+
+    .cart-line.balance{
+      color: #fbd38d;
+    }
+
+    .cart-divider{
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,212,255,0), rgba(0,212,255,0.45), rgba(0,212,255,0));
+      margin: 2px 0;
+    }
+
+    @keyframes cartSummaryFlight{
+      0% { transform: translateY(0); opacity: 1; }
+      40% { transform: translateY(-6px); opacity: 0.92; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .cart-btn{
+      justify-content: center;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      background: linear-gradient(180deg, #ff8edb, #ff4fc3);
+      border-color: rgba(255, 112, 210, 0.75);
+      color: #fff;
+      box-shadow: 0 12px 32px rgba(255, 110, 205, 0.35);
+    }
+
+    .cart-btn:disabled{
+      background: linear-gradient(180deg, rgba(255, 142, 219, 0.28), rgba(255, 79, 195, 0.2));
+      border-color: rgba(255, 112, 210, 0.35);
+      color: rgba(255,255,255,0.68);
+      box-shadow: none;
+    }
+
+    .cart-btn.is-added{
+      background: linear-gradient(180deg, #ff9ee4, #ff64d0);
+      border-color: rgba(255, 140, 220, 0.85);
+      color: #fff;
+    }
+
+    .cart-status{
+      min-height: 1em;
+      font-size: 0.9rem;
+      color: #9ad4ff;
+    }
+
+    .cart-status.error{ color: #ff6b9a; }
+
+    .payment-policy{
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      padding: 14px;
+      font-size: 0.9rem;
+      color: #d7e7f8;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .payment-policy h3{
+      margin-top: 0;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ffe0f7;
+    }
+
+    .payment-policy p{ margin: 0; }
 
     .cart-summary{
       background: rgba(7, 18, 32, 0.72);
@@ -434,6 +594,11 @@
     .btn.back{
       background: rgba(255,255,255,0.06); color: #f2f5f8;
     }
+    .btn.skip{
+      background: rgba(255,255,255,0.08);
+      color: #e9f7ff;
+      border-color: rgba(255,255,255,0.18);
+    }
     .btn:hover{ filter: brightness(1.05); }
 
     .review{
@@ -521,8 +686,8 @@
 
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
-        <li class="active">1. frequency</li>
-        <li>2. add extras</li>
+        <li class="active">1. add extras</li>
+        <li>2. frequency</li>
         <li>3. your details</li>
         <li>4. when &amp; where</li>
         <li>5. review &amp; confirm</li>
@@ -556,92 +721,9 @@
           <div class="form-columns">
             <div class="form-steps">
 
-          <fieldset class="step" data-step="1">
-          <legend>Choose your visit frequency</legend>
-          <div class="plans">
-            <label class="plan">
-              <input type="radio" name="frequency" value="weekly" data-discount="0.25" required />
-              <div class="plan-card">
-                <div class="plan-title">Weekly</div>
-                <div class="plan-discount">25% off</div>
-                <div class="plan-note">Best value &amp; consistency</div>
-              </div>
-            </label>
-            <label class="plan">
-              <input type="radio" name="frequency" value="biweekly" data-discount="0.20" />
-              <div class="plan-card">
-                <div class="plan-title">Bi-Weekly</div>
-                <div class="plan-discount">20% off</div>
-                <div class="plan-note">Great for busy offices</div>
-              </div>
-            </label>
-            <label class="plan">
-              <input type="radio" name="frequency" value="triweekly" data-discount="0.15" />
-              <div class="plan-card">
-                <div class="plan-title">Tri-Weekly</div>
-                <div class="plan-discount">15% off</div>
-                <div class="plan-note">Light traffic spaces</div>
-              </div>
-            </label>
-            <label class="plan">
-              <input type="radio" name="frequency" value="monthly" data-discount="0.10" />
-              <div class="plan-card">
-                <div class="plan-title">Monthly</div>
-                <div class="plan-discount">10% off</div>
-                <div class="plan-note">Deep refresh once a month</div>
-              </div>
-            </label>
-            <label class="plan">
-              <input type="radio" name="frequency" value="biannual" data-discount="0.05" />
-              <div class="plan-card">
-                <div class="plan-title">Biannual</div>
-                <div class="plan-discount">5% off</div>
-                <div class="plan-note">Seasonal top-to-bottom</div>
-              </div>
-            </label>
-            <label class="plan">
-              <input type="radio" name="frequency" value="onetime" data-discount="0" />
-              <div class="plan-card">
-                <div class="plan-title">One-time</div>
-                <div class="plan-discount">Standard rate</div>
-                <div class="plan-note">Perfect for move-ins &amp; projects</div>
-              </div>
-            </label>
-          </div>
-          <div class="pricing-recap" id="pricingRecap">
-            <h3 class="pricing-recap-title">Pricing summary</h3>
-            <div class="pricing-breakdown">
-              <div class="pricing-line">
-                <span class="pricing-label">Base package</span>
-                <span class="pricing-value" data-recap-base>—</span>
-              </div>
-              <div class="pricing-line" data-recap-detail-row hidden>
-                <span class="pricing-label">Service details</span>
-                <span class="pricing-value" data-recap-detail>—</span>
-              </div>
-              <div class="pricing-line" data-recap-extras-row hidden>
-                <span class="pricing-label">Add-ons</span>
-                <span class="pricing-value" data-recap-extras>—</span>
-              </div>
-              <div class="pricing-line" data-recap-discount-row hidden>
-                <span class="pricing-label">Frequency savings</span>
-                <span class="pricing-value" data-recap-discount>—</span>
-              </div>
-              <div class="pricing-line total">
-                <span class="pricing-label">Visit total</span>
-                <span class="pricing-value" data-recap-total>—</span>
-              </div>
-            </div>
-            <p class="pricing-recap-details" data-recap-description hidden></p>
-          </div>
-          <div class="actions">
-            <button type="button" class="btn next">Next</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="step" data-step="2" hidden>
-          <legend>Add extra services</legend>
-          <p class="muted">Add speciality tasks for this visit. Select a tile to include it and adjust the quantity if needed.</p>
+        <fieldset class="step" data-step="1">
+          <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
+          <p class="muted">Select any speciality tasks you’d like to include or skip to keep the base package.</p>
           <div class="addon-groups" id="addon-groups">
             <div class="addon-group" data-service-group="home">
               <p class="addon-group-title">Home &amp; Residential Extras</p>
@@ -851,7 +933,90 @@
           </div>
           <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
-            <button type="button" class="btn back">Back</button>
+            <button type="button" class="btn skip">Skip extras</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2" hidden>
+          <legend>Choose your visit frequency</legend>
+          <div class="plans">
+            <label class="plan">
+              <input type="radio" name="frequency" value="weekly" data-discount="0.25" required />
+              <div class="plan-card">
+                <div class="plan-title">Weekly</div>
+                <div class="plan-discount">25% off</div>
+                <div class="plan-note">Best value &amp; consistency</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="biweekly" data-discount="0.20" />
+              <div class="plan-card">
+                <div class="plan-title">Bi-Weekly</div>
+                <div class="plan-discount">20% off</div>
+                <div class="plan-note">Great for busy offices</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="triweekly" data-discount="0.15" />
+              <div class="plan-card">
+                <div class="plan-title">Tri-Weekly</div>
+                <div class="plan-discount">15% off</div>
+                <div class="plan-note">Light traffic spaces</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="monthly" data-discount="0.10" />
+              <div class="plan-card">
+                <div class="plan-title">Monthly</div>
+                <div class="plan-discount">10% off</div>
+                <div class="plan-note">Deep refresh once a month</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="biannual" data-discount="0.05" />
+              <div class="plan-card">
+                <div class="plan-title">Biannual</div>
+                <div class="plan-discount">5% off</div>
+                <div class="plan-note">Seasonal top-to-bottom</div>
+              </div>
+            </label>
+            <label class="plan">
+              <input type="radio" name="frequency" value="onetime" data-discount="0" />
+              <div class="plan-card">
+                <div class="plan-title">One-time</div>
+                <div class="plan-discount">Standard rate</div>
+                <div class="plan-note">Perfect for move-ins &amp; projects</div>
+              </div>
+            </label>
+          </div>
+          <div class="pricing-recap" id="pricingRecap">
+            <h3 class="pricing-recap-title">Pricing summary</h3>
+            <div class="pricing-breakdown">
+              <div class="pricing-line">
+                <span class="pricing-label">Base package</span>
+                <span class="pricing-value" data-recap-base>—</span>
+              </div>
+              <div class="pricing-line" data-recap-detail-row hidden>
+                <span class="pricing-label">Service details</span>
+                <span class="pricing-value" data-recap-detail>—</span>
+              </div>
+              <div class="pricing-line" data-recap-extras-row hidden>
+                <span class="pricing-label">Add-ons</span>
+                <span class="pricing-value" data-recap-extras>—</span>
+              </div>
+              <div class="pricing-line" data-recap-discount-row hidden>
+                <span class="pricing-label">Frequency savings</span>
+                <span class="pricing-value" data-recap-discount>—</span>
+              </div>
+              <div class="pricing-line total">
+                <span class="pricing-label">Visit total</span>
+                <span class="pricing-value" data-recap-total>—</span>
+              </div>
+            </div>
+            <p class="pricing-recap-details" data-recap-description hidden></p>
+          </div>
+          <div class="actions">
             <button type="button" class="btn next">Next</button>
           </div>
         </fieldset>
@@ -880,6 +1045,7 @@
               <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
             </label>
           </div>
+          <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>
@@ -1657,6 +1823,13 @@
       }
 
       totalBase = basePrice + detailPrice;
+      if(totalParam > 0 && totalBase < totalParam){
+        totalBase = totalParam;
+        if(!(basePrice > 0)){
+          const inferredBase = totalBase - detailPrice;
+          basePrice = inferredBase > 0 ? inferredBase : totalBase;
+        }
+      }
 
       const resolvedServiceLabel = rawServiceLabel || SERVICE_LABELS[serviceKey] || 'Custom Package';
       const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
@@ -1857,6 +2030,21 @@
           extrasState.push({ name, qty, price });
         });
         return extrasState;
+      }
+
+      function clearExtras(){
+        addonPills.forEach(pill => {
+          pill.classList.remove('active');
+          pill.setAttribute('aria-pressed', 'false');
+          const qtyInput = pill.querySelector('.addon-qty');
+          if(qtyInput){
+            qtyInput.disabled = true;
+            if(qtyInput.min){
+              qtyInput.value = qtyInput.min;
+            }
+          }
+        });
+        updateSummary();
       }
 
       function buildExtrasLabel(){
@@ -2354,6 +2542,15 @@
       }
 
       document.addEventListener('click', (event) => {
+        if(event.target.matches('.skip')){
+          clearExtras();
+          const nextIndex = Math.min(current + 1, steps.length - 1);
+          showStep(nextIndex);
+          if(frequencyInputs.length){
+            frequencyInputs[0].focus();
+          }
+          return;
+        }
         if(event.target.matches('.next')){
           const visible = steps[current];
           const required = Array.from(visible.querySelectorAll('[required]'));
@@ -2511,249 +2708,6 @@
           if(submitBtn) submitBtn.textContent = 'Submit';
         }
       });
-      const paymentRadios = Array.from(form.querySelectorAll('input[name="payment_method"]'));
-      const paypalUi = document.querySelector('[data-payment-ui="paypal"]');
-      const paypalButtonsContainer = document.getElementById('paypal-buttons');
-      const paypalStatus = document.getElementById('paypal-status');
-      const PAYPAL_CONTEXTS = {
-        main: { container: paypalButtonsContainer, status: paypalStatus },
-        nav: { container: navPayPalContainer, status: navPayPalStatus }
-      };
-
-      const DEPOSIT_RATE = 0.5;
-      const PAYPAL_CURRENCY = ((document.body && document.body.dataset && document.body.dataset.paypalCurrency) || 'CAD').toUpperCase();
-      const FREQUENCY_LABELS = {
-        weekly: 'Weekly (25% off)',
-        biweekly: 'Bi-Weekly (20% off)',
-        triweekly: 'Tri-Weekly (15% off)',
-        monthly: 'Monthly (10% off)',
-        biannual: 'Biannual (5% off)',
-        onetime: 'One-time'
-      };
-
-      const paypalButtonsInstances = {};
-      let paypalApproved = false;
-      let paypalApprovedAmount = 0;
-      let paypalScriptPromise = null;
-      let current = 0;
-      let cartAdded = false;
-      let lastCartSignature = '';
-      let latestCartState = null;
-
-      const params = new URLSearchParams(window.location.search);
-      const SERVICE_LABELS = {
-        home: 'Home General Cleaning',
-        commercial: 'Factory / Commercial / Industrial Cleaning',
-        office: 'Office Workspace Cleaning'
-      };
-      const BASE_PRICE_TABLE = {
-        home: {
-          '1000-1500': 165,
-          '1500-2000': 185,
-          '2000-2500': 215,
-          '2500-3000': 245,
-          '3000-3500': 285,
-          '3500-4000': 325
-        },
-        commercial: {
-          '1000-1500': 240,
-          '1500-2000': 285,
-          '2000-2500': 330,
-          '2500-3000': 380,
-          '3000-3500': 425,
-          '3500-4000': 470
-        },
-        office: {
-          '1000-1500': 210,
-          '1500-2000': 250,
-          '2000-2500': 295,
-          '2500-3000': 335,
-          '3000-3500': 375,
-          '3500-4000': 420
-        }
-      };
-      const DETAIL_PRICE_TABLE = {
-        home: {
-          rooms: { '1-2': 0, '3-4': 25, '5-6': 55, '7+': 85 },
-          bathrooms: { '1': 0, '2': 18, '3': 36, '4+': 54 },
-          pets: { no: 0, yes: 25 },
-          basement: { no: 0, yes: 45 },
-          basementRooms: { '1-2': 25, '3-4': 45, '5+': 65 },
-          basementBathrooms: { '1': 18, '2': 32, '3+': 46 }
-        },
-        office: {
-          offices: { '1-5': 0, '6-10': 45, '11-20': 90, '21+': 135 },
-          bathrooms: { '1-2': 0, '3-4': 40, '5+': 70 }
-        }
-      };
-
-      const serviceKey = params.get('service') || '';
-      const rawServiceLabel = params.get('serviceLabel') || '';
-      const sqftKey = params.get('sqft') || '';
-      const rawSqftLabel = params.get('sqftLabel') || '';
-      let basePrice = Number(params.get('basePrice') || params.get('total') || 0);
-      let detailPrice = Number(params.get('detailPrice') || 0);
-      const totalParam = Number(params.get('total') || 0);
-      let totalBase = 0;
-
-      function formatSqftLabel(label, key){
-        if(label) return label;
-        if(!key) return '';
-        if(key.includes('-')){
-          const parts = key.split('-').map(part => parseInt(part, 10));
-          if(parts.length === 2 && parts.every(num => !Number.isNaN(num))){
-            return `${parts[0].toLocaleString()} – ${parts[1].toLocaleString()} sq ft`;
-          }
-        }
-        return key;
-      }
-
-      function deriveDetailPrice(service){
-        if(service === 'home'){
-          let total = 0;
-          const rooms = Number(params.get('homeRooms') || 0);
-          if(rooms){
-            if(rooms <= 2){ total += DETAIL_PRICE_TABLE.home.rooms['1-2'] || 0; }
-            else if(rooms <= 4){ total += DETAIL_PRICE_TABLE.home.rooms['3-4'] || 0; }
-            else if(rooms <= 6){ total += DETAIL_PRICE_TABLE.home.rooms['5-6'] || 0; }
-            else { total += DETAIL_PRICE_TABLE.home.rooms['7+'] || 0; }
-          }
-          const baths = Number(params.get('homeBathrooms') || 0);
-          if(baths){
-            if(baths <= 1){ total += DETAIL_PRICE_TABLE.home.bathrooms['1'] || 0; }
-            else if(baths <= 2){ total += DETAIL_PRICE_TABLE.home.bathrooms['2'] || 0; }
-            else if(baths <= 3){ total += DETAIL_PRICE_TABLE.home.bathrooms['3'] || 0; }
-            else { total += DETAIL_PRICE_TABLE.home.bathrooms['4+'] || 0; }
-          }
-          const pets = params.get('homePets');
-          if(pets && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.pets, pets)){
-            total += DETAIL_PRICE_TABLE.home.pets[pets] || 0;
-          }
-          const basement = params.get('homeBasement');
-          if(basement && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.basement, basement)){
-            total += DETAIL_PRICE_TABLE.home.basement[basement] || 0;
-            if(basement === 'yes'){
-              const basementRooms = Number(params.get('homeBasementRooms') || 0);
-              if(basementRooms){
-                if(basementRooms <= 2){ total += DETAIL_PRICE_TABLE.home.basementRooms['1-2'] || 0; }
-                else if(basementRooms <= 4){ total += DETAIL_PRICE_TABLE.home.basementRooms['3-4'] || 0; }
-                else { total += DETAIL_PRICE_TABLE.home.basementRooms['5+'] || 0; }
-              }
-              const basementBaths = Number(params.get('homeBasementBathrooms') || 0);
-              if(basementBaths){
-                if(basementBaths <= 1){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['1'] || 0; }
-                else if(basementBaths <= 2){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['2'] || 0; }
-                else { total += DETAIL_PRICE_TABLE.home.basementBathrooms['3+'] || 0; }
-              }
-            }
-          }
-          return total;
-        }
-        if(service === 'office'){
-          let total = 0;
-          const officesValue = params.get('officeOffices');
-          if(officesValue){
-            const officesKey = DETAIL_PRICE_TABLE.office.offices[officesValue] !== undefined
-              ? officesValue
-              : (() => {
-                  const count = Number(officesValue);
-                  if(!(count > 0)) return '';
-                  if(count <= 5) return '1-5';
-                  if(count <= 10) return '6-10';
-                  if(count <= 20) return '11-20';
-                  return '21+';
-                })();
-            if(officesKey && DETAIL_PRICE_TABLE.office.offices[officesKey] !== undefined){
-              total += DETAIL_PRICE_TABLE.office.offices[officesKey] || 0;
-            }
-          }
-          const officeBathsValue = params.get('officeBathrooms');
-          if(officeBathsValue){
-            const bathsKey = DETAIL_PRICE_TABLE.office.bathrooms[officeBathsValue] !== undefined
-              ? officeBathsValue
-              : (() => {
-                  const count = Number(officeBathsValue);
-                  if(!(count > 0)) return '';
-                  if(count <= 2) return '1-2';
-                  if(count <= 4) return '3-4';
-                  return '5+';
-                })();
-            if(bathsKey && DETAIL_PRICE_TABLE.office.bathrooms[bathsKey] !== undefined){
-              total += DETAIL_PRICE_TABLE.office.bathrooms[bathsKey] || 0;
-            }
-          }
-          return total;
-        }
-        return 0;
-      }
-
-      if(!(detailPrice > 0)){
-        const derivedDetail = deriveDetailPrice(serviceKey);
-        if(derivedDetail > 0){
-          detailPrice = derivedDetail;
-        }
-      }
-
-      if(!(basePrice > 0) && totalParam > 0){
-        const possibleBase = totalParam - detailPrice;
-        if(possibleBase > 0){
-          basePrice = possibleBase;
-        }
-      }
-
-      if(!(basePrice > 0) && serviceKey && sqftKey && BASE_PRICE_TABLE[serviceKey] && BASE_PRICE_TABLE[serviceKey][sqftKey]){
-        basePrice = BASE_PRICE_TABLE[serviceKey][sqftKey];
-      }
-
-      totalBase = basePrice + detailPrice;
-
-      const resolvedServiceLabel = rawServiceLabel || SERVICE_LABELS[serviceKey] || 'Custom Package';
-      const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
-
-      const detailSelections = [];
-      function pushDetail(label, value){
-        if(value){ detailSelections.push(label + ': ' + value); }
-      }
-      pushDetail('Service', resolvedServiceLabel || serviceKey);
-      pushDetail('Square Footage', resolvedSqftLabel || sqftKey);
-      pushDetail('Rooms', params.get('homeRoomsLabel'));
-      pushDetail('Bathrooms', params.get('homeBathroomsLabel'));
-      pushDetail('Pets', params.get('homePetsLabel'));
-      pushDetail('Basement', params.get('homeBasementLabel'));
-      pushDetail('Basement Rooms', params.get('homeBasementRoomsLabel'));
-      pushDetail('Basement Bathrooms', params.get('homeBasementBathroomsLabel'));
-      pushDetail('Offices', params.get('officeOfficesLabel'));
-      pushDetail('Office Bathrooms', params.get('officeBathroomsLabel'));
-
-      hiddenServiceKey.value = serviceKey;
-      hiddenServiceLabel.value = resolvedServiceLabel;
-      hiddenSqftLabel.value = resolvedSqftLabel;
-      const detailSummaryValue = detailSelections.join(' | ');
-      const detailSummaryDisplay = detailSelections.length
-        ? detailSelections.join(' • ')
-        : (totalBase > 0 ? 'Base package from instant quote.' : '');
-      hiddenDetailSummary.value = detailSummaryValue || (totalBase > 0 ? 'Base package from instant quote.' : '');
-      hiddenBasePrice.value = basePrice.toFixed(2);
-      hiddenDetailPrice.value = detailPrice.toFixed(2);
-      hiddenPackage.value = resolvedServiceLabel;
-
-      if(recapDescription){
-        if(detailSummaryDisplay){
-          recapDescription.hidden = false;
-          recapDescription.textContent = detailSummaryDisplay;
-        } else {
-          recapDescription.hidden = true;
-          recapDescription.textContent = '';
-        }
-      }
-
-      if(cartService){
-        cartService.textContent = (resolvedServiceLabel || 'Custom Package');
-      }
-
-      if(originField){
-        originField.value = serviceKey ? 'instant-quote' : 'book-page';
-      }
 
       updateSummary();
       applyPaymentSelection();

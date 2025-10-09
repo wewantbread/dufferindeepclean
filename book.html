@@ -160,7 +160,7 @@
     }
 
     .booking-card{
-      margin: 18px auto 0; width: min(100%, 1120px);
+      margin: 18px auto 0; width: min(100%, 1200px);
       background: rgba(10, 12, 16, 0.72);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
@@ -180,7 +180,7 @@
 
     .form-columns{
       display: grid;
-      gap: clamp(20px, 3vw, 36px);
+      gap: clamp(24px, 4vw, 48px);
       align-items: start;
       grid-template-columns: minmax(0, 1fr);
     }
@@ -221,6 +221,8 @@
       margin-left: auto;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
+    .cart-summary.cart-summary-empty .cart-summary-subtitle{ color: #9ad4ff; }
+    .cart-summary.cart-summary-empty .cart-pricing .cart-line span:last-child{ color: rgba(214, 238, 255, 0.6); }
 
     .cart-summary.is-added{
       border-color: rgba(255, 140, 220, 0.6);
@@ -398,8 +400,8 @@
       background: rgba(255,255,255,0.08);
     }
 
-    .plans{ display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, minmax(220px, 1fr)); } }
+    .plans{ display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, minmax(240px, 1fr)); } }
     .plan{ display:block; }
     .plan input{ display:none; }
     .plan-card{
@@ -499,8 +501,8 @@
 
     @media (min-width: 860px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.8fr);
-        gap: clamp(44px, 6.5vw, 72px);
+        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.8fr);
+        gap: clamp(52px, 6vw, 80px);
         align-items: start;
       }
       .cart-summary{
@@ -511,13 +513,14 @@
         justify-self: end;
       }
     }
-    @media (min-width: 1180px){
+    @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.55fr) minmax(380px, 0.7fr);
-        gap: clamp(52px, 6vw, 84px);
+        grid-template-columns: minmax(0, 1.45fr) minmax(400px, 0.75fr);
+        gap: clamp(60px, 6.5vw, 96px);
       }
+      .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .cart-summary{
-        max-width: 380px;
+        max-width: 400px;
       }
     }
 
@@ -1567,6 +1570,7 @@
       let autoAddAfterSkip = false;
       let lastCartSignature = '';
       let latestCartState = null;
+      let quoteAvailable = false;
 
       const params = new URLSearchParams(window.location.search);
       const SERVICE_LABELS = {
@@ -1742,6 +1746,11 @@
         }
       }
 
+      quoteAvailable = totalBase > 0;
+      if(cartSummaryEl){
+        cartSummaryEl.classList.toggle('cart-summary-empty', !quoteAvailable);
+      }
+
       const resolvedServiceLabel = rawServiceLabel || SERVICE_LABELS[serviceKey] || 'Custom Package';
       const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
 
@@ -1769,8 +1778,8 @@
         ? detailSummaryLines.join(' • ')
         : (totalBase > 0 ? 'Base package from instant quote.' : '');
       hiddenDetailSummary.value = detailSummaryValue || (totalBase > 0 ? 'Base package from instant quote.' : '');
-      hiddenBasePrice.value = basePrice.toFixed(2);
-      hiddenDetailPrice.value = detailPrice.toFixed(2);
+      hiddenBasePrice.value = quoteAvailable ? basePrice.toFixed(2) : '';
+      hiddenDetailPrice.value = quoteAvailable ? detailPrice.toFixed(2) : '';
       hiddenPackage.value = resolvedServiceLabel;
 
       if(recapDescription){
@@ -1786,7 +1795,16 @@
       }
 
       if(cartService){
-        cartService.textContent = (resolvedServiceLabel || 'Custom Package');
+        cartService.textContent = quoteAvailable
+          ? (resolvedServiceLabel || 'Custom Package')
+          : 'Select a package on the quote page to see pricing here.';
+      }
+
+      if(cartStatus && !quoteAvailable){
+        cartStatus.classList.remove('error');
+        cartStatus.textContent = 'Select a package on the quote page to see pricing here.';
+      } else if(cartStatus && cartStatus.textContent === 'Select a package on the quote page to see pricing here.'){
+        cartStatus.textContent = '';
       }
 
       if(originField){
@@ -1870,7 +1888,7 @@
       }
 
       function triggerCartFlight(){
-        if(!cartSummaryEl || !navCartButton) return;
+        if(!cartSummaryEl || !navCartButton || !quoteAvailable) return;
         const start = cartSummaryEl.getBoundingClientRect();
         const end = navCartButton.getBoundingClientRect();
         if(!start.width || !end.width) return;
@@ -1914,7 +1932,7 @@
       }
 
       function ensureCartAdded(options){
-        if(cartAdded) return;
+        if(cartAdded || !quoteAvailable) return;
         const freqInput = selectedFrequency();
         if(!freqInput) return;
         cartAdded = true;
@@ -2213,6 +2231,7 @@
             addToCartBtn.textContent = labelText;
           }
           addToCartBtn.classList.toggle('is-added', cartAdded);
+          addToCartBtn.setAttribute('aria-disabled', addToCartBtn.disabled ? 'true' : 'false');
         }
         if(hiddenCartStatus){
           hiddenCartStatus.value = cartAdded ? 'added' : 'pending';
@@ -2232,6 +2251,36 @@
 
       function updateSummary(){
         applyCartVisibility(current);
+        if(!quoteAvailable){
+          cartAdded = false;
+          if(cartStatus){
+            cartStatus.classList.remove('error');
+            cartStatus.textContent = 'Select a package on the quote page to see pricing here.';
+          }
+          if(recapBase) recapBase.textContent = '—';
+          if(recapDetailRow){
+            recapDetailRow.hidden = true;
+          }
+          if(recapExtrasRow){
+            recapExtrasRow.hidden = true;
+          }
+          if(recapDiscountRow){
+            recapDiscountRow.hidden = true;
+          }
+          if(recapTotal){
+            recapTotal.textContent = '—';
+          }
+          if(depositText){ depositText.textContent = '—'; }
+          if(balanceText){ balanceText.textContent = '—'; }
+          if(addToCartBtn){
+            addToCartBtn.disabled = true;
+            addToCartBtn.setAttribute('aria-disabled', 'true');
+          }
+          refreshCartButton();
+          latestCartState = null;
+          dispatchNavCartUpdate(false);
+          return;
+        }
         const extras = computeExtras();
         const extrasTotal = extras.reduce((sum, item) => sum + item.price * item.qty, 0);
         const freqInput = selectedFrequency();
@@ -2319,9 +2368,15 @@
         }
 
         if(addToCartBtn){
-          const canAdd = current >= 1 && !!freqInput;
+          const hasFrequency = !!freqInput;
+          const canAdd = quoteAvailable && current >= 1 && hasFrequency;
           addToCartBtn.disabled = cartAdded ? true : !canAdd;
-          if(!canAdd){
+          addToCartBtn.setAttribute('aria-disabled', addToCartBtn.disabled ? 'true' : 'false');
+          if(!quoteAvailable){
+            if(cartStatus && cartStatus.textContent === ''){
+              cartStatus.textContent = 'Select a package on the quote page to see pricing here.';
+            }
+          } else if(!canAdd){
             if(!cartAdded && cartStatus){
               if(current >= 1){
                 cartStatus.classList.remove('error');
@@ -2509,6 +2564,13 @@
         }
         if(event.target.matches('.next')){
           if(current === 1){
+            if(!quoteAvailable){
+              if(cartStatus){
+                cartStatus.classList.add('error');
+                cartStatus.textContent = 'Select a package on the quote page to see pricing here.';
+              }
+              return;
+            }
             const freqCheck = selectedFrequency();
             if(!freqCheck){
               if(cartStatus){

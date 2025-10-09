@@ -432,8 +432,6 @@
         }
       };
 
-      const QUOTE_STORAGE_KEY = 'ddcQuotePayload';
-
       quoteForms.forEach(setupQuoteForm);
 
       function setupQuoteForm(form){
@@ -909,32 +907,6 @@
             params.set('basePrice', totals.base.toFixed(2));
             params.set('detailPrice', totals.detail.toFixed(2));
             params.set('total', totals.total.toFixed(2));
-
-            const payload = {
-              service: serviceValue,
-              serviceLabel: totals.serviceLabel || '',
-              sqft: sqftValue,
-              sqftLabel: totals.sqftLabel || '',
-              basePrice: totals.base,
-              detailPrice: totals.detail,
-              total: totals.total,
-              selections: {}
-            };
-
-            Object.entries(totals.selections || {}).forEach(([key, info]) => {
-              payload.selections[key] = {
-                value: info && info.value ? info.value : '',
-                label: info && info.label ? info.label : ''
-              };
-            });
-
-            try {
-              if(window.sessionStorage){
-                sessionStorage.setItem(QUOTE_STORAGE_KEY, JSON.stringify(payload));
-              }
-            } catch(storageError) {
-              /* ignore storage issues (private browsing, etc.) */
-            }
 
             const firstName = form.querySelector('input[name="first-name"]');
             if(firstName && firstName.value.trim()){

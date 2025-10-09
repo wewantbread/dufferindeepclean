@@ -109,7 +109,7 @@
     }
 
     .booking{
-      max-width: 1160px; margin: 0 auto;
+      max-width: 1220px; margin: 0 auto;
       padding: clamp(20px, 4vw, 48px);
     }
     .booking-title{
@@ -180,7 +180,7 @@
 
     .form-columns{
       display: grid;
-      gap: clamp(24px, 4vw, 48px);
+      gap: clamp(32px, 5vw, 64px);
       align-items: start;
       grid-template-columns: minmax(0, 1fr);
     }
@@ -400,15 +400,15 @@
       background: rgba(255,255,255,0.08);
     }
 
-    .plans{ display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-    @media (min-width: 840px){ .plans{ grid-template-columns: repeat(3, minmax(240px, 1fr)); } }
+    .plans{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    @media (min-width: 900px){ .plans{ grid-template-columns: repeat(3, minmax(220px, 1fr)); } }
     .plan{ display:block; }
     .plan input{ display:none; }
     .plan-card{
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: clamp(16px, 2.6vw, 24px);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: clamp(18px, 2.8vw, 26px);
       background: rgba(255,255,255,0.04);
       transition: transform .2s ease, border-color .2s ease, background .2s ease;
-      min-height: 140px;
+      min-height: 150px;
     }
     .plan input:checked + .plan-card{
       border-color: rgba(0,208,132,0.6);
@@ -501,8 +501,8 @@
 
     @media (min-width: 860px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.8fr);
-        gap: clamp(52px, 6vw, 80px);
+        grid-template-columns: minmax(0, 1.55fr) minmax(360px, 0.9fr);
+        gap: clamp(56px, 6.5vw, 88px);
         align-items: start;
       }
       .cart-summary{
@@ -511,16 +511,18 @@
         max-height: calc(100vh - 80px);
         overflow: auto;
         justify-self: end;
+        margin-left: auto;
+        width: min(100%, 420px);
       }
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.45fr) minmax(400px, 0.75fr);
-        gap: clamp(60px, 6.5vw, 96px);
+        grid-template-columns: minmax(0, 1.7fr) minmax(380px, 0.85fr);
+        gap: clamp(64px, 6.8vw, 104px);
       }
-      .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
+      .plans{ grid-template-columns: repeat(3, minmax(230px, 1fr)); }
       .cart-summary{
-        max-width: 400px;
+        max-width: 420px;
       }
     }
 
@@ -1573,6 +1575,42 @@
       let quoteAvailable = false;
 
       const params = new URLSearchParams(window.location.search);
+      const QUOTE_STORAGE_KEY = 'ddcQuotePayload';
+
+      function parseAmount(value){
+        if(typeof value === 'number'){
+          return Number.isFinite(value) ? value : 0;
+        }
+        if(typeof value === 'string'){
+          const trimmed = value.trim();
+          if(!trimmed) return 0;
+          const num = Number(trimmed);
+          return Number.isFinite(num) ? num : 0;
+        }
+        return 0;
+      }
+
+      function safeParseJson(value){
+        if(!value) return null;
+        try {
+          return JSON.parse(value);
+        } catch(_){
+          return null;
+        }
+      }
+
+      let storedQuote = null;
+      try {
+        if(window.sessionStorage){
+          storedQuote = safeParseJson(sessionStorage.getItem(QUOTE_STORAGE_KEY));
+        }
+      } catch(_){
+        storedQuote = null;
+      }
+
+      const storedSelections = storedQuote && typeof storedQuote.selections === 'object' && storedQuote.selections
+        ? storedQuote.selections
+        : {};
       const SERVICE_LABELS = {
         home: 'Home General Cleaning',
         commercial: 'Factory / Commercial / Industrial Cleaning',
@@ -1619,14 +1657,38 @@
         }
       };
 
-      const serviceKey = params.get('service') || '';
-      const rawServiceLabel = params.get('serviceLabel') || '';
-      const sqftKey = params.get('sqft') || '';
-      const rawSqftLabel = params.get('sqftLabel') || '';
-      let basePrice = Number(params.get('basePrice') || params.get('total') || 0);
-      let detailPrice = Number(params.get('detailPrice') || 0);
-      const totalParam = Number(params.get('total') || 0);
+      let serviceKey = params.get('service') || '';
+      let rawServiceLabel = params.get('serviceLabel') || '';
+      let sqftKey = params.get('sqft') || '';
+      let rawSqftLabel = params.get('sqftLabel') || '';
+      const rawBaseParam = params.get('basePrice');
+      const rawDetailParam = params.get('detailPrice');
+      let totalParam = parseAmount(params.get('total'));
+      let basePrice = parseAmount(rawBaseParam);
+      let detailPrice = parseAmount(rawDetailParam);
       let totalBase = 0;
+
+      if(!serviceKey && storedQuote && storedQuote.service){
+        serviceKey = storedQuote.service;
+      }
+      if(!rawServiceLabel && storedQuote && storedQuote.serviceLabel){
+        rawServiceLabel = storedQuote.serviceLabel;
+      }
+      if(!sqftKey && storedQuote && storedQuote.sqft){
+        sqftKey = storedQuote.sqft;
+      }
+      if(!rawSqftLabel && storedQuote && storedQuote.sqftLabel){
+        rawSqftLabel = storedQuote.sqftLabel;
+      }
+      if(!(basePrice > 0) && storedQuote && parseAmount(storedQuote.basePrice) > 0){
+        basePrice = parseAmount(storedQuote.basePrice);
+      }
+      if(!(detailPrice > 0) && storedQuote && parseAmount(storedQuote.detailPrice) > 0){
+        detailPrice = parseAmount(storedQuote.detailPrice);
+      }
+      if(!(totalParam > 0) && storedQuote && parseAmount(storedQuote.total) > 0){
+        totalParam = parseAmount(storedQuote.total);
+      }
 
       function formatSqftLabel(label, key){
         if(label) return label;
@@ -1640,38 +1702,61 @@
         return key;
       }
 
+      function selectionValueFromSources(key){
+        const direct = params.get(key);
+        if(direct) return direct;
+        const stored = storedSelections[key];
+        if(stored && stored.value){
+          return stored.value;
+        }
+        return '';
+      }
+
+      function selectionLabelFromSources(key){
+        const labeled = params.get(`${key}Label`);
+        if(labeled) return labeled;
+        const stored = storedSelections[key];
+        if(stored){
+          if(stored.label) return stored.label;
+          if(stored.value) return stored.value;
+        }
+        const fallback = params.get(key);
+        if(fallback) return fallback;
+        return '';
+      }
+
       function deriveDetailPrice(service){
         if(service === 'home'){
           let total = 0;
-          const rooms = Number(params.get('homeRooms') || 0);
+          const rooms = Number(selectionValueFromSources('homeRooms') || 0);
           if(rooms){
             if(rooms <= 2){ total += DETAIL_PRICE_TABLE.home.rooms['1-2'] || 0; }
             else if(rooms <= 4){ total += DETAIL_PRICE_TABLE.home.rooms['3-4'] || 0; }
             else if(rooms <= 6){ total += DETAIL_PRICE_TABLE.home.rooms['5-6'] || 0; }
             else { total += DETAIL_PRICE_TABLE.home.rooms['7+'] || 0; }
           }
-          const baths = Number(params.get('homeBathrooms') || 0);
+          const baths = Number(selectionValueFromSources('homeBathrooms') || 0);
           if(baths){
             if(baths <= 1){ total += DETAIL_PRICE_TABLE.home.bathrooms['1'] || 0; }
             else if(baths <= 2){ total += DETAIL_PRICE_TABLE.home.bathrooms['2'] || 0; }
             else if(baths <= 3){ total += DETAIL_PRICE_TABLE.home.bathrooms['3'] || 0; }
             else { total += DETAIL_PRICE_TABLE.home.bathrooms['4+'] || 0; }
           }
-          const pets = params.get('homePets');
+          const pets = selectionValueFromSources('homePets');
           if(pets && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.pets, pets)){
             total += DETAIL_PRICE_TABLE.home.pets[pets] || 0;
           }
-          const basement = params.get('homeBasement');
+          const basement = selectionValueFromSources('homeBasement');
           if(basement && Object.prototype.hasOwnProperty.call(DETAIL_PRICE_TABLE.home.basement, basement)){
             total += DETAIL_PRICE_TABLE.home.basement[basement] || 0;
             if(basement === 'yes'){
-              const basementRooms = Number(params.get('homeBasementRooms') || 0);
+              const basementRooms = Number(selectionValueFromSources('homeBasementRooms') || 0);
               if(basementRooms){
                 if(basementRooms <= 2){ total += DETAIL_PRICE_TABLE.home.basementRooms['1-2'] || 0; }
                 else if(basementRooms <= 4){ total += DETAIL_PRICE_TABLE.home.basementRooms['3-4'] || 0; }
                 else { total += DETAIL_PRICE_TABLE.home.basementRooms['5+'] || 0; }
               }
-              const basementBaths = Number(params.get('homeBasementBathrooms') || 0);
+              const basementBaths = Number(selectionValueFromSources('homeBasementBathrooms') || 0);
               if(basementBaths){
                 if(basementBaths <= 1){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['1'] || 0; }
                 else if(basementBaths <= 2){ total += DETAIL_PRICE_TABLE.home.basementBathrooms['2'] || 0; }
@@ -1683,7 +1768,7 @@
         }
         if(service === 'office'){
           let total = 0;
-          const officesValue = params.get('officeOffices');
+          const officesValue = selectionValueFromSources('officeOffices');
           if(officesValue){
             const officesKey = DETAIL_PRICE_TABLE.office.offices[officesValue] !== undefined
               ? officesValue
@@ -1699,7 +1784,7 @@
               total += DETAIL_PRICE_TABLE.office.offices[officesKey] || 0;
             }
           }
-          const officeBathsValue = params.get('officeBathrooms');
+          const officeBathsValue = selectionValueFromSources('officeBathrooms');
           if(officeBathsValue){
             const bathsKey = DETAIL_PRICE_TABLE.office.bathrooms[officeBathsValue] !== undefined
               ? officeBathsValue
@@ -1755,19 +1840,28 @@
       const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
 
       const detailSelections = [];
-      function pushDetail(label, value){
-        if(value){ detailSelections.push(label + ': ' + value); }
+      function pushDetail(label, key, fallback){
+        let value = '';
+        if(key){
+          value = selectionLabelFromSources(key);
+        }
+        if(!value && fallback){
+          value = fallback;
+        }
+        if(value){
+          detailSelections.push(label + ': ' + value);
+        }
       }
-      pushDetail('Service', resolvedServiceLabel || serviceKey);
-      pushDetail('Square Footage', resolvedSqftLabel || sqftKey);
-      pushDetail('Rooms', params.get('homeRoomsLabel'));
-      pushDetail('Bathrooms', params.get('homeBathroomsLabel'));
-      pushDetail('Pets', params.get('homePetsLabel'));
-      pushDetail('Basement', params.get('homeBasementLabel'));
-      pushDetail('Basement Rooms', params.get('homeBasementRoomsLabel'));
-      pushDetail('Basement Bathrooms', params.get('homeBasementBathroomsLabel'));
-      pushDetail('Offices', params.get('officeOfficesLabel'));
-      pushDetail('Office Bathrooms', params.get('officeBathroomsLabel'));
+      pushDetail('Service', null, resolvedServiceLabel || serviceKey);
+      pushDetail('Square Footage', null, resolvedSqftLabel || sqftKey);
+      pushDetail('Rooms', 'homeRooms');
+      pushDetail('Bathrooms', 'homeBathrooms');
+      pushDetail('Pets', 'homePets');
+      pushDetail('Basement', 'homeBasement');
+      pushDetail('Basement Rooms', 'homeBasementRooms');
+      pushDetail('Basement Bathrooms', 'homeBasementBathrooms');
+      pushDetail('Offices', 'officeOffices');
+      pushDetail('Office Bathrooms', 'officeBathrooms');
 
       hiddenServiceKey.value = serviceKey;
       hiddenServiceLabel.value = resolvedServiceLabel;

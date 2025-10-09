@@ -501,8 +501,8 @@
 
     @media (min-width: 860px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.8fr);
-        gap: clamp(52px, 6vw, 80px);
+        grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.7fr);
+        gap: clamp(80px, 9vw, 160px);
         align-items: start;
       }
       .cart-summary{
@@ -511,16 +511,19 @@
         max-height: calc(100vh - 80px);
         overflow: auto;
         justify-self: end;
+        width: clamp(280px, 22vw, 320px);
+        max-width: 320px;
       }
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.45fr) minmax(400px, 0.75fr);
-        gap: clamp(60px, 6.5vw, 96px);
+        grid-template-columns: minmax(0, 1.5fr) minmax(360px, 0.65fr);
+        gap: clamp(100px, 11vw, 220px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .cart-summary{
-        max-width: 400px;
+        width: clamp(320px, 22vw, 360px);
+        max-width: 360px;
       }
     }
 

@@ -109,7 +109,8 @@
     }
 
     .booking{
-      max-width: 1280px; margin: 0 auto;
+      max-width: min(96vw, 1560px);
+      margin: 0 auto;
       padding: clamp(24px, 4.2vw, 56px);
     }
     .booking-title{
@@ -160,7 +161,8 @@
     }
 
     .booking-card{
-      margin: 18px auto 0; width: min(100%, 1340px);
+      margin: 18px auto 0;
+      width: min(100%, 1520px);
       background: rgba(10, 12, 16, 0.72);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 30px;
@@ -197,6 +199,131 @@
     }
     .form-steps > *{
       min-width: 0;
+    }
+
+    .step-extras-layout{
+      display: grid;
+      gap: clamp(18px, 3vw, 28px);
+    }
+
+    .step-extras-content{
+      display: grid;
+      gap: clamp(16px, 2.6vw, 22px);
+    }
+
+    .package-overview{
+      border-radius: 22px;
+      border: 1px solid rgba(0,212,255,0.35);
+      background: linear-gradient(180deg, rgba(0, 212, 255, 0.14), rgba(0, 212, 255, 0.04));
+      padding: clamp(18px, 2.8vw, 28px);
+      box-shadow: 0 22px 48px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+      animation: floatFade 0.8s ease both;
+    }
+
+    .package-overview::before{
+      content: "";
+      position: absolute;
+      inset: -40% -50% auto;
+      height: 65%;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.35), transparent 65%);
+      opacity: 0.65;
+      transform: translateY(-40%);
+      pointer-events: none;
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+
+    .package-overview h3{
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2.8vw, 28px);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #e5f9ff;
+    }
+
+    .package-overview p.lead{
+      margin: 0 0 14px;
+      font-weight: 600;
+      color: #f4fbff;
+    }
+
+    .package-overview-section{
+      margin-top: clamp(12px, 2vw, 18px);
+      padding-top: clamp(12px, 2vw, 18px);
+      border-top: 1px dashed rgba(255,255,255,0.18);
+    }
+
+    .package-overview-section h4{
+      margin: 0 0 10px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ad4ff;
+    }
+
+    .package-list{
+      margin: 0;
+      padding-left: 1.1rem;
+      display: grid;
+      gap: 8px;
+      color: #d9ecff;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .package-list li::marker{
+      color: #4cc3ff;
+    }
+
+    .package-note{
+      background: rgba(9, 24, 38, 0.65);
+      border: 1px solid rgba(154,212,255,0.25);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: clamp(14px, 2.4vw, 20px);
+      font-size: 0.9rem;
+      color: #b9d8f2;
+    }
+
+    .package-note strong{ color: #e9f7ff; }
+
+    @media (min-width: 960px){
+      .step-extras-layout{
+        grid-template-columns: minmax(250px, 0.85fr) minmax(0, 1fr);
+        align-items: start;
+      }
+      .package-overview{
+        position: sticky;
+        top: 0;
+      }
+    }
+
+    @media (min-width: 1100px){
+      .step-extras-content{
+        max-height: clamp(520px, 68vh, 760px);
+        overflow: auto;
+        padding-right: clamp(6px, 1vw, 16px);
+      }
+
+      .step-extras-content::-webkit-scrollbar{
+        width: 6px;
+      }
+
+      .step-extras-content::-webkit-scrollbar-thumb{
+        background: linear-gradient(180deg, rgba(76,195,255,0.65), rgba(255,79,195,0.65));
+        border-radius: 999px;
+      }
+    }
+
+    @keyframes floatFade{
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseGlow{
+      0%, 100% { transform: translateY(-40%) scale(1); opacity: 0.65; }
+      50% { transform: translateY(-36%) scale(1.05); opacity: 0.85; }
     }
     .base-package{
       border: 1px solid rgba(255,255,255,0.12);
@@ -538,7 +665,7 @@
 
     @media (min-width: 780px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.75fr) minmax(320px, 0.9fr);
+        grid-template-columns: minmax(0, 2.05fr) minmax(340px, 0.95fr);
         gap: clamp(48px, 6vw, 82px);
       }
       .summary-column{
@@ -561,7 +688,7 @@
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.95fr) minmax(380px, 0.8fr);
+        grid-template-columns: minmax(0, 2.25fr) minmax(400px, 0.9fr);
         gap: clamp(64px, 6.8vw, 110px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
@@ -667,9 +794,36 @@
 
         <fieldset class="step step-extras" data-step="1">
           <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
-          <p class="muted">Select any speciality tasks you’d like to include or skip to keep the base package.</p>
-          <p class="muted base-package-note">Review your custom quoted package on the right while you add extras.</p>
-          <div class="addon-groups" id="addon-groups">
+          <div class="step-extras-layout">
+            <aside class="package-overview" aria-label="What's included in the base package">
+              <h3>Signature Home Refresh</h3>
+              <p class="lead">A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
+              <div class="package-overview-section">
+                <h4>What’s included</h4>
+                <ul class="package-list">
+                  <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
+                  <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
+                  <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
+                  <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
+                  <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
+                  <li>Trash: bag &amp; place at your designated spot.</li>
+                </ul>
+              </div>
+              <div class="package-overview-section">
+                <h4>Good to know</h4>
+                <ul class="package-list">
+                  <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
+                  <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
+                  <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
+                  <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
+                </ul>
+              </div>
+              <p class="package-note"><strong>Need more?</strong> Layer on speciality add-ons to the right and watch your package update instantly.</p>
+            </aside>
+            <div class="step-extras-content">
+              <p class="muted">Select any speciality tasks you’d like to include or skip to keep the base package.</p>
+              <p class="muted base-package-note">Review your custom quoted package on the right while you add extras.</p>
+              <div class="addon-groups" id="addon-groups">
             <div class="addon-group" data-service-group="home">
               <p class="addon-group-title">Home &amp; Residential Extras</p>
               <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
@@ -865,18 +1019,20 @@
                   <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Pressure Washing quantity"><span aria-hidden="true">+</span></button>
                 </div>
               </div>
-              <div class="addon-pill color-rose" data-addon="Floor Strip &amp; Wax" data-price="185">
-                <span class="addon-icon" data-icon="floor" aria-hidden="true"></span>
-                <span class="addon-name">Floor Strip &amp; Wax</span>
-                <div class="addon-stepper" role="group" aria-label="Floor Strip and Wax quantity">
-                  <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Floor Strip and Wax quantity"><span aria-hidden="true">−</span></button>
-                  <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Floor Strip and Wax quantity">
-                  <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Floor Strip and Wax quantity"><span aria-hidden="true">+</span></button>
+                <div class="addon-pill color-rose" data-addon="Floor Strip &amp; Wax" data-price="185">
+                  <span class="addon-icon" data-icon="floor" aria-hidden="true"></span>
+                  <span class="addon-name">Floor Strip &amp; Wax</span>
+                  <div class="addon-stepper" role="group" aria-label="Floor Strip and Wax quantity">
+                    <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Floor Strip and Wax quantity"><span aria-hidden="true">−</span></button>
+                    <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Floor Strip and Wax quantity">
+                    <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Floor Strip and Wax quantity"><span aria-hidden="true">+</span></button>
+                  </div>
+                </div>
                 </div>
               </div>
+              <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
             </div>
           </div>
-          <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
             <button type="button" class="btn skip">Skip extras</button>
             <button type="button" class="btn next">Next</button>

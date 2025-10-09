@@ -267,6 +267,10 @@
       color: #99b3cc;
       line-height: 1.45;
     }
+    .cart-detail-line{
+      display: block;
+      padding: 2px 0;
+    }
 
     .cart-pricing{
       border-radius: 16px;
@@ -493,10 +497,10 @@
 
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
 
-    @media (min-width: 900px){
+    @media (min-width: 860px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.85fr);
-        gap: clamp(36px, 6vw, 64px);
+        grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.8fr);
+        gap: clamp(44px, 6.5vw, 72px);
         align-items: start;
       }
       .cart-summary{
@@ -507,9 +511,10 @@
         justify-self: end;
       }
     }
-    @media (min-width: 1200px){
+    @media (min-width: 1180px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.45fr) minmax(360px, 0.75fr);
+        grid-template-columns: minmax(0, 1.55fr) minmax(380px, 0.7fr);
+        gap: clamp(52px, 6vw, 84px);
       }
       .cart-summary{
         max-width: 380px;
@@ -1408,7 +1413,7 @@
       const hiddenPayPalPayer = document.getElementById('input-paypal-payer-id');
       const hiddenPayPalCapture = document.getElementById('input-paypal-capture-id');
       const hiddenCartStatus = document.getElementById('input-cart-status');
-      const CART_IMAGE_DATA_URI = (window.CART_IMAGE_DATA_URI && typeof window.CART_IMAGE_DATA_URI === 'string' && window.CART_IMAGE_DATA_URI.trim()) ? window.CART_IMAGE_DATA_URI : 'deepcleanpackage.png';
+      const CART_IMAGE_DATA_URI = (window.CART_IMAGE_DATA_URI && typeof window.CART_IMAGE_DATA_URI === 'string' && window.CART_IMAGE_DATA_URI.trim()) ? window.CART_IMAGE_DATA_URI : 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgNjAwIDYwMCI+ICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iYmciIGN4PSI1MCUiIGN5PSI0NSUiIHI9IjY1JSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3NDQ2ZmYiIHN0b3Atb3BhY2l0eT0iMC45NSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjU1JSIgc3RvcC1jb2xvcj0iIzVhMmFjNCIgc3RvcC1vcGFjaXR5PSIwLjkyIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJkMTA1OCIgc3RvcC1vcGFjaXR5PSIwLjk4Ii8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJnbG93IiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmN2I1ZmYiIHN0b3Atb3BhY2l0eT0iMC45Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2UxNmVmZiIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJidWNrZXQiIHgxPSIwIiB4Mj0iMSIgeTE9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzUyMmI4NSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IjZmMzViNiIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaGFuZGxlIiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlZmU1ZmYiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjY2JkM2ZmIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJicm9vbSIgeDE9IjAiIHgyPSIxIiB5MT0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZjdkMjdjIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2ZiYjE0YSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0idmFjIiB4MT0iMCIgeDI9IjAiIHkxPSIwIiB5Mj0iMSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM0MjI1NjgiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMmYxMzRiIi8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogICAgPGZpbHRlciBpZD0ic2hhZG93IiB4PSItMjAlIiB5PSItMjAlIiB3aWR0aD0iMTQwJSIgaGVpZ2h0PSIxNDAiPgogICAgICA8ZmVEcm9wU2hhZG93IGR4PSIwIiBkeT0iMTIiIHN0ZERldmlhdGlvbj0iMTgiIGZsb29kLWNvbG9yPSIjMTIwNjI2IiBmbG9vZC1vcGFjaXR5PSIwLjYiLz4KICAgIDwvZmlsdGVyPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0idXJsKCNiZykiLz4KICA8ZWxsaXBzZSBjeD0iMzAwIiBjeT0iNDcwIiByeD0iMjIwIiByeT0iNzAiIGZpbGw9IiMxODA3MzAiIG9wYWNpdHk9IjAuNzUiLz4KICA8ZyBmaWx0ZXI9InVybCgjc2hhZG93KSI+CiAgICA8cGF0aCBkPSJNMTc0IDE3MGgyNTJhMTQgMTQgMCAwIDEgMTQgMTR2MzRhMTQgMTQgMCAwIDEtMTQgMTRIMTc0YTE0IDE0IDAgMCAxLTE0LTE0di0zNGExNCAxNCAwIDAgMSAxNC0xNHoiIGZpbGw9InVybCgjZ2xvdykiIG9wYWNpdHk9IjAuODUiLz4KICAgIDx0ZXh0IHg9IjMwMCIgeT0iMjA1IiBmb250LWZhbWlseT0iJ0JlYmFzIE5ldWUnLCAnQXJpYWwgQmxhY2snLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjQ4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmQwZjQ3IiBsZXR0ZXItc3BhY2luZz0iNiI+ZHVmZmVyaW5kZWVwY2xlYW48L3RleHQ+CiAgPC9nPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE1MCAyNDApIj4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE0MCAtMjApIj4KICAgICAgPHBhdGggZD0iTTExMCAwYzI4IDAgNTIgMjEgNTUgNDlsMTYgMTYyYzEgOS02IDE3LTE1IDE3SDU0Yy05IDAtMTYtOC0xNS0xN2wxNi0xNjJDNTggMjEgODIgMCAxMTAgMHoiIGZpbGw9InVybCgjYnVja2V0KSIvPgogICAgICA8cGF0aCBkPSJNNDYgNzZoMTI4bDcgNzBIMzl6IiBmaWxsPSIjN2M0OWQwIiBvcGFjaXR5PSIwLjQiLz4KICAgICAgPHBhdGggZD0iTTg4IC0zMmg0NGwyMCA3MEg2OHoiIGZpbGw9InVybCgjaGFuZGxlKSIvPgogICAgICA8cmVjdCB4PSI5MiIgeT0iLTUwIiB3aWR0aD0iMzYiIGhlaWdodD0iMjAiIHJ4PSIxMCIgZmlsbD0iI2ZlZjZmZiIgc3Ryb2tlPSIjY2JjOWZmIiBzdHJva2Utd2lkdGg9IjQiLz4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwIDIwKSI+CiAgICAgIDxwYXRoIGQ9Ik00NiAtNDBoMjRsMjQgMzIwaC0yNHoiIGZpbGw9IiNmOGU5ZmYiIHN0cm9rZT0iI2Q0YzBmZiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICAgIDxwYXRoIGQ9Ik0tMTAgMjYwaDE2MGwxMiA1NGMyIDgtNCAxNi0xMiAxNkgtMzRjLTggMC0xNC04LTEyLTE2eiIgZmlsbD0idXJsKCNicm9vbSkiIHN0cm9rZT0iI2Y1OWQzMiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICAgIDxwYXRoIGQ9Ik0tMjQgMjYwaDIwMCIgc3Ryb2tlPSIjZmFjYTY2IiBzdHJva2Utd2lkdGg9IjEyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNjUiLz4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI2MCAxMCkiPgogICAgICA8cGF0aCBkPSJNMTIwIC0yMGMxNCAwIDI2IDEwIDI4IDI0bDI2IDI1MGMyIDE2LTEwIDMwLTI2IDMwSDY2Yy0xNiAwLTI4LTE0LTI2LTMwbDI2LTI1MGMyLTE0IDE0LTI0IDI4LTI0eiIgZmlsbD0idXJsKCN2YWMpIi8+CiAgICAgIDxwYXRoIGQ9Ik0xMDQgLTU0aDMybDEwIDM4aC01MnoiIGZpbGw9IiM1ZDJmOGYiLz4KICAgICAgPHJlY3QgeD0iOTIiIHk9Ii05NiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjQ4IiByeD0iMjIiIGZpbGw9IiNmMGU3ZmYiIHN0cm9rZT0iI2QzYzlmZiIgc3Ryb2tlLXdpZHRoPSI2Ii8+CiAgICAgIDxyZWN0IHg9IjEyIiB5PSIyMzYiIHdpZHRoPSIyMDAiIGhlaWdodD0iNDIiIHJ4PSIxOCIgZmlsbD0iIzYyMzQ5YSIvPgogICAgPC9nPgogICAgPGcgb3BhY2l0eT0iMC43MiI+CiAgICAgIDxjaXJjbGUgY3g9IjIwNiIgY3k9IjI2IiByPSI4IiBmaWxsPSIjZmVmNmZmIi8+CiAgICAgIDxjaXJjbGUgY3g9IjIzNiIgY3k9Ii0xNiIgcj0iNiIgZmlsbD0iI2ZlZjZmZiIvPgogICAgICA8Y2lyY2xlIGN4PSIxNzYiIGN5PSItMTIiIHI9IjUiIGZpbGw9IiNmZWY2ZmYiLz4KICAgICAgPGNpcmNsZSBjeD0iMjQ2IiBjeT0iNTYiIHI9IjUiIGZpbGw9IiNmZWY2ZmYiLz4KICAgICAgPGNpcmNsZSBjeD0iMTE2IiBjeT0iMTYiIHI9IjYiIGZpbGw9IiNmZWY2ZmYiLz4KICAgIDwvZz4KICA8L2c+Cjwvc3ZnPg==';
       if(!window.CART_IMAGE_DATA_URI){
         window.CART_IMAGE_DATA_URI = CART_IMAGE_DATA_URI;
       }
@@ -1473,6 +1478,13 @@
       const frequencyInputs = Array.from(form.querySelectorAll('input[name="frequency"]'));
       const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
       const addonPills = Array.from(form.querySelectorAll('.addon-pill'));
+
+      const escapeHtml = (value) => String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 
       const ADDON_ICON_SVGS = {
         sparkle: `<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 5l2.2 5.8 6 .4-4.7 4 1.4 5.7-4.9-3.1-4.9 3.1 1.4-5.7-4.7-4 6-.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.2 9.5l1.1 2.3 2.5.2-2 1.7.6 2.3-2.1-1.3-2.1 1.3.6-2.3-2-1.7 2.5-.2z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/></svg>`,
@@ -1552,6 +1564,7 @@
         });
       });
       let cartAdded = false;
+      let autoAddAfterSkip = false;
       let lastCartSignature = '';
       let latestCartState = null;
 
@@ -1750,9 +1763,10 @@
       hiddenServiceKey.value = serviceKey;
       hiddenServiceLabel.value = resolvedServiceLabel;
       hiddenSqftLabel.value = resolvedSqftLabel;
-      const detailSummaryValue = detailSelections.join(' | ');
-      const detailSummaryDisplay = detailSelections.length
-        ? detailSelections.join(' • ')
+      const detailSummaryLines = detailSelections.slice();
+      const detailSummaryValue = detailSummaryLines.join(' | ');
+      const detailSummaryDisplay = detailSummaryLines.length
+        ? detailSummaryLines.join(' • ')
         : (totalBase > 0 ? 'Base package from instant quote.' : '');
       hiddenDetailSummary.value = detailSummaryValue || (totalBase > 0 ? 'Base package from instant quote.' : '');
       hiddenBasePrice.value = basePrice.toFixed(2);
@@ -1760,12 +1774,14 @@
       hiddenPackage.value = resolvedServiceLabel;
 
       if(recapDescription){
-        if(detailSummaryDisplay){
+        if(detailSummaryLines.length){
           recapDescription.hidden = false;
-          recapDescription.textContent = detailSummaryDisplay;
+          recapDescription.innerHTML = detailSummaryLines
+            .map(line => `<span class="cart-detail-line">${escapeHtml(line)}</span>`)
+            .join('');
         } else {
           recapDescription.hidden = true;
-          recapDescription.textContent = '';
+          recapDescription.innerHTML = '';
         }
       }
 
@@ -2365,6 +2381,7 @@
           const parent = pill.closest('.addon-group');
           if(!parent || !parent.classList.contains('active')) return;
 
+          autoAddAfterSkip = false;
           pill.classList.toggle('active');
           const active = pill.classList.contains('active');
           pill.setAttribute('aria-pressed', active ? 'true' : 'false');
@@ -2402,6 +2419,7 @@
             button.addEventListener('click', (event) => {
               event.preventDefault();
               event.stopPropagation();
+              autoAddAfterSkip = false;
               const delta = Number(button.dataset.qtyStep || button.dataset.step || 0);
               if(!delta) return;
               const parent = pill.closest('.addon-group');
@@ -2430,7 +2448,9 @@
             }
           }
           updateSummary();
-          ensureCartAdded({ animate: true });
+          if(autoAddAfterSkip){
+            ensureCartAdded({ animate: true });
+          }
         });
       });
 
@@ -2479,6 +2499,7 @@
       document.addEventListener('click', (event) => {
         if(event.target.matches('.skip')){
           clearExtras();
+          autoAddAfterSkip = true;
           const nextIndex = Math.min(current + 1, steps.length - 1);
           showStep(nextIndex);
           if(frequencyInputs.length){
@@ -2512,9 +2533,6 @@
           const prevIndex = current;
           const nextIndex = Math.min(current + 1, steps.length - 1);
           showStep(nextIndex);
-          if(prevIndex === 1 && nextIndex >= 2){
-            ensureCartAdded({ animate: true });
-          }
         }
         if(event.target.matches('.back')){
           showStep(Math.max(current - 1, 0));

@@ -194,11 +194,15 @@
       gap: clamp(18px, 3vw, 28px);
       min-width: 0;
     }
+    .form-steps > *{
+      min-width: 0;
+    }
     .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
     fieldset{ border: none; margin: 0; padding: 0; }
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: #b6c2cf; }
+    .frequency-note{ margin-top: 12px; }
     .legend-note{
       display: block;
       margin-top: 4px;
@@ -216,7 +220,7 @@
       display: grid;
       gap: clamp(10px, 1.6vw, 16px);
       width: 100%;
-      max-width: 360px;
+      max-width: 380px;
       min-width: 0;
       margin-left: auto;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -405,70 +409,31 @@
     .plan{ display:block; }
     .plan input{ display:none; }
     .plan-card{
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: clamp(16px, 2.6vw, 24px);
+      border: 2px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: clamp(18px, 2.6vw, 26px);
       background: rgba(255,255,255,0.04);
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-      min-height: 140px;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+      min-height: 148px;
+    }
+    .plan-card:hover{
+      border-color: rgba(0,212,255,0.45);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+      transform: translateY(-1px);
+    }
+    .plan input:focus-visible + .plan-card{
+      outline: 2px solid rgba(0,212,255,0.65);
+      outline-offset: 3px;
     }
     .plan input:checked + .plan-card{
-      border-color: rgba(0,208,132,0.6);
-      background: linear-gradient(180deg, rgba(0,208,132,0.12), rgba(0,208,132,0.05));
-      transform: translateY(-1px);
+      border-color: rgba(0,208,132,0.75);
+      background: linear-gradient(180deg, rgba(0,208,132,0.18), rgba(0,208,132,0.08));
+      box-shadow: 0 18px 36px rgba(0,208,132,0.18);
+      transform: translateY(-2px);
     }
     .plan-title{ font-weight: 800; }
     .plan-discount{ color: #00d084; font-weight: 700; }
     .plan-note{ color: #b6c2cf; font-size: .9rem; }
-
-    .pricing-recap{
-      margin-top: 12px;
-      border-radius: 16px;
-      border: 1px solid rgba(0,212,255,0.18);
-      background: rgba(4, 18, 28, 0.55);
-      padding: clamp(14px, 2.4vw, 20px);
-      display: grid;
-      gap: 0.6rem;
-    }
-    .pricing-recap-title{
-      margin: 0;
-      font-size: 0.9rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(214, 238, 255, 0.8);
-    }
-    .pricing-breakdown{
-      display: grid;
-      gap: 0.45rem;
-    }
-    .pricing-line{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .pricing-label{
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(214, 238, 255, 0.65);
-    }
-    .pricing-value{
-      font-weight: 700;
-      color: #f5fbff;
-    }
-    .pricing-line.total{
-      margin-top: 0.4rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-    .pricing-line.total .pricing-value{
-      font-size: 1.05rem;
-    }
-    .pricing-recap-details{
-      margin: 0;
-      font-size: 0.78rem;
-      line-height: 1.5;
-      color: rgba(214, 238, 255, 0.7);
-    }
 
     .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap; }
     .step[data-step="1"] .actions{ justify-content:flex-start; }
@@ -501,8 +466,8 @@
 
     @media (min-width: 860px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.8fr);
-        gap: clamp(52px, 6vw, 80px);
+        grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.85fr);
+        gap: clamp(52px, 6vw, 84px);
         align-items: start;
       }
       .cart-summary{
@@ -515,19 +480,19 @@
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.45fr) minmax(400px, 0.75fr);
+        grid-template-columns: minmax(0, 1.75fr) minmax(380px, 0.8fr);
         gap: clamp(60px, 6.5vw, 96px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .cart-summary{
-        max-width: 400px;
+        max-width: 420px;
       }
     }
 
     .step-frequency .plans{ margin-bottom: 0; }
   </style>
 </head>
-<body data-paypal-client-id="" data-paypal-currency="CAD">
+<body data-paypal-client-id="" data-paypal-currency="CAD" data-cart-image="deepcleanpackage.png">
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
@@ -888,32 +853,7 @@
               </div>
             </label>
           </div>
-          <div class="pricing-recap" id="pricingRecap">
-            <h3 class="pricing-recap-title">Pricing summary</h3>
-            <div class="pricing-breakdown">
-              <div class="pricing-line">
-                <span class="pricing-label">Base package</span>
-                <span class="pricing-value" data-recap-base>—</span>
-              </div>
-              <div class="pricing-line" data-recap-detail-row hidden>
-                <span class="pricing-label">Service details</span>
-                <span class="pricing-value" data-recap-detail>—</span>
-              </div>
-              <div class="pricing-line" data-recap-extras-row hidden>
-                <span class="pricing-label">Add-ons</span>
-                <span class="pricing-value" data-recap-extras>—</span>
-              </div>
-              <div class="pricing-line" data-recap-discount-row hidden>
-                <span class="pricing-label">Frequency savings</span>
-                <span class="pricing-value" data-recap-discount>—</span>
-              </div>
-              <div class="pricing-line total">
-                <span class="pricing-label">Visit total</span>
-                <span class="pricing-value" data-recap-total>—</span>
-              </div>
-            </div>
-            <p class="pricing-recap-details" data-recap-description hidden></p>
-          </div>
+          <p class="muted frequency-note">Your cart on the right keeps a live tally of the package, add-ons, and frequency savings.</p>
           <div class="actions">
             <button type="button" class="btn next">Next</button>
           </div>
@@ -2243,7 +2183,7 @@
 
       function applyCartVisibility(stepIndex){
         if(!cartSummaryEl || !formColumnsEl) return;
-        const hide = stepIndex > 1;
+        const hide = stepIndex !== 1;
         cartSummaryEl.hidden = hide;
         cartSummaryEl.setAttribute('aria-hidden', hide ? 'true' : 'false');
         formColumnsEl.classList.toggle('cart-summary-hidden', hide);

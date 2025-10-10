@@ -2825,3 +2825,23 @@ body::before{
 @media (max-width: 979.98px){
   #summaryColumn{ position: static; max-width:none; }
 }
+/* === Step 1: package (left) + cart (right) === */
+.extras-with-cart{
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 380px;
+  gap: clamp(22px, 3vw, 36px);
+  align-items: start;
+}
+.extras-with-cart #summaryColumn{
+  position: sticky;
+  top: 96px;          /* adjust if your header height differs */
+  max-width: 380px;
+  align-self: start;
+}
+@media (max-width: 979.98px){
+  .extras-with-cart{ grid-template-columns: 1fr; }
+  .extras-with-cart #summaryColumn{ position: static; max-width: none; }
+}
+
+/* make sure sticky/overflow doesn’t break */
+.booking-card, .booking-layout, .form-columns, .form-steps{ min-height: 0; }

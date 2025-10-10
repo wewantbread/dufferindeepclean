@@ -292,6 +292,28 @@
       gap: 10px;
     }
 
+    @keyframes packageOverviewReveal{
+      from {
+        opacity: 0;
+        transform: translate3d(0, 16px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference){
+      .package-overview-section{
+        opacity: 0;
+        animation: packageOverviewReveal 0.6s ease forwards;
+      }
+
+      .package-overview-section:nth-of-type(2){
+        animation-delay: 0.12s;
+      }
+    }
+
     .package-overview-section h4{
       margin: 0;
       font-size: 1rem;

@@ -123,12 +123,12 @@
 
     .stepper-wrap{ width: 100%; display:flex; justify-content:center; }
     .stepper{
-      list-style: none; padding: 10px; margin: 0;
-      width: min(100%, 1050px);
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+      list-style: none; padding: 12px; margin: 0;
+      width: min(100%, 1080px);
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
       background: rgba(0, 0, 0, 0.55);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
+      border-radius: 28px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.35);
       backdrop-filter: blur(6px);
       text-transform: lowercase;
@@ -162,10 +162,10 @@
 
     .booking-card{
       margin: 18px auto 0;
-      width: min(100%, 1520px);
+      width: min(100%, 1640px);
       background: rgba(10, 12, 16, 0.72);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
+      border-radius: 44px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.45);
       backdrop-filter: blur(8px);
       overflow: hidden;
@@ -173,8 +173,8 @@
     .booking-layout{
       display: flex;
       flex-direction: column;
-      gap: clamp(22px, 3.2vw, 36px);
-      padding: clamp(24px, 3.4vw, 40px);
+      gap: clamp(24px, 3.6vw, 40px);
+      padding: clamp(28px, 3.8vw, 48px);
     }
     .booking-form{
       padding: 0;
@@ -196,14 +196,14 @@
       gap: clamp(20px, 3.2vw, 32px);
       min-width: 0;
       max-width: 860px;
+      padding-bottom: clamp(90px, 16vw, 140px);
     }
     .form-steps > *{
       min-width: 0;
     }
 
     .step-extras-layout{
-      display: flex;
-      flex-direction: column;
+      display: grid;
       gap: clamp(18px, 2.6vw, 26px);
     }
 
@@ -212,113 +212,184 @@
       gap: clamp(14px, 2.2vw, 20px);
     }
 
-    .package-overview{
-      display: flex;
-      flex-direction: column;
-      gap: clamp(16px, 2.4vw, 22px);
-      border-radius: 18px;
-      border: 1px solid rgba(255, 120, 220, 0.32);
-      background: rgba(7, 18, 32, 0.74);
-      padding: clamp(16px, 2.2vw, 24px);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.34);
-      position: relative;
+    .package-info{
+      border-radius: 28px;
+      border: 1px solid rgba(255, 120, 220, 0.38);
+      background: linear-gradient(135deg, rgba(24, 32, 52, 0.92), rgba(8, 12, 22, 0.88));
+      box-shadow: 0 18px 46px rgba(0,0,0,0.42);
       overflow: hidden;
+      position: relative;
+      isolation: isolate;
       animation: floatFade 0.8s ease both;
     }
 
-    .package-overview::before{
+    .package-info::after{
       content: "";
       position: absolute;
-      inset: -40% -50% auto;
-      height: 48%;
-      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.28), transparent 70%);
-      opacity: 0.55;
-      transform: translateY(-40%);
+      inset: auto 12% -60% 12%;
+      height: 80%;
+      border-radius: 40%;
+      background: radial-gradient(circle at center, rgba(255, 144, 220, 0.35), transparent 70%);
+      filter: blur(32px);
+      opacity: 0.6;
       pointer-events: none;
-      animation: pulseGlow 6s ease-in-out infinite;
+      transform: translateY(-12%);
     }
 
-    .package-overview-banner{
+    .package-info-toggle{
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      gap: clamp(6px, 1vw, 10px);
-      padding: clamp(10px, 1.8vw, 14px);
-      border-radius: 14px;
-      background: linear-gradient(90deg, rgba(76,195,255,0.28), rgba(255,79,195,0.18));
-      border: 1px solid rgba(154,212,255,0.38);
-    }
-
-    .package-overview-banner h3{
-      margin: 0;
-      font-size: clamp(22px, 2.6vw, 28px);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #e5f9ff;
-    }
-
-    .package-overview-main{
-      display: flex;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
       gap: clamp(18px, 3vw, 28px);
-      align-items: flex-start;
+      padding: clamp(16px, 2.6vw, 24px) clamp(20px, 3vw, 32px);
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
     }
 
-    .package-intro{
-      display: flex;
-      flex-direction: column;
-      gap: clamp(12px, 1.8vw, 18px);
-      flex: 1 1 320px;
+    .package-info-toggle:focus-visible{
+      outline: 2px solid rgba(255, 144, 220, 0.8);
+      outline-offset: 4px;
     }
 
-    .package-intro .lead{
+    .package-info-summary{
+      display: grid;
+      gap: 6px;
+      flex: 1 1 auto;
+    }
+
+    .package-info-label{
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      color: #ffb8ec;
+    }
+
+    .package-info-service{
+      margin: 0;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: clamp(30px, 5vw, 44px);
+      letter-spacing: 0.08em;
+      color: #f8f2ff;
+    }
+
+    .package-info-description{
+      margin: 0;
+      color: #dbeaff;
+      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+      line-height: 1.5;
+    }
+
+    .package-info-chevron{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      flex-shrink: 0;
+      transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .package-info-chevron svg{
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .package-info.package-open .package-info-chevron{
+      transform: rotate(180deg);
+      background: rgba(255, 79, 195, 0.28);
+      border-color: rgba(255, 120, 220, 0.6);
+    }
+
+    .package-panel{
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: max-height 0.5s ease, opacity 0.45s ease, transform 0.45s ease;
+      padding: 0 clamp(20px, 3vw, 32px);
+    }
+
+    .package-info.package-open .package-panel{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .package-panel-inner{
+      display: grid;
+      gap: clamp(16px, 2.4vw, 24px);
+      padding-bottom: clamp(16px, 2.4vw, 24px);
+    }
+
+    .package-lead{
       margin: 0;
       font-weight: 600;
-      color: #f4fbff;
+      color: #f8fcff;
     }
 
-    .package-overview-columns{
-      display: flex;
-      flex: 1 1 320px;
-      gap: clamp(16px, 2.4vw, 24px);
+    .package-context{
+      margin: 0;
+      color: #b9d8f2;
     }
 
-    .package-overview-section{
-      flex: 1 1 0;
-      padding: clamp(10px, 1.6vw, 16px);
-      border-radius: 14px;
-      border: 1px solid rgba(154,212,255,0.26);
-      background: rgba(9, 24, 38, 0.65);
+    .package-lists{
       display: grid;
-      gap: 10px;
+      gap: clamp(16px, 2.2vw, 22px);
     }
 
-    @keyframes packageOverviewReveal{
-      from {
-        opacity: 0;
-        transform: translate3d(0, 16px, 0);
-      }
-      to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
+    @media (min-width: 860px){
+      .package-lists{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (prefers-reduced-motion: no-preference){
-      .package-overview-section{
-        opacity: 0;
-        animation: packageOverviewReveal 0.6s ease forwards;
-      }
-
-      .package-overview-section:nth-of-type(2){
-        animation-delay: 0.12s;
-      }
+    .package-section{
+      border: 1px solid rgba(154, 212, 255, 0.28);
+      border-radius: 18px;
+      background: rgba(10, 24, 40, 0.72);
+      padding: clamp(14px, 2vw, 20px);
+      display: grid;
+      gap: 12px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.32);
     }
 
-    .package-overview-section h4{
+    .payment-policy{
+      border-top: 1px dashed rgba(154, 212, 255, 0.25);
+      padding-top: 10px;
+      color: #b9d8f2;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .payment-policy h3{
+      margin: 0;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #ffb8ec;
+    }
+
+    .payment-policy p{
+      margin: 6px 0 0;
+    }
+
+    .package-section h4{
       margin: 0;
       font-size: 1rem;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: #9ad4ff;
     }
 
@@ -336,27 +407,10 @@
       color: #4cc3ff;
     }
 
-    .package-note{
-      background: rgba(9, 24, 38, 0.65);
-      border: 1px solid rgba(154,212,255,0.25);
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 0.9rem;
-      color: #b9d8f2;
-    }
-
-    .package-note strong{ color: #e9f7ff; }
-
     @media (min-width: 960px){
-      .package-overview{
+      .package-info{
         position: sticky;
-        top: 0;
-      }
-      .package-overview-main{
-        flex-wrap: nowrap;
-      }
-      .package-overview-columns{
-        flex: 1 1 380px;
+        top: clamp(24px, 3.4vw, 42px);
       }
     }
 
@@ -386,60 +440,11 @@
       0%, 100% { transform: translateY(-40%) scale(1); opacity: 0.65; }
       50% { transform: translateY(-36%) scale(1.05); opacity: 0.85; }
     }
-    .base-package{
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      padding: clamp(18px, 2.6vw, 26px);
-      box-shadow: 0 16px 42px rgba(0,0,0,0.32);
-      display: grid;
-      gap: clamp(10px, 1.6vw, 18px);
-    }
-    .base-package--inactive{
-      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
-      border-style: dashed;
-      border-color: rgba(255,255,255,0.16);
-      opacity: 0.92;
-    }
-    .base-package--inactive .base-package-badge{
-      color: #9ad4ff;
-      border-color: rgba(154,212,255,0.45);
-      background: rgba(154,212,255,0.12);
-    }
-    .base-package-badge{
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-weight: 700;
-      color: #00d4ff;
-      background: rgba(0,212,255,0.12);
-      border: 1px solid rgba(0,212,255,0.32);
-      border-radius: 999px;
-      padding: 6px 14px;
-      width: fit-content;
-    }
-    .base-package-title{
-      margin: 0;
-      font-family: "Bebas Neue", system-ui, sans-serif;
-      font-size: clamp(32px, 5vw, 44px);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .base-package-description{
-      margin: 0;
-      color: #d7e7f8;
-      line-height: 1.6;
-      font-size: 1rem;
-    }
     .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
     fieldset{ border: none; margin: 0; padding: 0; }
     legend{ font-weight: 800; font-size: 1.2rem; margin-bottom: 14px; }
     .muted{ color: #b6c2cf; }
-    .base-package-note{ margin-top: 4px; }
     .frequency-note{ margin-top: 12px; }
     .legend-note{
       display: block;
@@ -451,23 +456,12 @@
 
     .summary-column{
       display: grid;
-      gap: clamp(20px, 3vw, 28px);
+      gap: clamp(18px, 2.8vw, 26px);
       align-self: stretch;
       align-content: start;
     }
     .summary-column[hidden]{
       display: none !important;
-    }
-    .summary-column .base-package{
-      background: linear-gradient(180deg, rgba(0,212,255,0.12), rgba(255,79,195,0.08));
-      border-color: rgba(154,212,255,0.35);
-      box-shadow: 0 18px 42px rgba(0,0,0,0.38);
-    }
-    .summary-column .base-package-title{
-      font-size: clamp(26px, 3.8vw, 36px);
-    }
-    .summary-column .base-package-description{
-      font-size: 0.95rem;
     }
     .summary-column .cart-summary{
       margin: 0;
@@ -475,7 +469,7 @@
     .cart-summary{
       background: rgba(7, 18, 32, 0.74);
       border: 1px solid rgba(255, 120, 220, 0.32);
-      border-radius: 20px;
+      border-radius: 26px;
       padding: clamp(14px, 2vw, 20px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
       display: grid;
@@ -700,12 +694,33 @@
     .plan-discount{ color: #00d084; font-weight: 700; }
     .plan-note{ color: #b6c2cf; font-size: .9rem; }
 
-    .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap; }
-    .step[data-step="1"] .actions{ justify-content:flex-start; }
+    .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-start; flex-wrap: wrap; }
     .btn{
       appearance: none; border: 1px solid rgba(255,255,255,0.08); color: #0b0d10;
       background: linear-gradient(180deg, #4cc3ff, #00e0a4);
       font-weight: 800; border-radius: 12px; padding: 10px 16px; cursor: pointer;
+    }
+    .btn.next{
+      background: linear-gradient(135deg, #ff9adb, #ff4fc3);
+      color: #fff;
+      border-color: rgba(255,255,255,0.18);
+      position: fixed;
+      right: clamp(16px, 4vw, 48px);
+      bottom: clamp(20px, 5vw, 52px);
+      padding: clamp(12px, 2.6vw, 18px) clamp(28px, 5vw, 40px);
+      border-radius: 999px;
+      box-shadow: 0 22px 50px rgba(255, 79, 195, 0.32);
+      z-index: 980;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn.next:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 28px 58px rgba(255, 79, 195, 0.42);
+    }
+    .btn.next:disabled{
+      opacity: 0.6;
+      box-shadow: none;
+      transform: none;
     }
     .btn.back{
       background: rgba(255,255,255,0.06); color: #f2f5f8;
@@ -731,18 +746,18 @@
 
     @media (min-width: 780px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.05fr) minmax(340px, 0.95fr);
-        gap: clamp(48px, 6vw, 82px);
+        grid-template-columns: minmax(0, 1.9fr) minmax(360px, 1fr);
+        gap: clamp(52px, 6.4vw, 88px);
       }
       .summary-column{
         position: sticky;
-        top: 0;
+        top: clamp(24px, 3.6vw, 46px);
         max-height: calc(100vh - 80px);
         overflow: auto;
         justify-self: end;
         padding-right: 4px;
         align-content: start;
-        gap: clamp(22px, 3vw, 30px);
+        gap: clamp(18px, 2.8vw, 26px);
       }
       .summary-column .cart-summary{
         position: static;
@@ -757,8 +772,8 @@
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.25fr) minmax(400px, 0.9fr);
-        gap: clamp(64px, 6.8vw, 110px);
+        grid-template-columns: minmax(0, 2.1fr) minmax(420px, 1fr);
+        gap: clamp(66px, 7vw, 112px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .summary-column{
@@ -864,266 +879,273 @@
         <fieldset class="step step-extras" data-step="1">
           <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
           <div class="step-extras-layout">
-            <aside class="package-overview" aria-label="What's included in the base package">
-              <div class="package-overview-banner">
-                <h3>Signature Home Refresh</h3>
-              </div>
-              <div class="package-overview-main">
-                <div class="package-intro">
-                  <p class="lead">A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
-                  <div class="step-extras-content">
-                    <p class="muted">Select any speciality tasks you’d like to include or skip to keep the base package.</p>
-                    <p class="muted base-package-note">Review your custom quoted package on the right while you add extras.</p>
-                    <div class="addon-groups" id="addon-groups">
-                  <div class="addon-group" data-service-group="home">
-                    <p class="addon-group-title">Home &amp; Residential Extras</p>
-                    <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
-                      <span class="addon-icon" data-icon="sparkle" aria-hidden="true"></span>
-                      <span class="addon-name">Deep Clean Package</span>
-                      <div class="addon-stepper" role="group" aria-label="Deep Clean Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Deep Clean Package quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Deep Clean Package quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
-                      <span class="addon-icon" data-icon="truck" aria-hidden="true"></span>
-                      <span class="addon-name">Move In/Out Clean Package</span>
-                      <div class="addon-stepper" role="group" aria-label="Move In/Out Clean Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Move In/Out Clean Package quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Move In/Out Clean Package quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
-                      <span class="addon-icon" data-icon="tool" aria-hidden="true"></span>
-                      <span class="addon-name">Renovation Clean Package</span>
-                      <div class="addon-stepper" role="group" aria-label="Renovation Clean Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Renovation Clean Package quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Renovation Clean Package quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
-                      <span class="addon-icon" data-icon="cap" aria-hidden="true"></span>
-                      <span class="addon-name">Move In/Out Package (Student Property)</span>
-                      <div class="addon-stepper" role="group" aria-label="Move In/Out Package (Student Property) quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Move In/Out Package (Student Property) quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Move In/Out Package (Student Property) quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
-                      <span class="addon-icon" data-icon="home" aria-hidden="true"></span>
-                      <span class="addon-name">AirBnB Listing</span>
-                      <div class="addon-stepper" role="group" aria-label="AirBnB Listing quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease AirBnB Listing quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase AirBnB Listing quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
-                      <span class="addon-icon" data-icon="paw" aria-hidden="true"></span>
-                      <span class="addon-name">I have Pets</span>
-                      <div class="addon-stepper" role="group" aria-label="I have Pets quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease I have Pets quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase I have Pets quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
-                      <span class="addon-icon" data-icon="fridge" aria-hidden="true"></span>
-                      <span class="addon-name">Inside Fridge</span>
-                      <div class="addon-stepper" role="group" aria-label="Inside Fridge quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Fridge quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Fridge quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
-                      <span class="addon-icon" data-icon="oven" aria-hidden="true"></span>
-                      <span class="addon-name">Inside Oven</span>
-                      <div class="addon-stepper" role="group" aria-label="Inside Oven quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Oven quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Oven quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
-                      <span class="addon-icon" data-icon="cabinet" aria-hidden="true"></span>
-                      <span class="addon-name">Inside Cabinets</span>
-                      <div class="addon-stepper" role="group" aria-label="Inside Cabinets quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Cabinets quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Cabinets quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
-                      <span class="addon-icon" data-icon="utensils" aria-hidden="true"></span>
-                      <span class="addon-name">Additional Kitchen</span>
-                      <div class="addon-stepper" role="group" aria-label="Additional Kitchen quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Additional Kitchen quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Additional Kitchen quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
-                      <span class="addon-icon" data-icon="blinds" aria-hidden="true"></span>
-                      <span class="addon-name">Blinds (per window)</span>
-                      <div class="addon-stepper" role="group" aria-label="Blinds (per window) quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Blinds quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Blinds quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
-                      <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
-                      <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
-                      <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 6) quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 6) quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 6) quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
-                      <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
-                      <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
-                      <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 12) quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 12) quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 12) quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
-                      <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
-                      <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
-                      <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 24) quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 24) quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 24) quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
-                      <span class="addon-icon" data-icon="bed" aria-hidden="true"></span>
-                      <span class="addon-name">Change Bed Sheets + Load Laundry</span>
-                      <div class="addon-stepper" role="group" aria-label="Change Bed Sheets and Load Laundry quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Change Bed Sheets and Load Laundry quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets and Load Laundry quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Change Bed Sheets and Load Laundry quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-ivory" data-addon="Laundry Service (wash &amp; fold)" data-price="35">
-                      <span class="addon-icon" data-icon="laundry" aria-hidden="true"></span>
-                      <span class="addon-name">Laundry Service (wash &amp; fold)</span>
-                      <div class="addon-stepper" role="group" aria-label="Laundry Service quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Laundry Service quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Laundry Service quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Laundry Service quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-cream" data-addon="Load Dishwasher" data-price="10">
-                      <span class="addon-icon" data-icon="dishwasher" aria-hidden="true"></span>
-                      <span class="addon-name">Load Dishwasher</span>
-                      <div class="addon-stepper" role="group" aria-label="Load Dishwasher quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Load Dishwasher quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Load Dishwasher quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
-                      <span class="addon-icon" data-icon="spray" aria-hidden="true"></span>
-                      <span class="addon-name">Sanitization Package</span>
-                      <div class="addon-stepper" role="group" aria-label="Sanitization Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Sanitization Package quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Sanitization Package quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="addon-group" data-service-group="commercial,office">
-                    <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
-                    <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
-                      <span class="addon-icon" data-icon="vacuum" aria-hidden="true"></span>
-                      <span class="addon-name">Carpet Steam Cleaning Package</span>
-                      <div class="addon-stepper" role="group" aria-label="Carpet Steam Cleaning Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Carpet Steam Cleaning quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Carpet Steam Cleaning quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
-                      <span class="addon-icon" data-icon="tiles" aria-hidden="true"></span>
-                      <span class="addon-name">Tile and Grout Cleaning Package</span>
-                      <div class="addon-stepper" role="group" aria-label="Tile and Grout Cleaning Package quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Tile and Grout quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Tile and Grout quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-coral" data-addon="Window Detailing" data-price="120">
-                      <span class="addon-icon" data-icon="squeegee" aria-hidden="true"></span>
-                      <span class="addon-name">Window Detailing</span>
-                      <div class="addon-stepper" role="group" aria-label="Window Detailing quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Window Detailing quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Window Detailing quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Window Detailing quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                    <div class="addon-pill color-lime" data-addon="Pressure Washing" data-price="165">
-                      <span class="addon-icon" data-icon="pressure" aria-hidden="true"></span>
-                      <span class="addon-name">Pressure Washing</span>
-                      <div class="addon-stepper" role="group" aria-label="Pressure Washing quantity">
-                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Pressure Washing quantity"><span aria-hidden="true">−</span></button>
-                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Pressure Washing quantity">
-                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Pressure Washing quantity"><span aria-hidden="true">+</span></button>
-                      </div>
-                    </div>
-                      <div class="addon-pill color-rose" data-addon="Floor Strip &amp; Wax" data-price="185">
-                        <span class="addon-icon" data-icon="floor" aria-hidden="true"></span>
-                        <span class="addon-name">Floor Strip &amp; Wax</span>
-                        <div class="addon-stepper" role="group" aria-label="Floor Strip and Wax quantity">
-                          <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Floor Strip and Wax quantity"><span aria-hidden="true">−</span></button>
-                          <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Floor Strip and Wax quantity">
-                          <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Floor Strip and Wax quantity"><span aria-hidden="true">+</span></button>
-                        </div>
-                      </div>
-                      </div>
-                    </div>
-                          </div>
-      
-                    <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
-                  </div>
+            <div class="package-info" data-package>
+              <button class="package-info-toggle" type="button" data-package-toggle aria-expanded="false">
+                <div class="package-info-summary">
+                  <span class="package-info-label">Description</span>
+                  <h3 class="package-info-service" data-package-service>Signature Home Refresh</h3>
+                  <p class="package-info-description" data-package-description>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
                 </div>
-                <div class="package-overview-columns">
-                  <div class="package-overview-section">
-                    <h4>What’s included</h4>
-                    <ul class="package-list">
-                      <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
-                      <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
-                      <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
-                      <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
-                      <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
-                      <li>Trash: bag &amp; place at your designated spot.</li>
-                    </ul>
-                  </div>
-                  <div class="package-overview-section">
-                    <h4>Good to know</h4>
-                    <ul class="package-list">
-                      <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
-                      <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
-                      <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
-                      <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
-                    </ul>
-                    <div class="payment-policy">
-                      <h3>Payment Policy</h3>
-                      <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
-                    </div>
+                <span class="package-info-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </span>
+              </button>
+              <div class="package-panel" data-package-panel aria-hidden="true">
+                <div class="package-panel-inner">
+                  <p class="package-lead" data-package-lead>A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
+                  <p class="package-context" data-package-context hidden></p>
+                  <div class="package-lists">
+                    <section class="package-section">
+                      <h4>What’s included</h4>
+                      <ul class="package-list" data-package-list="included">
+                        <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
+                        <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
+                        <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
+                        <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
+                        <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
+                        <li>Trash: bag &amp; place at your designated spot.</li>
+                      </ul>
+                    </section>
+                    <section class="package-section">
+                      <h4>Good to know</h4>
+                      <ul class="package-list" data-package-list="good">
+                        <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
+                        <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
+                        <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
+                        <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
+                      </ul>
+                      <div class="payment-policy">
+                        <h3>Payment Policy</h3>
+                        <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
+                      </div>
+                    </section>
                   </div>
                 </div>
               </div>
-              <p class="package-note"><strong>Need more?</strong> Layer on speciality add-ons to the right and watch your package update instantly.</p>
-            </aside>
+            </div>
+            <div class="step-extras-content">
+              <p class="muted">Select any speciality tasks you’d like to include or skip to keep the base package.</p>
+              <div class="addon-groups" id="addon-groups">
+                                <div class="addon-group" data-service-group="home">
+                                  <p class="addon-group-title">Home &amp; Residential Extras</p>
+                                  <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
+                                    <span class="addon-icon" data-icon="sparkle" aria-hidden="true"></span>
+                                    <span class="addon-name">Deep Clean Package</span>
+                                    <div class="addon-stepper" role="group" aria-label="Deep Clean Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Deep Clean Package quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Deep Clean Package quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
+                                    <span class="addon-icon" data-icon="truck" aria-hidden="true"></span>
+                                    <span class="addon-name">Move In/Out Clean Package</span>
+                                    <div class="addon-stepper" role="group" aria-label="Move In/Out Clean Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Move In/Out Clean Package quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Move In/Out Clean Package quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
+                                    <span class="addon-icon" data-icon="tool" aria-hidden="true"></span>
+                                    <span class="addon-name">Renovation Clean Package</span>
+                                    <div class="addon-stepper" role="group" aria-label="Renovation Clean Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Renovation Clean Package quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Renovation Clean Package quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
+                                    <span class="addon-icon" data-icon="cap" aria-hidden="true"></span>
+                                    <span class="addon-name">Move In/Out Package (Student Property)</span>
+                                    <div class="addon-stepper" role="group" aria-label="Move In/Out Package (Student Property) quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Move In/Out Package (Student Property) quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Move In/Out Package (Student Property) quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
+                                    <span class="addon-icon" data-icon="home" aria-hidden="true"></span>
+                                    <span class="addon-name">AirBnB Listing</span>
+                                    <div class="addon-stepper" role="group" aria-label="AirBnB Listing quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease AirBnB Listing quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase AirBnB Listing quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
+                                    <span class="addon-icon" data-icon="paw" aria-hidden="true"></span>
+                                    <span class="addon-name">I have Pets</span>
+                                    <div class="addon-stepper" role="group" aria-label="I have Pets quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease I have Pets quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase I have Pets quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
+                                    <span class="addon-icon" data-icon="fridge" aria-hidden="true"></span>
+                                    <span class="addon-name">Inside Fridge</span>
+                                    <div class="addon-stepper" role="group" aria-label="Inside Fridge quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Fridge quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Fridge quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
+                                    <span class="addon-icon" data-icon="oven" aria-hidden="true"></span>
+                                    <span class="addon-name">Inside Oven</span>
+                                    <div class="addon-stepper" role="group" aria-label="Inside Oven quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Oven quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Oven quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
+                                    <span class="addon-icon" data-icon="cabinet" aria-hidden="true"></span>
+                                    <span class="addon-name">Inside Cabinets</span>
+                                    <div class="addon-stepper" role="group" aria-label="Inside Cabinets quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Cabinets quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Cabinets quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
+                                    <span class="addon-icon" data-icon="utensils" aria-hidden="true"></span>
+                                    <span class="addon-name">Additional Kitchen</span>
+                                    <div class="addon-stepper" role="group" aria-label="Additional Kitchen quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Additional Kitchen quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Additional Kitchen quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
+                                    <span class="addon-icon" data-icon="blinds" aria-hidden="true"></span>
+                                    <span class="addon-name">Blinds (per window)</span>
+                                    <div class="addon-stepper" role="group" aria-label="Blinds (per window) quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Blinds quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Blinds quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
+                                    <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
+                                    <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
+                                    <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 6) quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 6) quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 6) quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
+                                    <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
+                                    <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
+                                    <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 12) quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 12) quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 12) quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
+                                    <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
+                                    <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
+                                    <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 24) quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 24) quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 24) quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
+                                    <span class="addon-icon" data-icon="bed" aria-hidden="true"></span>
+                                    <span class="addon-name">Change Bed Sheets + Load Laundry</span>
+                                    <div class="addon-stepper" role="group" aria-label="Change Bed Sheets and Load Laundry quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Change Bed Sheets and Load Laundry quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets and Load Laundry quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Change Bed Sheets and Load Laundry quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-ivory" data-addon="Laundry Service (wash &amp; fold)" data-price="35">
+                                    <span class="addon-icon" data-icon="laundry" aria-hidden="true"></span>
+                                    <span class="addon-name">Laundry Service (wash &amp; fold)</span>
+                                    <div class="addon-stepper" role="group" aria-label="Laundry Service quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Laundry Service quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Laundry Service quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Laundry Service quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-cream" data-addon="Load Dishwasher" data-price="10">
+                                    <span class="addon-icon" data-icon="dishwasher" aria-hidden="true"></span>
+                                    <span class="addon-name">Load Dishwasher</span>
+                                    <div class="addon-stepper" role="group" aria-label="Load Dishwasher quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Load Dishwasher quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Load Dishwasher quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
+                                    <span class="addon-icon" data-icon="spray" aria-hidden="true"></span>
+                                    <span class="addon-name">Sanitization Package</span>
+                                    <div class="addon-stepper" role="group" aria-label="Sanitization Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Sanitization Package quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Sanitization Package quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                </div>
+              
+                                <div class="addon-group" data-service-group="commercial,office">
+                                  <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
+                                  <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
+                                    <span class="addon-icon" data-icon="vacuum" aria-hidden="true"></span>
+                                    <span class="addon-name">Carpet Steam Cleaning Package</span>
+                                    <div class="addon-stepper" role="group" aria-label="Carpet Steam Cleaning Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Carpet Steam Cleaning quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Carpet Steam Cleaning quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
+                                    <span class="addon-icon" data-icon="tiles" aria-hidden="true"></span>
+                                    <span class="addon-name">Tile and Grout Cleaning Package</span>
+                                    <div class="addon-stepper" role="group" aria-label="Tile and Grout Cleaning Package quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Tile and Grout quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Tile and Grout quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-coral" data-addon="Window Detailing" data-price="120">
+                                    <span class="addon-icon" data-icon="squeegee" aria-hidden="true"></span>
+                                    <span class="addon-name">Window Detailing</span>
+                                    <div class="addon-stepper" role="group" aria-label="Window Detailing quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Window Detailing quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Window Detailing quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Window Detailing quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                  <div class="addon-pill color-lime" data-addon="Pressure Washing" data-price="165">
+                                    <span class="addon-icon" data-icon="pressure" aria-hidden="true"></span>
+                                    <span class="addon-name">Pressure Washing</span>
+                                    <div class="addon-stepper" role="group" aria-label="Pressure Washing quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Pressure Washing quantity"><span aria-hidden="true">−</span></button>
+                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Pressure Washing quantity">
+                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Pressure Washing quantity"><span aria-hidden="true">+</span></button>
+                                    </div>
+                                  </div>
+                                    <div class="addon-pill color-rose" data-addon="Floor Strip &amp; Wax" data-price="185">
+                                      <span class="addon-icon" data-icon="floor" aria-hidden="true"></span>
+                                      <span class="addon-name">Floor Strip &amp; Wax</span>
+                                      <div class="addon-stepper" role="group" aria-label="Floor Strip and Wax quantity">
+                                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Floor Strip and Wax quantity"><span aria-hidden="true">−</span></button>
+                                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Floor Strip and Wax quantity">
+                                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Floor Strip and Wax quantity"><span aria-hidden="true">+</span></button>
+                                      </div>
+                                    </div>
+                                    </div>
+                                  </div>
+              <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
+            </div>
+            </div>
           </div>
           <div class="actions">
             <button type="button" class="btn skip">Skip extras</button>
@@ -1326,11 +1348,6 @@
                 </button>
                 <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
               </div>
-              <section class="base-package" id="basePackageOverview" aria-live="polite">
-                <span class="base-package-badge" id="basePackageBadge">Base package preview</span>
-                <h2 class="base-package-title" id="basePackageTitle">House Cleaning Package</h2>
-                <p class="base-package-description" id="basePackageDescription">Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
-              </section>
             </aside>
 
           </div>
@@ -1749,10 +1766,15 @@
       const summaryColumnEl = document.getElementById('summaryColumn');
       const cartSummaryTitle = document.querySelector('.cart-summary-title');
       const cartSummaryImage = document.getElementById('cartSummaryImage');
-      const basePackageOverview = document.getElementById('basePackageOverview');
-      const basePackageTitle = document.getElementById('basePackageTitle');
-      const basePackageDescription = document.getElementById('basePackageDescription');
-      const basePackageBadge = document.getElementById('basePackageBadge');
+      const packageInfo = document.querySelector('[data-package]');
+      const packageToggle = document.querySelector('[data-package-toggle]');
+      const packagePanel = document.querySelector('[data-package-panel]');
+      const packageServiceHeading = document.querySelector('[data-package-service]');
+      const packageDescription = document.querySelector('[data-package-description]');
+      const packageLead = document.querySelector('[data-package-lead]');
+      const packageContext = document.querySelector('[data-package-context]');
+      const packageIncludedList = document.querySelector('[data-package-list="included"]');
+      const packageGoodList = document.querySelector('[data-package-list="good"]');
       const formColumnsEl = document.querySelector('.form-columns');
       const navCartButton = document.querySelector('[data-cart-toggle]');
       const navPayPalContainer = document.getElementById('nav-paypal-buttons');
@@ -1768,6 +1790,47 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+
+      function renderPackageList(target, items){
+        if(!target) return;
+        const hasItems = Array.isArray(items) && items.length > 0;
+        if(!hasItems){
+          target.innerHTML = '';
+          target.hidden = true;
+          return;
+        }
+        target.innerHTML = items.map(item => `<li>${escapeHtml(item)}</li>`).join('');
+        target.hidden = false;
+      }
+
+      function syncPackagePanelHeight(){
+        if(!packageInfo || !packagePanel) return;
+        if(packageInfo.classList.contains('package-open')){
+          packagePanel.style.maxHeight = packagePanel.scrollHeight + 'px';
+        } else {
+          packagePanel.style.maxHeight = '0px';
+        }
+      }
+
+      if(packageToggle && packageInfo && packagePanel){
+        packagePanel.style.maxHeight = '0px';
+        packageToggle.addEventListener('click', () => {
+          const isOpen = packageInfo.classList.toggle('package-open');
+          packageToggle.setAttribute('aria-expanded', String(isOpen));
+          packagePanel.setAttribute('aria-hidden', String(!isOpen));
+          syncPackagePanelHeight();
+        });
+        syncPackagePanelHeight();
+      }
+
+      function refreshPackagePanel(){
+        if(!packageInfo || !packagePanel) return;
+        if(packageInfo.classList.contains('package-open')){
+          requestAnimationFrame(() => {
+            packagePanel.style.maxHeight = packagePanel.scrollHeight + 'px';
+          });
+        }
+      }
 
       const ADDON_ICON_SVGS = {
         sparkle: `<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M16 5l2.2 5.8 6 .4-4.7 4 1.4 5.7-4.9-3.1-4.9 3.1 1.4-5.7-4.7-4 6-.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.2 9.5l1.1 2.3 2.5.2-2 1.7.6 2.3-2.1-1.3-2.1 1.3.6-2.3-2-1.7 2.5-.2z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" opacity=".6"/></svg>`,
@@ -1861,9 +1924,69 @@
       };
       const SERVICE_DESCRIPTIONS = {
         home: 'Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.',
-        commercial: 'Industrial-strength detailing for production floors, loading zones, staff spaces, and compliance touchpoints so your facility stays inspection-ready.',
+        commercial: 'Ideal for light-industrial units and warehouses with attached offices—covers production aisles, loading zones, staff areas, and restrooms with safety-first detailing.',
         office: 'Professional office upkeep that dusts workstations, refreshes conference rooms, polishes reception areas, and tidies shared kitchens for a productive team.',
         default: 'Signature cleaning tailored to your property with meticulous dusting, disinfected touchpoints, and a polished finish guests will notice.'
+      };
+      const PACKAGE_COPY = {
+        home: {
+          lead: 'A full-home detailing that leaves every lived-in space ready for life’s next moments.',
+          context: '',
+          included: [
+            'Dust & wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.',
+            'Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.',
+            'Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink & taps; microwave inside & out; cabinet exteriors only.',
+            'Bathrooms: toilet (in/out), tub/shower walls & fixtures, mirrors, vanity, sink & taps.',
+            'Bedrooms & living areas: make beds (no linen change), general tidy, mirrors & glass accents.',
+            'Trash: bag & place at your designated spot.'
+          ],
+          goodToKnow: [
+            'Time & team: 1–2 cleaners; duration depends on size/condition.',
+            'Supplies: professional, pet-safe products & equipment included.',
+            'Guarantee: Not happy? Tell us within 24 hours—we fix it.',
+            'Prep: tidy personal items & clear counters where possible for best results.'
+          ]
+        },
+        commercial: {
+          lead: 'Ideal for: light-industrial units, warehouses, workshops, production floors with attached offices/breakrooms.',
+          context: 'Zones covered: production floor (light service), aisles/walkways, loading areas (indoors), attached offices, lunchroom, restrooms, locker/change areas.',
+          included: [
+            'High-touch points: door hardware, switches, railings, time clocks, shared equipment controls (dry wipe/disinfect—non-invasive).',
+            'Dust & wipe (reachable): ledges, window sills, benches/tables in non-process zones, safety rails/guarding (wipe-down only).',
+            'Floors: machine-safe sweep/vac of debris in aisles; damp mop or auto-scrub where suitable and safe (client to identify exclusions).',
+            'Office/lunchroom/restrooms: as per office standards—surfaces, exteriors of appliances, sinks/taps, toilets/urinals, mirrors, bin service.',
+            'Bins & cardboard: collect, bag, and stage at designated point (no compactor operation).'
+          ],
+          goodToKnow: [
+            'Not included (base): Inside machinery, degreasing/heavy oil removal, confined spaces, heights >10 ft, line shutdown/lockout work, hazardous waste, post-construction debris, epoxy/strip-and-wax, exterior yard/parking lots, interior window tracks beyond spot-clean.',
+            'Safety first: we follow site PPE rules; client provides hazard disclosures and restricted zones.',
+            'Scheduling: off-hours/shift-change service available to minimize downtime.',
+            'Equipment: commercial vacs/mops/auto-scrubber (if site-approved power/water access).'
+          ]
+        },
+        office: {
+          lead: 'Professional upkeep that keeps meeting rooms, workstations, and common areas guest-ready every visit.',
+          context: '',
+          included: [
+            'Dust workstations, conference tables, and reception surfaces (reachable).',
+            'Vacuum carpets and rugs; mop hard floors with commercial-safe solutions.',
+            'Refresh reception and break areas—wipe counters, appliance exteriors, sinks & taps.',
+            'Restock and sanitize restrooms: toilets/urinals, partitions, mirrors, fixtures.',
+            'Empty bins and recycling; reliner service included.'
+          ],
+          goodToKnow: [
+            'Team size scales with office footprint and traffic patterns.',
+            'Eco-forward supplies included; let us know about sensitive surfaces in advance.',
+            'Flexible scheduling for after-hours or staggered teams.',
+            'Prep: please clear confidential paperwork and power down equipment where possible.'
+          ]
+        },
+        default: {
+          lead: 'Signature cleaning tailored to your property with meticulous dusting, disinfected touchpoints, and a polished finish guests will notice.',
+          context: '',
+          included: [],
+          goodToKnow: []
+        }
       };
       const BASE_PRICE_TABLE = {
         home: {
@@ -2044,24 +2167,53 @@
 
       const hasServiceSelection = !!(serviceKey || rawServiceLabel);
 
-      if(basePackageTitle){
-        basePackageTitle.textContent = resolvedServiceLabel;
+      if(packageServiceHeading){
+        packageServiceHeading.textContent = resolvedServiceLabel;
       }
-      if(basePackageDescription){
+      if(packageDescription){
         if(serviceDescription){
-          basePackageDescription.textContent = serviceDescription;
-          basePackageDescription.hidden = false;
+          packageDescription.textContent = serviceDescription;
+          packageDescription.hidden = false;
         } else {
-          basePackageDescription.textContent = '';
-          basePackageDescription.hidden = true;
+          packageDescription.textContent = '';
+          packageDescription.hidden = true;
         }
       }
-      if(basePackageBadge){
-        basePackageBadge.textContent = hasServiceSelection ? 'Custom quoted package' : 'Base package preview';
+      const fallbackPackageCopy = PACKAGE_COPY.home || PACKAGE_COPY.default;
+      const activePackageCopy = (serviceKey && PACKAGE_COPY[serviceKey]) || fallbackPackageCopy;
+      if(packageLead && activePackageCopy){
+        const leadText = activePackageCopy.lead || (fallbackPackageCopy && fallbackPackageCopy.lead) || '';
+        if(leadText){
+          packageLead.textContent = leadText;
+          packageLead.hidden = false;
+        } else {
+          packageLead.textContent = '';
+          packageLead.hidden = true;
+        }
       }
-      if(basePackageOverview){
-        basePackageOverview.classList.toggle('base-package--inactive', !hasServiceSelection);
+      if(packageContext){
+        const contextText = (activePackageCopy && activePackageCopy.context) || '';
+        if(contextText){
+          packageContext.textContent = contextText;
+          packageContext.hidden = false;
+        } else {
+          packageContext.textContent = '';
+          packageContext.hidden = true;
+        }
       }
+      renderPackageList(
+        packageIncludedList,
+        (activePackageCopy && activePackageCopy.included && activePackageCopy.included.length)
+          ? activePackageCopy.included
+          : (fallbackPackageCopy && fallbackPackageCopy.included)
+      );
+      renderPackageList(
+        packageGoodList,
+        (activePackageCopy && activePackageCopy.goodToKnow && activePackageCopy.goodToKnow.length)
+          ? activePackageCopy.goodToKnow
+          : (fallbackPackageCopy && fallbackPackageCopy.goodToKnow)
+      );
+      refreshPackagePanel();
       if(cartSummaryTitle){
         cartSummaryTitle.textContent = resolvedServiceLabel;
       }

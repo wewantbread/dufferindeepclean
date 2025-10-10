@@ -2056,9 +2056,6 @@
           basePackageDescription.hidden = true;
         }
       }
-      if(basePackageBadge){
-        basePackageBadge.textContent = hasServiceSelection ? 'Custom quoted package' : 'Base package preview';
-      }
       if(basePackageOverview){
         basePackageOverview.classList.toggle('base-package--inactive', !hasServiceSelection);
       }

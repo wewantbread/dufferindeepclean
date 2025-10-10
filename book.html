@@ -238,6 +238,12 @@
       animation: pulseGlow 6s ease-in-out infinite;
     }
 
+    .package-overview-header{
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 2vw, 18px);
+    }
+
     .package-overview-banner{
       display: flex;
       flex-direction: column;
@@ -254,6 +260,10 @@
       text-transform: uppercase;
       letter-spacing: 0.18em;
       color: #e5f9ff;
+    }
+
+    .package-overview-header .cart-summary{
+      width: 100%;
     }
 
     .package-overview-main{
@@ -734,6 +744,18 @@
         grid-template-columns: minmax(0, 2.05fr) minmax(340px, 0.95fr);
         gap: clamp(48px, 6vw, 82px);
       }
+      .package-overview-header{
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .package-overview-banner{
+        flex: 1 1 0;
+      }
+      .package-overview-header .cart-summary{
+        flex: 1 1 320px;
+        max-width: 380px;
+        align-self: stretch;
+      }
       .summary-column{
         position: sticky;
         top: 0;
@@ -865,8 +887,60 @@
           <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
           <div class="step-extras-layout">
             <aside class="package-overview" aria-label="What's included in the base package">
-              <div class="package-overview-banner">
-                <h3>Signature Home Refresh</h3>
+              <div class="package-overview-header">
+                <div class="package-overview-banner">
+                  <h3>Signature Home Refresh</h3>
+                </div>
+                <div class="cart-summary" id="cartSummary" aria-label="Cart summary">
+                  <header>
+                    <img id="cartSummaryImage" alt="House cleaning package preview" loading="lazy" />
+                    <div>
+                      <h2 class="cart-summary-title">House Cleaning Package</h2>
+                      <p class="cart-summary-subtitle" data-cart-service>Choose a service to view details.</p>
+                    </div>
+                  </header>
+                  <div class="cart-details" data-cart-description hidden></div>
+                  <div class="cart-pricing" id="pricingRecap">
+                    <div class="cart-line">
+                      <span>Base package</span>
+                      <span data-recap-base>—</span>
+                    </div>
+                    <div class="cart-line" data-recap-detail-row hidden>
+                      <span>Service details</span>
+                      <span data-recap-detail>—</span>
+                    </div>
+                    <div class="cart-line" data-recap-extras-row hidden>
+                      <span>Add-ons</span>
+                      <span data-recap-extras>—</span>
+                    </div>
+                    <div class="cart-line" data-recap-discount-row hidden>
+                      <span>Frequency savings</span>
+                      <span data-recap-discount>—</span>
+                    </div>
+                    <div class="cart-divider"></div>
+                    <div class="cart-line total">
+                      <span>Visit total</span>
+                      <span data-recap-total>—</span>
+                    </div>
+                    <div class="cart-line deposit">
+                      <span>Deposit (50%)</span>
+                      <span id="deposit-due-text">—</span>
+                    </div>
+                    <div class="cart-line balance">
+                      <span>Balance at service</span>
+                      <span id="balance-due-text">—</span>
+                    </div>
+                  </div>
+                  <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>
+                    <span class="cart-btn-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                        <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                    <span class="cart-btn-text">Add to Cart</span>
+                  </button>
+                  <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
+                </div>
               </div>
               <div class="package-overview-main">
                 <div class="package-intro">
@@ -1276,56 +1350,6 @@
             </div>
 
             <aside class="summary-column" id="summaryColumn" aria-label="Package overview and cart">
-              <div class="cart-summary" id="cartSummary" aria-label="Cart summary">
-                <header>
-                  <img id="cartSummaryImage" alt="House cleaning package preview" loading="lazy" />
-                  <div>
-                    <h2 class="cart-summary-title">House Cleaning Package</h2>
-                    <p class="cart-summary-subtitle" data-cart-service>Choose a service to view details.</p>
-                  </div>
-                </header>
-                <div class="cart-details" data-cart-description hidden></div>
-                <div class="cart-pricing" id="pricingRecap">
-                  <div class="cart-line">
-                    <span>Base package</span>
-                    <span data-recap-base>—</span>
-                  </div>
-                  <div class="cart-line" data-recap-detail-row hidden>
-                    <span>Service details</span>
-                    <span data-recap-detail>—</span>
-                  </div>
-                  <div class="cart-line" data-recap-extras-row hidden>
-                    <span>Add-ons</span>
-                    <span data-recap-extras>—</span>
-                  </div>
-                  <div class="cart-line" data-recap-discount-row hidden>
-                    <span>Frequency savings</span>
-                    <span data-recap-discount>—</span>
-                  </div>
-                  <div class="cart-divider"></div>
-                  <div class="cart-line total">
-                    <span>Visit total</span>
-                    <span data-recap-total>—</span>
-                  </div>
-                  <div class="cart-line deposit">
-                    <span>Deposit (50%)</span>
-                    <span id="deposit-due-text">—</span>
-                  </div>
-                  <div class="cart-line balance">
-                    <span>Balance at service</span>
-                    <span id="balance-due-text">—</span>
-                  </div>
-                </div>
-                <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>
-                  <span class="cart-btn-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                      <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
-                    </svg>
-                  </span>
-                  <span class="cart-btn-text">Add to Cart</span>
-                </button>
-                <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
-              </div>
               <section class="base-package" id="basePackageOverview" aria-live="polite">
                 <span class="base-package-badge" id="basePackageBadge">Base package preview</span>
                 <h2 class="base-package-title" id="basePackageTitle">House Cleaning Package</h2>

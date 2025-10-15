@@ -229,7 +229,7 @@ h1, h2, h3 {
 .hero-quote {
   margin-top: clamp(1.4rem, 3vw, 2.1rem);
   width: 100%;
-  max-width: 580px;
+  max-width: clamp(520px, 48vw, 720px);
   display: flex;
   align-self: flex-start;
 }
@@ -752,16 +752,17 @@ h1, h2, h3 {
   }
 
   .split-screen .hero-quote {
-    max-width: 440px;
+    max-width: clamp(500px, 46vw, 720px);
+    flex: 0 1 clamp(500px, 46vw, 720px);
   }
 
   .split-screen .hero-quote .quote-card {
-    padding: 0.95rem 1.05rem;
-    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    border-radius: 22px;
     box-shadow:
-      0 16px 48px rgba(0, 0, 0, 0.45),
-      0 0 14px rgba(0, 212, 255, 0.18),
-      inset 0 0 16px rgba(0, 212, 255, 0.05);
+      0 24px 68px rgba(0, 0, 0, 0.48),
+      0 0 20px rgba(0, 212, 255, 0.22),
+      inset 0 0 22px rgba(0, 212, 255, 0.08);
   }
 
   .split-screen .hero-quote .quote-card-header {

@@ -183,7 +183,7 @@
     .form-columns{
       display: grid;
       gap: clamp(28px, 4.6vw, 54px);
-      align-items: start;
+      align-items: stretch;
       grid-template-columns: minmax(0, 1fr);
       grid-auto-rows: minmax(0, auto);
     }
@@ -754,7 +754,6 @@
       align-self: start;
       align-content: start;
       justify-self: end;
-      margin-left: auto;
       max-width: min(100%, 480px);
     }
     .summary-column[hidden]{
@@ -1046,7 +1045,7 @@
 
     @media (min-width: 780px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.1fr) minmax(360px, 1fr);
+        grid-template-columns: minmax(0, 2.2fr) minmax(360px, 1fr);
         gap: clamp(52px, 6.4vw, 88px);
         align-items: start;
       }
@@ -1059,7 +1058,6 @@
         align-content: start;
         gap: clamp(18px, 2.8vw, 26px);
         width: min(100%, 460px);
-        margin-top: 0;
       }
       .summary-column .cart-summary{
         position: static;
@@ -1074,22 +1072,12 @@
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.4fr) minmax(420px, 1fr);
+        grid-template-columns: minmax(0, 2.4fr) minmax(440px, 1fr);
         gap: clamp(66px, 7vw, 112px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .summary-column{
-        max-width: 520px;
-      }
-    }
-
-    @media (min-width: 1400px){
-      .form-columns{
-        grid-template-columns: minmax(0, 2.6fr) minmax(440px, 1fr);
-        gap: clamp(72px, 6vw, 120px);
-      }
-      .summary-column{
-        max-width: 540px;
+        max-width: 480px;
       }
     }
 

@@ -125,7 +125,7 @@
     .stepper{
       list-style: none; padding: 12px; margin: 0;
       width: min(100%, 1080px);
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
       background: rgba(0, 0, 0, 0.55);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 28px;
@@ -183,8 +183,9 @@
     .form-columns{
       display: grid;
       gap: clamp(28px, 4.6vw, 54px);
-      align-items: start;
+      align-items: stretch;
       grid-template-columns: minmax(0, 1fr);
+      grid-auto-rows: minmax(0, auto);
     }
 
     .form-columns.cart-summary-hidden{
@@ -454,11 +455,348 @@
       color: #b6c2cf;
     }
 
+    .schedule-calendar{
+      margin-top: clamp(18px, 3vw, 28px);
+      border-radius: 28px;
+      border: 1px solid rgba(154, 212, 255, 0.28);
+      background: linear-gradient(145deg, rgba(10, 24, 40, 0.82), rgba(14, 32, 54, 0.88));
+      box-shadow: 0 18px 46px rgba(0,0,0,0.42);
+      padding: clamp(18px, 3vw, 28px);
+      display: grid;
+      gap: clamp(16px, 2.4vw, 24px);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .schedule-calendar::before{
+      content: "";
+      position: absolute;
+      inset: -40% -20% auto -20%;
+      height: 65%;
+      border-radius: 60%;
+      background: radial-gradient(circle at center, rgba(76, 195, 255, 0.18), transparent 70%);
+      filter: blur(28px);
+      opacity: 0.65;
+      pointer-events: none;
+      animation: calendarGlow 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes calendarGlow{
+      0%{ transform: translateY(0); opacity: 0.5; }
+      100%{ transform: translateY(12px) scale(1.05); opacity: 0.8; }
+    }
+
+    .calendar-top{
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(12px, 2vw, 18px);
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .calendar-heading{
+      display: grid;
+      gap: 6px;
+      max-width: min(100%, 420px);
+    }
+
+    .calendar-heading h3{
+      margin: 0;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .calendar-heading p{
+      margin: 0;
+      color: #b9d8f2;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .calendar-nav{
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(154, 212, 255, 0.22);
+      background: rgba(6, 18, 32, 0.65);
+      padding: 6px 10px;
+      box-shadow: inset 0 0 0 1px rgba(76,195,255,0.12);
+    }
+
+    .calendar-current{
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e8f7ff;
+    }
+
+    .calendar-nav-btn{
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(154, 212, 255, 0.32);
+      background: rgba(7, 24, 40, 0.85);
+      color: #9ad4ff;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .calendar-nav-btn:hover,
+    .calendar-nav-btn:focus-visible{
+      border-color: rgba(255, 144, 220, 0.55);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(76,195,255,0.35);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .calendar-nav-btn:disabled{
+      opacity: 0.35;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .calendar-body{
+      display: grid;
+      gap: 10px;
+    }
+
+    .calendar-weekdays{
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(173, 214, 255, 0.68);
+    }
+
+    .calendar-weekdays span{
+      display: grid;
+      place-items: center;
+      padding: 6px 0;
+    }
+
+    .calendar-grid{
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      animation: calendarFade 0.35s ease;
+    }
+
+    @keyframes calendarFade{
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .calendar-cell{
+      min-height: 52px;
+      display: grid;
+      place-items: center;
+    }
+
+    .calendar-cell--empty{ opacity: 0.2; }
+
+    .calendar-day{
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(154, 212, 255, 0.2);
+      background: rgba(6, 18, 32, 0.78);
+      color: #e8f7ff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calendar-day:hover,
+    .calendar-day:focus-visible{
+      border-color: rgba(255, 144, 220, 0.55);
+      background: rgba(18, 36, 60, 0.92);
+      box-shadow: 0 12px 26px rgba(76,195,255,0.32);
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .calendar-day.is-selected{
+      background: linear-gradient(180deg, rgba(255, 144, 220, 0.35), rgba(255, 79, 195, 0.38));
+      border-color: rgba(255, 144, 220, 0.65);
+      color: #fff;
+      box-shadow: 0 16px 40px rgba(255, 79, 195, 0.35);
+      animation: calendarPop 0.3s ease;
+    }
+
+    .calendar-day.is-followup{
+      background: linear-gradient(180deg, rgba(76,195,255,0.22), rgba(76,195,255,0.35));
+      border-color: rgba(76,195,255,0.6);
+      color: #f2fbff;
+      box-shadow: 0 12px 32px rgba(76,195,255,0.28);
+    }
+
+    .calendar-day.is-selected::after{
+      content: "Start";
+      position: absolute;
+      inset: auto 8px 6px 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .calendar-day.is-followup::after{
+      content: "Next";
+      position: absolute;
+      inset: auto 8px 6px 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(214, 238, 255, 0.88);
+    }
+
+    @keyframes calendarPop{
+      from { transform: scale(0.9); }
+      to { transform: scale(1); }
+    }
+
+    .calendar-day.is-disabled,
+    .calendar-day:disabled{
+      cursor: not-allowed;
+      opacity: 0.35;
+      filter: grayscale(0.3);
+    }
+
+    .calendar-summary{
+      display: grid;
+      gap: 10px;
+      background: rgba(6, 18, 32, 0.78);
+      border: 1px solid rgba(154, 212, 255, 0.22);
+      border-radius: 20px;
+      padding: clamp(14px, 2.2vw, 20px);
+      box-shadow: inset 0 0 0 1px rgba(76,195,255,0.08);
+    }
+
+    .calendar-summary-row{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.95rem;
+      color: #e8f7ff;
+    }
+
+    .calendar-summary-label{
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(173, 214, 255, 0.78);
+    }
+
+    .calendar-message{
+      margin: 0;
+      font-size: 0.85rem;
+      color: rgba(173, 214, 255, 0.82);
+    }
+
+    .calendar-error{
+      margin: 0;
+      color: #ff98d6;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .cart-schedule{
+      border-top: 1px dashed rgba(154, 212, 255, 0.22);
+      padding-top: 12px;
+      display: grid;
+      gap: 10px;
+      color: #dbeaff;
+      font-size: 0.9rem;
+    }
+
+    .cart-schedule-row{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-schedule-label{
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ad4ff;
+    }
+
+    .cart-schedule-row time{
+      font-weight: 600;
+    }
+
+    .step-contact .grid-2{
+      gap: clamp(18px, 2.6vw, 26px);
+    }
+
+    .step-contact label{
+      background: linear-gradient(150deg, rgba(12, 26, 44, 0.82), rgba(20, 38, 60, 0.9));
+      border: 1px solid rgba(154, 212, 255, 0.2);
+      border-radius: 24px;
+      padding: clamp(16px, 2.6vw, 26px);
+      display: grid;
+      gap: clamp(12px, 1.8vw, 18px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.38);
+    }
+
+    .step-contact .field-title{
+      font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(173, 214, 255, 0.85);
+      font-weight: 700;
+    }
+
+    .step-contact input,
+    .step-contact textarea{
+      background: rgba(6, 18, 30, 0.78);
+      border: 1px solid rgba(154, 212, 255, 0.25);
+      border-radius: 16px;
+      padding: 0.85rem 1.1rem;
+      color: #f4fbff;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+      min-height: 54px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .step-contact textarea{
+      min-height: 160px;
+      resize: vertical;
+    }
+
+    .step-contact input:focus,
+    .step-contact textarea:focus{
+      border-color: rgba(255, 144, 220, 0.55);
+      box-shadow: 0 0 0 2px rgba(255, 144, 220, 0.2);
+      outline: none;
+    }
+
     .summary-column{
       display: grid;
       gap: clamp(18px, 2.8vw, 26px);
       align-self: stretch;
       align-content: start;
+      justify-self: end;
+      max-width: min(100%, 480px);
     }
     .summary-column[hidden]{
       display: none !important;
@@ -746,18 +1084,19 @@
 
     @media (min-width: 780px){
       .form-columns{
-        grid-template-columns: minmax(0, 1.9fr) minmax(360px, 1fr);
+        grid-template-columns: minmax(0, 2.2fr) minmax(360px, 1fr);
         gap: clamp(52px, 6.4vw, 88px);
+        align-items: start;
       }
       .summary-column{
         position: sticky;
         top: clamp(24px, 3.6vw, 46px);
         max-height: calc(100vh - 80px);
         overflow: auto;
-        justify-self: end;
         padding-right: 4px;
         align-content: start;
         gap: clamp(18px, 2.8vw, 26px);
+        width: min(100%, 460px);
       }
       .summary-column .cart-summary{
         position: static;
@@ -772,12 +1111,12 @@
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.1fr) minmax(420px, 1fr);
+        grid-template-columns: minmax(0, 2.4fr) minmax(440px, 1fr);
         gap: clamp(66px, 7vw, 112px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .summary-column{
-        max-width: 440px;
+        max-width: 480px;
       }
     }
 
@@ -842,10 +1181,9 @@
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
         <li class="active">1. add extras</li>
-        <li>2. frequency</li>
+        <li>2. frequency &amp; schedule</li>
         <li>3. your details</li>
-        <li>4. when &amp; where</li>
-        <li>5. review &amp; confirm</li>
+        <li>4. review &amp; confirm</li>
       </ol>
     </div>
 
@@ -872,6 +1210,8 @@
           <input type="hidden" name="paypal_capture_id" id="input-paypal-capture-id">
           <input type="hidden" name="cart_status" id="input-cart-status" value="pending">
           <input type="hidden" name="name" id="input-full-name" value="">
+          <input type="hidden" name="first_visit_date" id="input-first-visit-date" value="">
+          <input type="hidden" name="follow_up_visit_date" id="input-follow-up-date" value="">
 
           <div class="form-columns">
             <div class="form-steps">
@@ -1206,32 +1546,69 @@
             </label>
           </div>
           <p class="muted frequency-note">Your cart on the right keeps a live tally of the package, add-ons, and frequency savings.</p>
+          <div class="schedule-calendar" data-schedule-calendar>
+            <div class="calendar-top">
+              <div class="calendar-heading">
+                <h3>Schedule your visits</h3>
+                <p>Select a starting date to preview when we’ll be back based on your chosen frequency.</p>
+              </div>
+              <div class="calendar-nav" role="group" aria-label="Change month">
+                <button type="button" class="calendar-nav-btn" data-calendar-prev aria-label="Previous month">‹</button>
+                <div class="calendar-current" data-calendar-month>Month</div>
+                <button type="button" class="calendar-nav-btn" data-calendar-next aria-label="Next month">›</button>
+              </div>
+            </div>
+            <div class="calendar-body">
+              <div class="calendar-weekdays" aria-hidden="true">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+              <div class="calendar-grid" data-calendar-grid aria-live="polite" aria-label="Select your first visit date"></div>
+            </div>
+            <div class="calendar-summary" aria-live="polite">
+              <div class="calendar-summary-row">
+                <span class="calendar-summary-label">First visit</span>
+                <time data-calendar-selected>—</time>
+              </div>
+              <div class="calendar-summary-row" data-calendar-follow-up-row hidden>
+                <span class="calendar-summary-label">Next visit</span>
+                <time data-calendar-follow-up>—</time>
+              </div>
+              <p class="calendar-message" data-calendar-message>Pick your starting date to preview your recurring visits.</p>
+            </div>
+            <p class="calendar-error" id="calendarError" role="alert" hidden>Please choose a starting visit date before continuing.</p>
+          </div>
           <div class="actions">
             <button type="button" class="btn next">Next</button>
           </div>
         </fieldset>
 
-        <fieldset class="step" data-step="3" hidden>
+        <fieldset class="step step-contact" data-step="3" hidden>
           <legend>Your contact information</legend>
           <div class="grid-2">
             <label>
-              First name
+              <span class="field-title">First name</span>
               <input type="text" name="first_name" placeholder="Jane" autocomplete="given-name" required />
             </label>
             <label>
-              Last name (optional)
+              <span class="field-title">Last name (optional)</span>
               <input type="text" name="last_name" placeholder="Smith" autocomplete="family-name" />
             </label>
             <label>
-              Email
+              <span class="field-title">Email</span>
               <input type="email" name="email" placeholder="you@company.com" autocomplete="email" required />
             </label>
             <label>
-              Phone
+              <span class="field-title">Phone</span>
               <input type="tel" name="phone" placeholder="(555) 555-5555" autocomplete="tel" />
             </label>
             <label class="wide">
-              Notes (optional)
+              <span class="field-title">Notes (optional)</span>
               <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
             </label>
           </div>
@@ -1243,49 +1620,6 @@
         </fieldset>
 
         <fieldset class="step" data-step="4" hidden>
-          <legend>When &amp; where should we clean?</legend>
-          <div class="grid-2">
-            <label>
-              Business / Building Name
-              <input type="text" name="business" placeholder="Company or building" autocomplete="organization" />
-            </label>
-            <label>
-              Street Address
-              <input type="text" name="address" placeholder="123 Queen St" autocomplete="street-address" required />
-            </label>
-            <label>
-              City
-              <input type="text" name="city" placeholder="Toronto" autocomplete="address-level2" required />
-            </label>
-            <label>
-              Postal Code
-              <input type="text" name="postal" placeholder="M5H 2N2" autocomplete="postal-code" required />
-            </label>
-            <label>
-              Preferred Date
-              <input type="date" name="date" required />
-            </label>
-            <label>
-              Preferred Time Window
-              <select name="time" required>
-                <option value="">Select a time window</option>
-                <option value="morning">Morning (8am – 11am)</option>
-                <option value="midday">Midday (11am – 2pm)</option>
-                <option value="afternoon">Afternoon (2pm – 5pm)</option>
-              </select>
-            </label>
-            <label class="wide">
-              Square Footage (approx.)
-              <input type="number" name="sqft" min="100" step="50" placeholder="e.g., 5,000" />
-            </label>
-          </div>
-          <div class="actions">
-            <button type="button" class="btn back">Back</button>
-            <button type="button" class="btn next">Next</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="step" data-step="5" hidden>
           <legend>Review &amp; confirm</legend>
           <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
@@ -1336,6 +1670,16 @@
                   <div class="cart-line balance">
                     <span>Balance at service</span>
                     <span id="balance-due-text">—</span>
+                  </div>
+                </div>
+                <div class="cart-schedule" id="cartSchedule" hidden aria-live="polite">
+                  <div class="cart-schedule-row">
+                    <span class="cart-schedule-label">First visit</span>
+                    <time data-cart-first-visit>—</time>
+                  </div>
+                  <div class="cart-schedule-row" data-cart-next-row hidden>
+                    <span class="cart-schedule-label">Next visit</span>
+                    <time data-cart-next-visit>—</time>
                   </div>
                 </div>
                 <button type="button" class="btn cart-btn" id="addToCartBtn" disabled>
@@ -1780,6 +2124,23 @@
       const navPayPalContainer = document.getElementById('nav-paypal-buttons');
       const navPayPalStatus = document.getElementById('nav-paypal-status');
 
+      const cartScheduleEl = document.getElementById('cartSchedule');
+      const cartScheduleFirst = document.querySelector('[data-cart-first-visit]');
+      const cartScheduleNextRow = document.querySelector('[data-cart-next-row]');
+      const cartScheduleNext = document.querySelector('[data-cart-next-visit]');
+      const hiddenFirstVisit = document.getElementById('input-first-visit-date');
+      const hiddenFollowUpVisit = document.getElementById('input-follow-up-date');
+      const calendarSection = document.querySelector('[data-schedule-calendar]');
+      const calendarGrid = calendarSection ? calendarSection.querySelector('[data-calendar-grid]') : null;
+      const calendarMonthLabel = calendarSection ? calendarSection.querySelector('[data-calendar-month]') : null;
+      const calendarPrevBtn = calendarSection ? calendarSection.querySelector('[data-calendar-prev]') : null;
+      const calendarNextBtn = calendarSection ? calendarSection.querySelector('[data-calendar-next]') : null;
+      const calendarSelectedDisplay = calendarSection ? calendarSection.querySelector('[data-calendar-selected]') : null;
+      const calendarFollowUpRow = calendarSection ? calendarSection.querySelector('[data-calendar-follow-up-row]') : null;
+      const calendarFollowUpDisplay = calendarSection ? calendarSection.querySelector('[data-calendar-follow-up]') : null;
+      const calendarMessage = calendarSection ? calendarSection.querySelector('[data-calendar-message]') : null;
+      const calendarError = document.getElementById('calendarError');
+
       const frequencyInputs = Array.from(form.querySelectorAll('input[name="frequency"]'));
       const addonGroups = Array.from(form.querySelectorAll('.addon-group'));
       const addonPills = Array.from(form.querySelectorAll('.addon-pill'));
@@ -1790,6 +2151,56 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+
+      const MONTH_FORMATTER = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' });
+      const DATE_FORMATTER = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'long', day: 'numeric', year: 'numeric' });
+
+      const todayStart = (() => {
+        const base = new Date();
+        base.setHours(0, 0, 0, 0);
+        return base;
+      })();
+
+      let calendarCurrentMonth = new Date(todayStart.getFullYear(), todayStart.getMonth(), 1);
+      let selectedVisitDate = null;
+      let followUpVisitDate = null;
+
+      function startOfDay(value){
+        const date = new Date(value);
+        date.setHours(0, 0, 0, 0);
+        return date;
+      }
+
+      function formatDateLong(date){
+        if(!(date instanceof Date) || Number.isNaN(date.getTime())) return '—';
+        return DATE_FORMATTER.format(date);
+      }
+
+      function formatInputDate(date){
+        if(!(date instanceof Date) || Number.isNaN(date.getTime())) return '';
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      function parseInputDate(value){
+        if(!value) return null;
+        const parsed = new Date(`${value}T00:00:00`);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+      }
+
+      function isSameDay(a, b){
+        if(!(a instanceof Date) || !(b instanceof Date)) return false;
+        return a.getFullYear() === b.getFullYear() &&
+               a.getMonth() === b.getMonth() &&
+               a.getDate() === b.getDate();
+      }
+
+      function formatDateHumanFromInput(value){
+        const parsed = parseInputDate(value);
+        return parsed ? formatDateLong(parsed) : '—';
+      }
 
       function renderPackageList(target, items){
         if(!target) return;
@@ -1830,6 +2241,223 @@
             packagePanel.style.maxHeight = packagePanel.scrollHeight + 'px';
           });
         }
+      }
+
+      function frequencyIntervalDays(){
+        const freq = selectedFrequency();
+        if(!freq) return null;
+        switch(freq.value){
+          case 'weekly': return 7;
+          case 'biweekly': return 14;
+          case 'triweekly': return 21;
+          case 'monthly': return 30;
+          case 'biannual': return 182;
+          default: return null;
+        }
+      }
+
+      function syncScheduleHidden(){
+        if(hiddenFirstVisit){
+          hiddenFirstVisit.value = selectedVisitDate ? formatInputDate(selectedVisitDate) : '';
+        }
+        if(hiddenFollowUpVisit){
+          hiddenFollowUpVisit.value = followUpVisitDate ? formatInputDate(followUpVisitDate) : '';
+        }
+      }
+
+      function syncCartSchedule(){
+        if(!cartScheduleEl) return;
+        if(selectedVisitDate){
+          cartScheduleEl.hidden = false;
+          cartScheduleEl.setAttribute('aria-hidden', 'false');
+          if(cartScheduleFirst){
+            cartScheduleFirst.textContent = formatDateLong(selectedVisitDate);
+          }
+          if(followUpVisitDate && cartScheduleNextRow){
+            cartScheduleNextRow.hidden = false;
+            cartScheduleNextRow.setAttribute('aria-hidden', 'false');
+            if(cartScheduleNext){
+              cartScheduleNext.textContent = formatDateLong(followUpVisitDate);
+            }
+          } else if(cartScheduleNextRow){
+            cartScheduleNextRow.hidden = true;
+            cartScheduleNextRow.setAttribute('aria-hidden', 'true');
+          }
+        } else {
+          cartScheduleEl.hidden = true;
+          cartScheduleEl.setAttribute('aria-hidden', 'true');
+        }
+      }
+
+      function updateScheduleDisplays(){
+        const interval = frequencyIntervalDays();
+        if(selectedVisitDate && interval){
+          const next = new Date(selectedVisitDate);
+          next.setDate(next.getDate() + interval);
+          followUpVisitDate = next;
+        } else {
+          followUpVisitDate = null;
+        }
+
+        if(calendarSelectedDisplay){
+          calendarSelectedDisplay.textContent = selectedVisitDate ? formatDateLong(selectedVisitDate) : '—';
+        }
+        if(calendarFollowUpRow && calendarFollowUpDisplay){
+          if(followUpVisitDate){
+            calendarFollowUpRow.hidden = false;
+            calendarFollowUpDisplay.textContent = formatDateLong(followUpVisitDate);
+          } else {
+            calendarFollowUpRow.hidden = true;
+            calendarFollowUpDisplay.textContent = '—';
+          }
+        }
+        if(calendarMessage){
+          const freq = selectedFrequency();
+          if(selectedVisitDate && followUpVisitDate){
+            const label = freq ? (freq.closest('.plan')?.querySelector('.plan-title')?.textContent || freq.value) : '';
+            calendarMessage.textContent = label ? `${label.trim()} schedule locked in.` : 'Recurring schedule locked in.';
+          } else if(selectedVisitDate){
+            if(freq && freq.value === 'onetime'){
+              calendarMessage.textContent = 'One-time visit selected — add any finishing touches you’d like.';
+            } else {
+              calendarMessage.textContent = 'Choose a visit frequency above to preview your follow-up date.';
+            }
+          } else {
+            calendarMessage.textContent = 'Pick your starting date to preview your recurring visits.';
+          }
+        }
+        if(calendarError && selectedVisitDate){
+          calendarError.hidden = true;
+        }
+
+        syncScheduleHidden();
+        syncCartSchedule();
+      }
+
+      function renderCalendar(){
+        if(!calendarSection || !calendarGrid) return;
+        const monthDate = new Date(calendarCurrentMonth);
+        monthDate.setDate(1);
+        if(calendarMonthLabel){
+          calendarMonthLabel.textContent = MONTH_FORMATTER.format(monthDate);
+        }
+
+        if(calendarPrevBtn){
+          const prevMonth = new Date(monthDate.getFullYear(), monthDate.getMonth() - 1, 1);
+          const canGoPrev = canNavigateToMonth(prevMonth);
+          calendarPrevBtn.disabled = !canGoPrev;
+          calendarPrevBtn.setAttribute('aria-disabled', canGoPrev ? 'false' : 'true');
+        }
+        if(calendarNextBtn){
+          calendarNextBtn.disabled = false;
+          calendarNextBtn.setAttribute('aria-disabled', 'false');
+        }
+
+        calendarGrid.innerHTML = '';
+        const startDay = monthDate.getDay();
+        const daysInMonth = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0).getDate();
+        const frag = document.createDocumentFragment();
+
+        for(let i = 0; i < startDay; i++){
+          const spacer = document.createElement('div');
+          spacer.className = 'calendar-cell calendar-cell--empty';
+          frag.appendChild(spacer);
+        }
+
+        for(let day = 1; day <= daysInMonth; day++){
+          const cellDate = new Date(monthDate.getFullYear(), monthDate.getMonth(), day);
+          cellDate.setHours(0, 0, 0, 0);
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'calendar-day';
+          button.textContent = String(day);
+          button.dataset.date = formatInputDate(cellDate);
+          button.setAttribute('aria-label', cellDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }));
+
+          if(cellDate < todayStart){
+            button.disabled = true;
+            button.classList.add('is-disabled');
+          }
+
+          if(selectedVisitDate && isSameDay(cellDate, selectedVisitDate)){
+            button.classList.add('is-selected');
+          }
+
+          if(followUpVisitDate && isSameDay(cellDate, followUpVisitDate)){
+            button.classList.add('is-followup');
+          }
+
+          button.addEventListener('click', () => {
+            if(button.disabled) return;
+            selectedVisitDate = new Date(cellDate);
+            calendarCurrentMonth = new Date(selectedVisitDate.getFullYear(), selectedVisitDate.getMonth(), 1);
+            updateScheduleDisplays();
+            renderCalendar();
+          });
+
+          const cell = document.createElement('div');
+          cell.className = 'calendar-cell';
+          cell.appendChild(button);
+          frag.appendChild(cell);
+        }
+
+        const totalCells = startDay + daysInMonth;
+        const trailing = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+        for(let i = 0; i < trailing; i++){
+          const spacer = document.createElement('div');
+          spacer.className = 'calendar-cell calendar-cell--empty';
+          frag.appendChild(spacer);
+        }
+
+        calendarGrid.appendChild(frag);
+      }
+
+      function canNavigateToMonth(target){
+        if(!(target instanceof Date)) return false;
+        const minMonth = new Date(todayStart.getFullYear(), todayStart.getMonth(), 1);
+        return target.getTime() >= minMonth.getTime();
+      }
+
+      if(calendarPrevBtn){
+        calendarPrevBtn.addEventListener('click', () => {
+          const prev = new Date(calendarCurrentMonth);
+          prev.setMonth(prev.getMonth() - 1);
+          if(!canNavigateToMonth(prev)) return;
+          calendarCurrentMonth = prev;
+          renderCalendar();
+        });
+      }
+
+      if(calendarNextBtn){
+        calendarNextBtn.addEventListener('click', () => {
+          const next = new Date(calendarCurrentMonth);
+          next.setMonth(next.getMonth() + 1);
+          calendarCurrentMonth = next;
+          renderCalendar();
+        });
+      }
+
+      if(hiddenFirstVisit && hiddenFirstVisit.value){
+        const parsed = parseInputDate(hiddenFirstVisit.value);
+        if(parsed){
+          selectedVisitDate = startOfDay(parsed);
+        }
+      }
+
+      if(hiddenFollowUpVisit && hiddenFollowUpVisit.value){
+        const parsedNext = parseInputDate(hiddenFollowUpVisit.value);
+        if(parsedNext){
+          followUpVisitDate = startOfDay(parsedNext);
+        }
+      }
+
+      if(selectedVisitDate){
+        calendarCurrentMonth = new Date(selectedVisitDate.getFullYear(), selectedVisitDate.getMonth(), 1);
+      }
+
+      if(calendarSection && calendarGrid){
+        updateScheduleDisplays();
+        renderCalendar();
       }
 
       const ADDON_ICON_SVGS = {
@@ -2749,6 +3377,7 @@
             addToCartBtn.disabled = true;
             addToCartBtn.setAttribute('aria-disabled', 'true');
           }
+          syncCartSchedule();
           refreshCartButton();
           latestCartState = null;
           dispatchNavCartUpdate(false);
@@ -2863,6 +3492,7 @@
           }
         }
 
+        syncCartSchedule();
         refreshCartButton();
         syncSubmitDisabled();
 
@@ -2976,6 +3606,8 @@
             }
           }
           updateSummary();
+          updateScheduleDisplays();
+          renderCalendar();
           if(autoAddAfterSkip){
             ensureCartAdded({ animate: true });
           }
@@ -3055,6 +3687,15 @@
               }
               return;
             }
+            if(!selectedVisitDate){
+              if(calendarError){
+                calendarError.hidden = false;
+              }
+              if(calendarSection){
+                calendarSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+              return;
+            }
           }
           const visible = steps[current];
           const required = Array.from(visible.querySelectorAll('[required]'));
@@ -3102,10 +3743,8 @@
           ['Balance at Service', hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'],
           ['Estimated Visit Total', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
           ['PayPal Reference', hiddenPayPalCapture.value || hiddenPayPalOrder.value || '—'],
-          ['Business', fd.get('business') || '—'],
-          ['Address', [fd.get('address'), fd.get('city'), fd.get('postal')].filter(Boolean).join(', ') || '—'],
-          ['Preferred Date', fd.get('date') || '—'],
-          ['Preferred Time', fd.get('time') || '—'],
+          ['First Visit', formatDateHumanFromInput(fd.get('first_visit_date'))],
+          ['Next Visit', formatDateHumanFromInput(fd.get('follow_up_visit_date'))],
           ['Full Name', fullName || '—'],
           ['Email', fd.get('email') || '—'],
           ['Phone', fd.get('phone') || '—'],
@@ -3168,6 +3807,8 @@
           `Deposit Due Today: ${hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'}`,
           `Balance at Service: ${hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'}`,
           `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
+          `First Visit: ${formatDateHumanFromInput(fd.get('first_visit_date'))}`,
+          `Next Visit: ${formatDateHumanFromInput(fd.get('follow_up_visit_date'))}`,
           `Full Name: ${fullName || '—'}`,
           `Email: ${fd.get('email') || '—'}`,
           `Phone: ${fd.get('phone') || '—'}`

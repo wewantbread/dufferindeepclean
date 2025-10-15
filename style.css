@@ -2846,3 +2846,22 @@ body::before{
 
 /* make sure sticky/overflow doesn’t break */
 .booking-card, .booking-layout, .form-columns, .form-steps{ min-height: 0; }
+/* Enable sticky cart on desktop */
+@media (min-width: 780px){
+  /* Parent overflow blocks sticky; make it visible on larger screens */
+  .booking-card{ overflow: visible; }
+}
+
+/* Pin the cart to the top-right under the stepper */
+@media (min-width: 780px){
+  .summary-column{
+    position: sticky;
+    top: clamp(24px, 3.6vw, 46px); /* matches your existing offset */
+    align-self: start;
+    justify-self: end;
+    margin-top: 0 !important;
+  }
+}
+
+/* Make sure grid isn’t pushing items down */
+.form-columns{ align-items: start !important; }

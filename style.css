@@ -2865,3 +2865,23 @@ body::before{
 
 /* Make sure grid isn’t pushing items down */
 .form-columns{ align-items: start !important; }
+.booking-card{ overflow: visible !important; }
+
+@media (min-width: 780px){
+  .form-columns{ align-items: start !important; }
+  #summaryColumn{
+    position: sticky !important;
+    top: clamp(24px, 3.6vw, 46px) !important;
+    align-self: start !important;
+    justify-self: end !important;
+  }
+}
+
+/* neutralize any leftover floating wrapper */
+#cartFloatingWrap{
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  filter: none !important;
+}

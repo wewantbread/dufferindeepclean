@@ -3849,6 +3849,94 @@
           allButtons.forEach(btn => btn.disabled = false);
           if(submitBtn) submitBtn.textContent = 'Submit';
         }
+        <script id="cart-float" data-version="1.0">
+(() => {
+  // Target your existing cart column
+  const column = document.getElementById('summaryColumn');
+  if (!column) return;
+
+  // No-op if we’ve already floated it
+  if (document.getElementById('cartFloatingWrap')) return;
+
+  // Keep a placeholder so you can restore later if needed
+  const placeholder = document.createComment('summaryColumn-placeholder');
+  column.parentNode.insertBefore(placeholder, column.nextSibling);
+
+  // Create floating wrapper
+  const wrap = document.createElement('div');
+  wrap.id = 'cartFloatingWrap';
+  Object.assign(wrap.style, {
+    position: 'fixed',
+    top: 'calc(12px + env(safe-area-inset-top, 0px))',
+    right: 'calc(12px + env(safe-area-inset-right, 0px))',
+    zIndex: '970',                // below your .btn.next (z-index: 980) so it won’t block it
+    maxWidth: 'min(420px, 90vw)',
+    pointerEvents: 'auto',
+    background: 'transparent',
+    filter: 'drop-shadow(0 6px 18px rgba(0,0,0,.25))',
+    borderRadius: '16px'
+  });
+
+  // Neutralize in-grid/sticky styles that might fight the float
+  column.style.position = 'static';
+  column.style.top = '';
+  column.style.maxHeight = 'none';
+  column.style.overflow = 'visible';
+  column.style.paddingRight = '0';
+  column.style.width = 'auto';
+  column.style.maxWidth = 'none';
+
+  // Move the existing aside into the wrapper
+  wrap.appendChild(column);
+  document.body.appendChild(wrap);
+
+  // Mobile: dock full-width at the bottom (≤768px)
+  const mq = matchMedia('(max-width: 768px)');
+  function applyLayout() {
+    if (mq.matches) {
+      Object.assign(wrap.style, {
+        top: 'auto',
+        right: '0',
+        left: '0',
+        bottom: 'env(safe-area-inset-bottom, 0px)',
+        width: '100%',
+        maxWidth: '100%'
+      });
+    } else {
+      Object.assign(wrap.style, {
+        bottom: 'auto',
+        left: 'auto',
+        width: 'auto',
+        maxWidth: 'min(420px, 90vw)',
+        top: 'calc(12px + env(safe-area-inset-top, 0px))',
+        right: 'calc(12px + env(safe-area-inset-right, 0px))'
+      });
+    }
+  }
+  mq.addEventListener?.('change', applyLayout);
+  applyLayout();
+
+  // Optional helpers (use in DevTools if you ever want to put it back in-grid)
+  window.CartFloat = {
+    release() { // restore to original document flow
+      if (placeholder.parentNode) {
+        placeholder.parentNode.insertBefore(column, placeholder);
+        wrap.remove();
+      }
+    },
+    reattach() { // float again if you restored it
+      if (!document.body.contains(wrap)) {
+        wrap.appendChild(column);
+        document.body.appendChild(wrap);
+        applyLayout();
+      }
+    },
+    wrapper: wrap,
+    column
+  };
+})();
+</script>
+
       });
 
       updateSummary();

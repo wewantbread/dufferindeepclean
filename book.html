@@ -215,15 +215,13 @@
 
     .package-info{
       border-radius: 28px;
-      border: 1px solid rgba(255, 120, 220, 0.32);
-      background: transparent;
+      border: 1px solid rgba(255, 120, 220, 0.38);
+      background: linear-gradient(135deg, rgba(24, 32, 52, 0.92), rgba(8, 12, 22, 0.88));
       box-shadow: 0 18px 46px rgba(0,0,0,0.42);
+      overflow: hidden;
       position: relative;
       isolation: isolate;
       animation: floatFade 0.8s ease both;
-      display: grid;
-      gap: clamp(18px, 2.8vw, 26px);
-      padding: clamp(20px, 3vw, 32px);
     }
 
     .package-info::after{
@@ -232,18 +230,36 @@
       inset: auto 12% -60% 12%;
       height: 80%;
       border-radius: 40%;
-      background: radial-gradient(circle at center, rgba(255, 144, 220, 0.28), transparent 70%);
-      filter: blur(36px);
-      opacity: 0.55;
+      background: radial-gradient(circle at center, rgba(255, 144, 220, 0.35), transparent 70%);
+      filter: blur(32px);
+      opacity: 0.6;
       pointer-events: none;
       transform: translateY(-12%);
     }
 
+    .package-info-toggle{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(18px, 3vw, 28px);
+      padding: clamp(16px, 2.6vw, 24px) clamp(20px, 3vw, 32px);
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .package-info-toggle:focus-visible{
+      outline: 2px solid rgba(255, 144, 220, 0.8);
+      outline-offset: 4px;
+    }
+
     .package-info-summary{
       display: grid;
-      gap: clamp(8px, 1.6vw, 14px);
-      position: relative;
-      z-index: 1;
+      gap: 6px;
+      flex: 1 1 auto;
     }
 
     .package-info-label{
@@ -266,30 +282,56 @@
       margin: 0;
       color: #dbeaff;
       font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-      line-height: 1.55;
+      line-height: 1.5;
+    }
+
+    .package-info-chevron{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      flex-shrink: 0;
+      transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+    }
+
+    .package-info-chevron svg{
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .package-info.package-open .package-info-chevron{
+      transform: rotate(180deg);
+      background: rgba(255, 79, 195, 0.28);
+      border-color: rgba(255, 120, 220, 0.6);
     }
 
     .package-panel{
-      position: relative;
-      z-index: 1;
-      display: grid;
-      gap: clamp(18px, 2.6vw, 24px);
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-12px);
+      transition: max-height 0.5s ease, opacity 0.45s ease, transform 0.45s ease;
+      padding: 0 clamp(20px, 3vw, 32px);
+    }
+
+    .package-info.package-open .package-panel{
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .package-panel-inner{
       display: grid;
       gap: clamp(16px, 2.4vw, 24px);
-    }
-
-    @media (min-width: 960px){
-      .package-info{
-        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-        align-items: stretch;
-      }
-      .package-panel{
-        padding-left: clamp(16px, 2vw, 24px);
-        border-left: 1px solid rgba(255, 255, 255, 0.12);
-      }
+      padding-bottom: clamp(16px, 2.4vw, 24px);
     }
 
     .package-lead{
@@ -751,7 +793,7 @@
     .summary-column{
       display: grid;
       gap: clamp(18px, 2.8vw, 26px);
-      align-self: start;
+      align-self: stretch;
       align-content: start;
       justify-self: end;
       max-width: min(100%, 480px);
@@ -991,9 +1033,6 @@
     .plan-note{ color: #b6c2cf; font-size: .9rem; }
 
     .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:flex-start; flex-wrap: wrap; }
-    .step-extras .actions{ justify-content: flex-end; }
-    .step-extras .actions .next{ order: 1; }
-    .step-extras .actions .skip{ order: 2; margin-left: clamp(12px, 2vw, 20px); }
     .btn{
       appearance: none; border: 1px solid rgba(255,255,255,0.08); color: #0b0d10;
       background: linear-gradient(180deg, #4cc3ff, #00e0a4);
@@ -1180,13 +1219,20 @@
         <fieldset class="step step-extras" data-step="1">
           <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
           <div class="step-extras-layout">
-            <div class="package-info package-open" data-package>
-              <div class="package-info-summary">
-                <span class="package-info-label">Description</span>
-                <h3 class="package-info-service" data-package-service>Signature Home Refresh</h3>
-                <p class="package-info-description" data-package-description>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
-              </div>
-              <div class="package-panel" data-package-panel>
+            <div class="package-info" data-package>
+              <button class="package-info-toggle" type="button" data-package-toggle aria-expanded="false">
+                <div class="package-info-summary">
+                  <span class="package-info-label">Description</span>
+                  <h3 class="package-info-service" data-package-service>Signature Home Refresh</h3>
+                  <p class="package-info-description" data-package-description>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
+                </div>
+                <span class="package-info-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                    <path d="M6 9l6 6 6-6" />
+                  </svg>
+                </span>
+              </button>
+              <div class="package-panel" data-package-panel aria-hidden="true">
                 <div class="package-panel-inner">
                   <p class="package-lead" data-package-lead>A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
                   <p class="package-context" data-package-context hidden></p>

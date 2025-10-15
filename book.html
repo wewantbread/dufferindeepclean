@@ -3943,6 +3943,34 @@
     if (e.target.closest('.go-to-step-3, [data-step="3"], .step-3')) {
       window.CartFloat.release();
     }
+  <script>
+(() => {
+  const col  = document.getElementById('summaryColumn');
+  const wrap = document.getElementById('cartFloatingWrap');
+
+  // If it was wrapped/fixed, restore it to normal document flow
+  if (wrap && col && wrap.contains(col)) {
+    wrap.replaceWith(col);
+  }
+
+  // Nuke any inline fixed styles that might be lingering
+  if (col) {
+    col.style.position   = '';
+    col.style.top        = '';
+    col.style.right      = '';
+    col.style.bottom     = '';
+    col.style.left       = '';
+    col.style.width      = '';
+    col.style.maxWidth   = '';
+    col.style.marginTop  = '';
+  }
+
+  // Make sure sticky can actually stick
+  const card = document.querySelector('.booking-card');
+  if (card) card.style.overflow = 'visible';
+})();
+</script>
+
   });
 })();
 </script>

@@ -3948,3 +3948,29 @@
 
 </body>
 </html>
+/* Make sure sticky can actually stick */
+.booking-card{ overflow: visible !important; }
+
+/* Lock the grid placement so the cart starts at the very top-right */
+@media (min-width: 780px){
+  .form-columns{ align-items: start !important; }
+  .form-columns > .form-steps{ grid-column: 1 / 2; grid-row: 1; }
+  .form-columns > #summaryColumn{
+    grid-column: 2 / 3;
+    grid-row: 1;
+    position: sticky;
+    top: clamp(24px, 3.6vw, 46px);
+    align-self: start;
+    margin-top: 0 !important;
+    z-index: 1;
+  }
+}
+
+/* If a floating wrapper is still on the page, neutralize it */
+#cartFloatingWrap{
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  filter: none !important;
+}

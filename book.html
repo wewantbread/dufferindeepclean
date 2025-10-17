@@ -168,7 +168,7 @@
       border-radius: 44px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.45);
       backdrop-filter: blur(8px);
-      overflow: hidden;
+      overflow: visible;
     }
     .booking-layout{
       display: flex;
@@ -793,10 +793,11 @@
     .summary-column{
       display: grid;
       gap: clamp(18px, 2.8vw, 26px);
-      align-self: stretch;
+      align-self: start;
       align-content: start;
       justify-self: end;
       max-width: min(100%, 480px);
+      margin-top: 0;
     }
     .summary-column[hidden]{
       display: none !important;
@@ -1087,6 +1088,15 @@
         grid-template-columns: minmax(0, 2.2fr) minmax(360px, 1fr);
         gap: clamp(52px, 6.4vw, 88px);
         align-items: start;
+      }
+      .form-columns > .form-steps{
+        grid-column: 1 / 2;
+        grid-row: 1;
+      }
+      .form-columns > #summaryColumn{
+        grid-column: 2 / 3;
+        grid-row: 1;
+        align-self: start;
       }
       .summary-column{
         position: sticky;
@@ -3856,150 +3866,5 @@
       showStep(0);
     })();
   </script>
-  <script>
-(() => {
-  // 1) EDIT THIS SELECTOR to match your cart element
-  const CART_SELECTOR = window.CART_SELECTOR || '#cart, .cart, [data-cart], [id*="cart"], [class*="cart"]';
-
-  const cart = document.querySelector(CART_SELECTOR);
-  if (!cart) { console.warn('Cart not found. Set window.CART_SELECTOR to your cart selector before this script.'); return; }
-
-  // Save original location so we can restore later
-  const placeholder = document.createComment('cart-placeholder');
-  cart.parentNode.insertBefore(placeholder, cart.nextSibling);
-
-  // Create floating wrapper (inline styles beat most CSS)
-  const wrap = document.createElement('div');
-  wrap.id = 'cart-floating';
-  Object.assign(wrap.style, {
-    position:'fixed',
-    top:'calc(12px + env(safe-area-inset-top, 0px))',
-    right:'calc(12px + env(safe-area-inset-right, 0px))',
-    zIndex:'2147480000',
-    maxWidth:'min(420px, 90vw)',
-    minWidth:'260px',
-    pointerEvents:'auto',
-    filter:'drop-shadow(0 6px 18px rgba(0,0,0,.25))',
-    borderRadius:'16px',
-    background:'transparent'
-  });
-
-  // Move the existing cart into the wrapper, strip any pinning it had
-  const resetPin = (el) => {
-    el.style.position = 'static';
-    el.style.top = el.style.right = el.style.bottom = el.style.left = 'auto';
-    el.style.margin = '';
-    el.style.transform = '';
-  };
-  resetPin(cart);
-  wrap.appendChild(cart);
-  document.body.appendChild(wrap);
-<script>document.getElementById('cartFloatingWrap')?.remove();</script>
-
-  // Mobile: dock full-width at bottom
-  const MOBILE_BP = 768;
-  const mq = matchMedia(`(max-width:${MOBILE_BP}px)`);
-  const dockMobile = () => {
-    if (mq.matches) {
-      wrap.style.top = 'auto';
-      wrap.style.right = '0';
-      wrap.style.left = '0';
-      wrap.style.bottom = 'env(safe-area-inset-bottom, 0px)';
-      wrap.style.width = '100%';
-      wrap.style.maxWidth = '100%';
-    } else {
-      wrap.style.bottom = 'auto';
-      wrap.style.left = 'auto';
-      wrap.style.width = 'auto';
-      wrap.style.maxWidth = 'min(420px, 90vw)';
-      wrap.style.top = 'calc(12px + env(safe-area-inset-top, 0px))';
-      wrap.style.right = 'calc(12px + env(safe-area-inset-right, 0px))';
-    }
-  };
-  mq.addEventListener?.('change', dockMobile);
-  dockMobile();
-
-  // Public helpers if you want to hide cart after Step 2
-  window.CartFloat = {
-    release(){
-      if (placeholder.parentNode) {
-        placeholder.parentNode.insertBefore(cart, placeholder);
-        wrap.remove();
-      }
-    },
-    reattach(){
-      if (!document.body.contains(wrap)) {
-        wrap.appendChild(cart);
-        document.body.appendChild(wrap);
-        dockMobile();
-      }
-    },
-    wrapper: wrap,
-    cart
-  };
-
-  // OPTIONAL: auto-release when you reach Step 3 (adjust selectors to your step markup)
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.go-to-step-3, [data-step="3"], .step-3')) {
-      window.CartFloat.release();
-    }
-  <script>
-(() => {
-  const col  = document.getElementById('summaryColumn');
-  const wrap = document.getElementById('cartFloatingWrap');
-
-  // If it was wrapped/fixed, restore it to normal document flow
-  if (wrap && col && wrap.contains(col)) {
-    wrap.replaceWith(col);
-  }
-
-  // Nuke any inline fixed styles that might be lingering
-  if (col) {
-    col.style.position   = '';
-    col.style.top        = '';
-    col.style.right      = '';
-    col.style.bottom     = '';
-    col.style.left       = '';
-    col.style.width      = '';
-    col.style.maxWidth   = '';
-    col.style.marginTop  = '';
-  }
-
-  // Make sure sticky can actually stick
-  const card = document.querySelector('.booking-card');
-  if (card) card.style.overflow = 'visible';
-})();
-</script>
-
-  });
-})();
-</script>
-
 </body>
 </html>
-/* Make sure sticky can actually stick */
-.booking-card{ overflow: visible !important; }
-
-/* Lock the grid placement so the cart starts at the very top-right */
-@media (min-width: 780px){
-  .form-columns{ align-items: start !important; }
-  .form-columns > .form-steps{ grid-column: 1 / 2; grid-row: 1; }
-  .form-columns > #summaryColumn{
-    grid-column: 2 / 3;
-    grid-row: 1;
-    position: sticky;
-    top: clamp(24px, 3.6vw, 46px);
-    align-self: start;
-    margin-top: 0 !important;
-    z-index: 1;
-  }
-}
-
-/* If a floating wrapper is still on the page, neutralize it */
-#cartFloatingWrap{
-  position: static !important;
-  inset: auto !important;
-  width: auto !important;
-  max-width: none !important;
-  filter: none !important;
-}

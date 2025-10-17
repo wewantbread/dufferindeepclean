@@ -1,27 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About - DufferinDeepClean</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>About — DufferinDeepClean</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="assets/aos.css" />
+  <script src="nav-cart.js" defer></script>
 </head>
-<body>
-  <header data-aos="fade-down">
-    <h1>About Us</h1>
-    <nav>
-      <a href="index.html">Home</a>
+<body data-cart-image="deepcleanpackage.png">
+
+  <header class="navbar">
+    <div class="logo">
+      <span class="soap">🧼</span>
+      <a class="logo-text" href="index.html">DufferinDeepClean</a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html#home">Home</a>
       <a href="services.html">Services</a>
-      <a href="about.html">About</a>
+      <a href="about.html" aria-current="page">About Us</a>
       <a href="contact.html">Contact</a>
+      <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
+    <div class="nav-actions">
+      <button class="nav-cart" type="button" data-cart-toggle aria-haspopup="dialog" aria-controls="navCartPopover" aria-expanded="false">
+        <span class="nav-cart-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="nav-cart-label">Cart</span>
+        <span class="nav-cart-count" data-cart-count hidden>0</span>
+      </button>
+    </div>
   </header>
+  <aside class="nav-cart-popover" id="navCartPopover" role="dialog" aria-modal="false" aria-label="Cart summary" hidden>
+    <div class="nav-cart-popover-inner">
+      <button type="button" class="cart-popover-close" data-cart-close aria-label="Close cart">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <header class="cart-popover-header">
+        <img data-cart-popover-image alt="Cart package preview" loading="lazy" />
+        <div>
+          <p class="cart-popover-title" data-popover-service>Your cart is empty</p>
+          <p class="cart-popover-subtitle" data-popover-frequency>Build a package to see pricing here.</p>
+        </div>
+      </header>
+      <p class="cart-popover-status" data-popover-status hidden></p>
+      <p class="cart-popover-empty" data-popover-empty>Use “Book Online” to customise your cleaning package.</p>
+      <dl class="cart-popover-details" data-popover-details hidden></dl>
+      <div class="cart-popover-totals" data-popover-totals hidden>
+        <div><span>Visit total</span><span data-popover-total>—</span></div>
+        <div><span>Deposit (50%)</span><span data-popover-deposit>—</span></div>
+        <div><span>Balance</span><span data-popover-balance>—</span></div>
+      </div>
+      <div class="cart-popover-payments" data-popover-payments hidden>
+        <div id="nav-paypal-buttons" data-paypal-container="nav"></div>
+        <p class="cart-popover-paypal-status" id="nav-paypal-status" role="status" aria-live="polite"></p>
+        <button type="button" class="btn cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
+      </div>
+    </div>
+  </aside>
 
-  <section data-aos="fade-right">
-    <p>Cleaners built from the ground up by a family who knows what it's like to be taken advantage of by big companies. We're here to restore trust, offer fairness, and deliver the kind of clean that you can feel.</p>
-  </section>
+  <main class="page-main about-main">
+    <section class="page-hero">
+      <p class="page-kicker">our story</p>
+      <h1 class="page-title">A family-owned team obsessed with shine</h1>
+      <p class="page-lede">We started DufferinDeepClean to bring trustworthy, detail-driven cleaning back to local businesses and homes. The mission is simple—deliver results you can see and service you can feel.</p>
+    </section>
 
-  <script src="assets/aos.js"></script>
-  <script>AOS.init();</script>
+    <section class="page-card about-intro">
+      <h2>built on care</h2>
+      <p>Our family knows how frustrating it is when vendors cut corners. That’s why every visit includes meticulous checklists, transparent pricing, and professionals who treat your space like their own.</p>
+      <div class="about-values">
+        <article>
+          <h3>01. trusted team</h3>
+          <p>Background-checked specialists with an eye for detail and pride in every job.</p>
+        </article>
+        <article>
+          <h3>02. custom plans</h3>
+          <p>From industrial warehouses to boutique storefronts, we tailor our clean to your needs.</p>
+        </article>
+        <article>
+          <h3>03. lasting sparkle</h3>
+          <p>Hospital-grade products, eco-minded options, and finishing touches that wow your guests.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="page-card about-cta">
+      <h2>experience the dufferin difference</h2>
+      <p>Let’s design a cleaning program that keeps your space photo-ready. You pick the cadence—we’ll bring the shine.</p>
+      <a class="quote-btn-home" href="book.html#start">Book your consultation</a>
+    </section>
+  </main>
+
 </body>
 </html>

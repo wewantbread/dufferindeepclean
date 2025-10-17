@@ -179,6 +179,7 @@
     }
 
     .form-columns{
+<<<<<<< HEAD
       display: flex;
       flex-direction: column;
       gap: clamp(24px, 4vw, 48px);
@@ -187,13 +188,26 @@
 
     .form-columns.cart-summary-hidden{
       flex-direction: column;
+=======
+      display: grid;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: start;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .form-columns.cart-summary-hidden{
+      grid-template-columns: 1fr !important;
+>>>>>>> e89e605d59dbb34f4e3b473be7d71858adaa807a
     }
 
     .form-steps{
       display: grid;
       gap: clamp(18px, 3vw, 28px);
       min-width: 0;
+<<<<<<< HEAD
       flex: 1 1 auto;
+=======
+>>>>>>> e89e605d59dbb34f4e3b473be7d71858adaa807a
     }
     .booking-success{ padding: clamp(16px, 3vw, 28px); }
 
@@ -219,8 +233,12 @@
       width: 100%;
       max-width: 360px;
       min-width: 0;
+<<<<<<< HEAD
       margin: 0 auto;
       align-self: flex-start;
+=======
+      margin-left: auto;
+>>>>>>> e89e605d59dbb34f4e3b473be7d71858adaa807a
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
     .cart-summary.cart-summary-empty .cart-summary-subtitle{ color: #9ad4ff; }
@@ -503,6 +521,7 @@
 
     @media (min-width: 860px){
       .form-columns{
+<<<<<<< HEAD
         flex-direction: row;
         align-items: flex-start;
         gap: clamp(120px, 14vw, 220px);
@@ -513,20 +532,30 @@
       }
       .form-steps{
         width: 100%;
+=======
+        grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.8fr);
+        gap: clamp(52px, 6vw, 80px);
+        align-items: start;
+>>>>>>> e89e605d59dbb34f4e3b473be7d71858adaa807a
       }
       .cart-summary{
         position: sticky;
         top: 24px;
         max-height: calc(100vh - 80px);
         overflow: auto;
+<<<<<<< HEAD
         margin: 0;
         width: clamp(220px, 18vw, 280px);
         max-width: 280px;
         flex: 0 0 auto;
+=======
+        justify-self: end;
+>>>>>>> e89e605d59dbb34f4e3b473be7d71858adaa807a
       }
     }
     @media (min-width: 1120px){
       .form-columns{
+<<<<<<< HEAD
         gap: clamp(150px, 16vw, 260px);
       }
       .form-columns.cart-summary-hidden{
@@ -536,6 +565,14 @@
       .cart-summary{
         width: clamp(260px, 20vw, 320px);
         max-width: 320px;
+=======
+        grid-template-columns: minmax(0, 1.45fr) minmax(400px, 0.75fr);
+        gap: clamp(60px, 6.5vw, 96px);
+      }
+      .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
+      .cart-summary{
+        max-width: 400px;
+>>>>>>> e89e605d59dbb34f4e3b473be7d71858adaa807a
       }
     }
 

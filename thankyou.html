@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Thank You!</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="nav-cart.js" defer></script>
 </head>
 <body>
 
@@ -16,9 +17,47 @@
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
-      <a href="quote.html" class="quote-btn">Get Quote</a>
+      <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
+    <div class="nav-actions">
+      <button class="nav-cart" type="button" data-cart-toggle aria-haspopup="dialog" aria-controls="navCartPopover" aria-expanded="false">
+        <span class="nav-cart-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+            <path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="nav-cart-label">Cart</span>
+        <span class="nav-cart-count" data-cart-count hidden>0</span>
+      </button>
+    </div>
   </header>
+  <aside class="nav-cart-popover" id="navCartPopover" role="dialog" aria-modal="false" aria-label="Cart summary" hidden>
+    <div class="nav-cart-popover-inner">
+      <button type="button" class="cart-popover-close" data-cart-close aria-label="Close cart">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <header class="cart-popover-header">
+        <img data-cart-popover-image alt="Cart package preview" loading="lazy" />
+        <div>
+          <p class="cart-popover-title" data-popover-service>Your cart is empty</p>
+          <p class="cart-popover-subtitle" data-popover-frequency>Build a package to see pricing here.</p>
+        </div>
+      </header>
+      <p class="cart-popover-status" data-popover-status hidden></p>
+      <p class="cart-popover-empty" data-popover-empty>Use “Book Online” to customise your cleaning package.</p>
+      <dl class="cart-popover-details" data-popover-details hidden></dl>
+      <div class="cart-popover-totals" data-popover-totals hidden>
+        <div><span>Visit total</span><span data-popover-total>—</span></div>
+        <div><span>Deposit (50%)</span><span data-popover-deposit>—</span></div>
+        <div><span>Balance</span><span data-popover-balance>—</span></div>
+      </div>
+      <div class="cart-popover-payments" data-popover-payments hidden>
+        <div id="nav-paypal-buttons" data-paypal-container="nav"></div>
+        <p class="cart-popover-paypal-status" id="nav-paypal-status" role="status" aria-live="polite"></p>
+        <button type="button" class="btn cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
+      </div>
+    </div>
+  </aside>
 
   <section style="padding: 4em; text-align: center;">
     <h1>Thank you for reaching out!</h1>

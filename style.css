@@ -3088,3 +3088,29 @@ body::before{
     padding: clamp(1.6rem, 6vw, 2.4rem);
   }
 }
+/* === Cart: pin to top-right of the viewport (desktop), bottom-docked (mobile) === */
+body[data-cart-fixed] .nav-cart-popover {
+  position: fixed !important;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  width: clamp(280px, 28vw, 420px);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  z-index: 2147483000;
+  inset-inline: auto;
+  inset-block: auto;
+  isolation: isolate;
+  will-change: transform;
+}
+
+@media (max-width: 900px) {
+  body[data-cart-fixed] .nav-cart-popover {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: max(0px, env(safe-area-inset-bottom));
+    width: 100%;
+    max-height: 55vh;
+    border-radius: 16px 16px 0 0;
+  }
+}

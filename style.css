@@ -3114,3 +3114,65 @@ body[data-cart-fixed] .nav-cart-popover {
     border-radius: 16px 16px 0 0;
   }
 }
+/* ===== Cart top-right layout overrides ===== */
+:root { --header-h: 72px; }
+
+/* Stop locking the whole booking layout to the viewport */
+.booking-layout {
+  position: static !important;
+  margin: 0 !important;
+  padding-bottom: 60px !important;
+  display: block !important;
+}
+
+/* Two-column layout: content (left) + cart (right) */
+.form-columns {
+  display: grid !important;
+  grid-template-columns: 1fr minmax(320px, 420px) !important;
+  gap: clamp(28px, 4.6vw, 54px) !important;
+  align-items: start !important;
+  margin: 0 !important;
+  padding: 0 0 60px 0 !important;
+}
+
+/* Put steps/content in left column */
+.form-steps {
+  grid-column: 1 !important;
+  min-width: 0;
+}
+
+/* Put the cart box in the right column and make it sticky */
+#cartSummary {
+  grid-column: 2 !important;
+  align-self: start !important;
+  justify-self: end !important;
+  position: sticky !important;
+  top: calc(var(--header-h) + 16px) !important;
+  width: 100% !important;
+  max-width: 420px !important;
+}
+
+/* Remove old width cap that kept it narrow */
+#cartSummary.cart-summary {
+  width: 100% !important;
+  max-width: 420px !important;
+}
+
+/* Mobile: dock the cart at the bottom, make room for it */
+@media (max-width: 900px) {
+  .form-columns {
+    grid-template-columns: 1fr !important;
+  }
+  #cartSummary {
+    grid-column: 1 !important;
+    position: fixed !important;
+    left: 0; right: 0; bottom: 0; top: auto;
+    max-width: none !important;
+    border-radius: 16px 16px 0 0;
+    z-index: 1000;
+  }
+  .booking-card {
+    /* space so content isn't hidden behind the docked cart */
+    padding-bottom: 56vh !important;
+  }
+}

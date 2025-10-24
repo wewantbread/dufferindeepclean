@@ -100,7 +100,18 @@
     /* iOS-only quick fixes keep working via style.css rules */
   </style>
 </head>
-<body data-cart-image="deepcleanpackage.png">
+<body data-cart-image="deepcleanpackage.png" data-cart-fixed><script>
+  (function () {
+    var pop = document.getElementById('navCartPopover');
+    if (!pop) return;
+    // Keep the cart open on the homepage so it stays pinned top-right.
+    // If you only want the icon, comment these two lines out.
+    pop.hidden = false;
+    var btn = document.querySelector('[data-cart-toggle]');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  })();
+</script>
+
 
   <!-- NAVIGATION -->
   <header class="navbar">

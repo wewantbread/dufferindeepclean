@@ -3114,3 +3114,11 @@ body[data-cart-fixed] .nav-cart-popover {
     border-radius: 16px 16px 0 0;
   }
 }
+#navCartPopover {
+  position: fixed !important;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  z-index: 2147483000;
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}

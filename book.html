@@ -240,29 +240,11 @@
       transform: translateY(-12%);
     }
 
-    .package-info-toggle{
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: clamp(18px, 3vw, 28px);
-      padding: clamp(16px, 2.6vw, 24px) clamp(20px, 3vw, 32px);
-      background: transparent;
-      border: none;
-      color: inherit;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .package-info-toggle:focus-visible{
-      outline: 2px solid rgba(255, 144, 220, 0.8);
-      outline-offset: 4px;
-    }
-
     .package-info-summary{
       display: grid;
       gap: 6px;
-      flex: 1 1 auto;
+      padding: clamp(18px, 2.6vw, 26px) clamp(20px, 3vw, 32px) clamp(16px, 2.6vw, 24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .package-info-label{
@@ -288,53 +270,10 @@
       line-height: 1.5;
     }
 
-    .package-info-chevron{
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      flex-shrink: 0;
-      transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
-    }
-
-    .package-info-chevron svg{
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .package-info.package-open .package-info-chevron{
-      transform: rotate(180deg);
-      background: rgba(255, 79, 195, 0.28);
-      border-color: rgba(255, 120, 220, 0.6);
-    }
-
-    .package-panel{
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(-12px);
-      transition: max-height 0.5s ease, opacity 0.45s ease, transform 0.45s ease;
-      padding: 0 clamp(20px, 3vw, 32px);
-    }
-
-    .package-info.package-open .package-panel{
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .package-panel-inner{
+    .package-details{
       display: grid;
       gap: clamp(16px, 2.4vw, 24px);
-      padding-bottom: clamp(16px, 2.4vw, 24px);
+      padding: clamp(20px, 2.8vw, 28px) clamp(20px, 3vw, 32px) clamp(28px, 3vw, 34px);
     }
 
     .package-lead{
@@ -1234,48 +1173,39 @@
           <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
           <div class="step-extras-layout">
             <div class="package-info" data-package>
-              <button class="package-info-toggle" type="button" data-package-toggle aria-expanded="false">
-                <div class="package-info-summary">
-                  <span class="package-info-label">Description</span>
-                  <h3 class="package-info-service" data-package-service>Signature Home Refresh</h3>
-                  <p class="package-info-description" data-package-description>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
-                </div>
-                <span class="package-info-chevron" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </span>
-              </button>
-              <div class="package-panel" data-package-panel aria-hidden="true">
-                <div class="package-panel-inner">
-                  <p class="package-lead" data-package-lead>A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
-                  <p class="package-context" data-package-context hidden></p>
-                  <div class="package-lists">
-                    <section class="package-section">
-                      <h4>What’s included</h4>
-                      <ul class="package-list" data-package-list="included">
-                        <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
-                        <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
-                        <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
-                        <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
-                        <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
-                        <li>Trash: bag &amp; place at your designated spot.</li>
-                      </ul>
-                    </section>
-                    <section class="package-section">
-                      <h4>Good to know</h4>
-                      <ul class="package-list" data-package-list="good">
-                        <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
-                        <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
-                        <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
-                        <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
-                      </ul>
-                      <div class="payment-policy">
-                        <h3>Payment Policy</h3>
-                        <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
-                      </div>
-                    </section>
-                  </div>
+              <div class="package-info-summary">
+                <span class="package-info-label">Description</span>
+                <h3 class="package-info-service" data-package-service>Signature Home Refresh</h3>
+                <p class="package-info-description" data-package-description>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
+              </div>
+              <div class="package-details">
+                <p class="package-lead" data-package-lead>A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
+                <p class="package-context" data-package-context hidden></p>
+                <div class="package-lists">
+                  <section class="package-section">
+                    <h4>What’s included</h4>
+                    <ul class="package-list" data-package-list="included">
+                      <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
+                      <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
+                      <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
+                      <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
+                      <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
+                      <li>Trash: bag &amp; place at your designated spot.</li>
+                    </ul>
+                  </section>
+                  <section class="package-section">
+                    <h4>Good to know</h4>
+                    <ul class="package-list" data-package-list="good">
+                      <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
+                      <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
+                      <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
+                      <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
+                    </ul>
+                    <div class="payment-policy">
+                      <h3>Payment Policy</h3>
+                      <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
+                    </div>
+                  </section>
                 </div>
               </div>
             </div>
@@ -2125,8 +2055,6 @@
       const cartSummaryTitle = document.querySelector('.cart-summary-title');
       const cartSummaryImage = document.getElementById('cartSummaryImage');
       const packageInfo = document.querySelector('[data-package]');
-      const packageToggle = document.querySelector('[data-package-toggle]');
-      const packagePanel = document.querySelector('[data-package-panel]');
       const packageServiceHeading = document.querySelector('[data-package-service]');
       const packageDescription = document.querySelector('[data-package-description]');
       const packageLead = document.querySelector('[data-package-lead]');
@@ -2226,35 +2154,6 @@
         }
         target.innerHTML = items.map(item => `<li>${escapeHtml(item)}</li>`).join('');
         target.hidden = false;
-      }
-
-      function syncPackagePanelHeight(){
-        if(!packageInfo || !packagePanel) return;
-        if(packageInfo.classList.contains('package-open')){
-          packagePanel.style.maxHeight = packagePanel.scrollHeight + 'px';
-        } else {
-          packagePanel.style.maxHeight = '0px';
-        }
-      }
-
-      if(packageToggle && packageInfo && packagePanel){
-        packagePanel.style.maxHeight = '0px';
-        packageToggle.addEventListener('click', () => {
-          const isOpen = packageInfo.classList.toggle('package-open');
-          packageToggle.setAttribute('aria-expanded', String(isOpen));
-          packagePanel.setAttribute('aria-hidden', String(!isOpen));
-          syncPackagePanelHeight();
-        });
-        syncPackagePanelHeight();
-      }
-
-      function refreshPackagePanel(){
-        if(!packageInfo || !packagePanel) return;
-        if(packageInfo.classList.contains('package-open')){
-          requestAnimationFrame(() => {
-            packagePanel.style.maxHeight = packagePanel.scrollHeight + 'px';
-          });
-        }
       }
 
       function frequencyIntervalDays(){
@@ -2855,7 +2754,6 @@
           ? activePackageCopy.goodToKnow
           : (fallbackPackageCopy && fallbackPackageCopy.goodToKnow)
       );
-      refreshPackagePanel();
       if(cartSummaryTitle){
         cartSummaryTitle.textContent = resolvedServiceLabel;
       }

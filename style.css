@@ -1255,17 +1255,35 @@ html.ios .announce-line { color:#000 !important; }
 html.ios .announcement-cta { background:#00ff88 !important; color:#000 !important; }
 html.ios .announcement-cta:hover { background:#00cc6d !important; }
 
+html.ios,
 html.ios body {
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  position: relative;
+}
+
+html.ios body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+html.ios body > * {
+  width: 100%;
+  max-width: 100%;
 }
 
 html.ios .split-screen {
   flex-direction: column;
   height: auto;
-  width: 100%;
-  max-width: min(96vw, 760px);
+  width: min(100%, 760px);
+  max-width: 760px;
   margin-inline: auto;
-  padding: 3.25rem clamp(1.4rem, 5vw, 2.75rem) calc(2.4rem + env(safe-area-inset-bottom));
+  padding: 3.25rem clamp(1.6rem, 4.5vw, 2.75rem) calc(2.4rem + env(safe-area-inset-bottom));
   gap: 1.6rem;
   box-sizing: border-box;
 }
@@ -1285,8 +1303,6 @@ html.ios .text-side {
 html.ios .text-side > * {
   width: 100%;
 }
-html.ios .text-side > * {
-  width: 100%;
 html.ios .text-side::before { display: none; }
 html.ios .headline { font-size:3rem; line-height:1.15; font-weight:900; color:#f6fbff; position:relative; text-shadow: 0 14px 32px rgba(0,0,0,0.55); }
 html.ios .subtext { font-size:1.3rem; font-weight:600; color:#e4f4ff; max-width:30ch; position:relative; text-shadow: 0 12px 28px rgba(0,0,0,0.45); }
@@ -1304,6 +1320,27 @@ html.ios .hero-quote {
   margin-inline: 0;
 }
 
+html.ios section:not(#home),
+html.ios footer {
+  width: min(100%, 760px);
+  max-width: 760px;
+  margin-inline: auto;
+  padding-inline: clamp(1.6rem, 4.5vw, 2.75rem);
+  box-sizing: border-box;
+}
+
+html.ios footer {
+  align-self: center;
+}
+
+html.ios .services-grid {
+  padding-inline: 0;
+}
+
+html.ios .about-inner {
+  padding: 3em clamp(1.2rem, 4vw, 2.4rem);
+}
+
 html.ios .hero-quote .quote-card {
   padding: 1.6rem clamp(1.2rem, 5vw, 1.75rem);
   border-radius: 26px;
@@ -1315,6 +1352,11 @@ html.ios .hero-quote .quote-card {
   gap: 1.4rem;
   box-sizing: border-box;
   overscroll-behavior: contain;
+  border: 2px solid rgba(0, 212, 255, 0.55);
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.55),
+    0 0 32px rgba(0, 212, 255, 0.24);
+  background: rgba(0, 12, 22, 0.82);
 }
 
 html.ios .quote-card-header {

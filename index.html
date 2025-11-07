@@ -354,25 +354,31 @@
     </div>
 
     <div class="services-grid">
-      <a class="service-card" href="book.html?pkg=industrial&service=Industrial%20%26%20Warehouse%20Deep%20Clean#start">
-        <img src="img/warehouse-deep-clean.jpg" alt="Warehouse deep cleaning with floor scrubber and high-dusting" class="service-image" />
-        <h3>industrial &amp; warehouse deep clean</h3>
-        <p>Heavy-duty cleaning for aisles, docks, and production floors—degreasing, machine wipe-downs, and high-dusting of beams &amp; racking.</p>
-        <span class="service-cta">book this</span>
+      <a class="service-card" href="#quote" data-service-card data-service="home">
+        <img src="deepcleanpackage.png" alt="Sparkling kitchen with fresh countertops and appliances" class="service-image" />
+        <div class="service-copy">
+          <h3>House Cleaning Package</h3>
+          <p>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
+        </div>
+        <span class="service-cta">Book this package</span>
       </a>
 
-      <a class="service-card" href="book.html?pkg=office&service=Office%20Deep%20Clean#start">
-        <img src="img/office-deep-clean.jpg" alt="Office deep clean: tidy desks, mopped floors, stocked restrooms" class="service-image" />
-        <h3>office deep clean</h3>
-        <p>Workstations, meeting rooms, and common areas—vacuum &amp; mop, bin service &amp; recycling, restroom sanitization and supply refill.</p>
-        <span class="service-cta">book this</span>
+      <a class="service-card" href="#quote" data-service-card data-service="commercial">
+        <img src="cleanuptransformation.jpg" alt="Warehouse aisle freshly mopped with organized storage racks" class="service-image" />
+        <div class="service-copy">
+          <h3>Commercial Cleaning Package</h3>
+          <p>Ideal for light-industrial units and warehouses with attached offices—covers production aisles, loading zones, staff areas, and restrooms with safety-first detailing.</p>
+        </div>
+        <span class="service-cta">Book this package</span>
       </a>
 
-      <a class="service-card" href="book.html?pkg=specialty&service=High-Reach%20Window%20%26%20Rail%20Cleaning%20(Scissor%20Lift)%20%E2%80%94%20Warehouses#start">
-        <img src="img/highreach-warehouse.jpg" alt="Scissor-lift crew cleaning warehouse high windows and rails" class="service-image" />
-        <h3>high-reach window &amp; rail (warehouses)</h3>
-        <p>Clear glass and safe rails at height—performed with scissor lifts (no rope-access). Frames, tracks, and mezzanine rails detailed and sanitized.</p>
-        <span class="service-cta">book this</span>
+      <a class="service-card" href="#quote" data-service-card data-service="office">
+        <img src="IMG_1629.png" alt="Modern office lounge freshly detailed with seating and plants" class="service-image" />
+        <div class="service-copy">
+          <h3>Office Cleaning Package</h3>
+          <p>Professional office upkeep that dusts workstations, refreshes conference rooms, polishes reception areas, and tidies shared kitchens for a productive team.</p>
+        </div>
+        <span class="service-cta">Book this package</span>
       </a>
     </div>
   </section>
@@ -982,6 +988,56 @@
           quoteSection.classList.remove('quote-spotlight');
           spotlightTimer = null;
         }, 1600);
+      });
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const serviceCards = Array.from(document.querySelectorAll('[data-service-card]'));
+      if(!serviceCards.length) return;
+
+      const quoteSection = document.getElementById('quote');
+      const quoteForm = document.getElementById('instant-quote');
+      const serviceSelect = quoteForm ? quoteForm.querySelector('#quote-service') : null;
+
+      serviceCards.forEach(card => {
+        card.addEventListener('click', event => {
+          const serviceKey = card.dataset.service || '';
+          if(serviceSelect && serviceKey){
+            const matchingOption = Array.from(serviceSelect.options).find(option => option.value === serviceKey);
+            if(matchingOption){
+              serviceSelect.value = serviceKey;
+              serviceSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+          }
+
+          if(quoteSection){
+            event.preventDefault();
+            try {
+              quoteSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (err) {
+              quoteSection.scrollIntoView();
+            }
+
+            const focusTarget = quoteSection.querySelector('input, select, button');
+            if(focusTarget){
+              setTimeout(() => {
+                try {
+                  focusTarget.focus({ preventScroll: true });
+                } catch (focusErr) {
+                  focusTarget.focus();
+                }
+              }, 320);
+            }
+
+            if(history.replaceState){
+              history.replaceState(null, '', '#quote');
+            } else {
+              window.location.hash = 'quote';
+            }
+          }
+        });
       });
     })();
   </script>

@@ -1285,6 +1285,8 @@ html.ios .text-side {
 html.ios .text-side > * {
   width: 100%;
 }
+html.ios .text-side > * {
+  width: 100%;
 html.ios .text-side::before { display: none; }
 html.ios .headline { font-size:3rem; line-height:1.15; font-weight:900; color:#f6fbff; position:relative; text-shadow: 0 14px 32px rgba(0,0,0,0.55); }
 html.ios .subtext { font-size:1.3rem; font-weight:600; color:#e4f4ff; max-width:30ch; position:relative; text-shadow: 0 12px 28px rgba(0,0,0,0.45); }

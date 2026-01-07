@@ -112,7 +112,7 @@
     }
 
     .booking{
-      max-width: min(96vw, 1560px);
+      max-width: min(98vw, 1820px);
       margin: 0 auto;
       padding: clamp(24px, 4.2vw, 56px);
     }
@@ -128,7 +128,7 @@
     .stepper{
       list-style: none; padding: 12px; margin: 0;
       width: min(100%, 1080px);
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
       background: rgba(0, 0, 0, 0.55);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 28px;
@@ -165,7 +165,7 @@
 
     .booking-card{
       margin: 18px auto 0;
-      width: min(100%, 1640px);
+      width: min(100%, 1820px);
       background: rgba(10, 12, 16, 0.72);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 44px;
@@ -1133,10 +1133,9 @@
 
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
-        <li class="active">1. add extras</li>
-        <li>2. frequency &amp; schedule</li>
-        <li>3. your details</li>
-        <li>4. review &amp; confirm</li>
+        <li class="active">1. schedule &amp; frequency</li>
+        <li>2. your details</li>
+        <li>3. review &amp; confirm</li>
       </ol>
     </div>
 
@@ -1169,275 +1168,9 @@
           <div class="form-columns">
             <div class="form-steps">
 
-        <fieldset class="step step-extras" data-step="1">
-          <legend>Add extra services <span class="legend-note">Optional boosts to tailor your visit.</span></legend>
-          <div class="step-extras-layout">
-            <div class="package-info" data-package>
-              <div class="package-info-summary">
-                <span class="package-info-label">Description</span>
-                <h3 class="package-info-service" data-package-service>Signature Home Refresh</h3>
-                <p class="package-info-description" data-package-description>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
-              </div>
-              <div class="package-details">
-                <p class="package-lead" data-package-lead>A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
-                <p class="package-context" data-package-context hidden></p>
-                <div class="package-lists">
-                  <section class="package-section">
-                    <h4>What’s included</h4>
-                    <ul class="package-list" data-package-list="included">
-                      <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
-                      <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
-                      <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
-                      <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
-                      <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
-                      <li>Trash: bag &amp; place at your designated spot.</li>
-                    </ul>
-                  </section>
-                  <section class="package-section">
-                    <h4>Good to know</h4>
-                    <ul class="package-list" data-package-list="good">
-                      <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
-                      <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
-                      <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
-                      <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
-                    </ul>
-                    <div class="payment-policy">
-                      <h3>Payment Policy</h3>
-                      <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
-                    </div>
-                  </section>
-                </div>
-              </div>
-            </div>
-            <div class="step-extras-content">
-              <p class="muted">Select any speciality tasks you’d like to include or skip to keep the base package.</p>
-              <div class="addon-groups" id="addon-groups">
-                                <div class="addon-group" data-service-group="home">
-                                  <p class="addon-group-title">Home &amp; Residential Extras</p>
-                                  <div class="addon-pill color-cyan" data-addon="Deep Clean Package" data-price="80">
-                                    <span class="addon-icon" data-icon="sparkle" aria-hidden="true"></span>
-                                    <span class="addon-name">Deep Clean Package</span>
-                                    <div class="addon-stepper" role="group" aria-label="Deep Clean Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Deep Clean Package quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Deep Clean Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Deep Clean Package quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-lime" data-addon="Move In/Out Clean Package" data-price="95">
-                                    <span class="addon-icon" data-icon="truck" aria-hidden="true"></span>
-                                    <span class="addon-name">Move In/Out Clean Package</span>
-                                    <div class="addon-stepper" role="group" aria-label="Move In/Out Clean Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Move In/Out Clean Package quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Clean Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Move In/Out Clean Package quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-magenta" data-addon="Renovation Clean Package" data-price="110">
-                                    <span class="addon-icon" data-icon="tool" aria-hidden="true"></span>
-                                    <span class="addon-name">Renovation Clean Package</span>
-                                    <div class="addon-stepper" role="group" aria-label="Renovation Clean Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Renovation Clean Package quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Renovation Clean Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Renovation Clean Package quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-orange" data-addon="Move In/Out Package (Student Property)" data-price="70">
-                                    <span class="addon-icon" data-icon="cap" aria-hidden="true"></span>
-                                    <span class="addon-name">Move In/Out Package (Student Property)</span>
-                                    <div class="addon-stepper" role="group" aria-label="Move In/Out Package (Student Property) quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Move In/Out Package (Student Property) quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Move In/Out Package (Student Property) quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Move In/Out Package (Student Property) quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-indigo" data-addon="AirBnB Listing" data-price="65">
-                                    <span class="addon-icon" data-icon="home" aria-hidden="true"></span>
-                                    <span class="addon-name">AirBnB Listing</span>
-                                    <div class="addon-stepper" role="group" aria-label="AirBnB Listing quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease AirBnB Listing quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="AirBnB Listing quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase AirBnB Listing quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-gold" data-addon="I have Pets" data-price="35">
-                                    <span class="addon-icon" data-icon="paw" aria-hidden="true"></span>
-                                    <span class="addon-name">I have Pets</span>
-                                    <div class="addon-stepper" role="group" aria-label="I have Pets quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease I have Pets quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="I have Pets quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase I have Pets quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-sky" data-addon="Inside Fridge" data-price="25">
-                                    <span class="addon-icon" data-icon="fridge" aria-hidden="true"></span>
-                                    <span class="addon-name">Inside Fridge</span>
-                                    <div class="addon-stepper" role="group" aria-label="Inside Fridge quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Fridge quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Fridge quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Fridge quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-rose" data-addon="Inside Oven" data-price="25">
-                                    <span class="addon-icon" data-icon="oven" aria-hidden="true"></span>
-                                    <span class="addon-name">Inside Oven</span>
-                                    <div class="addon-stepper" role="group" aria-label="Inside Oven quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Oven quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Oven quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Oven quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-mint" data-addon="Inside Cabinets" data-price="30">
-                                    <span class="addon-icon" data-icon="cabinet" aria-hidden="true"></span>
-                                    <span class="addon-name">Inside Cabinets</span>
-                                    <div class="addon-stepper" role="group" aria-label="Inside Cabinets quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Cabinets quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Inside Cabinets quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Cabinets quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-teal" data-addon="Additional Kitchen" data-price="45">
-                                    <span class="addon-icon" data-icon="utensils" aria-hidden="true"></span>
-                                    <span class="addon-name">Additional Kitchen</span>
-                                    <div class="addon-stepper" role="group" aria-label="Additional Kitchen quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Additional Kitchen quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Additional Kitchen quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Additional Kitchen quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-plum" data-addon="Blinds (per window)" data-price="8">
-                                    <span class="addon-icon" data-icon="blinds" aria-hidden="true"></span>
-                                    <span class="addon-name">Blinds (per window)</span>
-                                    <div class="addon-stepper" role="group" aria-label="Blinds (per window) quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Blinds quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="25" value="1" aria-label="Blinds quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Blinds quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-azure" data-addon="Inside Windows with Tracks (up to 6)" data-price="60">
-                                    <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
-                                    <span class="addon-name">Inside Windows with Tracks (up to 6)</span>
-                                    <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 6) quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 6) quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 6 quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 6) quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-amber" data-addon="Inside Windows with Tracks (up to 12)" data-price="105">
-                                    <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
-                                    <span class="addon-name">Inside Windows with Tracks (up to 12)</span>
-                                    <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 12) quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 12) quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 12 quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 12) quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-blue" data-addon="Inside Windows with Tracks (up to 24)" data-price="195">
-                                    <span class="addon-icon" data-icon="window" aria-hidden="true"></span>
-                                    <span class="addon-name">Inside Windows with Tracks (up to 24)</span>
-                                    <div class="addon-stepper" role="group" aria-label="Inside Windows with Tracks (up to 24) quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Inside Windows with Tracks (up to 24) quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="5" value="1" aria-label="Inside Windows with Tracks up to 24 quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Inside Windows with Tracks (up to 24) quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-lavender" data-addon="Change Bed Sheets + Load Laundry" data-price="18">
-                                    <span class="addon-icon" data-icon="bed" aria-hidden="true"></span>
-                                    <span class="addon-name">Change Bed Sheets + Load Laundry</span>
-                                    <div class="addon-stepper" role="group" aria-label="Change Bed Sheets and Load Laundry quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Change Bed Sheets and Load Laundry quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Change Bed Sheets and Load Laundry quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Change Bed Sheets and Load Laundry quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-ivory" data-addon="Laundry Service (wash &amp; fold)" data-price="35">
-                                    <span class="addon-icon" data-icon="laundry" aria-hidden="true"></span>
-                                    <span class="addon-name">Laundry Service (wash &amp; fold)</span>
-                                    <div class="addon-stepper" role="group" aria-label="Laundry Service quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Laundry Service quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Laundry Service quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Laundry Service quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-cream" data-addon="Load Dishwasher" data-price="10">
-                                    <span class="addon-icon" data-icon="dishwasher" aria-hidden="true"></span>
-                                    <span class="addon-name">Load Dishwasher</span>
-                                    <div class="addon-stepper" role="group" aria-label="Load Dishwasher quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Load Dishwasher quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Load Dishwasher quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Load Dishwasher quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-emerald" data-addon="Sanitization Package" data-price="55">
-                                    <span class="addon-icon" data-icon="spray" aria-hidden="true"></span>
-                                    <span class="addon-name">Sanitization Package</span>
-                                    <div class="addon-stepper" role="group" aria-label="Sanitization Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Sanitization Package quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Sanitization Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Sanitization Package quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                </div>
-              
-                                <div class="addon-group" data-service-group="commercial,office">
-                                  <p class="addon-group-title">Facility &amp; Workspace Enhancements</p>
-                                  <div class="addon-pill color-indigo" data-addon="Carpet Steam Cleaning Package" data-price="140">
-                                    <span class="addon-icon" data-icon="vacuum" aria-hidden="true"></span>
-                                    <span class="addon-name">Carpet Steam Cleaning Package</span>
-                                    <div class="addon-stepper" role="group" aria-label="Carpet Steam Cleaning Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Carpet Steam Cleaning quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Carpet Steam Cleaning quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Carpet Steam Cleaning quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-azure" data-addon="Tile and Grout Cleaning Package" data-price="130">
-                                    <span class="addon-icon" data-icon="tiles" aria-hidden="true"></span>
-                                    <span class="addon-name">Tile and Grout Cleaning Package</span>
-                                    <div class="addon-stepper" role="group" aria-label="Tile and Grout Cleaning Package quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Tile and Grout quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Tile and Grout quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Tile and Grout quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-coral" data-addon="Window Detailing" data-price="120">
-                                    <span class="addon-icon" data-icon="squeegee" aria-hidden="true"></span>
-                                    <span class="addon-name">Window Detailing</span>
-                                    <div class="addon-stepper" role="group" aria-label="Window Detailing quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Window Detailing quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Window Detailing quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Window Detailing quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                  <div class="addon-pill color-lime" data-addon="Pressure Washing" data-price="165">
-                                    <span class="addon-icon" data-icon="pressure" aria-hidden="true"></span>
-                                    <span class="addon-name">Pressure Washing</span>
-                                    <div class="addon-stepper" role="group" aria-label="Pressure Washing quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Pressure Washing quantity"><span aria-hidden="true">−</span></button>
-                                      <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Pressure Washing quantity">
-                                      <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Pressure Washing quantity"><span aria-hidden="true">+</span></button>
-                                    </div>
-                                  </div>
-                                    <div class="addon-pill color-rose" data-addon="Floor Strip &amp; Wax" data-price="185">
-                                      <span class="addon-icon" data-icon="floor" aria-hidden="true"></span>
-                                      <span class="addon-name">Floor Strip &amp; Wax</span>
-                                      <div class="addon-stepper" role="group" aria-label="Floor Strip and Wax quantity">
-                                        <button type="button" class="stepper-button" data-qty-step="-1" aria-label="Decrease Floor Strip and Wax quantity"><span aria-hidden="true">−</span></button>
-                                        <input class="addon-qty" type="number" min="1" max="10" value="1" aria-label="Floor Strip and Wax quantity">
-                                        <button type="button" class="stepper-button" data-qty-step="1" aria-label="Increase Floor Strip and Wax quantity"><span aria-hidden="true">+</span></button>
-                                      </div>
-                                    </div>
-                                    </div>
-                                  </div>
-              <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
-            </div>
-            </div>
-          </div>
-          <div class="actions">
-            <button type="button" class="btn skip">Skip extras</button>
-            <button type="button" class="btn next">Next</button>
-          </div>
-        </fieldset>
+        
 
-        <fieldset class="step step-frequency" data-step="2" hidden>
+        <fieldset class="step step-frequency" data-step="1">
           <legend>Choose your visit frequency</legend>
           <div class="plans">
             <label class="plan">
@@ -1489,7 +1222,7 @@
               </div>
             </label>
           </div>
-          <p class="muted frequency-note">Your cart on the right keeps a live tally of the package, add-ons, and frequency savings.</p>
+          <p class="muted frequency-note">Your cart on the right keeps a live tally of the package and frequency savings.</p>
           <div class="schedule-calendar" data-schedule-calendar>
             <div class="calendar-top">
               <div class="calendar-heading">
@@ -1532,7 +1265,7 @@
           </div>
         </fieldset>
 
-        <fieldset class="step step-contact" data-step="3" hidden>
+        <fieldset class="step step-contact" data-step="2" hidden>
           <legend>Your contact information</legend>
           <div class="grid-2">
             <label>
@@ -1556,14 +1289,13 @@
               <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
             </label>
           </div>
-          <p id="addon-empty-message" class="addon-empty" hidden>No add-ons are available for the package you selected.</p>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="button" class="btn next">Next</button>
           </div>
         </fieldset>
 
-        <fieldset class="step" data-step="4" hidden>
+        <fieldset class="step" data-step="3" hidden>
           <legend>Review &amp; confirm</legend>
           <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
@@ -1635,6 +1367,38 @@
                   <span class="cart-btn-text">Add to Cart</span>
                 </button>
                 <p class="cart-status" id="cartStatus" role="status" aria-live="polite"></p>
+              </div>
+              <div class="package-info" data-package>
+                <div class="package-details">
+                  <p class="package-lead" data-package-lead>A full-home detailing that leaves every lived-in space ready for life’s next moments.</p>
+                  <p class="package-context" data-package-context hidden></p>
+                  <div class="package-lists">
+                    <section class="package-section">
+                      <h4>What’s included</h4>
+                      <ul class="package-list" data-package-list="included">
+                        <li>Dust &amp; wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.</li>
+                        <li>Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.</li>
+                        <li>Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink &amp; taps; microwave inside &amp; out; cabinet exteriors only.</li>
+                        <li>Bathrooms: toilet (in/out), tub/shower walls &amp; fixtures, mirrors, vanity, sink &amp; taps.</li>
+                        <li>Bedrooms &amp; living areas: make beds (no linen change), general tidy, mirrors &amp; glass accents.</li>
+                        <li>Trash: bag &amp; place at your designated spot.</li>
+                      </ul>
+                    </section>
+                    <section class="package-section">
+                      <h4>Good to know</h4>
+                      <ul class="package-list" data-package-list="good">
+                        <li>Time &amp; team: 1–2 cleaners; duration depends on size/condition.</li>
+                        <li>Supplies: professional, pet-safe products &amp; equipment included.</li>
+                        <li>Guarantee: Not happy? Tell us within 24 hours—we fix it.</li>
+                        <li>Prep: tidy personal items &amp; clear counters where possible for best results.</li>
+                      </ul>
+                      <div class="payment-policy">
+                        <h3>Payment Policy</h3>
+                        <p>A 50% deposit is required at the time of booking to secure your appointment. The remaining balance is due upon completion of the service. Deposits are non-refundable if cancellations occur within 48 hours of the scheduled cleaning.</p>
+                      </div>
+                    </section>
+                  </div>
+                </div>
               </div>
             </aside>
 
@@ -3250,7 +3014,7 @@
 
       function applyCartVisibility(stepIndex){
         if(!formColumnsEl) return;
-        const hide = stepIndex > 1;
+        const hide = false;
         if(cartSummaryEl){
           cartSummaryEl.hidden = hide;
           cartSummaryEl.setAttribute('aria-hidden', hide ? 'true' : 'false');
@@ -3383,7 +3147,7 @@
 
         if(addToCartBtn){
           const hasFrequency = !!freqInput;
-          const canAdd = quoteAvailable && current >= 1 && hasFrequency;
+          const canAdd = quoteAvailable && current >= 0 && hasFrequency;
           addToCartBtn.disabled = cartAdded ? true : !canAdd;
           addToCartBtn.setAttribute('aria-disabled', addToCartBtn.disabled ? 'true' : 'false');
           if(!quoteAvailable){
@@ -3392,7 +3156,7 @@
             }
           } else if(!canAdd){
             if(!cartAdded && cartStatus){
-              if(current >= 1){
+              if(current >= 0){
                 cartStatus.classList.remove('error');
                 cartStatus.textContent = 'Select a visit frequency to add this package to your cart.';
               } else if(cartStatus.textContent === 'Select a visit frequency to add this package to your cart.'){
@@ -3580,7 +3344,7 @@
           return;
         }
         if(event.target.matches('.next')){
-          if(current === 1){
+          if(current === 0){
             if(!quoteAvailable){
               if(cartStatus){
                 cartStatus.classList.add('error');

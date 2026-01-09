@@ -216,147 +216,6 @@
       gap: clamp(14px, 2.2vw, 20px);
     }
 
-    .package-info{
-      border-radius: 28px;
-      border: 1px solid rgba(255, 120, 220, 0.38);
-      background: linear-gradient(135deg, rgba(24, 32, 52, 0.92), rgba(8, 12, 22, 0.88));
-      box-shadow: 0 18px 46px rgba(0,0,0,0.42);
-      overflow: hidden;
-      position: relative;
-      isolation: isolate;
-      animation: floatFade 0.8s ease both;
-    }
-
-    .package-info::after{
-      content: "";
-      position: absolute;
-      inset: auto 12% -60% 12%;
-      height: 80%;
-      border-radius: 40%;
-      background: radial-gradient(circle at center, rgba(255, 144, 220, 0.35), transparent 70%);
-      filter: blur(32px);
-      opacity: 0.6;
-      pointer-events: none;
-      transform: translateY(-12%);
-    }
-
-    .package-info-summary{
-      display: grid;
-      gap: 6px;
-      padding: clamp(18px, 2.6vw, 26px) clamp(20px, 3vw, 32px) clamp(16px, 2.6vw, 24px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .package-info-label{
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-weight: 700;
-      color: #ffb8ec;
-    }
-
-    .package-info-service{
-      margin: 0;
-      font-family: "Bebas Neue", system-ui, sans-serif;
-      font-size: clamp(30px, 5vw, 44px);
-      letter-spacing: 0.08em;
-      color: #f8f2ff;
-    }
-
-    .package-info-description{
-      margin: 0;
-      color: #dbeaff;
-      font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-      line-height: 1.5;
-    }
-
-    .package-details{
-      display: grid;
-      gap: clamp(16px, 2.4vw, 24px);
-      padding: clamp(20px, 2.8vw, 28px) clamp(20px, 3vw, 32px) clamp(28px, 3vw, 34px);
-    }
-
-    .package-lead{
-      margin: 0;
-      font-weight: 600;
-      color: #f8fcff;
-    }
-
-    .package-context{
-      margin: 0;
-      color: #b9d8f2;
-    }
-
-    .package-lists{
-      display: grid;
-      gap: clamp(16px, 2.2vw, 22px);
-    }
-
-    @media (min-width: 860px){
-      .package-lists{
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .package-section{
-      border: 1px solid rgba(154, 212, 255, 0.28);
-      border-radius: 18px;
-      background: rgba(10, 24, 40, 0.72);
-      padding: clamp(14px, 2vw, 20px);
-      display: grid;
-      gap: 12px;
-      box-shadow: 0 14px 32px rgba(0,0,0,0.32);
-    }
-
-    .payment-policy{
-      border-top: 1px dashed rgba(154, 212, 255, 0.25);
-      padding-top: 10px;
-      color: #b9d8f2;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    .payment-policy h3{
-      margin: 0;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: #ffb8ec;
-    }
-
-    .payment-policy p{
-      margin: 6px 0 0;
-    }
-
-    .package-section h4{
-      margin: 0;
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #9ad4ff;
-    }
-
-    .package-list{
-      margin: 0;
-      padding-left: 1.1rem;
-      display: grid;
-      gap: 8px;
-      color: #d9ecff;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .package-list li::marker{
-      color: #4cc3ff;
-    }
-
-    @media (min-width: 960px){
-      .package-info{
-        position: sticky;
-        top: clamp(24px, 3.4vw, 42px);
-      }
-    }
-
     @media (min-width: 1100px){
       .step-extras-content{
         max-height: clamp(520px, 68vh, 760px);
@@ -905,29 +764,6 @@
     }
 
     .cart-status.error{ color: #ff6b9a; }
-
-    .payment-policy{
-      margin: 4px 0 0;
-      padding: clamp(10px, 1.5vw, 14px);
-      border-radius: 12px;
-      border: 1px solid rgba(154,212,255,0.28);
-      background: linear-gradient(180deg, rgba(76,195,255,0.12), rgba(255,79,195,0.08));
-      color: #d9ecff;
-      font-size: 0.92rem;
-      line-height: 1.55;
-      display: grid;
-      gap: 6px;
-    }
-
-    .payment-policy h3{
-      margin: 0;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #e5f9ff;
-    }
-
-    .payment-policy p{ margin: 0; }
 
     .grid-2{ display: grid; gap: 14px; grid-template-columns: 1fr; }
     .grid-2 .wide{ grid-column: 1 / -1; }
@@ -1818,13 +1654,6 @@
       const summaryColumnEl = document.getElementById('summaryColumn');
       const cartSummaryTitle = document.querySelector('.cart-summary-title');
       const cartSummaryImage = document.getElementById('cartSummaryImage');
-      const packageInfo = document.querySelector('[data-package]');
-      const packageServiceHeading = document.querySelector('[data-package-service]');
-      const packageDescription = document.querySelector('[data-package-description]');
-      const packageLead = document.querySelector('[data-package-lead]');
-      const packageContext = document.querySelector('[data-package-context]');
-      const packageIncludedList = document.querySelector('[data-package-list="included"]');
-      const packageGoodList = document.querySelector('[data-package-list="good"]');
       const formColumnsEl = document.querySelector('.form-columns');
       const navCartButton = document.querySelector('[data-cart-toggle]');
       const navPayPalContainer = document.getElementById('nav-paypal-buttons');
@@ -1906,18 +1735,6 @@
       function formatDateHumanFromInput(value){
         const parsed = parseInputDate(value);
         return parsed ? formatDateLong(parsed) : '—';
-      }
-
-      function renderPackageList(target, items){
-        if(!target) return;
-        const hasItems = Array.isArray(items) && items.length > 0;
-        if(!hasItems){
-          target.innerHTML = '';
-          target.hidden = true;
-          return;
-        }
-        target.innerHTML = items.map(item => `<li>${escapeHtml(item)}</li>`).join('');
-        target.hidden = false;
       }
 
       function frequencyIntervalDays(){
@@ -2227,72 +2044,6 @@
         commercial: 'Commercial Cleaning Package',
         office: 'Office Cleaning Package'
       };
-      const SERVICE_DESCRIPTIONS = {
-        home: 'Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.',
-        commercial: 'Ideal for light-industrial units and warehouses with attached offices—covers production aisles, loading zones, staff areas, and restrooms with safety-first detailing.',
-        office: 'Professional office upkeep that dusts workstations, refreshes conference rooms, polishes reception areas, and tidies shared kitchens for a productive team.',
-        default: 'Signature cleaning tailored to your property with meticulous dusting, disinfected touchpoints, and a polished finish guests will notice.'
-      };
-      const PACKAGE_COPY = {
-        home: {
-          lead: 'A full-home detailing that leaves every lived-in space ready for life’s next moments.',
-          context: '',
-          included: [
-            'Dust & wipe surfaces: furniture tops, shelves, décor (reachable), baseboards (light), window sills, door handles, light switches.',
-            'Floors: full vacuum of carpets/rugs; vacuum + mop hard floors.',
-            'Kitchen: exterior wipe of appliances (fridge/oven/dishwasher), stovetop, counters, sink & taps; microwave inside & out; cabinet exteriors only.',
-            'Bathrooms: toilet (in/out), tub/shower walls & fixtures, mirrors, vanity, sink & taps.',
-            'Bedrooms & living areas: make beds (no linen change), general tidy, mirrors & glass accents.',
-            'Trash: bag & place at your designated spot.'
-          ],
-          goodToKnow: [
-            'Time & team: 1–2 cleaners; duration depends on size/condition.',
-            'Supplies: professional, pet-safe products & equipment included.',
-            'Guarantee: Not happy? Tell us within 24 hours—we fix it.',
-            'Prep: tidy personal items & clear counters where possible for best results.'
-          ]
-        },
-        commercial: {
-          lead: 'Ideal for: light-industrial units, warehouses, workshops, production floors with attached offices/breakrooms.',
-          context: 'Zones covered: production floor (light service), aisles/walkways, loading areas (indoors), attached offices, lunchroom, restrooms, locker/change areas.',
-          included: [
-            'High-touch points: door hardware, switches, railings, time clocks, shared equipment controls (dry wipe/disinfect—non-invasive).',
-            'Dust & wipe (reachable): ledges, window sills, benches/tables in non-process zones, safety rails/guarding (wipe-down only).',
-            'Floors: machine-safe sweep/vac of debris in aisles; damp mop or auto-scrub where suitable and safe (client to identify exclusions).',
-            'Office/lunchroom/restrooms: as per office standards—surfaces, exteriors of appliances, sinks/taps, toilets/urinals, mirrors, bin service.',
-            'Bins & cardboard: collect, bag, and stage at designated point (no compactor operation).'
-          ],
-          goodToKnow: [
-            'Not included (base): Inside machinery, degreasing/heavy oil removal, confined spaces, heights >10 ft, line shutdown/lockout work, hazardous waste, post-construction debris, epoxy/strip-and-wax, exterior yard/parking lots, interior window tracks beyond spot-clean.',
-            'Safety first: we follow site PPE rules; client provides hazard disclosures and restricted zones.',
-            'Scheduling: off-hours/shift-change service available to minimize downtime.',
-            'Equipment: commercial vacs/mops/auto-scrubber (if site-approved power/water access).'
-          ]
-        },
-        office: {
-          lead: 'Professional upkeep that keeps meeting rooms, workstations, and common areas guest-ready every visit.',
-          context: '',
-          included: [
-            'Dust workstations, conference tables, and reception surfaces (reachable).',
-            'Vacuum carpets and rugs; mop hard floors with commercial-safe solutions.',
-            'Refresh reception and break areas—wipe counters, appliance exteriors, sinks & taps.',
-            'Restock and sanitize restrooms: toilets/urinals, partitions, mirrors, fixtures.',
-            'Empty bins and recycling; reliner service included.'
-          ],
-          goodToKnow: [
-            'Team size scales with office footprint and traffic patterns.',
-            'Eco-forward supplies included; let us know about sensitive surfaces in advance.',
-            'Flexible scheduling for after-hours or staggered teams.',
-            'Prep: please clear confidential paperwork and power down equipment where possible.'
-          ]
-        },
-        default: {
-          lead: 'Signature cleaning tailored to your property with meticulous dusting, disinfected touchpoints, and a polished finish guests will notice.',
-          context: '',
-          included: [],
-          goodToKnow: []
-        }
-      };
       const BASE_PRICE_TABLE = {
         home: {
           '1000-1500': 165,
@@ -2468,56 +2219,8 @@
 
       const resolvedServiceLabel = rawServiceLabel || SERVICE_LABELS[serviceKey] || DEFAULT_SERVICE_LABEL;
       const resolvedSqftLabel = formatSqftLabel(rawSqftLabel, sqftKey);
-      const serviceDescription = SERVICE_DESCRIPTIONS[serviceKey] || SERVICE_DESCRIPTIONS.default;
-
       const hasServiceSelection = !!(serviceKey || rawServiceLabel);
 
-      if(packageServiceHeading){
-        packageServiceHeading.textContent = resolvedServiceLabel;
-      }
-      if(packageDescription){
-        if(serviceDescription){
-          packageDescription.textContent = serviceDescription;
-          packageDescription.hidden = false;
-        } else {
-          packageDescription.textContent = '';
-          packageDescription.hidden = true;
-        }
-      }
-      const fallbackPackageCopy = PACKAGE_COPY.home || PACKAGE_COPY.default;
-      const activePackageCopy = (serviceKey && PACKAGE_COPY[serviceKey]) || fallbackPackageCopy;
-      if(packageLead && activePackageCopy){
-        const leadText = activePackageCopy.lead || (fallbackPackageCopy && fallbackPackageCopy.lead) || '';
-        if(leadText){
-          packageLead.textContent = leadText;
-          packageLead.hidden = false;
-        } else {
-          packageLead.textContent = '';
-          packageLead.hidden = true;
-        }
-      }
-      if(packageContext){
-        const contextText = (activePackageCopy && activePackageCopy.context) || '';
-        if(contextText){
-          packageContext.textContent = contextText;
-          packageContext.hidden = false;
-        } else {
-          packageContext.textContent = '';
-          packageContext.hidden = true;
-        }
-      }
-      renderPackageList(
-        packageIncludedList,
-        (activePackageCopy && activePackageCopy.included && activePackageCopy.included.length)
-          ? activePackageCopy.included
-          : (fallbackPackageCopy && fallbackPackageCopy.included)
-      );
-      renderPackageList(
-        packageGoodList,
-        (activePackageCopy && activePackageCopy.goodToKnow && activePackageCopy.goodToKnow.length)
-          ? activePackageCopy.goodToKnow
-          : (fallbackPackageCopy && fallbackPackageCopy.goodToKnow)
-      );
       if(cartSummaryTitle){
         cartSummaryTitle.textContent = resolvedServiceLabel;
       }

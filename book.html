@@ -26,11 +26,7 @@
       --overlay-c: rgba(0,0,0,0.90);
     }
 
-    html, body {
-      min-height: 100%;
-      background:#000;
-      overflow: hidden;
-    }
+    html, body { min-height: 100%; background:#000; }
     body {
       color: #f2f5f8;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -172,7 +168,7 @@
       width: min(100%, 1820px);
       background: rgba(10, 12, 16, 0.72);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 64px;
+      border-radius: 44px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.45);
       backdrop-filter: blur(8px);
       overflow: visible;
@@ -203,8 +199,8 @@
       display: grid;
       gap: clamp(20px, 3.2vw, 32px);
       min-width: 0;
-      max-width: 1040px;
-      padding-bottom: clamp(24px, 4vw, 48px);
+      max-width: 860px;
+      padding-bottom: clamp(90px, 16vw, 140px);
     }
     .form-steps > *{
       min-width: 0;
@@ -899,7 +895,7 @@
       }
     }
     @media (min-width: 960px){
-      .form-steps{ max-width: 1120px; }
+      .form-steps{ max-width: 940px; }
     }
     @media (min-width: 1120px){
       .form-columns{

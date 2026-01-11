@@ -26,7 +26,11 @@
       --overlay-c: rgba(0,0,0,0.90);
     }
 
-    html, body { min-height: 100%; background:#000; }
+    html, body {
+      min-height: 100%;
+      background:#000;
+      overflow: hidden;
+    }
     body {
       color: #f2f5f8;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -114,17 +118,15 @@
     .booking{
       max-width: min(98vw, 1820px);
       margin: 0 auto;
-      padding: clamp(24px, 4.2vw, 56px);
-    }
-    .booking-title{
-      font-family: "Bebas Neue", system-ui, sans-serif;
-      font-size: clamp(36px, 6vw, 72px);
-      letter-spacing: 1px;
-      margin: 10px 0 18px;
-      text-transform: lowercase;
+      padding: clamp(14px, 2.8vw, 36px) clamp(24px, 4.2vw, 56px) clamp(24px, 4.2vw, 56px);
     }
 
-    .stepper-wrap{ width: 100%; display:flex; justify-content:center; }
+    .stepper-wrap{
+      width: 100%;
+      display:flex;
+      justify-content:center;
+      margin-top: 4px;
+    }
     .stepper{
       list-style: none; padding: 12px; margin: 0;
       width: min(100%, 1080px);
@@ -168,7 +170,7 @@
       width: min(100%, 1820px);
       background: rgba(10, 12, 16, 0.72);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 44px;
+      border-radius: 64px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.45);
       backdrop-filter: blur(8px);
       overflow: visible;
@@ -199,8 +201,8 @@
       display: grid;
       gap: clamp(20px, 3.2vw, 32px);
       min-width: 0;
-      max-width: 860px;
-      padding-bottom: clamp(90px, 16vw, 140px);
+      max-width: 1040px;
+      padding-bottom: clamp(24px, 4vw, 48px);
     }
     .form-steps > *{
       min-width: 0;
@@ -597,7 +599,7 @@
       align-self: start;
       align-content: start;
       justify-self: end;
-      max-width: min(100%, 480px);
+      max-width: min(100%, 420px);
       margin-top: 0;
     }
     .summary-column[hidden]{
@@ -608,14 +610,14 @@
     }
     .cart-summary{
       background: rgba(7, 18, 32, 0.74);
-      border: 1px solid rgba(255, 120, 220, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.32);
       border-radius: 26px;
-      padding: clamp(14px, 2vw, 20px);
+      padding: clamp(12px, 1.6vw, 18px);
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
       display: grid;
       gap: clamp(10px, 1.6vw, 16px);
       width: 100%;
-      max-width: 380px;
+      max-width: 340px;
       min-width: 0;
       margin: 0;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -624,8 +626,8 @@
     .cart-summary.cart-summary-empty .cart-pricing .cart-line span:last-child{ color: rgba(214, 238, 255, 0.6); }
 
     .cart-summary.is-added{
-      border-color: rgba(255, 140, 220, 0.6);
-      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(255, 140, 220, 0.18);
+      border-color: rgba(255, 255, 255, 0.65);
+      box-shadow: 0 20px 46px rgba(0,0,0,0.45), 0 0 0 2px rgba(255, 255, 255, 0.18);
       opacity: 0.96;
     }
 
@@ -859,11 +861,92 @@
     .review dt{ font-weight: 700; color: #b6c2cf; }
     .review dd{ margin: 0 0 10px; }
 
+    .payment-section{
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .payment-section h3{
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e9f7ff;
+    }
+
+    .payment-options{
+      display: grid;
+      gap: 12px;
+    }
+
+    .payment-option{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(7, 18, 32, 0.62);
+      cursor: pointer;
+    }
+
+    .payment-option input{
+      accent-color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .payment-label{
+      font-weight: 600;
+      color: #f3f7fb;
+    }
+
+    .card-logos{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-logo{
+      width: 46px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-logo svg{
+      width: 36px;
+      height: 18px;
+      display: block;
+    }
+
+    .payment-ui{
+      border-radius: 16px;
+      border: 1px dashed rgba(255,255,255,0.2);
+      padding: 12px;
+      background: rgba(5, 14, 24, 0.6);
+    }
+
+    .paypal-status{
+      margin: 8px 0 0;
+      font-size: 0.9rem;
+      color: #b6c2cf;
+    }
+
+    .paypal-status.error{
+      color: #ff6b9a;
+    }
+
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
 
     @media (min-width: 780px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.2fr) minmax(360px, 1fr);
+        grid-template-columns: minmax(0, 2.4fr) minmax(320px, 0.85fr);
         gap: clamp(52px, 6.4vw, 88px);
         align-items: start;
       }
@@ -884,7 +967,7 @@
         padding-right: 4px;
         align-content: start;
         gap: clamp(18px, 2.8vw, 26px);
-        width: min(100%, 460px);
+        width: min(100%, 420px);
       }
       .summary-column .cart-summary{
         position: static;
@@ -895,16 +978,16 @@
       }
     }
     @media (min-width: 960px){
-      .form-steps{ max-width: 940px; }
+      .form-steps{ max-width: 1120px; }
     }
     @media (min-width: 1120px){
       .form-columns{
-        grid-template-columns: minmax(0, 2.4fr) minmax(440px, 1fr);
+        grid-template-columns: minmax(0, 2.6fr) minmax(360px, 0.85fr);
         gap: clamp(66px, 7vw, 112px);
       }
       .plans{ grid-template-columns: repeat(3, minmax(260px, 1fr)); }
       .summary-column{
-        max-width: 480px;
+        max-width: 420px;
       }
     }
 
@@ -965,8 +1048,6 @@
   </aside>
 
   <section class="booking" id="start">
-    <h1 class="booking-title">book online</h1>
-
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
         <li class="active">1. schedule &amp; frequency</li>
@@ -1135,6 +1216,38 @@
           <legend>Review &amp; confirm</legend>
           <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
+          <div class="payment-section">
+            <h3>Payment method</h3>
+            <div class="payment-options">
+              <label class="payment-option">
+                <span class="payment-label">PayPal</span>
+                <input type="radio" name="payment_method" value="paypal" />
+              </label>
+              <label class="payment-option">
+                <span class="payment-label">Debit / Credit</span>
+                <span class="card-logos" aria-hidden="true">
+                  <span class="card-logo">
+                    <svg viewBox="0 0 64 32" role="presentation" focusable="false" aria-hidden="true">
+                      <rect x="0" y="0" width="64" height="32" rx="6" fill="#1a3df0"/>
+                      <text x="32" y="21" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700" fill="#ffffff">VISA</text>
+                    </svg>
+                  </span>
+                  <span class="card-logo">
+                    <svg viewBox="0 0 64 32" role="presentation" focusable="false" aria-hidden="true">
+                      <rect x="0" y="0" width="64" height="32" rx="6" fill="#111827"/>
+                      <circle cx="26" cy="16" r="10" fill="#ff5f00"/>
+                      <circle cx="38" cy="16" r="10" fill="#eb001b" opacity="0.9"/>
+                    </svg>
+                  </span>
+                </span>
+                <input type="radio" name="payment_method" value="card" checked />
+              </label>
+            </div>
+            <div class="payment-ui" data-payment-ui="paypal" hidden>
+              <div id="paypal-buttons"></div>
+              <p class="paypal-status" id="paypal-status" role="status" aria-live="polite"></p>
+            </div>
+          </div>
           <div class="actions">
             <button type="button" class="btn back">Back</button>
             <button type="submit" class="btn submit">Submit</button>

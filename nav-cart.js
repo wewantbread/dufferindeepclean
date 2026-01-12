@@ -68,8 +68,6 @@
     const detailList = navPopover.querySelector('[data-popover-details]');
     const totalsEl = navPopover.querySelector('[data-popover-totals]');
     const totalValue = navPopover.querySelector('[data-popover-total]');
-    const depositValue = navPopover.querySelector('[data-popover-deposit]');
-    const balanceValue = navPopover.querySelector('[data-popover-balance]');
     const paymentsEl = navPopover.querySelector('[data-popover-payments]');
     const statusEl = navPopover.querySelector('[data-popover-status]');
     const closeBtn = navPopover.querySelector('[data-cart-close]');
@@ -210,13 +208,11 @@
         totalsEl.hidden = !hasItem;
         if(hasItem){
           if(totalValue){ totalValue.textContent = formatCurrency(state.total); }
-          if(depositValue){ depositValue.textContent = formatCurrency(state.deposit); }
-          if(balanceValue){ balanceValue.textContent = formatCurrency(state.balance); }
         }
       }
 
       if(paymentsEl){
-        const showPayments = hasItem && state.deposit && state.deposit > 0;
+        const showPayments = hasItem && state.total && state.total > 0;
         paymentsEl.hidden = !showPayments;
         if(googleBtn){
           googleBtn.disabled = !showPayments;

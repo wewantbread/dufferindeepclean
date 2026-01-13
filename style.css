@@ -918,6 +918,20 @@ h1, h2, h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   max-width: none;
   width: 100%;
+  position: relative;
+  isolation: isolate;
+}
+
+.addon-group--services::before {
+  content: "";
+  position: absolute;
+  inset: -18% -8%;
+  background: radial-gradient(circle at 50% 45%, rgba(255, 140, 220, 0.18), transparent 58%),
+              radial-gradient(circle at 40% 60%, rgba(120, 220, 255, 0.16), transparent 60%);
+  filter: blur(18px);
+  opacity: 0.75;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .addon-pill {
@@ -934,6 +948,7 @@ h1, h2, h3 {
   cursor: pointer;
   transition: transform 0.25s ease;
   overflow: visible;
+  z-index: 1;
 }
 
 .addon-pill--media {
@@ -961,13 +976,11 @@ h1, h2, h3 {
 .addon-thumb::before {
   content: "";
   position: absolute;
-  inset: -10% -6%;
+  inset: -12% -8%;
   border-radius: 22px;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.2), transparent 45%),
-              radial-gradient(circle at 80% 30%, rgba(120, 220, 255, 0.15), transparent 48%),
-              radial-gradient(circle at 50% 80%, rgba(255, 140, 220, 0.18), transparent 52%);
-  opacity: 0.55;
-  filter: blur(10px);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.12), transparent 62%);
+  opacity: 0.3;
+  filter: blur(18px);
   transition: opacity 0.4s ease, transform 0.4s ease;
   z-index: 0;
 }
@@ -978,7 +991,7 @@ h1, h2, h3 {
   object-fit: contain;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 0 16px rgba(255, 140, 220, 0.35));
+  filter: drop-shadow(0 0 24px rgba(255, 140, 220, 0.25));
   transition: transform 0.4s ease;
 }
 
@@ -1035,8 +1048,8 @@ h1, h2, h3 {
 
 .addon-pill--media:hover .addon-thumb::before,
 .addon-pill--media:focus-visible .addon-thumb::before {
-  opacity: 0.85;
-  transform: scale(1.03);
+  opacity: 0.5;
+  transform: scale(1.05);
 }
 
 .addon-pill--media:hover .addon-thumb img,

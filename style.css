@@ -916,7 +916,7 @@ h1, h2, h3 {
 
 .addon-group--services {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  max-width: 980px;
+  max-width: 960px;
 }
 
 .addon-pill {
@@ -939,8 +939,8 @@ h1, h2, h3 {
   flex-direction: column;
   align-items: stretch;
   gap: 0.6rem;
-  padding: 0.2rem 0.2rem 0.6rem;
-  min-height: 220px;
+  padding: 0.2rem 0.1rem 0.4rem;
+  min-height: 200px;
   animation: addonFadeIn 0.6s ease both;
   animation-delay: var(--delay, 0s);
 }
@@ -954,6 +954,7 @@ h1, h2, h3 {
   display: grid;
   place-items: center;
   position: relative;
+  box-shadow: none;
 }
 
 .addon-thumb::before {
@@ -972,7 +973,7 @@ h1, h2, h3 {
 
 .addon-thumb img {
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: contain;
   position: relative;
   z-index: 1;
@@ -986,6 +987,7 @@ h1, h2, h3 {
   letter-spacing: 0.4rem;
   color: rgba(207, 235, 255, 0.65);
   text-transform: uppercase;
+  margin-top: 0.1rem;
 }
 
 .addon-details {
@@ -1229,6 +1231,27 @@ h1, h2, h3 {
 .addon-pill.color-lavender { background: linear-gradient(135deg, rgba(215, 177, 255, 0.35), rgba(10, 30, 48, 0.7)); }
 .addon-pill.color-crimson { background: linear-gradient(135deg, rgba(255, 134, 134, 0.35), rgba(10, 30, 48, 0.7)); }
 .addon-pill.color-emerald { background: linear-gradient(135deg, rgba(134, 255, 184, 0.35), rgba(10, 30, 48, 0.7)); }
+
+.addon-pill--media.color-cyan,
+.addon-pill--media.color-lime,
+.addon-pill--media.color-magenta,
+.addon-pill--media.color-orange,
+.addon-pill--media.color-indigo,
+.addon-pill--media.color-gold,
+.addon-pill--media.color-sky,
+.addon-pill--media.color-rose,
+.addon-pill--media.color-mint,
+.addon-pill--media.color-teal,
+.addon-pill--media.color-plum,
+.addon-pill--media.color-azure,
+.addon-pill--media.color-amber,
+.addon-pill--media.color-blue,
+.addon-pill--media.color-lavender,
+.addon-pill--media.color-crimson,
+.addon-pill--media.color-emerald {
+  background: transparent;
+  box-shadow: none;
+}
 
 @media (max-width: 768px) {
   .hero-quote {

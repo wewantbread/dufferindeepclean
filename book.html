@@ -139,7 +139,7 @@
       text-transform: lowercase;
     }
     .stepper li{
-      padding: 14px 12px; text-align: center; border-radius: 12px;
+      padding: 14px 12px; text-align: center; border-radius: 18px;
       font-weight: 600; color: #b6c2cf;
       border: 1px dashed rgba(255,255,255,0.12);
       transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
@@ -160,8 +160,8 @@
     .stepper li.active{
       color: #fff;
       background: linear-gradient(180deg, #ff90dc, #ff4fc3);
-      border-color: rgba(255, 128, 210, 0.7);
-      box-shadow: 0 12px 28px rgba(255, 110, 205, 0.25);
+      border-color: rgba(255, 128, 210, 0.5);
+      box-shadow: 0 18px 40px rgba(255, 110, 205, 0.25), 0 0 24px rgba(255, 140, 220, 0.35);
       transform: translateY(-1px);
     }
 
@@ -216,6 +216,7 @@
     .step-extras-content{
       display: grid;
       gap: clamp(14px, 2.2vw, 20px);
+      width: 100%;
     }
 
     @media (min-width: 1100px){
@@ -820,21 +821,19 @@
       font-weight: 800; border-radius: 12px; padding: 10px 16px; cursor: pointer;
     }
     .btn.next{
-      background: linear-gradient(135deg, #ff9adb, #ff4fc3);
-      color: #fff;
-      border-color: rgba(255,255,255,0.18);
-      position: fixed;
-      right: clamp(16px, 4vw, 48px);
-      bottom: clamp(20px, 5vw, 52px);
-      padding: clamp(12px, 2.6vw, 18px) clamp(28px, 5vw, 40px);
-      border-radius: 999px;
-      box-shadow: 0 22px 50px rgba(255, 79, 195, 0.32);
-      z-index: 980;
+      background: rgba(255,255,255,0.06);
+      color: #f2f5f8;
+      border-color: rgba(255,255,255,0.08);
+      position: static;
+      padding: 10px 16px;
+      border-radius: 12px;
+      box-shadow: none;
+      z-index: auto;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .btn.next:hover{
       transform: translateY(-2px);
-      box-shadow: 0 28px 58px rgba(255, 79, 195, 0.42);
+      box-shadow: none;
     }
     .btn.next:disabled{
       opacity: 0.6;
@@ -1036,8 +1035,6 @@
       <dl class="cart-popover-details" data-popover-details hidden></dl>
       <div class="cart-popover-totals" data-popover-totals hidden>
         <div><span>Visit total</span><span data-popover-total>—</span></div>
-        <div><span>Deposit (50%)</span><span data-popover-deposit>—</span></div>
-        <div><span>Balance</span><span data-popover-balance>—</span></div>
       </div>
       <div class="cart-popover-payments" data-popover-payments hidden>
         <div id="nav-paypal-buttons" data-paypal-container="nav"></div>
@@ -1050,9 +1047,10 @@
   <section class="booking" id="start">
     <div class="stepper-wrap">
       <ol class="stepper" id="stepper">
-        <li class="active">1. schedule &amp; frequency</li>
-        <li>2. your details</li>
-        <li>3. review &amp; confirm</li>
+        <li class="active" data-stepper-label="schedule &amp; frequency">1. schedule &amp; frequency</li>
+        <li data-stepper-label="optional services" data-stepper-optional>2. optional services</li>
+        <li data-stepper-label="your details">3. your details</li>
+        <li data-stepper-label="review &amp; confirm">4. review &amp; confirm</li>
       </ol>
     </div>
 
@@ -1068,8 +1066,6 @@
           <input type="hidden" name="service_detail_price" id="input-detail-price">
           <input type="hidden" name="addons_price" id="input-addons-price">
           <input type="hidden" name="frequency_savings" id="input-discount-price">
-          <input type="hidden" name="deposit_due" id="input-deposit-price">
-          <input type="hidden" name="balance_due" id="input-balance-price">
           <input type="hidden" name="final_visit_total" id="input-total-price">
           <input type="hidden" name="selected_addons" id="input-selected-addons">
           <input type="hidden" name="origin_quote" id="input-origin" value="">
@@ -1182,7 +1178,184 @@
           </div>
         </fieldset>
 
-        <fieldset class="step step-contact" data-step="2" hidden>
+        <fieldset class="step step-extras" data-step="2" data-step-optional hidden>
+          <legend>Optional services <span class="legend-note">Add-ons are available for the house cleaning package.</span></legend>
+          <div class="step-extras-layout">
+            <div class="step-extras-content">
+              <div class="addon-groups">
+                <div class="addon-group addon-group--services" data-service-group="home">
+                  <button type="button" class="addon-pill addon-pill--media color-cyan" data-addon="Cabinet cleaning" data-price="25" style="--delay: 0s;">
+                    <span class="addon-thumb">
+                      <img src="cabinet.png" alt="Cabinet cleaning add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Cabinet cleaning</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$25 base</span>
+                        <span class="addon-desc">Exterior wipe-down</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-mint" data-addon="Baseboard detailing" data-price="20" style="--delay: 0.05s;">
+                    <span class="addon-thumb">
+                      <img src="baseboards.png" alt="Baseboard detailing add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Baseboard detailing</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$20 base</span>
+                        <span class="addon-desc">Dust + shine</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-lavender" data-addon="Refrigerator refresh" data-price="30" style="--delay: 0.1s;">
+                    <span class="addon-thumb">
+                      <img src="refrigerator.png" alt="Refrigerator refresh add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Refrigerator refresh</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$30 base</span>
+                        <span class="addon-desc">Shelves + handles</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-amber" data-addon="Appliance polish" data-price="40" style="--delay: 0.15s;">
+                    <span class="addon-thumb">
+                      <img src="appliances.png" alt="Appliance polish add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Appliance polish</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$40 base</span>
+                        <span class="addon-desc">Stainless shine</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-rose" data-addon="Oven deep clean" data-price="35" style="--delay: 0.2s;">
+                    <span class="addon-thumb">
+                      <img src="oven.png" alt="Oven deep clean add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Oven deep clean</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$35 base</span>
+                        <span class="addon-desc">Inside + glass</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-sky" data-addon="Window detailing" data-price="35" style="--delay: 0.25s;">
+                    <span class="addon-thumb">
+                      <img src="window.png" alt="Window detailing add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Window detailing</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$35 base</span>
+                        <span class="addon-desc">Interior glass</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-indigo" data-addon="Stove deep clean" data-price="35" style="--delay: 0.3s;">
+                    <span class="addon-thumb">
+                      <img src="stove.png" alt="Stove deep clean add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Stove deep clean</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$35 base</span>
+                        <span class="addon-desc">Surface + burners</span>
+                      </span>
+                    </span>
+                  </button>
+                  <button type="button" class="addon-pill addon-pill--media color-teal" data-addon="Laundry refresh" data-price="30" style="--delay: 0.35s;">
+                    <span class="addon-thumb">
+                      <img src="laundry.png" alt="Laundry refresh add-on" loading="lazy">
+                    </span>
+                    <span class="addon-controls">
+                      <span class="addon-qty-display" data-qty-display>0</span>
+                      <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                      <span class="addon-control-buttons">
+                        <button type="button" class="addon-control" data-qty-step="-1">−</button>
+                        <button type="button" class="addon-control" data-qty-step="1">+</button>
+                      </span>
+                    </span>
+                    <span class="addon-details">
+                      <span class="addon-name">Laundry refresh</span>
+                      <span class="addon-meta">
+                        <span class="addon-price">$30 base</span>
+                        <span class="addon-desc">Washer + dryer</span>
+                      </span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <p class="addon-empty" id="addon-empty-message" hidden>Optional services are only available for the house cleaning package.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn back">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="step step-contact" data-step="3" hidden>
           <legend>Your contact information</legend>
           <div class="grid-2">
             <label>
@@ -1212,7 +1385,7 @@
           </div>
         </fieldset>
 
-        <fieldset class="step" data-step="3" hidden>
+        <fieldset class="step" data-step="4" hidden>
           <legend>Review &amp; confirm</legend>
           <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
@@ -1287,14 +1460,6 @@
                   <div class="cart-line total">
                     <span>Visit total</span>
                     <span data-recap-total>—</span>
-                  </div>
-                  <div class="cart-line deposit">
-                    <span>Deposit (50%)</span>
-                    <span id="deposit-due-text">—</span>
-                  </div>
-                  <div class="cart-line balance">
-                    <span>Balance at service</span>
-                    <span id="balance-due-text">—</span>
                   </div>
                 </div>
                 <div class="cart-schedule" id="cartSchedule" hidden aria-live="polite">
@@ -1655,8 +1820,8 @@
       const form = document.getElementById('bookingForm');
       if(!form) return;
 
-      const steps = Array.from(form.querySelectorAll('.step'));
-      const stepper = Array.from(document.getElementById('stepper').children || []);
+      let steps = Array.from(form.querySelectorAll('.step'));
+      let stepper = Array.from(document.getElementById('stepper').children || []);
       const reviewList = document.getElementById('reviewList');
       const successEl = document.getElementById('bookingSuccess');
       const layoutEl = document.getElementById('bookingLayout');
@@ -1671,8 +1836,6 @@
       const hiddenDetailPrice = document.getElementById('input-detail-price');
       const hiddenAddonsPrice = document.getElementById('input-addons-price');
       const hiddenDiscountPrice = document.getElementById('input-discount-price');
-      const hiddenDepositPrice = document.getElementById('input-deposit-price');
-      const hiddenBalancePrice = document.getElementById('input-balance-price');
       const hiddenTotalPrice = document.getElementById('input-total-price');
       const hiddenSelectedAddons = document.getElementById('input-selected-addons');
       const hiddenPackage = document.getElementById('input-package');
@@ -1720,8 +1883,6 @@
       const hiddenFullName = document.getElementById('input-full-name');
       const originField = document.getElementById('input-origin');
 
-      const depositText = document.getElementById('deposit-due-text');
-      const balanceText = document.getElementById('balance-due-text');
       const submitBtn = form.querySelector('.submit');
 
       const recapBase = document.querySelector('[data-recap-base]');
@@ -2084,7 +2245,6 @@
         PAYPAL_CONTEXTS.nav = { container: navPayPalContainer, status: navPayPalStatus };
       }
 
-      const DEPOSIT_RATE = 0.5;
       const PAYPAL_CURRENCY = ((document.body && document.body.dataset && document.body.dataset.paypalCurrency) || 'CAD').toUpperCase();
       const FREQUENCY_LABELS = {
         weekly: 'Weekly (25% off)',
@@ -2100,23 +2260,6 @@
       let paypalApprovedAmount = 0;
       let paypalScriptPromise = null;
       let current = 0;
-      stepper.forEach((item, idx) => {
-        item.dataset.stepIndex = String(idx);
-        item.setAttribute('role', 'button');
-        item.tabIndex = idx === 0 ? 0 : -1;
-        item.setAttribute('aria-disabled', idx === 0 ? 'false' : 'true');
-        item.addEventListener('click', () => {
-          if(idx <= current){
-            showStep(idx);
-          }
-        });
-        item.addEventListener('keydown', (event) => {
-          if((event.key === 'Enter' || event.key === ' ') && idx <= current){
-            event.preventDefault();
-            showStep(idx);
-          }
-        });
-      });
       let cartAdded = false;
       let autoAddAfterSkip = false;
       let lastCartSignature = '';
@@ -2179,6 +2322,37 @@
       let detailPrice = Number(params.get('detailPrice') || 0);
       const totalParam = Number(params.get('total') || 0);
       let totalBase = 0;
+
+      const showOptionalServices = serviceKey === 'home';
+      const optionalStep = form.querySelector('[data-step-optional]');
+      const optionalStepperItem = document.querySelector('[data-stepper-optional]');
+      if(!showOptionalServices){
+        if(optionalStep){ optionalStep.remove(); }
+        if(optionalStepperItem){ optionalStepperItem.remove(); }
+      }
+
+      steps = Array.from(form.querySelectorAll('.step'));
+      stepper = Array.from(document.getElementById('stepper').children || []);
+      stepper.forEach((item, idx) => {
+        if(item.dataset.stepperLabel){
+          item.textContent = `${idx + 1}. ${item.dataset.stepperLabel}`;
+        }
+        item.dataset.stepIndex = String(idx);
+        item.setAttribute('role', 'button');
+        item.tabIndex = idx === 0 ? 0 : -1;
+        item.setAttribute('aria-disabled', idx === 0 ? 'false' : 'true');
+        item.addEventListener('click', () => {
+          if(idx <= current){
+            showStep(idx);
+          }
+        });
+        item.addEventListener('keydown', (event) => {
+          if((event.key === 'Enter' || event.key === ' ') && idx <= current){
+            event.preventDefault();
+            showStep(idx);
+          }
+        });
+      });
 
       function formatSqftLabel(label, key){
         if(label) return label;
@@ -2514,9 +2688,8 @@
         addonPills.forEach(pill => {
           const parent = pill.closest('.addon-group');
           if(!parent || !parent.classList.contains('active')) return;
-          if(!pill.classList.contains('active')) return;
-          const qtyInput = pill.querySelector('.addon-qty');
-          const qty = qtyInput ? Math.max(Number(qtyInput.value) || 1, Number(qtyInput.min) || 1) : 1;
+          const qty = Number(pill.dataset.qty || 0);
+          if(!(qty > 0)) return;
           const price = Number(pill.dataset.price || 0);
           const name = pill.querySelector('.addon-name')?.textContent.trim() || pill.dataset.addon || 'Addon';
           extrasState.push({ name, qty, price });
@@ -2528,13 +2701,9 @@
         addonPills.forEach(pill => {
           pill.classList.remove('active');
           pill.setAttribute('aria-pressed', 'false');
-          const qtyInput = pill.querySelector('.addon-qty');
-          if(qtyInput){
-            qtyInput.disabled = true;
-            if(qtyInput.min){
-              qtyInput.value = qtyInput.min;
-            }
-          }
+          pill.dataset.qty = '0';
+          const qtyDisplay = pill.querySelector('[data-qty-display]');
+          if(qtyDisplay){ qtyDisplay.textContent = '0'; }
         });
         updateSummary();
       }
@@ -2677,9 +2846,9 @@
               shape: 'rect'
             },
             onClick(data, actions){
-              const deposit = Number(hiddenDepositPrice.value || 0);
-              if(!(deposit > 0)){
-                setPayPalStatus('Finish selecting your services so we can calculate the deposit before paying with PayPal.', 'error');
+              const totalDue = Number(hiddenTotalPrice.value || 0);
+              if(!(totalDue > 0)){
+                setPayPalStatus('Finish selecting your services so we can calculate the total before paying with PayPal.', 'error');
                 return actions.reject();
               }
               paypalApproved = false;
@@ -2690,19 +2859,19 @@
               return actions.resolve();
             },
             createOrder(data, actions){
-              const deposit = Number(hiddenDepositPrice.value || 0);
-              if(!(deposit > 0)){
-                setPayPalStatus('Your deposit total is missing. Adjust your booking details before checking out with PayPal.', 'error');
+              const totalDue = Number(hiddenTotalPrice.value || 0);
+              if(!(totalDue > 0)){
+                setPayPalStatus('Your total is missing. Adjust your booking details before checking out with PayPal.', 'error');
                 return actions.reject();
               }
-              const amount = (Math.round(deposit * 100) / 100).toFixed(2);
+              const amount = (Math.round(totalDue * 100) / 100).toFixed(2);
               return actions.order.create({
                 purchase_units: [{
                   amount: {
                     currency_code: PAYPAL_CURRENCY,
                     value: amount
                   },
-                  description: 'Dufferin Deep Clean 50% deposit'
+                  description: 'Dufferin Deep Clean booking total'
                 }],
                 application_context: {
                   shipping_preference: 'NO_SHIPPING'
@@ -2713,13 +2882,13 @@
               setPayPalStatus('Processing your PayPal payment…');
               return actions.order.capture().then(details => {
                 paypalApproved = true;
-                paypalApprovedAmount = Math.round(Number(hiddenDepositPrice.value || 0) * 100) / 100;
+                paypalApprovedAmount = Math.round(Number(hiddenTotalPrice.value || 0) * 100) / 100;
                 if(hiddenPayPalOrder) hiddenPayPalOrder.value = data.orderID || details.id || '';
                 if(hiddenPayPalPayer) hiddenPayPalPayer.value = details?.payer?.payer_id || '';
                 const capture = details?.purchase_units?.[0]?.payments?.captures?.[0];
                 if(hiddenPayPalCapture) hiddenPayPalCapture.value = capture?.id || '';
                 const payerName = details?.payer?.name?.given_name || 'PayPal customer';
-                setPayPalStatus(`Deposit received from ${payerName}. You can now submit your booking.`);
+                setPayPalStatus(`Payment received from ${payerName}. You can now submit your booking.`);
                 syncSubmitDisabled();
                 buildReview();
                 dispatchNavCartUpdate(false);
@@ -2749,7 +2918,7 @@
         }).catch(err => {
           console.error('PayPal load error', err);
           destroyPayPalButtons(context);
-          const message = 'PayPal checkout is currently unavailable. Please contact us to complete your deposit.';
+          const message = 'PayPal checkout is currently unavailable. Please contact us to complete your payment.';
           setPayPalStatus(message, 'error', context);
         });
       }
@@ -2765,9 +2934,9 @@
           ensurePayPalButtons('main');
           ensurePayPalButtons('nav');
           if(paypalApproved){
-            setPayPalStatus('PayPal deposit approved. You can submit your booking.');
+            setPayPalStatus('PayPal payment approved. You can submit your booking.');
           } else {
-            setPayPalStatus('Complete your PayPal deposit to enable submission.');
+            setPayPalStatus('Complete your PayPal payment to enable submission.');
           }
         } else {
           togglePayPalUi(false);
@@ -2836,8 +3005,6 @@
           if(recapTotal){
             recapTotal.textContent = '—';
           }
-          if(depositText){ depositText.textContent = '—'; }
-          if(balanceText){ balanceText.textContent = '—'; }
           if(addToCartBtn){
             addToCartBtn.disabled = true;
             addToCartBtn.setAttribute('aria-disabled', 'true');
@@ -2855,8 +3022,6 @@
         const subtotal = totalBase + extrasTotal;
         const discount = subtotal * discountRate;
         const finalTotal = subtotal - discount;
-        const depositDue = finalTotal > 0 ? finalTotal * DEPOSIT_RATE : 0;
-        const balanceDue = finalTotal > 0 ? Math.max(finalTotal - depositDue, 0) : 0;
 
         const baseLabel = hiddenServiceLabel.value || resolvedServiceLabel || serviceKey || DEFAULT_SERVICE_LABEL;
         const freqLabel = freqInput ? (FREQUENCY_LABELS[freqInput.value] || freqInput.value) : '';
@@ -2864,9 +3029,6 @@
         if(cartService){
           cartService.textContent = freqLabel ? `${baseLabel} • ${freqLabel}` : baseLabel;
         }
-
-        if(depositText){ depositText.textContent = depositDue > 0 ? `$${Math.round(depositDue)}` : '—'; }
-        if(balanceText){ balanceText.textContent = balanceDue > 0 ? `$${Math.round(balanceDue)}` : '—'; }
 
         if(recapBase){ recapBase.textContent = basePrice > 0 ? `$${Math.round(basePrice)}` : '—'; }
         if(recapDetailRow && recapDetail){
@@ -2902,8 +3064,6 @@
 
         if(hiddenAddonsPrice) hiddenAddonsPrice.value = extrasTotal.toFixed(2);
         if(hiddenDiscountPrice) hiddenDiscountPrice.value = discount.toFixed(2);
-        if(hiddenDepositPrice) hiddenDepositPrice.value = depositDue.toFixed(2);
-        if(hiddenBalancePrice) hiddenBalancePrice.value = balanceDue.toFixed(2);
         if(hiddenTotalPrice) hiddenTotalPrice.value = finalTotal.toFixed(2);
         const extrasLabel = buildExtrasLabel();
         if(hiddenSelectedAddons) hiddenSelectedAddons.value = extrasLabel;
@@ -2924,13 +3084,13 @@
           }
         }
 
-        const normalizedDeposit = Math.round(depositDue * 100) / 100;
-        if(paypalApproved && Math.abs(normalizedDeposit - paypalApprovedAmount) > 0.01){
+        const normalizedTotal = Math.round(finalTotal * 100) / 100;
+        if(paypalApproved && Math.abs(normalizedTotal - paypalApprovedAmount) > 0.01){
           paypalApproved = false;
           paypalApprovedAmount = 0;
           clearPayPalHidden();
           if(getSelectedPayment() === 'paypal'){
-            setPayPalStatus('Your deposit total changed. Please approve the PayPal payment again.');
+            setPayPalStatus('Your total changed. Please approve the PayPal payment again.');
           }
         }
 
@@ -2972,48 +3132,29 @@
           extrasLabel,
           discount,
           total: finalTotal,
-          deposit: depositDue,
-          balance: balanceDue,
           checkoutUrl: 'book.html#cartSummary',
           status: cartStatus && cartStatus.textContent ? cartStatus.textContent : ''
         };
         dispatchNavCartUpdate(false);
       }
 
-      function adjustAddonQuantity(input, delta){
-        if(!input || !Number.isFinite(delta)) return;
-        const step = Number(input.step || 1) || 1;
-        const min = input.min !== '' ? Number(input.min) : 1;
-        const max = input.max !== '' ? Number(input.max) : null;
-        const current = input.value === '' ? min : Number(input.value);
-        let next = Number.isFinite(current) ? current + delta * step : min;
-        if(next < min) next = min;
-        if(max !== null && Number.isFinite(max)) next = Math.min(next, max);
-        input.value = String(next);
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-
       addonPills.forEach(pill => {
-        const qtyInput = pill.querySelector('.addon-qty');
-        if(qtyInput){
-          qtyInput.disabled = true;
-        }
+        pill.dataset.qty = pill.dataset.qty || '0';
+        const qtyDisplay = pill.querySelector('[data-qty-display]');
+        if(qtyDisplay){ qtyDisplay.textContent = pill.dataset.qty || '0'; }
 
         pill.addEventListener('click', (event) => {
-          if(event.target === qtyInput || event.target.closest('.addon-stepper')) return;
           const parent = pill.closest('.addon-group');
           if(!parent || !parent.classList.contains('active')) return;
 
           autoAddAfterSkip = false;
-          pill.classList.toggle('active');
-          const active = pill.classList.contains('active');
-          pill.setAttribute('aria-pressed', active ? 'true' : 'false');
-          if(qtyInput){
-            qtyInput.disabled = !active;
-            if(active && (!qtyInput.value || Number(qtyInput.value) < Number(qtyInput.min || 1))){
-              qtyInput.value = qtyInput.min || 1;
-            }
-          }
+          const currentQty = Number(pill.dataset.qty || 0);
+          const nextQty = currentQty > 0 ? 0 : 1;
+          pill.dataset.qty = String(nextQty);
+          const isActive = nextQty > 0;
+          pill.classList.toggle('active', isActive);
+          pill.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          if(qtyDisplay){ qtyDisplay.textContent = String(nextQty); }
           updateSummary();
         });
 
@@ -3028,37 +3169,27 @@
         pill.setAttribute('role', 'button');
         pill.setAttribute('aria-pressed', 'false');
 
-        if(qtyInput){
-          qtyInput.addEventListener('input', () => {
-            if(!pill.classList.contains('active')) return;
-            if(qtyInput.value === '' || Number(qtyInput.value) < Number(qtyInput.min || 1)){
-              qtyInput.value = qtyInput.min || 1;
-            }
+        const controlButtons = pill.querySelectorAll('.addon-control[data-qty-step]');
+        controlButtons.forEach(button => {
+          button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            const parent = pill.closest('.addon-group');
+            if(!parent || !parent.classList.contains('active')) return;
+
+            autoAddAfterSkip = false;
+            const delta = Number(button.dataset.qtyStep || 0);
+            if(!delta) return;
+            const currentQty = Number(pill.dataset.qty || 0);
+            const nextQty = Math.max(currentQty + delta, 0);
+            if(nextQty === currentQty) return;
+            pill.dataset.qty = String(nextQty);
+            pill.classList.toggle('active', nextQty > 0);
+            pill.setAttribute('aria-pressed', nextQty > 0 ? 'true' : 'false');
+            if(qtyDisplay){ qtyDisplay.textContent = String(nextQty); }
             updateSummary();
           });
-
-          const stepperButtons = pill.querySelectorAll('.stepper-button');
-          stepperButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              autoAddAfterSkip = false;
-              const delta = Number(button.dataset.qtyStep || button.dataset.step || 0);
-              if(!delta) return;
-              const parent = pill.closest('.addon-group');
-              if(parent && !parent.classList.contains('active')) return;
-              if(!pill.classList.contains('active')){
-                pill.classList.add('active');
-                pill.setAttribute('aria-pressed', 'true');
-                qtyInput.disabled = false;
-                if(!qtyInput.value || Number(qtyInput.value) < Number(qtyInput.min || 1)){
-                  qtyInput.value = qtyInput.min || 1;
-                }
-              }
-              adjustAddonQuantity(qtyInput, delta);
-            });
-          });
-        }
+        });
       });
 
       frequencyInputs.forEach(input => {
@@ -3204,9 +3335,7 @@
           ['Service Details', hiddenDetailPrice.value ? `$${Math.round(Number(hiddenDetailPrice.value))}` : '—'],
           ['Add-on Total', hiddenAddonsPrice.value ? `$${Math.round(Number(hiddenAddonsPrice.value))}` : '—'],
           ['Frequency Savings', hiddenDiscountPrice.value && Number(hiddenDiscountPrice.value) ? `-$${Math.round(Number(hiddenDiscountPrice.value))}` : '—'],
-          ['Deposit Due Today', hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'],
-          ['Balance at Service', hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'],
-          ['Estimated Visit Total', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
+          ['Total Due Today', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
           ['PayPal Reference', hiddenPayPalCapture.value || hiddenPayPalOrder.value || '—'],
           ['First Visit', formatDateHumanFromInput(fd.get('first_visit_date'))],
           ['Next Visit', formatDateHumanFromInput(fd.get('follow_up_visit_date'))],
@@ -3225,7 +3354,7 @@
 
         const method = getSelectedPayment();
         if(method === 'paypal' && !paypalApproved){
-          setPayPalStatus('Please complete your PayPal deposit before submitting your booking.', 'error');
+          setPayPalStatus('Please complete your PayPal payment before submitting your booking.', 'error');
           return;
         }
 
@@ -3269,9 +3398,7 @@
           `Add-ons: ${hiddenSelectedAddons.value || 'None'}`,
           `Add-on Total: ${hiddenAddonsPrice.value ? `$${Math.round(Number(hiddenAddonsPrice.value))}` : '—'}`,
           `Frequency Savings: ${hiddenDiscountPrice.value && Number(hiddenDiscountPrice.value) ? `-$${Math.round(Number(hiddenDiscountPrice.value))}` : '—'}`,
-          `Deposit Due Today: ${hiddenDepositPrice.value && Number(hiddenDepositPrice.value) ? `$${Math.round(Number(hiddenDepositPrice.value))}` : '—'}`,
-          `Balance at Service: ${hiddenBalancePrice.value && Number(hiddenBalancePrice.value) ? `$${Math.round(Number(hiddenBalancePrice.value))}` : '—'}`,
-          `Estimated Visit Total: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
+          `Total Due Today: ${hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'}`,
           `First Visit: ${formatDateHumanFromInput(fd.get('first_visit_date'))}`,
           `Next Visit: ${formatDateHumanFromInput(fd.get('follow_up_visit_date'))}`,
           `Full Name: ${fullName || '—'}`,

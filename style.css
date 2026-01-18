@@ -922,6 +922,10 @@ h1, h2, h3 {
   isolation: isolate;
 }
 
+.addon-group--services.active {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .addon-group--services::before {
   content: "";
   position: absolute;
@@ -1039,6 +1043,9 @@ h1, h2, h3 {
 
 .addon-pill.active {
   border-color: transparent;
+  background: linear-gradient(145deg, rgba(9, 26, 58, 0.95), rgba(4, 13, 30, 0.95));
+  box-shadow: 0 12px 24px rgba(7, 17, 35, 0.55);
+  border-radius: 22px;
 }
 
 .addon-pill--media:hover .addon-thumb,
@@ -1189,7 +1196,10 @@ h1, h2, h3 {
 
 @media (max-width: 1200px) {
   .addon-group--services {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .addon-group--services.active {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

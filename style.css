@@ -1017,9 +1017,12 @@ h1, h2, h3 {
 .addon-meta {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.2rem;
   font-size: 0.72rem;
   color: rgba(203, 227, 245, 0.8);
+  text-align: center;
 }
 
 .addon-price {
@@ -1043,8 +1046,8 @@ h1, h2, h3 {
 
 .addon-pill.active {
   border-color: transparent;
-  background: linear-gradient(145deg, rgba(9, 26, 58, 0.95), rgba(4, 13, 30, 0.95));
-  box-shadow: 0 12px 24px rgba(7, 17, 35, 0.55);
+  background: #5B8266;
+  box-shadow: 0 12px 24px rgba(26, 45, 34, 0.45);
   border-radius: 22px;
 }
 

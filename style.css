@@ -1043,9 +1043,12 @@ h1, h2, h3 {
 
 .addon-pill.active {
   border-color: transparent;
-  background: linear-gradient(145deg, rgba(9, 26, 58, 0.95), rgba(4, 13, 30, 0.95));
-  box-shadow: 0 12px 24px rgba(7, 17, 35, 0.55);
+  background: linear-gradient(135deg, rgba(41, 73, 54, 0.95), rgba(12, 36, 22, 0.95), rgba(55, 116, 82, 0.9));
+  background-size: 200% 200%;
+  box-shadow: 0 16px 32px rgba(15, 48, 30, 0.6), 0 0 18px rgba(41, 73, 54, 0.45);
   border-radius: 22px;
+  animation: addonActiveHue 3.6s ease-in-out infinite;
+  transform: translateY(-6px) scale(1.05);
 }
 
 .addon-pill--media:hover .addon-thumb,
@@ -1192,6 +1195,12 @@ h1, h2, h3 {
 @keyframes addonBreathe {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.04); }
+}
+
+@keyframes addonActiveHue {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  50% { background-position: 100% 50%; filter: hue-rotate(20deg); }
+  100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
 }
 
 @media (max-width: 1200px) {

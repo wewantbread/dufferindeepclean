@@ -221,18 +221,9 @@
 
     @media (min-width: 1100px){
       .step-extras-content{
-        max-height: clamp(520px, 68vh, 760px);
-        overflow: auto;
-        padding-right: clamp(6px, 1vw, 16px);
-      }
-
-      .step-extras-content::-webkit-scrollbar{
-        width: 6px;
-      }
-
-      .step-extras-content::-webkit-scrollbar-thumb{
-        background: linear-gradient(180deg, rgba(76,195,255,0.65), rgba(255,79,195,0.65));
-        border-radius: 999px;
+        max-height: none;
+        overflow: visible;
+        padding-right: 0;
       }
     }
 
@@ -727,15 +718,15 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-weight: 700;
-      background: linear-gradient(180deg, #ff8edb, #ff4fc3);
-      border-color: rgba(255, 112, 210, 0.75);
+      background: linear-gradient(180deg, #3e6f54, #294936);
+      border-color: rgba(41, 73, 54, 0.85);
       color: #fff;
-      box-shadow: 0 12px 32px rgba(255, 110, 205, 0.35);
+      box-shadow: 0 12px 32px rgba(41, 73, 54, 0.45);
     }
 
     .cart-btn:disabled{
-      background: linear-gradient(180deg, rgba(255, 142, 219, 0.28), rgba(255, 79, 195, 0.2));
-      border-color: rgba(255, 112, 210, 0.35);
+      background: linear-gradient(180deg, rgba(62, 111, 84, 0.35), rgba(41, 73, 54, 0.25));
+      border-color: rgba(41, 73, 54, 0.35);
       color: rgba(255,255,255,0.68);
       box-shadow: none;
     }
@@ -1186,11 +1177,15 @@
             <div class="step-extras-content">
               <div class="addon-groups">
                 <div class="addon-group addon-group--services" data-service-group="home">
-                  <button type="button" class="addon-pill addon-pill--media color-cyan" data-addon="Cabinet cleaning" data-price="25" style="--delay: 0s;">
+                  <button type="button" class="addon-pill addon-pill--media color-cyan" data-addon="Cabinet cleaning" data-price="25" style="--delay: 0s;" aria-pressed="false">
                     <span class="addon-thumb">
                       <img src="cabinet.png" alt="Cabinet cleaning add-on" loading="lazy">
                     </span>
-                    <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                    <span class="addon-stepper" aria-label="Cabinet cleaning quantity controls">
+                      <span class="addon-qty" data-addon-qty>0</span>
+                      <button type="button" class="stepper-button" data-qty-step="1"><span>Increase</span></button>
+                      <button type="button" class="stepper-button" data-qty-step="-1"><span>Decrease</span></button>
+                    </span>
                     <span class="addon-details">
                       <span class="addon-name">Cabinet cleaning</span>
                       <span class="addon-meta">
@@ -1199,11 +1194,15 @@
                       </span>
                     </span>
                   </button>
-                  <button type="button" class="addon-pill addon-pill--media color-mint" data-addon="Baseboard detailing" data-price="20" style="--delay: 0.05s;">
+                  <button type="button" class="addon-pill addon-pill--media color-mint" data-addon="Baseboard detailing" data-price="20" style="--delay: 0.05s;" aria-pressed="false">
                     <span class="addon-thumb">
                       <img src="baseboards.png" alt="Baseboard detailing add-on" loading="lazy">
                     </span>
-                    <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                    <span class="addon-stepper" aria-label="Baseboard detailing quantity controls">
+                      <span class="addon-qty" data-addon-qty>0</span>
+                      <button type="button" class="stepper-button" data-qty-step="1"><span>Increase</span></button>
+                      <button type="button" class="stepper-button" data-qty-step="-1"><span>Decrease</span></button>
+                    </span>
                     <span class="addon-details">
                       <span class="addon-name">Baseboard detailing</span>
                       <span class="addon-meta">
@@ -1212,11 +1211,15 @@
                       </span>
                     </span>
                   </button>
-                  <button type="button" class="addon-pill addon-pill--media color-lavender" data-addon="Refrigerator refresh" data-price="30" style="--delay: 0.1s;">
+                  <button type="button" class="addon-pill addon-pill--media color-lavender" data-addon="Refrigerator refresh" data-price="30" style="--delay: 0.1s;" aria-pressed="false">
                     <span class="addon-thumb">
                       <img src="refrigerator.png" alt="Refrigerator refresh add-on" loading="lazy">
                     </span>
-                    <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                    <span class="addon-stepper" aria-label="Refrigerator refresh quantity controls">
+                      <span class="addon-qty" data-addon-qty>0</span>
+                      <button type="button" class="stepper-button" data-qty-step="1"><span>Increase</span></button>
+                      <button type="button" class="stepper-button" data-qty-step="-1"><span>Decrease</span></button>
+                    </span>
                     <span class="addon-details">
                       <span class="addon-name">Refrigerator refresh</span>
                       <span class="addon-meta">
@@ -1225,11 +1228,15 @@
                       </span>
                     </span>
                   </button>
-                  <button type="button" class="addon-pill addon-pill--media color-amber" data-addon="Appliance polish" data-price="40" style="--delay: 0.15s;">
+                  <button type="button" class="addon-pill addon-pill--media color-amber" data-addon="Appliance polish" data-price="40" style="--delay: 0.15s;" aria-pressed="false">
                     <span class="addon-thumb">
                       <img src="appliances.png" alt="Appliance polish add-on" loading="lazy">
                     </span>
-                    <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                    <span class="addon-stepper" aria-label="Appliance polish quantity controls">
+                      <span class="addon-qty" data-addon-qty>0</span>
+                      <button type="button" class="stepper-button" data-qty-step="1"><span>Increase</span></button>
+                      <button type="button" class="stepper-button" data-qty-step="-1"><span>Decrease</span></button>
+                    </span>
                     <span class="addon-details">
                       <span class="addon-name">Appliance polish</span>
                       <span class="addon-meta">
@@ -1238,11 +1245,15 @@
                       </span>
                     </span>
                   </button>
-                  <button type="button" class="addon-pill addon-pill--media color-rose" data-addon="Oven deep clean" data-price="35" style="--delay: 0.2s;">
+                  <button type="button" class="addon-pill addon-pill--media color-rose" data-addon="Oven deep clean" data-price="35" style="--delay: 0.2s;" aria-pressed="false">
                     <span class="addon-thumb">
                       <img src="oven.png" alt="Oven deep clean add-on" loading="lazy">
                     </span>
-                    <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                    <span class="addon-stepper" aria-label="Oven deep clean quantity controls">
+                      <span class="addon-qty" data-addon-qty>0</span>
+                      <button type="button" class="stepper-button" data-qty-step="1"><span>Increase</span></button>
+                      <button type="button" class="stepper-button" data-qty-step="-1"><span>Decrease</span></button>
+                    </span>
                     <span class="addon-details">
                       <span class="addon-name">Oven deep clean</span>
                       <span class="addon-meta">
@@ -1251,11 +1262,15 @@
                       </span>
                     </span>
                   </button>
-                  <button type="button" class="addon-pill addon-pill--media color-sky" data-addon="Window detailing" data-price="35" style="--delay: 0.25s;">
+                  <button type="button" class="addon-pill addon-pill--media color-sky" data-addon="Window detailing" data-price="35" style="--delay: 0.25s;" aria-pressed="false">
                     <span class="addon-thumb">
                       <img src="window.png" alt="Window detailing add-on" loading="lazy">
                     </span>
-                    <span class="addon-ghost-controls" aria-hidden="true">− +</span>
+                    <span class="addon-stepper" aria-label="Window detailing quantity controls">
+                      <span class="addon-qty" data-addon-qty>0</span>
+                      <button type="button" class="stepper-button" data-qty-step="1"><span>Increase</span></button>
+                      <button type="button" class="stepper-button" data-qty-step="-1"><span>Decrease</span></button>
+                    </span>
                     <span class="addon-details">
                       <span class="addon-name">Window detailing</span>
                       <span class="addon-meta">
@@ -2436,10 +2451,16 @@
       hiddenDetailPrice.value = quoteAvailable ? detailPrice.toFixed(2) : '';
       hiddenPackage.value = resolvedServiceLabel;
 
-      if(recapDescription){
-        if(detailSummaryLines.length){
+      function renderCartDescription(extraItems = []){
+        if(!recapDescription) return;
+        const lines = detailSummaryLines.slice();
+        if(extraItems.length){
+          const extrasLine = `Add-ons: ${extraItems.map(item => `${item.name} ×${item.qty}`).join(', ')}`;
+          lines.push(extrasLine);
+        }
+        if(lines.length){
           recapDescription.hidden = false;
-          recapDescription.innerHTML = detailSummaryLines
+          recapDescription.innerHTML = lines
             .map(line => `<span class="cart-detail-line">${escapeHtml(line)}</span>`)
             .join('');
         } else {
@@ -2447,6 +2468,8 @@
           recapDescription.innerHTML = '';
         }
       }
+
+      renderCartDescription();
 
       if(cartService){
         cartService.textContent = quoteAvailable
@@ -2608,8 +2631,8 @@
         addonPills.forEach(pill => {
           const parent = pill.closest('.addon-group');
           if(!parent || !parent.classList.contains('active')) return;
-          if(!pill.classList.contains('active')) return;
-          const qty = 1;
+          const qty = Number(pill.dataset.qty || 0);
+          if(qty <= 0) return;
           const price = Number(pill.dataset.price || 0);
           const name = pill.querySelector('.addon-name')?.textContent.trim() || pill.dataset.addon || 'Addon';
           extrasState.push({ name, qty, price });
@@ -2617,10 +2640,19 @@
         return extrasState;
       }
 
+      function setAddonQty(pill, qty){
+        const safeQty = Math.max(0, qty);
+        pill.dataset.qty = String(safeQty);
+        const qtyEl = pill.querySelector('[data-addon-qty]');
+        if(qtyEl) qtyEl.textContent = String(safeQty);
+        const isActive = safeQty > 0;
+        pill.classList.toggle('active', isActive);
+        pill.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      }
+
       function clearExtras(){
         addonPills.forEach(pill => {
-          pill.classList.remove('active');
-          pill.setAttribute('aria-pressed', 'false');
+          setAddonQty(pill, 0);
         });
         updateSummary();
       }
@@ -2934,6 +2966,7 @@
         }
         const extras = computeExtras();
         const extrasTotal = extras.reduce((sum, item) => sum + item.price * item.qty, 0);
+        renderCartDescription(extras);
         const freqInput = selectedFrequency();
         const discountRate = freqInput ? Number(freqInput.dataset.discount || 0) : 0;
         const subtotal = totalBase + extrasTotal;
@@ -3056,14 +3089,28 @@
       }
 
       addonPills.forEach(pill => {
+        setAddonQty(pill, Number(pill.dataset.qty || 0));
+        const stepperButtons = Array.from(pill.querySelectorAll('[data-qty-step]'));
+        stepperButtons.forEach(button => {
+          button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const parent = pill.closest('.addon-group');
+            if(!parent || !parent.classList.contains('active')) return;
+            const step = Number(button.dataset.qtyStep || 0);
+            const currentQty = Number(pill.dataset.qty || 0);
+            setAddonQty(pill, currentQty + step);
+            autoAddAfterSkip = false;
+            updateSummary();
+          });
+        });
+
         pill.addEventListener('click', (event) => {
           const parent = pill.closest('.addon-group');
           if(!parent || !parent.classList.contains('active')) return;
 
           autoAddAfterSkip = false;
-          pill.classList.toggle('active');
-          const active = pill.classList.contains('active');
-          pill.setAttribute('aria-pressed', active ? 'true' : 'false');
+          const isActive = pill.classList.contains('active');
+          setAddonQty(pill, isActive ? 0 : 1);
           updateSummary();
         });
 
@@ -3076,8 +3123,6 @@
 
         pill.setAttribute('tabindex', '0');
         pill.setAttribute('role', 'button');
-        pill.setAttribute('aria-pressed', 'false');
-
       });
 
       frequencyInputs.forEach(input => {

@@ -144,7 +144,7 @@ h1, h2, h3 {
    ========================= */
 .split-screen { display: flex; height: 90vh; width: 100%; position: relative; z-index: 2; }
 .text-side {
-  flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4em;
+  flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: 4em;
   gap: 1.5rem;
   /* (grid removed above) */
 }
@@ -313,6 +313,10 @@ h1, h2, h3 {
   .quote-grid {
     grid-template-columns: 1fr;
   }
+
+  .service-detail-group.detail-inline {
+    grid-template-columns: 1fr;
+  }
 }
 
 .field {
@@ -458,16 +462,16 @@ h1, h2, h3 {
   opacity: 0;
   transform: translateY(-6px);
   pointer-events: none;
-  max-height: 0;
+  max-height: 280px;
+  min-height: 280px;
   overflow: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.35s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .service-details.visible {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  max-height: 320px;
 }
 
 .service-detail-group {
@@ -482,13 +486,13 @@ h1, h2, h3 {
 }
 
 .service-detail-group.detail-inline {
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  align-items: end;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   position: relative;
 }
 
 .service-detail-group.detail-inline[data-service-detail="home"] {
-  max-height: 235px;
+  max-height: 100%;
   overflow-y: auto;
   padding-right: 0.4rem;
   scrollbar-width: thin;

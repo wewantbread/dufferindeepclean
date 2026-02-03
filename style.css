@@ -462,9 +462,10 @@ h1, h2, h3 {
   opacity: 0;
   transform: translateY(-6px);
   pointer-events: none;
-  max-height: 0;
+  max-height: 280px;
+  min-height: 280px;
   overflow: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.35s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .service-details.visible {

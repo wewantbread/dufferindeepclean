@@ -142,9 +142,9 @@ h1, h2, h3 {
 /* =========================
    HERO SPLIT
    ========================= */
-.split-screen { display: flex; height: 90vh; width: 100%; position: relative; z-index: 2; }
+.split-screen { display: flex; height: 85vh; width: 100%; position: relative; z-index: 2; }
 .text-side {
-  flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: 4em;
+  flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding: 3em 4em;
   gap: 1.5rem;
   /* (grid removed above) */
 }
@@ -220,7 +220,7 @@ h1, h2, h3 {
    QUOTE PANEL
    ========================= */
 .hero-quote {
-  margin-top: clamp(0.6rem, 1.6vw, 1.1rem);
+  margin-top: clamp(1.2rem, 2vw, 2rem);
   width: 100%;
   max-width: clamp(420px, 40vw, 600px);
   display: flex;
@@ -2661,8 +2661,8 @@ h1, h2, h3 {
 /* =========================
    HERO SPLIT
    ========================= */
-.split-screen { display: flex; height: 90vh; width: 100%; position: relative; z-index: 2; }
-.text-side { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4em; }
+.split-screen { display: flex; height: 85vh; width: 100%; position: relative; z-index: 2; }
+.text-side { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 3em 4em; }
 .image-side { flex: 1; overflow: hidden; display: flex; justify-content: flex-start; align-items: center; position: relative; z-index: 1; }
 .image-side::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 120px;
   background: linear-gradient(to right, black, transparent); z-index: 3; pointer-events: none; }
@@ -2822,8 +2822,8 @@ h1, h2, h3 {
 /* =========================
    HERO SPLIT
    ========================= */
-.split-screen { display: flex; height: 90vh; width: 100%; position: relative; z-index: 2; }
-.text-side { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 4em; }
+.split-screen { display: flex; height: 85vh; width: 100%; position: relative; z-index: 2; }
+.text-side { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 3em 4em; }
 .image-side { flex: 1; overflow: hidden; display: flex; justify-content: flex-start; align-items: center; position: relative; z-index: 1; }
 .image-side::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 120px;
   background: linear-gradient(to right, black, transparent); z-index: 3; pointer-events: none; }

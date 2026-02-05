@@ -222,7 +222,7 @@ h1, h2, h3 {
 .hero-quote {
   margin-top: clamp(1.2rem, 2vw, 2rem);
   width: 100%;
-  max-width: clamp(420px, 40vw, 600px);
+  max-width: clamp(360px, 34vw, 520px);
   display: flex;
   align-self: flex-start;
 }
@@ -230,7 +230,7 @@ h1, h2, h3 {
 .quote-card {
   width: 100%;
   flex: 1;
-  padding: clamp(0.85rem, 1.9vw, 1.35rem);
+  padding: clamp(0.72rem, 1.4vw, 1rem);
   border-radius: 22px;
   border: 1.8px solid rgba(0, 212, 255, 0.55);
   background: linear-gradient(135deg, rgba(8, 19, 30, 0.82), rgba(10, 26, 38, 0.58));
@@ -279,11 +279,11 @@ h1, h2, h3 {
 }
 
 .quote-card-header {
-  margin-bottom: 1.1rem;
+  margin-bottom: 0.7rem;
 }
 
 .quote-card-header h2 {
-  font-size: clamp(1.32rem, 2.6vw, 1.85rem);
+  font-size: clamp(1.12rem, 2.1vw, 1.48rem);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #e6f8ff;
@@ -293,19 +293,19 @@ h1, h2, h3 {
 
 .quote-card-header p {
   color: rgba(212, 235, 255, 0.75);
-  font-size: 0.86rem;
+  font-size: 0.78rem;
   max-width: 30ch;
 }
 
 .quote-form {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.68rem;
 }
 
 .quote-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0.72rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
@@ -758,12 +758,12 @@ h1, h2, h3 {
   }
 
   .split-screen .hero-quote {
-    max-width: clamp(500px, 46vw, 720px);
-    flex: 0 1 clamp(500px, 46vw, 720px);
+    max-width: clamp(420px, 38vw, 560px);
+    flex: 0 1 clamp(420px, 38vw, 560px);
   }
 
   .split-screen .hero-quote .quote-card {
-    padding: 1.2rem 1.4rem;
+    padding: 0.9rem 1rem;
     border-radius: 22px;
     box-shadow:
       0 24px 68px rgba(0, 0, 0, 0.48),
@@ -772,25 +772,25 @@ h1, h2, h3 {
   }
 
   .split-screen .hero-quote .quote-card-header {
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.6rem;
   }
 
   .split-screen .hero-quote .quote-card-header h2 {
-    font-size: 1.42rem;
+    font-size: 1.2rem;
     letter-spacing: 0.14em;
   }
 
   .split-screen .hero-quote .quote-card-header p {
-    font-size: 0.75rem;
+    font-size: 0.68rem;
     max-width: 26ch;
   }
 
   .split-screen .hero-quote .quote-form {
-    gap: 0.9rem;
+    gap: 0.62rem;
   }
 
   .split-screen .hero-quote .quote-grid {
-    gap: 0.85rem;
+    gap: 0.62rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1297,7 +1297,7 @@ h1, h2, h3 {
   }
 
   .quote-card {
-    padding: 2.25rem 1.75rem;
+    padding: 1.1rem 0.95rem;
   }
 
   .quote-card-header p {

@@ -413,67 +413,6 @@
         <span class="service-cta">Book this package</span>
       </a>
     </div>
-
-    <div class="office-showcase" aria-label="Office cleaning transformations">
-      <div class="office-showcase__header">
-        <h2>Office cleaning in motion</h2>
-        <p>Scroll through our office highlights and compare the before-and-after difference with the slider.</p>
-      </div>
-      <div class="office-showcase__content">
-        <div class="office-carousel" aria-live="off">
-          <div class="office-carousel__track">
-            <div class="office-carousel__item">
-              <img src="FullSizeRender.jpg" alt="Office workspace detailed with bright lighting" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="FullSizeRender (1).jpg" alt="Open office area freshly cleaned" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="8ECF3199-A03E-4BEE-8815-CC200384FA9D.jpg" alt="Office hallway after deep cleaning" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="6EFB7A55-9F02-43A5-B942-BAA6857D5E5C.jpg" alt="Sanitized office break area" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="IMG_6370.jpg" alt="Office conference room ready for use" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="FullSizeRender.jpg" alt="Office workspace detailed with bright lighting" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="FullSizeRender (1).jpg" alt="Open office area freshly cleaned" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="8ECF3199-A03E-4BEE-8815-CC200384FA9D.jpg" alt="Office hallway after deep cleaning" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="6EFB7A55-9F02-43A5-B942-BAA6857D5E5C.jpg" alt="Sanitized office break area" loading="lazy" />
-            </div>
-            <div class="office-carousel__item">
-              <img src="IMG_6370.jpg" alt="Office conference room ready for use" loading="lazy" />
-            </div>
-          </div>
-        </div>
-
-        <div class="office-compare" style="--compare-position: 50%;">
-          <div class="office-compare__image office-compare__image--before">
-            <img src="IMG_6370.jpg" alt="Office area before cleaning" loading="lazy" />
-          </div>
-          <div class="office-compare__image office-compare__image--after">
-            <img src="4A5A9949-21AF-4D8B-8861-84B4263C56DD.jpg" alt="Office area after cleaning" loading="lazy" />
-          </div>
-          <input
-            class="office-compare__slider"
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-            aria-label="Reveal cleaned office comparison"
-          />
-          <span class="office-compare__handle" aria-hidden="true"></span>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- ABOUT (restored) -->
@@ -494,26 +433,6 @@
       <div class="about-soap" aria-hidden="true">🧼</div>
     </div>
   </section>
-
-  <script>
-    (function(){
-      const comparisons = Array.from(document.querySelectorAll('.office-compare'));
-      if(!comparisons.length) return;
-
-      comparisons.forEach(compare => {
-        const slider = compare.querySelector('.office-compare__slider');
-        if(!slider) return;
-
-        const updatePosition = (value) => {
-          const clamped = Math.min(100, Math.max(0, Number(value) || 50));
-          compare.style.setProperty('--compare-position', `${clamped}%`);
-        };
-
-        updatePosition(slider.value);
-        slider.addEventListener('input', (event) => updatePosition(event.target.value));
-      });
-    })();
-  </script>
 
   <!-- Quote logic -->
   <script>

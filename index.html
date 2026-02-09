@@ -405,7 +405,40 @@
       </a>
 
       <a class="service-card" href="#quote" data-service-card data-service="office">
-        <img src="IMG_1629.png" alt="Modern office lounge freshly detailed with seating and plants" class="service-image" />
+        <div class="office-carousel" data-office-carousel aria-label="Office cleaning photo carousel">
+          <div class="office-slide is-active">
+            <img src="FullSizeRender (1).jpg" alt="Freshly cleaned office corridor with bright lighting" />
+          </div>
+          <div class="office-slide">
+            <img src="FullSizeRender.jpg" alt="Neatly arranged office area after a deep clean" />
+          </div>
+          <div class="office-slide">
+            <img src="8ECF3199-A03E-4BEE-8815-CC200384FA9D.jpg" alt="Office workspace floor restored to a glossy finish" />
+          </div>
+          <div class="office-slide">
+            <img src="6EFB7A55-9F02-43A5-B942-BAA6857D5E5C.jpg" alt="Office hallway cleaned and ready for staff" />
+          </div>
+          <div class="office-slide">
+            <img src="IMG_1629.png" alt="Modern office lounge freshly detailed with seating and plants" />
+          </div>
+          <div class="office-slide office-compare" data-office-compare>
+            <div class="office-compare-base">
+              <img src="4A5A9949-21AF-4D8B-8861-84B4263C56DD.jpg" alt="Office space before cleaning" />
+            </div>
+            <div class="office-compare-top">
+              <img src="IMG_6370.jpg" alt="Office space after cleaning" />
+            </div>
+            <input
+              class="office-compare-slider"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              aria-label="Slide to compare office cleaning results"
+            />
+            <span class="office-compare-handle" aria-hidden="true"></span>
+          </div>
+        </div>
         <div class="service-copy">
           <h3>Office Cleaning Package</h3>
           <p>Professional office upkeep that dusts workstations, refreshes conference rooms, polishes reception areas, and tidies shared kitchens for a productive team.</p>
@@ -435,6 +468,64 @@
   </section>
 
   <!-- Quote logic -->
+  <script>
+    (function(){
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const carousels = Array.from(document.querySelectorAll('[data-office-carousel]'));
+
+      carousels.forEach((carousel) => {
+        const slides = Array.from(carousel.querySelectorAll('.office-slide'));
+        if (slides.length <= 1) return;
+
+        let index = 0;
+        let timerId = null;
+
+        const showSlide = (nextIndex) => {
+          slides[index].classList.remove('is-active');
+          index = nextIndex;
+          slides[index].classList.add('is-active');
+        };
+
+        const start = () => {
+          if (timerId || prefersReducedMotion.matches) return;
+          timerId = window.setInterval(() => {
+            showSlide((index + 1) % slides.length);
+          }, 4500);
+        };
+
+        const stop = () => {
+          if (!timerId) return;
+          window.clearInterval(timerId);
+          timerId = null;
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              start();
+            } else {
+              stop();
+            }
+          });
+        }, { threshold: 0.35 });
+
+        observer.observe(carousel);
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+      });
+
+      const compares = Array.from(document.querySelectorAll('[data-office-compare]'));
+      compares.forEach((compare) => {
+        const slider = compare.querySelector('.office-compare-slider');
+        if (!slider) return;
+        const update = (value) => {
+          compare.style.setProperty('--compare-value', `${value}%`);
+        };
+        update(slider.value || 50);
+        slider.addEventListener('input', (event) => update(event.target.value));
+      });
+    })();
+  </script>
   <script>
     (function(){
       const quoteForms = Array.from(document.querySelectorAll('form.quote-form'));

@@ -422,22 +422,8 @@
             <div class="office-slide">
               <img src="IMG_1629.png" alt="Modern office lounge freshly detailed with seating and plants" />
             </div>
-            <div class="office-slide office-compare" data-office-compare>
-              <div class="office-compare-base">
-                <img src="4A5A9949-21AF-4D8B-8861-84B4263C56DD.jpg" alt="Office space before cleaning" onerror="this.onerror=null;this.src='6EFB7A55-9F02-43A5-B942-BAA6857D5E5C.jpg';" />
-              </div>
-              <div class="office-compare-top">
-                <img src="IMG_6370.jpg" alt="Office space after cleaning" />
-              </div>
-              <input
-                class="office-compare-slider"
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                aria-label="Slide to compare office cleaning results"
-              />
-              <span class="office-compare-handle" aria-hidden="true"></span>
+            <div class="office-slide">
+              <img src="IMG_6370.jpg" alt="Office floor after detailed cleaning" />
             </div>
           </div>
         </div>
@@ -482,6 +468,9 @@
 
         let index = 0;
         let timerId = null;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let isDragging = false;
 
         const showSlide = (nextIndex) => {
           index = nextIndex;
@@ -514,18 +503,33 @@
         observer.observe(carousel);
         carousel.addEventListener('mouseenter', stop);
         carousel.addEventListener('mouseleave', start);
+        carousel.addEventListener('dragstart', (event) => event.preventDefault());
+        carousel.addEventListener('pointerdown', (event) => {
+          dragStartX = event.clientX;
+          dragStartY = event.clientY;
+          isDragging = false;
+        });
+        carousel.addEventListener('pointermove', (event) => {
+          if (!dragStartX && !dragStartY) return;
+          const deltaX = Math.abs(event.clientX - dragStartX);
+          const deltaY = Math.abs(event.clientY - dragStartY);
+          if (deltaX > 8 || deltaY > 8) {
+            isDragging = true;
+          }
+        });
+        carousel.addEventListener('pointerup', () => {
+          dragStartX = 0;
+          dragStartY = 0;
+        });
+        carousel.addEventListener('click', (event) => {
+          if (isDragging) {
+            event.preventDefault();
+            event.stopPropagation();
+            isDragging = false;
+          }
+        });
       });
 
-      const compares = Array.from(document.querySelectorAll('[data-office-compare]'));
-      compares.forEach((compare) => {
-        const slider = compare.querySelector('.office-compare-slider');
-        if (!slider) return;
-        const update = (value) => {
-          compare.style.setProperty('--compare-value', `${value}%`);
-        };
-        update(slider.value || 50);
-        slider.addEventListener('input', (event) => update(event.target.value));
-      });
     })();
   </script>
   <script>

@@ -387,7 +387,31 @@
 
     <div class="services-grid">
       <a class="service-card" href="#quote" data-service-card data-service="home">
-        <img src="deepcleanpackage.png" alt="Sparkling kitchen with fresh countertops and appliances" class="service-image" />
+        <div class="office-carousel" data-office-carousel aria-label="House cleaning photo carousel">
+          <div class="office-carousel-track">
+            <div class="office-slide">
+              <img src="FullSizeRender.jpeg" alt="House cleaning detail photo" />
+            </div>
+            <div class="office-slide">
+              <img src="IMG_5613.jpeg" alt="House cleaning package preview image" />
+            </div>
+            <div class="office-slide">
+              <img src="IMG_5609.jpeg" alt="Polished home interior after cleaning" />
+            </div>
+            <div class="office-slide">
+              <img src="toiletpic.jpg" alt="Sanitized bathroom fixture" onerror="this.onerror=null;this.src='FullSizeRender.jpeg';" />
+            </div>
+            <div class="office-slide">
+              <img src="toiletpicv2.jpg" alt="Detailed toilet cleaning close-up" onerror="this.onerror=null;this.src='IMG_5613.jpeg';" />
+            </div>
+            <div class="office-slide">
+              <img src="IMG_8004.jpeg" alt="Bathroom deep-clean transformation" onerror="this.onerror=null;this.src='IMG_5609.jpeg';" />
+            </div>
+            <div class="office-slide">
+              <img src="IMG_8006.jpeg" alt="Freshly cleaned washroom finish" onerror="this.onerror=null;this.src='FullSizeRender.jpeg';" />
+            </div>
+          </div>
+        </div>
         <div class="service-copy">
           <h3>House Cleaning Package</h3>
           <p>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
@@ -405,7 +429,25 @@
       </a>
 
       <a class="service-card" href="#quote" data-service-card data-service="office">
-        <img src="IMG_1629.png" alt="Modern office lounge freshly detailed with seating and plants" class="service-image" />
+        <div class="office-carousel" data-office-carousel aria-label="Office cleaning photo carousel">
+          <div class="office-carousel-track">
+            <div class="office-slide">
+              <img src="FullSizeRender (1).jpg" alt="Freshly cleaned office corridor with bright lighting" />
+            </div>
+            <div class="office-slide">
+              <img src="FullSizeRender.jpg" alt="Neatly arranged office area after a deep clean" />
+            </div>
+            <div class="office-slide">
+              <img src="8ECF3199-A03E-4BEE-8815-CC200384FA9D.jpg" alt="Office workspace floor restored to a glossy finish" />
+            </div>
+            <div class="office-slide">
+              <img src="6EFB7A55-9F02-43A5-B942-BAA6857D5E5C.jpg" alt="Office hallway cleaned and ready for staff" />
+            </div>
+            <div class="office-slide">
+              <img src="IMG_6370.jpg" alt="Office floor after detailed cleaning" />
+            </div>
+          </div>
+        </div>
         <div class="service-copy">
           <h3>Office Cleaning Package</h3>
           <p>Professional office upkeep that dusts workstations, refreshes conference rooms, polishes reception areas, and tidies shared kitchens for a productive team.</p>
@@ -435,6 +477,82 @@
   </section>
 
   <!-- Quote logic -->
+  <script>
+    (function(){
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const carousels = Array.from(document.querySelectorAll('[data-office-carousel]'));
+
+      carousels.forEach((carousel) => {
+        const track = carousel.querySelector('.office-carousel-track');
+        const slides = Array.from(carousel.querySelectorAll('.office-slide'));
+        if (!track || slides.length <= 1) return;
+
+        let index = 0;
+        let timerId = null;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let isDragging = false;
+
+        const showSlide = (nextIndex) => {
+          index = nextIndex;
+          slides[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+        };
+
+        const start = () => {
+          if (timerId || prefersReducedMotion.matches) return;
+          timerId = window.setInterval(() => {
+            showSlide((index + 1) % slides.length);
+          }, 4500);
+        };
+
+        const stop = () => {
+          if (!timerId) return;
+          window.clearInterval(timerId);
+          timerId = null;
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              start();
+            } else {
+              stop();
+            }
+          });
+        }, { threshold: 0.35 });
+
+        observer.observe(carousel);
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', start);
+        carousel.addEventListener('dragstart', (event) => event.preventDefault());
+        carousel.addEventListener('pointerdown', (event) => {
+          dragStartX = event.clientX;
+          dragStartY = event.clientY;
+          isDragging = false;
+        });
+        carousel.addEventListener('pointermove', (event) => {
+          if (!dragStartX && !dragStartY) return;
+          const deltaX = Math.abs(event.clientX - dragStartX);
+          const deltaY = Math.abs(event.clientY - dragStartY);
+          if (deltaX > 8 || deltaY > 8) {
+            isDragging = true;
+          }
+        });
+        carousel.addEventListener('pointerup', () => {
+          dragStartX = 0;
+          dragStartY = 0;
+        });
+        carousel.addEventListener('click', (event) => {
+          if (isDragging) {
+            event.preventDefault();
+            event.stopPropagation();
+            isDragging = false;
+          }
+        });
+      });
+
+    })();
+  </script>
   <script>
     (function(){
       const quoteForms = Array.from(document.querySelectorAll('form.quote-form'));

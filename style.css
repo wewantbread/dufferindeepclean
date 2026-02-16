@@ -22,7 +22,7 @@ a:link { text-decoration: none !important; }
   --tile-h-size: calc(var(--tile-h) * var(--tile-scale));
 }
 
-html, body { height: -webkit-fill-available; min-height: 100%; }
+html, body { height: -webkit-fill-available; min-height: 100%; width: 100%; max-width: 100%; overflow-x: hidden; }
 html { background: #000; }
 
 /* keep body transparent so the animated layers show through */
@@ -222,7 +222,11 @@ h1, h2, h3 {
 .hero-quote {
   margin-top: clamp(1.2rem, 2vw, 2rem);
   width: 100%;
+<<<<<<< codex/add-image-carousel-to-office-section-vacy9d
+  max-width: clamp(300px, 31vw, 430px);
+=======
   max-width: clamp(360px, 38vw, 520px);
+>>>>>>> main
   display: flex;
   align-self: flex-start;
 }
@@ -230,7 +234,11 @@ h1, h2, h3 {
 .quote-card {
   width: 100%;
   flex: 1;
+<<<<<<< codex/add-image-carousel-to-office-section-vacy9d
+  padding: clamp(0.4rem, 0.75vw, 0.62rem);
+=======
   padding: clamp(0.45rem, 0.9vw, 0.7rem);
+>>>>>>> main
   border-radius: 22px;
   border: 1.8px solid rgba(0, 212, 255, 0.55);
   background: linear-gradient(135deg, rgba(8, 19, 30, 0.82), rgba(10, 26, 38, 0.58));
@@ -758,8 +766,13 @@ h1, h2, h3 {
   }
 
   .split-screen .hero-quote {
+<<<<<<< codex/add-image-carousel-to-office-section-vacy9d
+    max-width: clamp(320px, 31vw, 430px);
+    flex: 0 1 clamp(320px, 31vw, 430px);
+=======
     max-width: clamp(380px, 36vw, 520px);
     flex: 0 1 clamp(380px, 36vw, 520px);
+>>>>>>> main
   }
 
   .split-screen .hero-quote .quote-card {

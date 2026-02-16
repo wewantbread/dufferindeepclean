@@ -3606,6 +3606,7 @@ body[data-cart-fixed] .nav-cart-popover {
 /* ===== UX fixes requested (homepage quote + mobile/iOS layout) ===== */
 .quote-card {
   background: linear-gradient(145deg, rgba(46, 18, 80, 0.88), rgba(31, 11, 67, 0.76));
+  overflow: visible;
 }
 
 .quote-form {
@@ -3619,16 +3620,17 @@ body[data-cart-fixed] .nav-cart-popover {
 .service-details {
   max-height: 0;
   min-height: 0;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .service-details.visible {
-  max-height: 1200px;
+  max-height: 1400px;
+  overflow: visible;
 }
 
 .service-detail-group.detail-inline[data-service-detail="home"] {
   max-height: none;
-  overflow-y: visible;
+  overflow: visible;
   padding-right: 0;
 }
 
@@ -3669,6 +3671,15 @@ body[data-cart-fixed] .nav-cart-popover {
 html.ios .split-screen {
   height: auto;
   min-height: 0;
+}
+
+html.ios .services-page {
+  padding-bottom: 3.5rem;
+}
+
+html.ios .about-section {
+  margin-top: 1.5rem;
+  padding-top: 3.25rem;
 }
 
 html.ios .service-card {

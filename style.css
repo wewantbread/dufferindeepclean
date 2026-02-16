@@ -3765,3 +3765,61 @@ html.ios .about-section .about-soap::before {
   top: 55% !important;
   transform: translate(-50%, -50%) !important;
 }
+
+/* ===== follow-up 2: hard iOS overlap fix + purple outlines ===== */
+/* Purple outline theme for quote + cards */
+.quote-card {
+  border-color: rgba(176, 82, 255, 0.72) !important;
+  box-shadow:
+    0 26px 90px rgba(0, 0, 0, 0.58),
+    0 0 24px rgba(176, 82, 255, 0.34),
+    inset 0 0 24px rgba(176, 82, 255, 0.14) !important;
+}
+
+.quote-card::before {
+  border-color: rgba(176, 82, 255, 0.52) !important;
+  box-shadow: 0 0 44px rgba(176, 82, 255, 0.3) !important;
+}
+
+.service-card {
+  border-color: rgba(176, 82, 255, 0.32) !important;
+}
+
+.service-card:hover {
+  border-color: rgba(196, 120, 255, 0.88) !important;
+  box-shadow: 0 20px 40px rgba(176, 82, 255, 0.3) !important;
+}
+
+.about-inner {
+  border-color: rgba(176, 82, 255, 0.35) !important;
+}
+
+/* iOS hard fix: stack About content and remove decorative soap overlap entirely */
+html.ios .about-section .about-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1.25rem !important;
+  overflow: hidden !important;
+}
+
+html.ios .about-section .about-soap,
+html.ios .about-section .about-soap::before,
+html.ios .about-section .about-soap::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ensure service card media never escapes its card on iOS */
+html.ios .service-card,
+html.ios .office-carousel,
+html.ios .office-carousel-track,
+html.ios .office-slide,
+html.ios .office-slide img {
+  max-width: 100%;
+}
+
+html.ios .office-carousel,
+html.ios .service-card {
+  overflow: hidden !important;
+}

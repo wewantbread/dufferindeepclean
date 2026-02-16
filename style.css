@@ -222,11 +222,7 @@ h1, h2, h3 {
 .hero-quote {
   margin-top: clamp(1.2rem, 2vw, 2rem);
   width: 100%;
-<<<<<<< codex/add-image-carousel-to-office-section-vacy9d
   max-width: clamp(300px, 31vw, 430px);
-=======
-  max-width: clamp(360px, 38vw, 520px);
->>>>>>> main
   display: flex;
   align-self: flex-start;
 }
@@ -234,11 +230,7 @@ h1, h2, h3 {
 .quote-card {
   width: 100%;
   flex: 1;
-<<<<<<< codex/add-image-carousel-to-office-section-vacy9d
-  padding: clamp(0.4rem, 0.75vw, 0.62rem);
-=======
-  padding: clamp(0.45rem, 0.9vw, 0.7rem);
->>>>>>> main
+  padding: clamp(0.38rem, 0.72vw, 0.58rem);
   border-radius: 22px;
   border: 1.8px solid rgba(0, 212, 255, 0.55);
   background: linear-gradient(135deg, rgba(8, 19, 30, 0.82), rgba(10, 26, 38, 0.58));
@@ -766,13 +758,8 @@ h1, h2, h3 {
   }
 
   .split-screen .hero-quote {
-<<<<<<< codex/add-image-carousel-to-office-section-vacy9d
     max-width: clamp(320px, 31vw, 430px);
     flex: 0 1 clamp(320px, 31vw, 430px);
-=======
-    max-width: clamp(380px, 36vw, 520px);
-    flex: 0 1 clamp(380px, 36vw, 520px);
->>>>>>> main
   }
 
   .split-screen .hero-quote .quote-card {
@@ -3613,4 +3600,113 @@ body[data-cart-fixed] .nav-cart-popover {
     max-height: 55vh;
     border-radius: 16px 16px 0 0;
   }
+}
+
+
+/* ===== UX fixes requested (homepage quote + mobile/iOS layout) ===== */
+.quote-card {
+  background: linear-gradient(145deg, rgba(46, 18, 80, 0.88), rgba(31, 11, 67, 0.76));
+}
+
+.quote-form {
+  gap: 0.32rem;
+}
+
+.quote-grid {
+  gap: 0.32rem;
+}
+
+.service-details {
+  max-height: 0;
+  min-height: 0;
+  overflow: clip;
+}
+
+.service-details.visible {
+  max-height: 1200px;
+}
+
+.service-detail-group.detail-inline[data-service-detail="home"] {
+  max-height: none;
+  overflow-y: visible;
+  padding-right: 0;
+}
+
+.detail-inline-field {
+  gap: 0.3rem;
+  padding: 0.38rem 0.5rem 0.34rem;
+}
+
+.detail-basement-extra {
+  gap: 0.36rem;
+}
+
+.detail-card {
+  gap: 0.42rem;
+  padding: 0.48rem 0.52rem;
+}
+
+.services-btn-home {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.6rem;
+  }
+
+  .nav-links .quote-btn {
+    order: 10;
+    flex: 0 0 100%;
+    width: fit-content;
+    margin-inline: auto;
+    text-align: center;
+  }
+}
+
+html.ios .split-screen {
+  height: auto;
+  min-height: 0;
+}
+
+html.ios .service-card {
+  overflow: hidden;
+}
+
+html.ios .office-carousel {
+  aspect-ratio: 4 / 3;
+}
+
+html.ios .service-detail-group.active {
+  gap: 0.7rem;
+  padding: 0.8rem;
+}
+
+html.ios .detail-inline-field,
+html.ios .detail-card {
+  gap: 0.45rem;
+}
+
+html.ios .detail-inline-field {
+  padding: 0.62rem 0.8rem;
+}
+
+html.ios .detail-card {
+  padding: 0.7rem;
+}
+
+html.ios .mini-pill-group {
+  gap: 0.6rem;
+}
+
+html.ios .mini-pill-group.tight {
+  gap: 0.5rem;
+}
+
+html.ios .mini-pill {
+  min-height: 40px;
+  padding: 0.48rem 0.7rem;
+  font-size: 0.8rem;
 }

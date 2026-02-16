@@ -843,6 +843,9 @@
             basementExtras.classList.add('visible');
             basementExtras.setAttribute('aria-hidden', 'false');
             basementExtraNumbers.forEach(updateNumberMeta);
+            window.requestAnimationFrame(() => {
+              basementExtras.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
           } else {
             basementExtras.hidden = true;
             basementExtras.classList.remove('visible');

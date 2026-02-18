@@ -3823,3 +3823,115 @@ html.ios .office-carousel,
 html.ios .service-card {
   overflow: hidden !important;
 }
+
+/* ===== Quote/card refresh: purple theme + improved quantity controls + scrolling ===== */
+.quote-card {
+  border-color: rgba(142, 76, 255, 0.78) !important;
+  background: linear-gradient(145deg, rgba(62, 25, 112, 0.9), rgba(44, 18, 86, 0.82)) !important;
+  box-shadow:
+    0 24px 68px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(142, 76, 255, 0.34),
+    inset 0 0 24px rgba(142, 76, 255, 0.2) !important;
+}
+
+.quote-card::before {
+  border-color: rgba(174, 124, 255, 0.55) !important;
+  box-shadow: 0 0 40px rgba(142, 76, 255, 0.3) !important;
+}
+
+.service-details,
+.service-details.visible {
+  max-height: none !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+.service-detail-group.detail-inline[data-service-detail="home"] {
+  max-height: none !important;
+  overflow-y: visible !important;
+  padding-right: 0 !important;
+}
+
+.number-wrap {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-areas:
+    "input input"
+    "minus plus";
+  gap: 0.32rem !important;
+  padding: 0.4rem !important;
+  border-color: rgba(168, 118, 255, 0.55) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: inset 0 0 0 1px rgba(188, 148, 255, 0.18) !important;
+}
+
+.number-wrap input[type="number"] {
+  grid-area: input;
+  background: transparent !important;
+  color: #f4eaff !important;
+}
+
+.number-wrap .stepper-button:first-child {
+  grid-area: minus;
+}
+
+.number-wrap .stepper-button:last-child {
+  grid-area: plus;
+}
+
+.stepper-button {
+  width: 100% !important;
+  border: 1px solid rgba(176, 126, 255, 0.55) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #f2e6ff !important;
+}
+
+.stepper-button:hover,
+.stepper-button:focus-visible {
+  background: rgba(170, 111, 255, 0.2) !important;
+  border-color: rgba(206, 172, 255, 0.85) !important;
+}
+
+.quote-see-price {
+  border-color: rgba(182, 138, 255, 0.75) !important;
+  background: linear-gradient(180deg, rgba(141, 72, 255, 0.52), rgba(106, 45, 222, 0.72)) !important;
+  color: #fff !important;
+}
+
+.quote-see-price:not(:disabled):hover,
+.quote-see-price:not(:disabled):focus-visible {
+  background: linear-gradient(180deg, rgba(162, 101, 255, 0.68), rgba(121, 61, 238, 0.9)) !important;
+  box-shadow: 0 0 0 3px rgba(170, 111, 255, 0.28) !important;
+}
+
+.nav-links .quote-btn {
+  border-color: rgba(182, 138, 255, 0.75) !important;
+  background: linear-gradient(135deg, rgba(146, 82, 255, 0.6), rgba(104, 42, 219, 0.82)) !important;
+  box-shadow: 0 12px 24px rgba(118, 58, 229, 0.35) !important;
+}
+
+.nav-links .quote-btn:hover,
+.nav-links .quote-btn:focus-visible {
+  background: linear-gradient(135deg, rgba(168, 112, 255, 0.78), rgba(120, 62, 240, 0.95)) !important;
+}
+
+.nav-cart {
+  border-color: rgba(182, 138, 255, 0.72) !important;
+  background: linear-gradient(135deg, rgba(76, 35, 144, 0.78), rgba(50, 20, 100, 0.88)) !important;
+  box-shadow: 0 12px 24px rgba(84, 36, 168, 0.32) !important;
+}
+
+.nav-cart:hover,
+.nav-cart:focus-visible {
+  background: linear-gradient(135deg, rgba(102, 57, 176, 0.8), rgba(70, 33, 138, 0.9)) !important;
+}
+
+.nav-cart-count {
+  display: inline-flex !important;
+  background: linear-gradient(135deg, #c58dff, #9554f4) !important;
+  color: #22063f !important;
+  box-shadow: 0 8px 18px rgba(112, 58, 210, 0.45) !important;
+}
+
+.nav-cart.nav-cart-has-items::before {
+  display: none !important;
+}

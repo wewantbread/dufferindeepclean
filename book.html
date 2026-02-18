@@ -933,6 +933,46 @@
       color: #ff6b9a;
     }
 
+    .stripe-help{
+      margin: 0 0 10px;
+    }
+
+    .stripe-checkout-btn{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: #6c4bf4;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .stripe-checkout-btn[aria-disabled="true"]{
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .stripe-status{
+      margin: 8px 0 0;
+      font-size: 0.9rem;
+      color: #b6c2cf;
+    }
+
+    .stripe-status.error{
+      color: #ff6b9a;
+    }
+
+    .stripe-reference{
+      display: grid;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
     .addon-empty{ color: rgba(214, 238, 255, 0.7); font-size: 0.95rem; }
 
     @media (min-width: 780px){
@@ -985,7 +1025,11 @@
     .step-frequency .plans{ margin-bottom: 0; }
   </style>
 </head>
-<body id="i1id" data-paypal-client-id="AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9jtInuutAfuZ6JLfRe1cu-ihq7X" data-paypal-currency="CAD" data-cart-image="deepcleanpackage.png">
+<body id="i1id"
+  data-paypal-client-id="AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9jtInuutAfuZ6JLfRe1cu-ihq7X"
+  data-paypal-currency="CAD"
+  data-cart-image="deepcleanpackage.png"
+  data-stripe-checkout-endpoint="/.netlify/functions/create-checkout-session">
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
@@ -1307,7 +1351,7 @@
                 <input type="radio" name="payment_method" value="paypal" />
               </label>
               <label class="payment-option">
-                <span class="payment-label">Debit / Credit</span>
+                <span class="payment-label">Card (Stripe)</span>
                 <span class="card-logos" aria-hidden="true">
                   <span class="card-logo">
                     <svg viewBox="0 0 64 32" role="presentation" focusable="false" aria-hidden="true">
@@ -1329,6 +1373,15 @@
             <div class="payment-ui" data-payment-ui="paypal" hidden>
               <div id="paypal-buttons"></div>
               <p class="paypal-status" id="paypal-status" role="status" aria-live="polite"></p>
+            </div>
+            <div class="payment-ui" data-payment-ui="stripe" hidden>
+              <p class="muted stripe-help">Card payments are processed securely through Stripe. Click below to create a live checkout from this cart total. After payment, you'll return here with your Stripe session ID filled in.</p>
+              <button type="button" class="btn stripe-checkout-btn" id="stripe-checkout-btn">Pay with Stripe Checkout</button>
+              <p class="stripe-status" id="stripe-status" role="status" aria-live="polite" hidden></p>
+              <label class="stripe-reference">
+                <span class="field-title">Stripe receipt / session ID</span>
+                <input type="text" name="stripe_reference" id="stripe-reference-input" placeholder="e.g. cs_test_123 or pi_123" />
+              </label>
             </div>
           </div>
           <div class="actions">
@@ -2145,6 +2198,20 @@
       });
       const paymentRadios = Array.from(form.querySelectorAll('input[name="payment_method"]'));
       const paypalUi = document.querySelector('[data-payment-ui="paypal"]');
+      const stripeUi = document.querySelector('[data-payment-ui="stripe"]');
+      const stripeCheckoutBtn = document.getElementById('stripe-checkout-btn');
+      const stripeStatus = document.getElementById('stripe-status');
+      const stripeReferenceInput = document.getElementById('stripe-reference-input');
+      let stripeSessionId = '';
+      let stripeSuccess = false;
+      try {
+        const searchParams = new URLSearchParams((window && window.location && window.location.search) || '');
+        stripeSessionId = searchParams.get('session_id') || '';
+        stripeSuccess = searchParams.get('stripe_success') === '1';
+      } catch(_){
+        stripeSessionId = '';
+        stripeSuccess = false;
+      }
       const paypalButtonsContainer = document.getElementById('paypal-buttons');
       const paypalStatus = document.getElementById('paypal-status');
       const PAYPAL_CONTEXTS = {};
@@ -2169,6 +2236,13 @@
       let paypalApproved = false;
       let paypalApprovedAmount = 0;
       let paypalScriptPromise = null;
+
+      if(stripeReferenceInput && stripeSessionId){
+        stripeReferenceInput.value = stripeSessionId;
+      }
+      if(stripeSuccess){
+        setStripeStatus('Stripe payment confirmed. Your checkout session ID has been added — submit your booking now.');
+      }
       let current = 0;
       let cartAdded = false;
       let autoAddAfterSkip = false;
@@ -2650,10 +2724,107 @@
         });
       }
 
+      function setStripeStatus(message, tone){
+        if(!stripeStatus) return;
+        stripeStatus.textContent = message || '';
+        stripeStatus.classList.toggle('error', tone === 'error');
+        stripeStatus.hidden = !message;
+      }
+
+      function getStripeCheckoutEndpoint(){
+        if(!document.body || !document.body.dataset) return '';
+        return (document.body.dataset.stripeCheckoutEndpoint || '').trim();
+      }
+
+      function updateStripeCheckoutButton(){
+        if(!stripeCheckoutBtn) return;
+        const endpoint = getStripeCheckoutEndpoint();
+        if(endpoint){
+          stripeCheckoutBtn.setAttribute('aria-disabled', 'false');
+          setStripeStatus('Stripe checkout is ready. We will send your cart total to Stripe when you click checkout.');
+        } else {
+          stripeCheckoutBtn.setAttribute('aria-disabled', 'true');
+          setStripeStatus('Stripe checkout endpoint is not configured. Add data-stripe-checkout-endpoint on <body>.', 'error');
+        }
+      }
+
+      async function startStripeCheckout(){
+        const endpoint = getStripeCheckoutEndpoint();
+        if(!endpoint){
+          setStripeStatus('Stripe checkout endpoint is not configured.', 'error');
+          return;
+        }
+
+        const total = Number(hiddenTotalPrice.value || 0);
+        if(!(total > 0)){
+          setStripeStatus('Your total is missing. Finish your package selections before checkout.', 'error');
+          return;
+        }
+
+        syncFullName();
+        const fd = new FormData(form);
+        const payload = {
+          frequency: fd.get('frequency') || '',
+          total,
+          currency: 'cad',
+          serviceLabel: hiddenServiceLabel.value || 'Dufferin Deep Clean booking',
+          customerEmail: fd.get('email') || undefined,
+          metadata: {
+            sqft: hiddenSqftLabel.value || String(fd.get('sqft') || ''),
+            service_details: hiddenDetailSummary.value || '',
+            addons: hiddenSelectedAddons.value || 'None'
+          }
+        };
+
+        stripeCheckoutBtn.disabled = true;
+        setStripeStatus('Creating secure Stripe checkout…');
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json().catch(() => ({}));
+          if(!response.ok || !result.url){
+            throw new Error(result.error || 'Could not create Stripe checkout session.');
+          }
+          if(stripeReferenceInput){
+            stripeReferenceInput.value = result.id || '';
+          }
+          window.location.href = result.url;
+        } catch(err){
+          console.error('Stripe checkout start failed', err);
+          setStripeStatus(err && err.message ? err.message : 'Stripe checkout failed. Please try again.', 'error');
+          stripeCheckoutBtn.disabled = false;
+          syncSubmitDisabled();
+        }
+      }
+
+      function updateStripeReferenceStatus(){
+        if(!stripeReferenceInput) return;
+        if(getSelectedPayment() !== 'card') return;
+        const hasReference = !!stripeReferenceInput.value.trim();
+        if(hasReference){
+          setStripeStatus('Stripe receipt captured. You can submit your booking.');
+        } else {
+          setStripeStatus('Click Stripe Checkout to pay this cart total, then return here to submit.', 'error');
+        }
+      }
+
+      function toggleStripeUi(show){
+        if(stripeUi){
+          stripeUi.hidden = !show;
+        }
+        if(!show){
+          setStripeStatus('', 'info');
+        }
+      }
+
       function syncSubmitDisabled(){
         if(!submitBtn) return;
         const method = getSelectedPayment();
-        submitBtn.disabled = method === 'paypal' && !paypalApproved;
+        const stripeMissing = method === 'card' && stripeReferenceInput && !stripeReferenceInput.value.trim();
+        submitBtn.disabled = (method === 'paypal' && !paypalApproved) || stripeMissing;
       }
 
       function togglePayPalUi(show){
@@ -2846,6 +3017,7 @@
         const method = getSelectedPayment();
         if(method === 'paypal'){
           togglePayPalUi(true);
+          toggleStripeUi(false);
           ensurePayPalButtons('main');
           ensurePayPalButtons('nav');
           if(paypalApproved){
@@ -2853,10 +3025,18 @@
           } else {
             setPayPalStatus('Complete your PayPal payment to enable submission.');
           }
+        } else if(method === 'card'){
+          togglePayPalUi(false);
+          resetPayPalApproval('');
+          setPayPalStatus('', 'info');
+          toggleStripeUi(true);
+          updateStripeCheckoutButton();
+          updateStripeReferenceStatus();
         } else {
           togglePayPalUi(false);
           resetPayPalApproval('');
           setPayPalStatus('', 'info');
+          toggleStripeUi(false);
         }
         syncSubmitDisabled();
       }
@@ -3010,6 +3190,9 @@
           }
         }
 
+        updateStripeCheckoutButton();
+        updateStripeReferenceStatus();
+
         if(addToCartBtn){
           const hasFrequency = !!freqInput;
           const canAdd = quoteAvailable && current >= 0 && hasFrequency;
@@ -3100,6 +3283,22 @@
       paymentRadios.forEach(radio => {
         radio.addEventListener('change', applyPaymentSelection);
       });
+
+      if(stripeCheckoutBtn){
+        stripeCheckoutBtn.addEventListener('click', (event) => {
+          event.preventDefault();
+          if(stripeCheckoutBtn.getAttribute('aria-disabled') === 'true') return;
+          startStripeCheckout();
+        });
+      }
+
+      if(stripeReferenceInput){
+        stripeReferenceInput.addEventListener('input', () => {
+          updateStripeReferenceStatus();
+          syncSubmitDisabled();
+          buildReview();
+        });
+      }
 
       if(addToCartBtn){
         addToCartBtn.addEventListener('click', () => {
@@ -3224,6 +3423,7 @@
           ['Frequency Savings', hiddenDiscountPrice.value && Number(hiddenDiscountPrice.value) ? `-$${Math.round(Number(hiddenDiscountPrice.value))}` : '—'],
           ['Total Due Today', hiddenTotalPrice.value && Number(hiddenTotalPrice.value) ? `$${Math.round(Number(hiddenTotalPrice.value))}` : '—'],
           ['PayPal Reference', hiddenPayPalCapture.value || hiddenPayPalOrder.value || '—'],
+          ['Stripe Reference', fd.get('stripe_reference') || '—'],
           ['First Visit', formatDateHumanFromInput(fd.get('first_visit_date'))],
           ['Next Visit', formatDateHumanFromInput(fd.get('follow_up_visit_date'))],
           ['Full Name', fullName || '—'],
@@ -3242,6 +3442,11 @@
         const method = getSelectedPayment();
         if(method === 'paypal' && !paypalApproved){
           setPayPalStatus('Please complete your PayPal payment before submitting your booking.', 'error');
+          return;
+        }
+        if(method === 'card' && stripeReferenceInput && !stripeReferenceInput.value.trim()){
+          setStripeStatus('Please add your Stripe receipt or session ID before submitting.', 'error');
+          stripeReferenceInput.focus();
           return;
         }
 
@@ -3295,6 +3500,9 @@
 
         if(hiddenPayPalCapture.value || hiddenPayPalOrder.value){
           summaryLines.push(`PayPal Reference: ${hiddenPayPalCapture.value || hiddenPayPalOrder.value}`);
+        }
+        if(fd.get('stripe_reference')){
+          summaryLines.push(`Stripe Reference: ${fd.get('stripe_reference')}`);
         }
 
         const pricingSummary = summaryLines.join('\n');

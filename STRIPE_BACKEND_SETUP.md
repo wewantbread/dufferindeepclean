@@ -4,6 +4,7 @@ This project now includes a Netlify Function at:
 
 - `netlify/functions/create-checkout-session.js`
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
 ## 1) Add keys in Netlify (where to paste secret vs publishable)
 
 In Netlify **Site configuration → Environment variables**, add:
@@ -12,6 +13,13 @@ In Netlify **Site configuration → Environment variables**, add:
 - `STRIPE_PUBLISHABLE_KEY=pk_live_...` optional for future Stripe.js usage
 
 For this Checkout redirect endpoint, only `STRIPE_SECRET_KEY` is required. Do **not** paste secret keys in HTML.
+=======
+## 1) Add your Stripe secret key in Netlify
+
+In Netlify site settings, add environment variable:
+
+- `STRIPE_SECRET_KEY=sk_live_...`
+>>>>>>> main
 
 ## 2) Install dependency
 
@@ -53,11 +61,17 @@ Response:
 }
 ```
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
 ## 4) Frontend usage (`book.html` is now wired)
 
 `book.html` now calls the endpoint in `data-stripe-checkout-endpoint` on the `<body>` tag and redirects automatically.
 
 Manual example (same pattern):
+=======
+## 4) Frontend usage
+
+When customer clicks Stripe checkout, call endpoint and redirect:
+>>>>>>> main
 
 ```js
 const payload = {
@@ -79,6 +93,7 @@ if (!res.ok || !data.url) throw new Error(data.error || 'Stripe checkout failed'
 window.location.href = data.url;
 ```
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
 ## 5) Stripe Dashboard / Netlify checklist
 
 1. In Stripe Dashboard, copy keys from **Developers → API keys**.
@@ -87,5 +102,8 @@ window.location.href = data.url;
 4. Deploy site, then test card checkout from `book.html`.
 
 ## 6) Important production note
+=======
+## 5) Important production note
+>>>>>>> main
 
 For full payment integrity, duplicate pricing logic server-side and calculate the final total in the function rather than trusting the browser-provided `total`.

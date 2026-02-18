@@ -108,10 +108,11 @@
     }
 
     .nav-cart{
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(0,212,255,0.32);
+      background: linear-gradient(180deg, rgba(203, 176, 255, 0.34), rgba(157, 121, 231, 0.26));
+      border: 1px solid rgba(218, 192, 255, 0.62);
       padding: 0.5em 1em;
-      color: #f1fbff;
+      color: #f8f1ff;
+      box-shadow: 0 8px 22px rgba(148, 109, 220, 0.25);
     }
 
     .booking{
@@ -129,7 +130,7 @@
     .stepper{
       list-style: none; padding: 12px; margin: 0;
       width: min(100%, 1080px);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;
       background: rgba(0, 0, 0, 0.55);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 28px;
@@ -138,9 +139,10 @@
       text-transform: lowercase;
     }
     .stepper li{
-      padding: 14px 12px; text-align: center; border-radius: 18px;
-      font-weight: 600; color: #b6c2cf;
-      border: 1px dashed rgba(255,255,255,0.12);
+      padding: 12px 10px; text-align: center; border-radius: 16px;
+      font-weight: 600; color: #efe8ff;
+      border: 1px solid rgba(204, 173, 255, 0.45);
+      background: linear-gradient(180deg, rgba(154, 119, 228, 0.28), rgba(124, 89, 203, 0.16));
       transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
       cursor: default;
     }
@@ -152,16 +154,28 @@
       outline-offset: 2px;
     }
     .stepper li.done{
-      color: #0f0;
-      border-color: rgba(0, 208, 132, 0.35);
-      background: linear-gradient(180deg, rgba(0,208,132,0.12), rgba(0,208,132,0.05));
+      color: #f6efff;
+      border-color: rgba(204, 173, 255, 0.72);
+      background: linear-gradient(180deg, rgba(175, 138, 245, 0.5), rgba(146, 109, 220, 0.32));
     }
     .stepper li.active{
       color: #fff;
-      background: linear-gradient(180deg, #ff90dc, #ff4fc3);
-      border-color: rgba(255, 128, 210, 0.5);
-      box-shadow: 0 18px 40px rgba(255, 110, 205, 0.25), 0 0 24px rgba(255, 140, 220, 0.35);
+      background: linear-gradient(180deg, #d8b7ff, #b88cff);
+      border-color: rgba(229, 210, 255, 0.95);
+      box-shadow: 0 12px 34px rgba(169, 123, 255, 0.34), 0 0 18px rgba(200, 168, 255, 0.42);
       transform: translateY(-1px);
+    }
+
+
+
+    @media (max-width: 900px){
+      .stepper-wrap{
+        overflow-x: auto;
+        justify-content: flex-start;
+      }
+      .stepper{
+        min-width: 980px;
+      }
     }
 
     .booking-card{
@@ -717,22 +731,22 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-weight: 700;
-      background: linear-gradient(180deg, #ff8edb, #ff4fc3);
-      border-color: rgba(255, 112, 210, 0.75);
+      background: linear-gradient(180deg, #d8b7ff, #b88cff);
+      border-color: rgba(221, 196, 255, 0.88);
       color: #fff;
-      box-shadow: 0 12px 32px rgba(255, 110, 205, 0.35);
+      box-shadow: 0 12px 30px rgba(165, 122, 242, 0.35);
     }
 
     .cart-btn:disabled{
-      background: linear-gradient(180deg, rgba(255, 142, 219, 0.28), rgba(255, 79, 195, 0.2));
-      border-color: rgba(255, 112, 210, 0.35);
-      color: rgba(255,255,255,0.68);
+      background: linear-gradient(180deg, rgba(216, 183, 255, 0.24), rgba(184, 140, 255, 0.18));
+      border-color: rgba(205, 176, 255, 0.36);
+      color: rgba(255,255,255,0.72);
       box-shadow: none;
     }
 
     .cart-btn.is-added{
-      background: linear-gradient(180deg, #ff9ee4, #ff64d0);
-      border-color: rgba(255, 140, 220, 0.85);
+      background: linear-gradient(180deg, #e2c7ff, #c69cff);
+      border-color: rgba(230, 212, 255, 0.9);
       color: #fff;
     }
 
@@ -843,14 +857,29 @@
     .btn:hover{ filter: brightness(1.05); }
 
     .review{
-      display:grid; gap:10px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      border-radius: 12px;
-      padding: 14px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 8px 12px;
+      border: 1px solid rgba(215, 193, 255, 0.42);
+      background: rgba(150, 118, 214, 0.14);
+      border-radius: 14px;
+      padding: 12px;
+      align-items: center;
     }
-    .review dt{ font-weight: 700; color: #b6c2cf; }
-    .review dd{ margin: 0 0 10px; }
+    .review dt{
+      font-weight: 700;
+      color: #dfd1ff;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .review dd{
+      margin: 0;
+      color: #ffffff;
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
 
     .payment-section{
       margin-top: 18px;
@@ -1029,7 +1058,12 @@
   data-paypal-client-id="AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9jtInuutAfuZ6JLfRe1cu-ihq7X"
   data-paypal-currency="CAD"
   data-cart-image="deepcleanpackage.png"
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
   data-stripe-checkout-endpoint="/.netlify/functions/create-checkout-session">
+=======
+  data-stripe-onetime-url=""
+  data-stripe-subscription-url="">
+>>>>>>> main
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
@@ -1375,8 +1409,13 @@
               <p class="paypal-status" id="paypal-status" role="status" aria-live="polite"></p>
             </div>
             <div class="payment-ui" data-payment-ui="stripe" hidden>
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
               <p class="muted stripe-help">Card payments are processed securely through Stripe. Click below to create a live checkout from this cart total. After payment, you'll return here with your Stripe session ID filled in.</p>
               <button type="button" class="btn stripe-checkout-btn" id="stripe-checkout-btn">Pay with Stripe Checkout</button>
+=======
+              <p class="muted stripe-help">Card payments are processed securely through Stripe. Use the button below to complete checkout, then paste your Stripe receipt or session ID before submitting.</p>
+              <a class="btn stripe-checkout-btn" id="stripe-checkout-btn" href="#" target="_blank" rel="noopener">Open Stripe Checkout</a>
+>>>>>>> main
               <p class="stripe-status" id="stripe-status" role="status" aria-live="polite" hidden></p>
               <label class="stripe-reference">
                 <span class="field-title">Stripe receipt / session ID</span>
@@ -1478,6 +1517,7 @@
       const quoteForms = Array.from(document.querySelectorAll('form.quote-form'));
       if(!quoteForms.length) return;
 
+
       const basePricing = {
         home: {
           '1000-1500': 165,
@@ -1485,7 +1525,39 @@
           '2000-2500': 215,
           '2500-3000': 245,
           '3000-3500': 285,
-          '3500-4000': 325
+          '3500-4000': 325,
+          '4000-4500': 345,
+          '4500-5000': 365,
+          '5000-5500': 385,
+          '5500-6000': 405,
+          '6000-6500': 425,
+          '6500-7000': 445,
+          '7000-7500': 465,
+          '7500-8000': 485,
+          '8000-8500': 505,
+          '8500-9000': 525,
+          '9000-9500': 545,
+          '9500-10000': 565,
+          '10000-10500': 585,
+          '10500-11000': 605,
+          '11000-11500': 625,
+          '11500-12000': 645,
+          '12000-12500': 665,
+          '12500-13000': 685,
+          '13000-13500': 705,
+          '13500-14000': 725,
+          '14000-14500': 745,
+          '14500-15000': 765,
+          '15000-15500': 785,
+          '15500-16000': 805,
+          '16000-16500': 825,
+          '16500-17000': 845,
+          '17000-17500': 865,
+          '17500-18000': 885,
+          '18000-18500': 905,
+          '18500-19000': 925,
+          '19000-19500': 945,
+          '19500-20000': 965
         },
         commercial: {
           '1000-1500': 240,
@@ -1493,7 +1565,39 @@
           '2000-2500': 330,
           '2500-3000': 380,
           '3000-3500': 425,
-          '3500-4000': 470
+          '3500-4000': 470,
+          '4000-4500': 495,
+          '4500-5000': 520,
+          '5000-5500': 545,
+          '5500-6000': 570,
+          '6000-6500': 595,
+          '6500-7000': 620,
+          '7000-7500': 645,
+          '7500-8000': 670,
+          '8000-8500': 695,
+          '8500-9000': 720,
+          '9000-9500': 745,
+          '9500-10000': 770,
+          '10000-10500': 795,
+          '10500-11000': 820,
+          '11000-11500': 845,
+          '11500-12000': 870,
+          '12000-12500': 895,
+          '12500-13000': 920,
+          '13000-13500': 945,
+          '13500-14000': 970,
+          '14000-14500': 995,
+          '14500-15000': 1020,
+          '15000-15500': 1045,
+          '15500-16000': 1070,
+          '16000-16500': 1095,
+          '16500-17000': 1120,
+          '17000-17500': 1145,
+          '17500-18000': 1170,
+          '18000-18500': 1195,
+          '18500-19000': 1220,
+          '19000-19500': 1245,
+          '19500-20000': 1270
         },
         office: {
           '1000-1500': 210,
@@ -1501,7 +1605,39 @@
           '2000-2500': 295,
           '2500-3000': 335,
           '3000-3500': 375,
-          '3500-4000': 420
+          '3500-4000': 420,
+          '4000-4500': 442,
+          '4500-5000': 464,
+          '5000-5500': 486,
+          '5500-6000': 508,
+          '6000-6500': 530,
+          '6500-7000': 552,
+          '7000-7500': 574,
+          '7500-8000': 596,
+          '8000-8500': 618,
+          '8500-9000': 640,
+          '9000-9500': 662,
+          '9500-10000': 684,
+          '10000-10500': 706,
+          '10500-11000': 728,
+          '11000-11500': 750,
+          '11500-12000': 772,
+          '12000-12500': 794,
+          '12500-13000': 816,
+          '13000-13500': 838,
+          '13500-14000': 860,
+          '14000-14500': 882,
+          '14500-15000': 904,
+          '15000-15500': 926,
+          '15500-16000': 948,
+          '16000-16500': 970,
+          '16500-17000': 992,
+          '17000-17500': 1014,
+          '17500-18000': 1036,
+          '18000-18500': 1058,
+          '18500-19000': 1080,
+          '19000-19500': 1102,
+          '19500-20000': 1124
         }
       };
 
@@ -2202,9 +2338,12 @@
       const stripeCheckoutBtn = document.getElementById('stripe-checkout-btn');
       const stripeStatus = document.getElementById('stripe-status');
       const stripeReferenceInput = document.getElementById('stripe-reference-input');
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
       const searchParams = new URLSearchParams(window.location.search);
       const stripeSessionId = searchParams.get('session_id');
       const stripeSuccess = searchParams.get('stripe_success') === '1';
+=======
+>>>>>>> main
       const paypalButtonsContainer = document.getElementById('paypal-buttons');
       const paypalStatus = document.getElementById('paypal-status');
       const PAYPAL_CONTEXTS = {};
@@ -2250,6 +2389,7 @@
         commercial: 'Commercial Cleaning Package',
         office: 'Office Cleaning Package'
       };
+
       const BASE_PRICE_TABLE = {
         home: {
           '1000-1500': 165,
@@ -2257,7 +2397,39 @@
           '2000-2500': 215,
           '2500-3000': 245,
           '3000-3500': 285,
-          '3500-4000': 325
+          '3500-4000': 325,
+          '4000-4500': 345,
+          '4500-5000': 365,
+          '5000-5500': 385,
+          '5500-6000': 405,
+          '6000-6500': 425,
+          '6500-7000': 445,
+          '7000-7500': 465,
+          '7500-8000': 485,
+          '8000-8500': 505,
+          '8500-9000': 525,
+          '9000-9500': 545,
+          '9500-10000': 565,
+          '10000-10500': 585,
+          '10500-11000': 605,
+          '11000-11500': 625,
+          '11500-12000': 645,
+          '12000-12500': 665,
+          '12500-13000': 685,
+          '13000-13500': 705,
+          '13500-14000': 725,
+          '14000-14500': 745,
+          '14500-15000': 765,
+          '15000-15500': 785,
+          '15500-16000': 805,
+          '16000-16500': 825,
+          '16500-17000': 845,
+          '17000-17500': 865,
+          '17500-18000': 885,
+          '18000-18500': 905,
+          '18500-19000': 925,
+          '19000-19500': 945,
+          '19500-20000': 965
         },
         commercial: {
           '1000-1500': 240,
@@ -2265,7 +2437,39 @@
           '2000-2500': 330,
           '2500-3000': 380,
           '3000-3500': 425,
-          '3500-4000': 470
+          '3500-4000': 470,
+          '4000-4500': 495,
+          '4500-5000': 520,
+          '5000-5500': 545,
+          '5500-6000': 570,
+          '6000-6500': 595,
+          '6500-7000': 620,
+          '7000-7500': 645,
+          '7500-8000': 670,
+          '8000-8500': 695,
+          '8500-9000': 720,
+          '9000-9500': 745,
+          '9500-10000': 770,
+          '10000-10500': 795,
+          '10500-11000': 820,
+          '11000-11500': 845,
+          '11500-12000': 870,
+          '12000-12500': 895,
+          '12500-13000': 920,
+          '13000-13500': 945,
+          '13500-14000': 970,
+          '14000-14500': 995,
+          '14500-15000': 1020,
+          '15000-15500': 1045,
+          '15500-16000': 1070,
+          '16000-16500': 1095,
+          '16500-17000': 1120,
+          '17000-17500': 1145,
+          '17500-18000': 1170,
+          '18000-18500': 1195,
+          '18500-19000': 1220,
+          '19000-19500': 1245,
+          '19500-20000': 1270
         },
         office: {
           '1000-1500': 210,
@@ -2273,7 +2477,39 @@
           '2000-2500': 295,
           '2500-3000': 335,
           '3000-3500': 375,
-          '3500-4000': 420
+          '3500-4000': 420,
+          '4000-4500': 442,
+          '4500-5000': 464,
+          '5000-5500': 486,
+          '5500-6000': 508,
+          '6000-6500': 530,
+          '6500-7000': 552,
+          '7000-7500': 574,
+          '7500-8000': 596,
+          '8000-8500': 618,
+          '8500-9000': 640,
+          '9000-9500': 662,
+          '9500-10000': 684,
+          '10000-10500': 706,
+          '10500-11000': 728,
+          '11000-11500': 750,
+          '11500-12000': 772,
+          '12000-12500': 794,
+          '12500-13000': 816,
+          '13000-13500': 838,
+          '13500-14000': 860,
+          '14000-14500': 882,
+          '14500-15000': 904,
+          '15000-15500': 926,
+          '15500-16000': 948,
+          '16000-16500': 970,
+          '16500-17000': 992,
+          '17000-17500': 1014,
+          '17500-18000': 1036,
+          '18000-18500': 1058,
+          '18500-19000': 1080,
+          '19000-19500': 1102,
+          '19500-20000': 1124
         }
       };
       const DETAIL_PRICE_TABLE = {
@@ -2724,13 +2960,30 @@
         stripeStatus.hidden = !message;
       }
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
       function getStripeCheckoutEndpoint(){
         if(!document.body || !document.body.dataset) return '';
         return (document.body.dataset.stripeCheckoutEndpoint || '').trim();
+=======
+      function stripeUrls(){
+        if(!document.body || !document.body.dataset) return { onetime: '', subscription: '' };
+        return {
+          onetime: document.body.dataset.stripeOnetimeUrl || '',
+          subscription: document.body.dataset.stripeSubscriptionUrl || ''
+        };
+      }
+
+      function getStripeCheckoutUrl(){
+        const urls = stripeUrls();
+        const freq = selectedFrequency();
+        const isSubscription = freq && freq.value === 'monthly';
+        return isSubscription ? urls.subscription : urls.onetime;
+>>>>>>> main
       }
 
       function updateStripeCheckoutButton(){
         if(!stripeCheckoutBtn) return;
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
         const endpoint = getStripeCheckoutEndpoint();
         if(endpoint){
           stripeCheckoutBtn.setAttribute('aria-disabled', 'false');
@@ -2790,6 +3043,17 @@
           setStripeStatus(err && err.message ? err.message : 'Stripe checkout failed. Please try again.', 'error');
           stripeCheckoutBtn.disabled = false;
           syncSubmitDisabled();
+=======
+        const url = getStripeCheckoutUrl();
+        if(url){
+          stripeCheckoutBtn.href = url;
+          stripeCheckoutBtn.setAttribute('aria-disabled', 'false');
+          setStripeStatus('Stripe checkout link is ready. Complete payment and paste your receipt or session ID below.');
+        } else {
+          stripeCheckoutBtn.href = '#';
+          stripeCheckoutBtn.setAttribute('aria-disabled', 'true');
+          setStripeStatus('Stripe checkout link is not configured yet. Add your Stripe payment links to enable card payments.', 'error');
+>>>>>>> main
         }
       }
 
@@ -2800,7 +3064,11 @@
         if(hasReference){
           setStripeStatus('Stripe receipt captured. You can submit your booking.');
         } else {
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
           setStripeStatus('Click Stripe Checkout to pay this cart total, then return here to submit.', 'error');
+=======
+          setStripeStatus('After checkout, paste your Stripe receipt or session ID to enable submission.', 'error');
+>>>>>>> main
         }
       }
 
@@ -3277,6 +3545,7 @@
         radio.addEventListener('change', applyPaymentSelection);
       });
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
       if(stripeCheckoutBtn){
         stripeCheckoutBtn.addEventListener('click', (event) => {
           event.preventDefault();
@@ -3285,6 +3554,8 @@
         });
       }
 
+=======
+>>>>>>> main
       if(stripeReferenceInput){
         stripeReferenceInput.addEventListener('input', () => {
           updateStripeReferenceStatus();

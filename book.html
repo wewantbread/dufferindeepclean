@@ -1058,8 +1058,12 @@
   data-paypal-client-id="AQk9lOYg8zcKM_lzMRRsenVn-6dsBDLcj19FZEfH_lyWi78RuZJnh9jtInuutAfuZ6JLfRe1cu-ihq7X"
   data-paypal-currency="CAD"
   data-cart-image="deepcleanpackage.png"
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+  data-stripe-checkout-endpoint="/.netlify/functions/create-checkout-session">
+=======
   data-stripe-onetime-url=""
   data-stripe-subscription-url="">
+>>>>>>> main
   <header class="navbar">
     <div class="logo">
       <span class="soap">🧼</span>
@@ -1405,8 +1409,13 @@
               <p class="paypal-status" id="paypal-status" role="status" aria-live="polite"></p>
             </div>
             <div class="payment-ui" data-payment-ui="stripe" hidden>
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+              <p class="muted stripe-help">Card payments are processed securely through Stripe. Click below to create a live checkout from this cart total. After payment, you'll return here with your Stripe session ID filled in.</p>
+              <button type="button" class="btn stripe-checkout-btn" id="stripe-checkout-btn">Pay with Stripe Checkout</button>
+=======
               <p class="muted stripe-help">Card payments are processed securely through Stripe. Use the button below to complete checkout, then paste your Stripe receipt or session ID before submitting.</p>
               <a class="btn stripe-checkout-btn" id="stripe-checkout-btn" href="#" target="_blank" rel="noopener">Open Stripe Checkout</a>
+>>>>>>> main
               <p class="stripe-status" id="stripe-status" role="status" aria-live="polite" hidden></p>
               <label class="stripe-reference">
                 <span class="field-title">Stripe receipt / session ID</span>
@@ -2329,6 +2338,12 @@
       const stripeCheckoutBtn = document.getElementById('stripe-checkout-btn');
       const stripeStatus = document.getElementById('stripe-status');
       const stripeReferenceInput = document.getElementById('stripe-reference-input');
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+      const searchParams = new URLSearchParams(window.location.search);
+      const stripeSessionId = searchParams.get('session_id');
+      const stripeSuccess = searchParams.get('stripe_success') === '1';
+=======
+>>>>>>> main
       const paypalButtonsContainer = document.getElementById('paypal-buttons');
       const paypalStatus = document.getElementById('paypal-status');
       const PAYPAL_CONTEXTS = {};
@@ -2353,6 +2368,13 @@
       let paypalApproved = false;
       let paypalApprovedAmount = 0;
       let paypalScriptPromise = null;
+
+      if(stripeReferenceInput && stripeSessionId){
+        stripeReferenceInput.value = stripeSessionId;
+      }
+      if(stripeSuccess){
+        setStripeStatus('Stripe payment confirmed. Your checkout session ID has been added — submit your booking now.');
+      }
       let current = 0;
       let cartAdded = false;
       let autoAddAfterSkip = false;
@@ -2938,6 +2960,11 @@
         stripeStatus.hidden = !message;
       }
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+      function getStripeCheckoutEndpoint(){
+        if(!document.body || !document.body.dataset) return '';
+        return (document.body.dataset.stripeCheckoutEndpoint || '').trim();
+=======
       function stripeUrls(){
         if(!document.body || !document.body.dataset) return { onetime: '', subscription: '' };
         return {
@@ -2951,10 +2978,72 @@
         const freq = selectedFrequency();
         const isSubscription = freq && freq.value === 'monthly';
         return isSubscription ? urls.subscription : urls.onetime;
+>>>>>>> main
       }
 
       function updateStripeCheckoutButton(){
         if(!stripeCheckoutBtn) return;
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+        const endpoint = getStripeCheckoutEndpoint();
+        if(endpoint){
+          stripeCheckoutBtn.setAttribute('aria-disabled', 'false');
+          setStripeStatus('Stripe checkout is ready. We will send your cart total to Stripe when you click checkout.');
+        } else {
+          stripeCheckoutBtn.setAttribute('aria-disabled', 'true');
+          setStripeStatus('Stripe checkout endpoint is not configured. Add data-stripe-checkout-endpoint on <body>.', 'error');
+        }
+      }
+
+      async function startStripeCheckout(){
+        const endpoint = getStripeCheckoutEndpoint();
+        if(!endpoint){
+          setStripeStatus('Stripe checkout endpoint is not configured.', 'error');
+          return;
+        }
+
+        const total = Number(hiddenTotalPrice.value || 0);
+        if(!(total > 0)){
+          setStripeStatus('Your total is missing. Finish your package selections before checkout.', 'error');
+          return;
+        }
+
+        syncFullName();
+        const fd = new FormData(form);
+        const payload = {
+          frequency: fd.get('frequency') || '',
+          total,
+          currency: 'cad',
+          serviceLabel: hiddenServiceLabel.value || 'Dufferin Deep Clean booking',
+          customerEmail: fd.get('email') || undefined,
+          metadata: {
+            sqft: hiddenSqftLabel.value || String(fd.get('sqft') || ''),
+            service_details: hiddenDetailSummary.value || '',
+            addons: hiddenSelectedAddons.value || 'None'
+          }
+        };
+
+        stripeCheckoutBtn.disabled = true;
+        setStripeStatus('Creating secure Stripe checkout…');
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json().catch(() => ({}));
+          if(!response.ok || !result.url){
+            throw new Error(result.error || 'Could not create Stripe checkout session.');
+          }
+          if(stripeReferenceInput){
+            stripeReferenceInput.value = result.id || '';
+          }
+          window.location.href = result.url;
+        } catch(err){
+          console.error('Stripe checkout start failed', err);
+          setStripeStatus(err && err.message ? err.message : 'Stripe checkout failed. Please try again.', 'error');
+          stripeCheckoutBtn.disabled = false;
+          syncSubmitDisabled();
+=======
         const url = getStripeCheckoutUrl();
         if(url){
           stripeCheckoutBtn.href = url;
@@ -2964,6 +3053,7 @@
           stripeCheckoutBtn.href = '#';
           stripeCheckoutBtn.setAttribute('aria-disabled', 'true');
           setStripeStatus('Stripe checkout link is not configured yet. Add your Stripe payment links to enable card payments.', 'error');
+>>>>>>> main
         }
       }
 
@@ -2974,7 +3064,11 @@
         if(hasReference){
           setStripeStatus('Stripe receipt captured. You can submit your booking.');
         } else {
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+          setStripeStatus('Click Stripe Checkout to pay this cart total, then return here to submit.', 'error');
+=======
           setStripeStatus('After checkout, paste your Stripe receipt or session ID to enable submission.', 'error');
+>>>>>>> main
         }
       }
 
@@ -3451,6 +3545,17 @@
         radio.addEventListener('change', applyPaymentSelection);
       });
 
+<<<<<<< codex/integrate-stripe-for-monthly-cleaning-sign-ups-6t5n7m
+      if(stripeCheckoutBtn){
+        stripeCheckoutBtn.addEventListener('click', (event) => {
+          event.preventDefault();
+          if(stripeCheckoutBtn.getAttribute('aria-disabled') === 'true') return;
+          startStripeCheckout();
+        });
+      }
+
+=======
+>>>>>>> main
       if(stripeReferenceInput){
         stripeReferenceInput.addEventListener('input', () => {
           updateStripeReferenceStatus();

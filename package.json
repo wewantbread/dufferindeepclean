@@ -1,0 +1,9 @@
+{
+  "name": "dufferindeepclean",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Dufferin Deep Clean site + Netlify functions",
+  "dependencies": {
+    "stripe": "^18.4.0"
+  }
+}

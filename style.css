@@ -3823,3 +3823,20 @@ html.ios .office-carousel,
 html.ios .service-card {
   overflow: hidden !important;
 }
+
+/* ===== latest iOS layout fixes ===== */
+/* Keep the home quote card lower so it does not crowd the main logo area. */
+.hero-quote {
+  margin-top: clamp(2.2rem, 4vw, 3.5rem);
+}
+
+/* Give extra separation between Services and About on iOS to stop section merging. */
+html.ios .services-page {
+  padding-bottom: clamp(4.5rem, 10vw, 7rem) !important;
+}
+
+html.ios .about-section {
+  margin-top: clamp(2.5rem, 7vw, 4rem) !important;
+  position: relative;
+  z-index: 3;
+}

@@ -656,6 +656,18 @@
       box-shadow: 0 10px 24px rgba(0,0,0,0.35);
     }
 
+    /* iOS only: hide the in-form cart summary and keep checkout flow focused on top cart button. */
+    html.ios .summary-column,
+    html.ios #cartSummary {
+      display: none !important;
+    }
+
+    html.ios .form-columns,
+    html.ios .form-columns.cart-summary-hidden {
+      grid-template-columns: 1fr !important;
+      gap: clamp(20px, 3.8vw, 34px);
+    }
+
     .cart-summary-title{
       margin: 0;
       font-family: "Bebas Neue", system-ui, sans-serif;

@@ -7,6 +7,16 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧼✨</text></svg>">
   <link rel="stylesheet" href="style.css" />
   <script src="nav-cart.js" defer></script>
+
+  <style>
+    .service-nav { position: relative; }
+    .service-nav > a { display: inline-flex; align-items: center; gap: .35rem; }
+    .services-dropdown { position: absolute; top: calc(100% + 10px); left: 0; min-width: 250px; background: rgba(4, 14, 28, 0.96); border: 1px solid rgba(0,212,255,.3); border-radius: 12px; padding: .4rem; display: none; box-shadow: 0 20px 40px rgba(0,0,0,.35); z-index: 25; }
+    .services-dropdown a { display: block; padding: .55rem .7rem; border-radius: 8px; color: #dff5ff; }
+    .services-dropdown a:hover { background: rgba(0,212,255,.16); }
+    .service-nav:hover .services-dropdown, .service-nav:focus-within .services-dropdown { display: block; }
+  </style>
+
 </head>
 <body data-cart-image="deepcleanpackage.png">
 
@@ -17,7 +27,14 @@
     </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
-      <a href="#services" class="services-btn-home" aria-current="page">Our Services</a>
+      <div class="service-nav">
+        <a href="services.html" class="services-btn-home" aria-current="page">Our Services ▾</a>
+        <div class="services-dropdown" role="menu" aria-label="Service pages">
+          <a href="premiumdeepclean.html">Premium Deep Clean</a>
+          <a href="commercialdeepclean.html">Commercial Deep Clean</a>
+          <a href="officecleanings.html">Office Cleaning</a>
+        </div>
+      </div>
       <a href="about.html">About Us</a>
       <a href="contact.html">Contact</a>
       <a href="book.html#start" class="quote-btn">Book Online</a>
@@ -67,7 +84,7 @@
     </div>
 
    <div class="services-grid" id="services-grid">
-      <a class="service-card" href="index.html#quote" data-service="home">
+      <a class="service-card" href="premiumdeepclean.html" data-service="home">
         <img src="deepcleanpackage.png" alt="Sparkling kitchen with fresh countertops and appliances" class="service-image">
         <div class="service-copy">
           <h3>House Cleaning Package</h3>
@@ -76,7 +93,7 @@
         <span class="service-cta">Book</span>
       </a>
 
-      <a class="service-card" href="index.html#quote" data-service="commercial">
+      <a class="service-card" href="commercialdeepclean.html" data-service="commercial">
         <img src="cleanuptransformation.jpg" alt="Warehouse aisle freshly mopped with organized storage racks" class="service-image">
         <div class="service-copy">
           <h3>Commercial Cleaning Package</h3>
@@ -85,7 +102,7 @@
         <span class="service-cta">Book</span>
       </a>
 
-      <a class="service-card" href="index.html#quote" data-service="office">
+      <a class="service-card" href="officecleanings.html" data-service="office">
         <img src="IMG_1629.png" alt="Modern office lounge freshly detailed with seating and plants" class="service-image">
         <div class="service-copy">
           <h3>Office Cleaning Package</h3>

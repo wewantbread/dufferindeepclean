@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Commercial Deep Clean | DufferinDeepClean</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="nav-cart.js" defer></script>
+  <style>
+    .navbar, main, section, footer { position: relative; z-index: 2; }
+    .service-layout { max-width: 1100px; margin: 0 auto; padding: 8rem 1.2rem 5rem; display: grid; gap: 2.5rem; }
+    .service-hero { background: rgba(6, 19, 35, 0.72); border: 1px solid rgba(0, 212, 255, 0.35); border-radius: 24px; padding: 2rem; box-shadow: 0 24px 50px rgba(0,0,0,0.35); }
+    .service-hero h1 { margin: 0 0 .6rem; color: #f4fbff; text-transform: uppercase; letter-spacing: .08em; }
+    .service-hero p { margin: 0; color: #cce8ff; }
+    .service-nav { position: relative; }
+    .service-nav > a { display: inline-flex; align-items: center; gap: .35rem; }
+    .services-dropdown { position: absolute; top: calc(100% + 10px); left: 0; min-width: 250px; background: rgba(4, 14, 28, 0.96); border: 1px solid rgba(0,212,255,.3); border-radius: 12px; padding: .4rem; display: none; box-shadow: 0 20px 40px rgba(0,0,0,.35); }
+    .services-dropdown a { display: block; padding: .55rem .7rem; border-radius: 8px; color: #dff5ff; }
+    .services-dropdown a:hover, .services-dropdown a[aria-current="page"] { background: rgba(0,212,255,.16); }
+    .service-nav:hover .services-dropdown, .service-nav:focus-within .services-dropdown { display: block; }
+    .story-grid { display: grid; gap: 1.6rem; }
+    .reveal-item { display: grid; gap: 1rem; grid-template-columns: 1fr; align-items: center; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 1.2rem; opacity: 0; transform: translateY(24px); transition: transform .6s ease, opacity .6s ease; }
+    .reveal-item.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-item img { width: 100%; border-radius: 16px; border: 1px solid rgba(255,255,255,.2); box-shadow: 0 0 40px rgba(120, 208, 255, .25); }
+    .type-line { min-height: 5.8em; color: #e8f8ff; font-size: 1.05rem; line-height: 1.7; }
+    .quote-card { max-width: 900px; margin: 0 auto; }
+    .service-lock { display: inline-flex; margin-top: .4rem; padding: .3rem .7rem; border-radius: 999px; border: 1px solid rgba(0,212,255,.35); color: #9fe9ff; font-size: .85rem; }
+  </style>
+</head>
+<body data-cart-image="deepcleanpackage.png">
+  <header class="navbar">
+    <div class="logo"><span class="soap">🧼</span><a class="logo-text" href="index.html">DufferinDeepClean</a></div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="service-nav">
+        <a href="services.html">Services ▾</a>
+        <div class="services-dropdown" role="menu" aria-label="Service pages">
+          <a href="premiumdeepclean.html" >Premium Deep Clean</a>
+          <a href="commercialdeepclean.html" aria-current="page">Commercial Deep Clean</a>
+          <a href="officecleanings.html">Office Cleaning</a>
+        </div>
+      </div>
+      <a href="about.html">About Us</a><a href="contact.html">Contact</a><a href="book.html#start" class="quote-btn">Book Online</a>
+    </nav>
+    <div class="nav-actions"><button class="nav-cart" type="button" data-cart-toggle aria-haspopup="dialog" aria-controls="navCartPopover" aria-expanded="false"><span class="nav-cart-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 4h-2a.5.5 0 0 1 0-1h2.8a1 1 0 0 1 .97.76L6.7 6H21a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 19 15H9.24l-.78 2.34A1 1 0 0 1 7.52 18H4.5a.5.5 0 0 1 0-1h2.55l3.2-9.6L9.8 6H4.78a1 1 0 0 1-.95-.68L4.5 4Zm4.28 3-2.4 7.2H19.1l1.71-6H8.78ZM9 19.75a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Zm9.5 0a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0Z" fill="currentColor"/></svg></span><span class="nav-cart-label">Cart</span><span class="nav-cart-count" data-cart-count hidden>0</span></button></div>
+  </header>
+  <aside class="nav-cart-popover" id="navCartPopover" role="dialog" aria-modal="false" aria-label="Cart summary" hidden><div class="nav-cart-popover-inner"><button type="button" class="cart-popover-close" data-cart-close aria-label="Close cart"><span aria-hidden="true">&times;</span></button><header class="cart-popover-header"><img data-cart-popover-image alt="Cart package preview" loading="lazy" /><div><p class="cart-popover-title" data-popover-service>Your cart is empty</p><p class="cart-popover-subtitle" data-popover-frequency>Build a package to see pricing here.</p></div></header><p class="cart-popover-status" data-popover-status hidden></p><p class="cart-popover-empty" data-popover-empty>Use “Book Online” to customise your cleaning package.</p><dl class="cart-popover-details" data-popover-details hidden></dl><div class="cart-popover-totals" data-popover-totals hidden><div><span>Visit total</span><span data-popover-total>—</span></div></div></div></aside>
 
+  <main class="service-layout">
+    <section class="service-hero">
+      <h1>Commercial Deep Clean</h1>
+      <p>Heavy-duty cleaning support for warehouses, industrial floors, shipping lanes, and attached staff facilities.</p>
+    </section>
+
+    <section class="story-grid" aria-label="Commercial deep clean highlights">
+      <article class="reveal-item"><img src="deepcleanpackage.png" alt="Commercial facility floor cleaning prep" /><p class="type-line" data-text="Commercial deep cleans target floor grime, racking dust, and high-contact points to keep production and storage spaces safer and presentable."></p></article>
+      <article class="reveal-item"><img src="baseboards.png" alt="Industrial workspace detailing and edge cleaning" /><p class="type-line" data-text="We detail wall edges, baseboards, ledges, and utility areas where buildup hides, reducing dust carryover into active operational zones."></p></article>
+      <article class="reveal-item"><img src="window.png" alt="Sanitized washroom and break area in commercial site" /><p class="type-line" data-text="Breakrooms, office pods, and washrooms inside your facility are sanitized and finished with streak-free glass care for a polished client-ready environment."></p></article>
+    </section>
+
+    <section id="quote" class="hero-quote" aria-labelledby="quote-title">
+      <div class="quote-card">
+        <div class="quote-card-header">
+          <h2 id="quote-title">Commercial Deep Clean Quote</h2>
+          <p>This quote is locked to <strong>Commercial Deep Clean</strong>.</p>
+          <span class="service-lock">Service locked: Commercial Deep Clean</span>
+        </div>
+        <form class="quote-form" action="book.html#start" method="get">
+          <input type="hidden" name="service" value="commercial" />
+          <div class="quote-grid">
+            <label class="field"><span class="field-label">First Name</span><input name="first-name" type="text" required /></label>
+            <label class="field"><span class="field-label">Email</span><input name="email" type="email" required /></label>
+            <label class="field field-inline"><span class="field-label">Type of Service</span><div class="select-wrap"><select disabled><option selected>Commercial Deep Clean</option></select></div></label>
+            <label class="field field-inline"><span class="field-label">Square Footage</span><div class="select-wrap"><select name="square-footage" required><option value="" disabled selected>Select approximate size</option><option value="1000-1500">1,000 – 1,500 sq ft</option><option value="1500-2500">1,500 – 2,500 sq ft</option><option value="2500-4000">2,500 – 4,000 sq ft</option><option value="4000-6000">4,000 – 6,000 sq ft</option></select></div></label>
+          </div>
+          <button class="btn quote-submit" type="submit">Continue With Commercial Deep Clean</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const revealItems = document.querySelectorAll('.reveal-item');
+    const typeText = (el) => {
+      if (el.dataset.done) return;
+      const text = el.dataset.text || '';
+      let i = 0;
+      const tick = () => {
+        el.textContent = text.slice(0, i++);
+        if (i <= text.length) setTimeout(tick, 16);
+      };
+      el.dataset.done = 'true';
+      tick();
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          typeText(entry.target.querySelector('.type-line'));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    revealItems.forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>

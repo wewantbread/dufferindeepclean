@@ -1126,8 +1126,7 @@
       <ol class="stepper" id="stepper">
         <li class="active" data-stepper-label="schedule &amp; frequency">1. schedule &amp; frequency</li>
         <li data-stepper-label="optional services" data-stepper-optional>2. optional services</li>
-        <li data-stepper-label="your details">3. your details</li>
-        <li data-stepper-label="review &amp; confirm">4. review &amp; confirm</li>
+        <li data-stepper-label="review &amp; confirm">3. review &amp; confirm</li>
       </ol>
     </div>
 
@@ -1350,16 +1349,13 @@
           </div>
         </fieldset>
 
-        <fieldset class="step step-contact" data-step="3" hidden>
-          <legend>Your contact information</legend>
+        <fieldset class="step" data-step="3" hidden>
+          <legend>Review &amp; confirm</legend>
+          <h3>Your contact information</h3>
           <div class="grid-2">
             <label>
-              <span class="field-title">First name</span>
-              <input type="text" name="first_name" placeholder="Jane" autocomplete="given-name" required />
-            </label>
-            <label>
-              <span class="field-title">Last name (optional)</span>
-              <input type="text" name="last_name" placeholder="Smith" autocomplete="family-name" />
+              <span class="field-title">Name</span>
+              <input type="text" name="first_name" placeholder="Jane Smith" autocomplete="name" required />
             </label>
             <label>
               <span class="field-title">Email</span>
@@ -1374,14 +1370,6 @@
               <textarea name="notes" rows="3" placeholder="Access details, special instructions, etc."></textarea>
             </label>
           </div>
-          <div class="actions">
-            <button type="button" class="btn back">Back</button>
-            <button type="button" class="btn next">Next</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="step" data-step="4" hidden>
-          <legend>Review &amp; confirm</legend>
           <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
           <div class="payment-section">

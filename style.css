@@ -3830,13 +3830,41 @@ html.ios .service-card {
   margin-top: clamp(2.2rem, 4vw, 3.5rem);
 }
 
-/* Give extra separation between Services and About on iOS to stop section merging. */
+/* ===== iOS overlap root fix =====
+   The global rule `html, body { height: -webkit-fill-available }` gives the
+   body a FIXED height equal to the visible viewport. Because the iOS body is
+   also `display:flex; flex-direction:column`, flex's default flex-shrink:1
+   causes all child sections to compress and overlap each other.
+   Fix: reset body to height:auto so it grows with its content, and add
+   flex-shrink:0 so sections never collapse below their natural height.      */
+
+html.ios,
+html.ios body {
+  height: auto !important;
+  min-height: -webkit-fill-available; /* iOS 12-14 fallback */
+  min-height: 100svh;                 /* iOS 15.4+ preferred  */
+}
+
+/* Stop flex items from shrinking — each section keeps its natural height */
+html.ios section,
+html.ios footer,
+html.ios header.navbar,
+html.ios .announcement {
+  flex-shrink: 0;
+}
+
+/* Remove the 100vh floor on services so Safari doesn't miscalculate its height */
 html.ios .services-page {
+  min-height: auto !important;
+  /* extra bottom breathing room keeps About well below the last card */
   padding-bottom: clamp(4.5rem, 10vw, 7rem) !important;
 }
 
+/* About section: sits in normal document flow, clearly below Services */
 html.ios .about-section {
-  margin-top: clamp(2.5rem, 7vw, 4rem) !important;
-  position: relative;
-  z-index: 3;
+  margin-top: 0 !important;      /* margin-top on the section itself is enough */
+  padding-top: clamp(4rem, 8vw, 6rem) !important;
+  position: relative !important;
+  z-index: 2 !important;
+  transform: none !important;    /* guard against any rogue transform */
 }

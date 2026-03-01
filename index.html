@@ -752,6 +752,10 @@
           input.value = String(next);
           input.dispatchEvent(new Event('input', { bubbles: true }));
           input.dispatchEvent(new Event('change', { bubbles: true }));
+          // Prevent iOS keyboard from opening after stepper tap
+          if(document.activeElement && document.activeElement !== document.body) {
+            document.activeElement.blur();
+          }
         }
 
         function wireNumberSteppers(){
@@ -958,9 +962,7 @@
             basementExtras.classList.add('visible');
             basementExtras.setAttribute('aria-hidden', 'false');
             basementExtraNumbers.forEach(updateNumberMeta);
-            window.requestAnimationFrame(() => {
-              basementExtras.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            });
+            // scrollIntoView removed — causes choppy jumps on iOS; page scrolls naturally
           } else {
             basementExtras.hidden = true;
             basementExtras.classList.remove('visible');
@@ -1154,6 +1156,15 @@
 
         numberFields.forEach(updateNumberMeta);
         wireNumberSteppers();
+
+        // On iOS: make number inputs readonly so the keyboard never pops up.
+        // Values are changed exclusively via the +/- stepper buttons.
+        if(document.documentElement.classList.contains('ios')){
+          Array.from(form.querySelectorAll('input[type="number"]')).forEach(function(input){
+            input.setAttribute('readonly', '');
+            input.setAttribute('tabindex', '-1');
+          });
+        }
 
         if(basementField){
           basementField.addEventListener('change', () => {

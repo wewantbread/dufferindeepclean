@@ -232,12 +232,12 @@ h1, h2, h3 {
   flex: 1;
   padding: clamp(0.38rem, 0.72vw, 0.58rem);
   border-radius: 22px;
-  border: 1.8px solid rgba(0, 212, 255, 0.55);
+  border: 3px solid rgba(176, 100, 255, 0.68);
   background: linear-gradient(135deg, rgba(8, 19, 30, 0.82), rgba(10, 26, 38, 0.58));
   box-shadow:
     0 26px 90px rgba(0, 0, 0, 0.58),
-    0 0 22px rgba(0, 212, 255, 0.22),
-    inset 0 0 28px rgba(0, 212, 255, 0.06);
+    0 0 28px rgba(176, 100, 255, 0.28),
+    inset 0 0 28px rgba(176, 100, 255, 0.08);
   backdrop-filter: blur(14px);
   position: relative;
   overflow: hidden;
@@ -249,18 +249,18 @@ h1, h2, h3 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 2.2px solid rgba(0, 212, 255, 0.28);
+  border: 2.5px solid rgba(176, 100, 255, 0.32);
   pointer-events: none;
-  box-shadow: 0 0 45px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 0 50px rgba(176, 100, 255, 0.22);
   opacity: 0.6;
 }
 
 .hero-quote.quote-spotlight .quote-card {
   transform: translateY(-4px);
   box-shadow:
-    0 0 0 2px rgba(0, 212, 255, 0.65),
+    0 0 0 3px rgba(176, 100, 255, 0.7),
     0 32px 70px rgba(0, 0, 0, 0.6),
-    inset 0 0 32px rgba(0, 212, 255, 0.12);
+    inset 0 0 32px rgba(176, 100, 255, 0.14);
 }
 
 .hero-quote.quote-spotlight .quote-card::before {
@@ -270,11 +270,11 @@ h1, h2, h3 {
 @keyframes quotePulse {
   0%, 100% {
     opacity: 0.6;
-    box-shadow: 0 0 45px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 50px rgba(176, 100, 255, 0.22);
   }
   50% {
     opacity: 0.95;
-    box-shadow: 0 0 80px rgba(0, 212, 255, 0.35);
+    box-shadow: 0 0 85px rgba(176, 100, 255, 0.4);
   }
 }
 
@@ -1627,10 +1627,10 @@ html.ios .hero-quote .quote-card {
   gap: 1.4rem;
   box-sizing: border-box;
   overscroll-behavior: contain;
-  border: 2px solid rgba(0, 212, 255, 0.55);
+  border: 3px solid rgba(176, 100, 255, 0.68);
   box-shadow:
     0 26px 80px rgba(0, 0, 0, 0.55),
-    0 0 32px rgba(0, 212, 255, 0.24);
+    0 0 32px rgba(176, 100, 255, 0.28);
   background: rgba(0, 12, 22, 0.82);
 }
 
@@ -3856,15 +3856,15 @@ html.ios .announcement {
 /* Remove the 100vh floor on services so Safari doesn't miscalculate its height */
 html.ios .services-page {
   min-height: auto !important;
-  /* extra bottom breathing room keeps About well below the last card */
-  padding-bottom: clamp(4.5rem, 10vw, 7rem) !important;
+  /* generous bottom padding pushes About well below the last service card */
+  padding-bottom: 9rem !important;
 }
 
-/* About section: sits in normal document flow, clearly below Services */
+/* About section: anchored in document flow, clearly below Services */
 html.ios .about-section {
-  margin-top: 0 !important;      /* margin-top on the section itself is enough */
-  padding-top: clamp(4rem, 8vw, 6rem) !important;
+  margin-top: 5rem !important;
+  padding-top: 5rem !important;
   position: relative !important;
   z-index: 2 !important;
-  transform: none !important;    /* guard against any rogue transform */
+  transform: none !important;    /* guard against any rogue upward transform */
 }

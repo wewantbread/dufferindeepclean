@@ -175,11 +175,6 @@
           </div>
 
           <form id="instant-quote" class="quote-form" data-quote-mode="redirect" data-redirect="book.html" data-redirect-anchor="start" novalidate>
-            <section class="quote-step-box" aria-label="Step 1">
-              <div class="quote-step-heading">
-                <span class="quote-step-index">Step 1</span>
-                <p>Tell us where to send your estimate.</p>
-              </div>
             <div class="quote-grid">
               <label class="field" for="quote-first-name">
                 <span class="field-label">Name</span>
@@ -250,13 +245,7 @@
                 </div>
               </label>
             </div>
-            </section>
 
-            <section class="quote-step-box" aria-label="Step 2">
-              <div class="quote-step-heading">
-                <span class="quote-step-index">Step 2</span>
-                <p>Choose service + layout details.</p>
-              </div>
             <div id="service-details" class="service-details" aria-live="polite">
               <div class="service-detail-group detail-inline" data-service-detail="home" aria-hidden="true">
                 <label class="detail-inline-field" for="home-rooms">
@@ -336,13 +325,7 @@
                 </div>
               </div>
             </div>
-            </section>
 
-            <section class="quote-step-box quote-step-box-summary" aria-label="Step 3">
-              <div class="quote-step-heading">
-                <span class="quote-step-index">Step 3</span>
-                <p>Review your instant estimate.</p>
-              </div>
             <div class="quote-summary" aria-live="polite">
               <div class="quote-summary-line">
                 <span>Base Package</span>
@@ -361,7 +344,6 @@
             <div class="quote-actions">
               <button type="button" id="quote-see-price" class="quote-see-price" disabled>See My Price</button>
             </div>
-            </section>
           </form>
         </div>
       </div>
@@ -756,15 +738,6 @@
         const seePriceBtn = form.querySelector('.quote-see-price');
         const pillControls = Array.from(form.querySelectorAll('[data-target-input]'));
         const numberFields = Array.from(form.querySelectorAll('input[type="number"][data-detail-key]'));
-
-        form.addEventListener('keydown', (event) => {
-          if(event.key !== 'Enter') return;
-          const target = event.target;
-          if(!(target instanceof HTMLElement)) return;
-          if(target.tagName === 'TEXTAREA') return;
-          if(target.closest('.quote-actions')) return;
-          event.preventDefault();
-        });
 
         function adjustNumericInput(input, delta){
           if(!input || !Number.isFinite(delta)) return;

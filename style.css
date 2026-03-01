@@ -4068,12 +4068,15 @@ html.ios .field select,
 html.ios .select-wrap select {
   border-radius: 12px !important;
 }
-/* iOS / small screen fix */
+/* iOS overlap fix */
 @media screen and (max-width: 768px) {
 
   .about-section {
-    margin-bottom: 60px !important;
-    position: relative !important;
+    margin-bottom: 80px;
+  }
+
+  .about-inner {
+    flex-direction: column;
   }
 
 }

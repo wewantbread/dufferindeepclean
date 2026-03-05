@@ -52,6 +52,30 @@
     return Math.max(min, Math.min(max, value));
   }
 
+  const NAV_CART_STORAGE_KEY = 'ddc-nav-cart-v1';
+
+  function readStoredCartState(){
+    try {
+      const raw = window.localStorage.getItem(NAV_CART_STORAGE_KEY);
+      if(!raw) return null;
+      const parsed = JSON.parse(raw);
+      if(parsed && parsed.cartAdded){
+        parsed.quantity = 1;
+        return parsed;
+      }
+    } catch(_) {}
+    return null;
+  }
+
+  function storeCartState(state){
+    try {
+      if(state && state.cartAdded){
+        const payload = Object.assign({}, state, { quantity: 1, justAdded: false });
+        window.localStorage.setItem(NAV_CART_STORAGE_KEY, JSON.stringify(payload));
+      }
+    } catch(_) {}
+  }
+
   function init(){
     const navCartButton = document.querySelector('[data-cart-toggle]');
     const navPopover = document.getElementById('navCartPopover');
@@ -73,6 +97,15 @@
     const closeBtn = navPopover.querySelector('[data-cart-close]');
     const googleBtn = navPopover.querySelector('[data-google-pay-button]');
     const navPayPalStatus = navPopover.querySelector('#nav-paypal-status');
+
+    if(paymentsEl && !paymentsEl.querySelector('[data-cart-checkout-row]')){
+      const checkoutRow = document.createElement('div');
+      checkoutRow.className = 'cart-popover-checkout-row';
+      checkoutRow.setAttribute('data-cart-checkout-row', 'true');
+      checkoutRow.innerHTML = '<a class="btn cart-popover-pay-btn" href="book.html#paymentPanel">PayPal</a><a class="btn cart-popover-stripe-btn" href="book.html#paymentPanel">Stripe</a>';
+
+      paymentsEl.appendChild(checkoutRow);
+    }
 
     if(navImage && !navImage.getAttribute('src')){
       applyCartImage(navImage);
@@ -160,12 +193,13 @@
     }
 
     window.updateNavCartPopover = function(state){
-      currentState = state || null;
-      const hasItem = !!(state && state.cartAdded);
+      const storedState = (!state || !state.cartAdded) ? readStoredCartState() : null;
+      currentState = state && state.cartAdded ? state : (storedState || state || null);
+      const hasItem = !!(currentState && currentState.cartAdded);
 
       if(navCartCount){
         navCartCount.hidden = !hasItem;
-        navCartCount.textContent = hasItem ? String(clamp(state && state.quantity ? state.quantity : 1, 1, 99)) : '';
+        navCartCount.textContent = hasItem ? '1' : '';
       }
 
       navCartButton.classList.toggle('nav-cart-has-items', hasItem);
@@ -176,23 +210,23 @@
 
       if(serviceEl){
         serviceEl.textContent = hasItem
-          ? (state.serviceLabel || DEFAULT_SERVICE_LABEL)
+          ? (currentState.serviceLabel || DEFAULT_SERVICE_LABEL)
           : 'Your cart is empty';
       }
 
       if(freqEl){
         freqEl.textContent = hasItem
-          ? (state.frequencyLabel || 'Choose a frequency to finalise your package.')
+          ? (currentState.frequencyLabel || 'Choose a frequency to finalise your package.')
           : 'Build a package to see pricing here.';
       }
 
       if(statusEl){
-        const message = state && state.status ? state.status : '';
+        const message = currentState && currentState.status ? currentState.status : '';
         statusEl.textContent = message;
         statusEl.hidden = !message;
       }
 
-      if(navPayPalStatus && !(state && state.cartAdded)){
+      if(navPayPalStatus && !(currentState && currentState.cartAdded)){
         navPayPalStatus.textContent = '';
         navPayPalStatus.classList.remove('error');
         navPayPalStatus.hidden = true;
@@ -202,33 +236,42 @@
         emptyEl.hidden = hasItem;
       }
 
-      renderDetailList(state);
+      renderDetailList(currentState);
 
       if(totalsEl){
         totalsEl.hidden = !hasItem;
         if(hasItem){
-          if(totalValue){ totalValue.textContent = formatCurrency(state.total); }
+          if(totalValue){ totalValue.textContent = formatCurrency(currentState.total); }
         }
       }
 
       if(paymentsEl){
-        const showPayments = hasItem && state.total && state.total > 0;
+        const showPayments = hasItem && currentState.total && currentState.total > 0;
         paymentsEl.hidden = !showPayments;
         if(googleBtn){
           googleBtn.disabled = !showPayments;
         }
       }
 
-      if(state && state.justAdded){
+      if(currentState && currentState.justAdded){
         navCartButton.classList.add('nav-cart-pulse');
         window.setTimeout(() => navCartButton.classList.remove('nav-cart-pulse'), 900);
         if(isOpen){
           document.dispatchEvent(new CustomEvent('nav-cart:opened', { detail: currentState }));
         }
       }
+
+      if(hasItem){
+        storeCartState(currentState);
+      }
     };
 
-    window.updateNavCartPopover();
+    const initialState = readStoredCartState();
+    if(initialState){
+      window.updateNavCartPopover(initialState);
+    } else {
+      window.updateNavCartPopover();
+    }
   }
 
   if(document.readyState === 'loading'){

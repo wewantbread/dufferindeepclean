@@ -65,7 +65,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.5);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -1426,7 +1426,7 @@
           </div>
           <p class="muted">Double-check every detail below, then finalize your booking when you're ready. Your cart summary stays on the right for a quick final check.</p>
           <dl class="review" id="reviewList"></dl>
-          <div class="payment-section">
+          <div class="payment-section" id="paymentPanel">
             <h3>Payment method</h3>
             <div class="payment-options">
               <label class="payment-option">
@@ -2394,7 +2394,7 @@
         setStripeStatus('Stripe payment confirmed. Your checkout session ID has been added — submit your booking now.');
       }
       let current = 0;
-      let cartAdded = false;
+      let cartAdded = true;
       let autoAddAfterSkip = false;
       let lastCartSignature = '';
       let latestCartState = null;
@@ -3435,12 +3435,8 @@
           const wasAdded = cartAdded;
           lastCartSignature = signature;
           if(wasAdded){
-            cartAdded = false;
+            cartAdded = true;
             refreshCartButton();
-            if(cartStatus){
-              cartStatus.classList.remove('error');
-              cartStatus.textContent = "Totals updated. Add to cart again when you're ready.";
-            }
           } else if(cartStatus && cartStatus.textContent && cartStatus.textContent.includes('Totals updated')){
             cartStatus.textContent = '';
           }
@@ -3692,6 +3688,9 @@
           const prevIndex = current;
           const nextIndex = Math.min(current + 1, steps.length - 1);
           showStep(nextIndex);
+          if(prevIndex === 1 && nextIndex >= 2){
+            ensureCartAdded({ animate: true });
+          }
         }
         if(event.target.matches('.back')){
           showStep(Math.max(current - 1, 0));

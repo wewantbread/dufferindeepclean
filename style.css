@@ -4226,3 +4226,54 @@ html.ios .quote-see-price:disabled {
   color: rgba(226, 241, 255, 0.8) !important;
   box-shadow: none !important;
 }
+
+
+/* cart drawer + 50% header transparency */
+.navbar{
+  background: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+.nav-cart-count{
+  display: inline-flex !important;
+}
+
+.nav-cart-popover{
+  top: 0;
+  right: 0;
+  width: min(430px, 92vw);
+  max-width: 100vw;
+  height: 100vh;
+  transform: translateX(108%);
+  transition: transform 0.24s ease, opacity 0.24s ease;
+  opacity: 1;
+}
+
+.nav-cart-popover.nav-cart-popover-open{
+  transform: translateX(0);
+}
+
+.nav-cart-popover-inner{
+  height: 100%;
+  border-radius: 0;
+  padding-top: 4rem;
+  overflow-y: auto;
+}
+
+.cart-popover-checkout-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.cart-popover-pay-btn,
+.cart-popover-stripe-btn{
+  text-align: center;
+  text-decoration: none;
+}
+
+.cart-popover-stripe-btn{
+  background: linear-gradient(135deg, #6d56f8, #4b32dd);
+  color: #fff;
+}

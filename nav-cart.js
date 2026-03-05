@@ -113,6 +113,21 @@
 
     ensurePaymentOptions();
 
+    let qtyEl = navPopover.querySelector('[data-popover-qty]');
+    if(!qtyEl){
+      const header = navPopover.querySelector('.cart-popover-header');
+      if(header){
+        const top = document.createElement('div');
+        top.className = 'cart-popover-item-top';
+        qtyEl = document.createElement('span');
+        qtyEl.className = 'cart-popover-qty';
+        qtyEl.dataset.popoverQty = '1';
+        qtyEl.textContent = '1 × service';
+        top.appendChild(qtyEl);
+        header.parentNode.insertBefore(top, header);
+      }
+    }
+
     let isOpen = false;
     let currentState = null;
 
@@ -215,6 +230,10 @@
 
       if(navCartLabel){
         navCartLabel.classList.toggle('muted', !hasItem);
+      }
+
+      if(qtyEl){
+        qtyEl.textContent = hasItem ? '1 × service' : '0 × service';
       }
 
       if(serviceEl){

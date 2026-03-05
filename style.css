@@ -2652,14 +2652,36 @@ h1, h2, h3 {
 
 .cart-popover-payments {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0.7rem;
   margin: 1rem auto 0;
-  max-width: 290px;
+  max-width: 320px;
   position: sticky;
   bottom: 0;
-  padding-top: 0.8rem;
+  padding-top: 0.85rem;
   background: linear-gradient(180deg, rgba(4,12,20,0), rgba(4,12,20,0.95) 36%);
+}
+
+.cart-checkout-btn {
+  appearance: none;
+  border: 1px solid rgba(175, 138, 255, 0.55);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: #eef6ff;
+  background: linear-gradient(135deg, rgba(72, 135, 255, 0.9), rgba(118, 82, 228, 0.95));
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(76, 92, 228, 0.28);
+}
+
+.cart-checkout-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .cart-pay-option {
@@ -2682,6 +2704,8 @@ h1, h2, h3 {
 
 [data-paypal-container] {
   width: 100%;
+  display: grid;
+  justify-items: center;
 }
 
 .cart-popover-paypal-status {

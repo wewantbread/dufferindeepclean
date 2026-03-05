@@ -830,6 +830,31 @@
     .plan-discount{ color: #00d084; font-weight: 700; }
     .plan-note{ color: #b6c2cf; font-size: .9rem; }
 
+    /* Streamlined booking flow (no cart panel) */
+    .summary-column,
+    #addToCartBtn,
+    #cartStatus,
+    .cart-summary,
+    #navCartPopover,
+    .nav-cart,
+    .nav-cart-count { display: none !important; }
+    .form-columns{ grid-template-columns: 1fr !important; }
+
+    /* Quote-style summary below calendar */
+    .booking-quote-summary{margin-top:14px;padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(8,8,12,.28)}
+    .booking-quote-summary .summary-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .booking-quote-summary .summary-total{font-weight:800}
+    .booking-quote-summary .summary-arrow{width:20px;height:20px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(167,139,250,.22);color:#fff;display:grid;place-items:center;font-size:.7rem}
+    .booking-quote-summary .summary-addon-details{max-height:0;opacity:0;overflow:hidden;transition:max-height .2s ease,opacity .2s ease}
+    .booking-quote-summary:hover .summary-addon-details,
+    .booking-quote-summary:focus-within .summary-addon-details{max-height:240px;opacity:1;margin-top:8px}
+
+    /* Make plan accents purple */
+    .plan-discount{ color:#c4b5fd; }
+
+    /* Add-on images: no right-click/select/drag */
+    .addon-pill--media img{user-select:none;-webkit-user-select:none;-webkit-user-drag:none;pointer-events:none}
+
     .actions{ margin-top: 18px; display:flex; gap:10px; justify-content:center; flex-wrap: wrap; }
     .btn{
       appearance: none; border: 1px solid rgba(255,255,255,0.08); color: #0b0d10;
@@ -1101,7 +1126,6 @@
       <div class="cart-popover-payments" data-popover-payments hidden>
         <div id="nav-paypal-buttons" data-paypal-container="nav"></div>
         <p class="cart-popover-paypal-status" id="nav-paypal-status" role="status" aria-live="polite"></p>
-        <button type="button" class="btn cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
       </div>
     </div>
   </aside>
@@ -1134,7 +1158,7 @@
           <input type="hidden" name="paypal_order_id" id="input-paypal-order-id">
           <input type="hidden" name="paypal_payer_id" id="input-paypal-payer-id">
           <input type="hidden" name="paypal_capture_id" id="input-paypal-capture-id">
-          <input type="hidden" name="cart_status" id="input-cart-status" value="pending">
+          <input type="hidden" name="cart_status" id="input-cart-status" value="added">
           <input type="hidden" name="name" id="input-full-name" value="">
           <input type="hidden" name="first_visit_date" id="input-first-visit-date" value="">
           <input type="hidden" name="follow_up_visit_date" id="input-follow-up-date" value="">
@@ -1196,7 +1220,7 @@
               </div>
             </label>
           </div>
-          <p class="muted frequency-note">Your cart on the right keeps a live tally of the package and frequency savings.</p>
+          <p class="muted frequency-note">Your live estimate is shown below and stays synced through each step.</p>
           <div class="schedule-calendar" data-schedule-calendar>
             <div class="calendar-top">
               <div class="calendar-heading">
@@ -1233,6 +1257,19 @@
               <p class="calendar-message" data-calendar-message>Pick your starting date to preview your recurring visits.</p>
             </div>
             <p class="calendar-error" id="calendarError" role="alert" hidden>Please choose a starting visit date before continuing.</p>
+          </div>
+
+          <div class="booking-quote-summary" id="bookingQuoteSummary" tabindex="0" aria-live="polite">
+            <div class="summary-head">
+              <span class="summary-total">Estimated total: <span data-recap-total>—</span></span>
+              <span class="summary-arrow" aria-hidden="true">˅</span>
+            </div>
+            <div class="cart-pricing summary-addon-details" id="pricingRecapInline">
+              <div class="cart-line"><span>Base package</span><span data-recap-base>—</span></div>
+              <div class="cart-line" data-recap-detail-row hidden><span>Service details</span><span data-recap-detail>—</span></div>
+              <div class="cart-line" data-recap-extras-row hidden><span>Add-ons</span><span data-recap-extras>—</span></div>
+              <div class="cart-line" data-recap-discount-row hidden><span>Frequency savings</span><span data-recap-discount>—</span></div>
+            </div>
           </div>
           <div class="actions">
             <button type="button" class="btn next">Next</button>
@@ -1446,29 +1483,6 @@
                   </div>
                 </header>
                 <div class="cart-details" data-cart-description hidden></div>
-                <div class="cart-pricing" id="pricingRecap">
-                  <div class="cart-line">
-                    <span>Base package</span>
-                    <span data-recap-base>—</span>
-                  </div>
-                  <div class="cart-line" data-recap-detail-row hidden>
-                    <span>Service details</span>
-                    <span data-recap-detail>—</span>
-                  </div>
-                  <div class="cart-line" data-recap-extras-row hidden>
-                    <span>Add-ons</span>
-                    <span data-recap-extras>—</span>
-                  </div>
-                  <div class="cart-line" data-recap-discount-row hidden>
-                    <span>Frequency savings</span>
-                    <span data-recap-discount>—</span>
-                  </div>
-                  <div class="cart-divider"></div>
-                  <div class="cart-line total">
-                    <span>Visit total</span>
-                    <span data-recap-total>—</span>
-                  </div>
-                </div>
                 <div class="cart-schedule" id="cartSchedule" hidden aria-live="polite">
                   <div class="cart-schedule-row">
                     <span class="cart-schedule-label">First visit</span>
@@ -3488,6 +3502,13 @@
       }
 
       addonPills.forEach(pill => {
+        const pillImg = pill.querySelector('img');
+        if(pillImg){
+          pillImg.setAttribute('draggable', 'false');
+          pillImg.classList.add('addon-img-locked');
+          pillImg.addEventListener('contextmenu', (event) => event.preventDefault());
+        }
+
         pill.addEventListener('click', (event) => {
           // Ignore clicks originating from stepper buttons
           if(event.target.closest('.stepper-button')) return;
@@ -3728,14 +3749,6 @@
           return;
         }
 
-        if(hiddenCartStatus && hiddenCartStatus.value !== 'added'){
-          if(cartStatus){
-            cartStatus.classList.add('error');
-            cartStatus.textContent = 'Please add the package to your cart before confirming.';
-          }
-          if(addToCartBtn) addToCartBtn.focus();
-          return;
-        }
 
         const allButtons = form.querySelectorAll('button');
         allButtons.forEach(btn => btn.disabled = true);

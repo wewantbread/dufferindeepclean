@@ -3380,6 +3380,7 @@
           syncCartSchedule();
           refreshCartButton();
           latestCartState = null;
+          try { localStorage.removeItem('ddc-nav-cart-state'); } catch(_err) {}
           dispatchNavCartUpdate(false);
           return;
         }

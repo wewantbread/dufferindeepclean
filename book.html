@@ -65,7 +65,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.50);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.07);
@@ -831,10 +831,7 @@
     .summary-column,
     #addToCartBtn,
     #cartStatus,
-    .cart-summary,
-    #navCartPopover,
-    .nav-cart,
-    .nav-cart-count { display: none !important; }
+    .cart-summary { display: none !important; }
     .form-columns{ grid-template-columns: 1fr !important; }
 
     /* Quote-style summary below calendar */
@@ -2398,6 +2395,16 @@
       let autoAddAfterSkip = false;
       let lastCartSignature = '';
       let latestCartState = null;
+      try {
+        const raw = localStorage.getItem('ddc-nav-cart-state');
+        if(raw){
+          const parsed = JSON.parse(raw);
+          if(parsed && parsed.cartAdded){
+            latestCartState = parsed;
+            cartAdded = true;
+          }
+        }
+      } catch(_err) {}
       let quoteAvailable = false;
 
       const params = new URLSearchParams(window.location.search);
@@ -3432,17 +3439,10 @@
 
         const signature = [basePrice, detailPrice, extrasTotal, discount, finalTotal].map(value => Math.round(value * 100) / 100).join('|');
         if(signature !== lastCartSignature){
-          const wasAdded = cartAdded;
           lastCartSignature = signature;
-          if(wasAdded){
-            cartAdded = false;
-            refreshCartButton();
-            if(cartStatus){
-              cartStatus.classList.remove('error');
-              cartStatus.textContent = "Totals updated. Add to cart again when you're ready.";
-            }
-          } else if(cartStatus && cartStatus.textContent && cartStatus.textContent.includes('Totals updated')){
-            cartStatus.textContent = '';
+          if(cartAdded && cartStatus){
+            cartStatus.classList.remove('error');
+            cartStatus.textContent = 'Cart updated with your latest selections.';
           }
         }
 
@@ -3500,6 +3500,11 @@
           checkoutUrl: 'book.html#cartSummary',
           status: cartStatus && cartStatus.textContent ? cartStatus.textContent : ''
         };
+        try {
+          if(cartAdded){
+            localStorage.setItem('ddc-nav-cart-state', JSON.stringify(latestCartState));
+          }
+        } catch(_err) {}
         dispatchNavCartUpdate(false);
       }
 
@@ -3692,6 +3697,9 @@
           const prevIndex = current;
           const nextIndex = Math.min(current + 1, steps.length - 1);
           showStep(nextIndex);
+          if(prevIndex === 1){
+            ensureCartAdded({ animate: true });
+          }
         }
         if(event.target.matches('.back')){
           showStep(Math.max(current - 1, 0));

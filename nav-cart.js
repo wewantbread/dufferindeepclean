@@ -91,6 +91,24 @@
         paymentsEl.appendChild(paypalShortcut);
       }
 
+      let debitCreditShortcut = paymentsEl.querySelector('[data-debit-credit-shortcut]');
+      if(!debitCreditShortcut){
+        debitCreditShortcut = document.createElement('button');
+        debitCreditShortcut.type = 'button';
+        debitCreditShortcut.className = 'cart-pay-option stripe';
+        debitCreditShortcut.dataset.debitCreditShortcut = '1';
+        debitCreditShortcut.textContent = 'Debit/Credit';
+        debitCreditShortcut.addEventListener('click', () => {
+          const stripeCheckoutBtn = document.getElementById('stripe-checkout-btn');
+          if(stripeCheckoutBtn){
+            stripeCheckoutBtn.click();
+          } else {
+            window.location.href = 'book.html#start';
+          }
+        });
+        paymentsEl.appendChild(debitCreditShortcut);
+      }
+
       let stripeShortcut = paymentsEl.querySelector('[data-stripe-shortcut]');
       if(!stripeShortcut){
         stripeShortcut = document.createElement('button');
@@ -108,7 +126,7 @@
         });
         paymentsEl.appendChild(stripeShortcut);
       }
-      return { paypalShortcut, stripeShortcut };
+      return { paypalShortcut, debitCreditShortcut, stripeShortcut };
     }
 
     ensurePaymentOptions();

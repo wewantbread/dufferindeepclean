@@ -109,7 +109,9 @@
     .logo{display:flex;align-items:center}
     .logo .soap{display:none !important}
     .logo .logo-text{display:none !important}
-    .logo .logo-image{display:block;width:58px;height:58px;object-fit:contain;image-rendering:-webkit-optimize-contrast;filter:drop-shadow(0 4px 10px rgba(0,0,0,.35))}
+    .logo .logo-image{display:block;width:92px;height:92px;object-fit:contain;image-rendering:-webkit-optimize-contrast;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+
+    .text-side{padding-top:1.2rem}
 
     /* Homepage soap quote */
     .soap-quote{max-width:680px;margin:0;position:relative;z-index:2}
@@ -144,13 +146,7 @@
     .soap-quote__pricePreview.is-open .soap-quote__addonPanel{max-height:180px;opacity:1;margin-top:6px}
     .soap-quote__actions{margin-top:12px;display:flex;justify-content:flex-end}
     .soap-quote__submit{min-width:170px;height:42px;border-radius:11px;border:1px solid rgba(167,139,250,.55);background:linear-gradient(180deg,rgba(196,181,253,.35),rgba(167,139,250,.28));color:#f8f6ff;font-size:.88rem;font-weight:700;cursor:pointer;box-shadow:0 0 0 1px rgba(196,181,253,.18) inset,0 8px 20px rgba(139,92,246,.18)}
-    .soap-quote__result{display:none;margin-top:12px;padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(8,8,12,.35)}
-    .soap-quote__result.is-show{display:block}
-    .soap-quote__result h3{margin:0 0 8px;font-size:.9rem;color:rgba(245,245,248,.96)}
-    .soap-quote__resultGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-    .soap-quote__item{font-size:.82rem;color:rgba(245,245,248,.96)}
-    .soap-quote__item span{display:block;font-size:.68rem;margin-bottom:3px;text-transform:uppercase;letter-spacing:.08em;color:rgba(185,170,235,.95)}
-    @media (max-width:700px){.soap-quote__grid,.soap-quote__resultGrid{grid-template-columns:1fr}.soap-quote__submit{width:100%}}
+    @media (max-width:700px){.soap-quote__grid{grid-template-columns:1fr}.soap-quote__submit{width:100%}}
 
     /* iOS-only quick fixes keep working via style.css rules */
   </style>
@@ -172,7 +168,7 @@
   <header class="navbar">
     <div class="logo">
       <a href="/" aria-label="DufferinDeepClean home">
-        <img class="logo-image" src="ddclogod.png" alt="DufferinDeepClean logo" width="58" height="58">
+        <img class="logo-image" src="ddclogod.png" alt="DufferinDeepClean logo" width="92" height="92">
       </a>
     </div>
     <nav class="nav-links">
@@ -346,11 +342,6 @@
                 <button class="soap-quote__submit" type="submit">Book Now</button>
               </div>
             </form>
-
-            <div class="soap-quote__result" id="sq-result">
-              <h3>Quote Request Summary</h3>
-              <div class="soap-quote__resultGrid" id="sq-resultGrid"></div>
-            </div>
           </div>
         </section>
       </div>
@@ -706,11 +697,9 @@
       setToggle('basement', 'No');
 
       const form = q('#soapQuoteForm');
-      const result = q('#sq-result');
-      const resultGrid = q('#sq-resultGrid');
       const pricePreview = q('#sq-pricePreview');
       const priceToggle = q('#sq-priceToggle');
-      if (!form || !result || !resultGrid || !pricePreview || !priceToggle) return;
+      if (!form || !pricePreview || !priceToggle) return;
 
       let touchTimer;
       const openAddonPanel = () => pricePreview.classList.add('is-open');
@@ -731,32 +720,21 @@
         if (!form.reportValidity()) return;
 
         const totals = calcTotals();
-        const data = {
-          Name: q('#sq-name').value.trim(),
-          Email: q('#sq-email').value.trim(),
-          Service: q('#sq-service').value,
-          Sqft: q('#sq-sqft').value,
-          Bedrooms: q('#sq-bedrooms').value,
-          Bathrooms: q('#sq-bathrooms').value,
-          'Pets on Site': q('#sq-pets').value,
-          Basement: q('#sq-basement').value,
-          'Estimated Total': formatPrice(totals.total)
-        };
-
-        if (data.Basement === 'Yes') {
-          data['Basement Rooms'] = q('#sq-basementRooms').value;
-          data['Basement Bathrooms'] = q('#sq-basementBathrooms').value;
-        }
-
-        resultGrid.innerHTML = '';
-        Object.entries(data).forEach(([key, value]) => {
-          const item = document.createElement('div');
-          item.className = 'soap-quote__item';
-          item.innerHTML = `<span>${key}</span>${value || '-'}`;
-          resultGrid.appendChild(item);
+        const params = new URLSearchParams({
+          name: q('#sq-name').value.trim(),
+          email: q('#sq-email').value.trim(),
+          service: q('#sq-service').value,
+          sqft: q('#sq-sqft').value,
+          bedrooms: q('#sq-bedrooms').value,
+          bathrooms: q('#sq-bathrooms').value,
+          pets: q('#sq-pets').value,
+          basement: q('#sq-basement').value,
+          basementRooms: q('#sq-basementRooms').value,
+          basementBathrooms: q('#sq-basementBathrooms').value,
+          estimate: String(totals.total)
         });
 
-        result.classList.add('is-show');
+        window.location.href = `book.html?${params.toString()}#start`;
       });
 
       renderPricePreview();

@@ -97,6 +97,57 @@
       filter: blur(20px); z-index:-1;
     }
 
+
+
+
+    @font-face{
+      font-family:'Porkys';
+      src:url('porkys.zip');
+      font-display:swap;
+    }
+
+    .logo{display:flex;align-items:center}
+    .logo .soap{display:none !important}
+    .logo .logo-text{display:none !important}
+    .logo .logo-image{display:block;width:144px;height:144px;object-fit:contain;image-rendering:-webkit-optimize-contrast;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+
+    .text-side{padding-top:1.2rem}
+
+    /* Homepage soap quote */
+    .soap-quote{max-width:680px;margin:0;position:relative;z-index:2}
+    .soap-quote *{box-sizing:border-box}
+    .soap-quote__card{border-radius:22px;border:1px solid rgba(255,255,255,.12);background:rgba(12,12,18,.28);backdrop-filter:blur(16px) saturate(125%);box-shadow:0 18px 50px rgba(0,0,0,.35);padding:12px}
+    .soap-quote__top{display:flex;align-items:center;justify-content:flex-start;padding:2px 2px 10px}
+.soap-quote__title{font-family:'Porkys','Inter',sans-serif;font-size:1.05rem;line-height:1.1;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;margin:0;padding:6px 10px;border-radius:999px;background:rgba(139,92,246,.22);border:1px solid rgba(139,92,246,.38);color:rgba(245,245,248,.98)}
+    .soap-quote__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .soap-quote__box{border-radius:16px;border:1px solid rgba(255,255,255,.07);background:rgba(10,10,16,.4);padding:10px;min-height:96px}
+    .soap-quote__labelrow{display:flex;align-items:center;margin-bottom:8px;font-size:.82rem;font-weight:600;color:rgba(245,245,248,.96)}
+    .soap-quote input,.soap-quote select{width:100%;height:42px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(6,6,10,.5);color:rgba(245,245,248,.96);padding:0 12px}
+    .soap-quote__counterMain{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px}
+    .soap-quote__btnCircle{width:34px;height:34px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(14,14,20,.66);color:#fff;cursor:pointer}
+    .soap-quote__value{font-size:1.35rem;font-weight:700;min-width:30px;text-align:center;color:#fff}
+    .soap-quote__toggleActions{display:flex;gap:6px}
+    .soap-quote__toggleBtn{flex:1;height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:rgba(14,14,20,.66);color:#fff;cursor:pointer;font-size:.84rem;font-weight:600}
+    .soap-quote__toggleBtn.is-active{color:#0e0e12;border-color:rgba(255,255,255,.85);background:linear-gradient(180deg,rgba(245,245,247,.96),rgba(225,225,232,.92))}
+    .soap-quote__conditional{display:none;margin-top:10px}
+    .soap-quote__conditional.is-show{display:block}
+    .soap-quote__conditional.pop-in{animation:basementPop .28s ease-out}
+    @keyframes basementPop{0%{opacity:0;transform:translateY(8px) scale(.98)}100%{opacity:1;transform:translateY(0) scale(1)}}
+    .soap-quote__pricePreview{margin-top:10px;padding:8px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(8,8,12,.22);font-size:.72rem}
+    .soap-quote__pricePreview h3{margin:0 0 4px;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:rgba(240,240,248,.9)}
+    .soap-quote__priceRow{display:flex;justify-content:space-between;gap:10px;font-size:.7rem;padding:2px 0;color:rgba(230,230,240,.95)}
+    .soap-quote__priceRow strong{color:#fff}
+    .soap-quote__priceRow.total{margin-top:4px;padding-top:5px;border-top:1px solid rgba(255,255,255,.12);font-size:.78rem}
+    .soap-quote__priceHead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .soap-quote__priceMain{display:flex;flex-direction:column;gap:1px}
+    .soap-quote__priceMain strong{font-size:.8rem;color:#fff}
+    .soap-quote__priceToggle{width:20px;height:20px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(139,92,246,.2);color:#fff;display:grid;place-items:center;cursor:pointer;font-size:.65rem;line-height:1;padding:0}
+    .soap-quote__addonPanel{max-height:0;opacity:0;overflow:hidden;transition:max-height .2s ease,opacity .2s ease;margin-top:0}
+    .soap-quote__pricePreview.is-open .soap-quote__addonPanel{max-height:180px;opacity:1;margin-top:6px}
+    .soap-quote__actions{margin-top:12px;display:flex;justify-content:flex-end}
+    .soap-quote__submit{min-width:170px;height:42px;border-radius:11px;border:1px solid rgba(167,139,250,.55);background:linear-gradient(180deg,rgba(196,181,253,.35),rgba(167,139,250,.28));color:#f8f6ff;font-size:.88rem;font-weight:700;cursor:pointer;box-shadow:0 0 0 1px rgba(196,181,253,.18) inset,0 8px 20px rgba(139,92,246,.18)}
+    @media (max-width:700px){.soap-quote__grid{grid-template-columns:1fr}.soap-quote__submit{width:100%}}
+
     /* iOS-only quick fixes keep working via style.css rules */
   </style>
 </head>
@@ -116,8 +167,9 @@
   <!-- NAVIGATION -->
   <header class="navbar">
     <div class="logo">
-      <span class="soap">🧼</span>
-      <a class="logo-text" href="/">DufferinDeepClean</a>
+      <a href="/" aria-label="DufferinDeepClean home">
+        <img class="logo-image" src="ddcv4.png" alt="DufferinDeepClean logo" width="144" height="144">
+      </a>
     </div>
     <nav class="nav-links">
       <a href="#home">Home</a>
@@ -168,184 +220,130 @@
   <section id="home" class="split-screen">
     <div class="text-side">
       <div id="quote" class="hero-quote" aria-labelledby="quote-title">
-        <div class="quote-card">
-          <div class="quote-card-header">
-            <h2 id="quote-title">custom cleaning quote</h2>
-            <p>Answer a few quick questions to unlock a tailored estimate for your space.</p>
+        <section class="soap-quote" id="soapQuote">
+          <div class="soap-quote__card">
+            <div class="soap-quote__top">
+              <h2 id="quote-title" class="soap-quote__title">Custom Cleaning Quote</h2>
+            </div>
+
+            <form id="soapQuoteForm">
+              <div class="soap-quote__grid">
+                <div class="soap-quote__box">
+                  <div class="soap-quote__labelrow"><label for="sq-name">Name</label></div>
+                  <input id="sq-name" name="name" type="text" placeholder="Full name" required>
+                </div>
+
+                <div class="soap-quote__box">
+                  <div class="soap-quote__labelrow"><label for="sq-email">Email</label></div>
+                  <input id="sq-email" name="email" type="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="soap-quote__box">
+                  <div class="soap-quote__labelrow"><label for="sq-service">Type of Service</label></div>
+                  <select id="sq-service" name="service" required>
+                    <option value="">Select service</option>
+                    <option value="House Cleaning">House Cleaning</option>
+                    <option value="Commercial Cleaning">Commercial Cleaning</option>
+                    <option value="Office Cleaning">Office Cleaning</option>
+                  </select>
+                </div>
+
+                <div class="soap-quote__box">
+                  <div class="soap-quote__labelrow"><label for="sq-sqft">Sqft</label></div>
+                  <input id="sq-sqft" name="sqft" type="number" min="0" placeholder="1800" required>
+                </div>
+
+                <div class="soap-quote__box soap-quote__counter">
+                  <div>
+                    <div class="soap-quote__labelrow"><span>Bedrooms</span></div>
+                    <div class="soap-quote__counterMain">
+                      <button type="button" class="soap-quote__btnCircle" data-target="bedrooms">−</button>
+                      <div class="soap-quote__value" id="sq-bedrooms-value">0</div>
+                      <button type="button" class="soap-quote__btnCircle" data-target="bedrooms" data-op="plus">+</button>
+                    </div>
+                  </div>
+                  <input type="hidden" id="sq-bedrooms" name="bedrooms" value="0">
+                </div>
+
+                <div class="soap-quote__box soap-quote__counter">
+                  <div>
+                    <div class="soap-quote__labelrow"><span>Bathrooms</span></div>
+                    <div class="soap-quote__counterMain">
+                      <button type="button" class="soap-quote__btnCircle" data-target="bathrooms">−</button>
+                      <div class="soap-quote__value" id="sq-bathrooms-value">0</div>
+                      <button type="button" class="soap-quote__btnCircle" data-target="bathrooms" data-op="plus">+</button>
+                    </div>
+                  </div>
+                  <input type="hidden" id="sq-bathrooms" name="bathrooms" value="0">
+                </div>
+
+                <div class="soap-quote__box soap-quote__toggle">
+                  <div class="soap-quote__labelrow"><span>Pets on Site?</span></div>
+                  <div class="soap-quote__toggleActions">
+                    <button type="button" class="soap-quote__toggleBtn" data-toggle="pets" data-value="Yes">Yes</button>
+                    <button type="button" class="soap-quote__toggleBtn is-active" data-toggle="pets" data-value="No">No</button>
+                  </div>
+                  <input type="hidden" id="sq-pets" name="pets" value="No">
+                </div>
+
+                <div class="soap-quote__box soap-quote__toggle">
+                  <div class="soap-quote__labelrow"><span>Basement?</span></div>
+                  <div class="soap-quote__toggleActions">
+                    <button type="button" class="soap-quote__toggleBtn" data-toggle="basement" data-value="Yes">Yes</button>
+                    <button type="button" class="soap-quote__toggleBtn is-active" data-toggle="basement" data-value="No">No</button>
+                  </div>
+                  <input type="hidden" id="sq-basement" name="basement" value="No">
+                </div>
+              </div>
+
+              <div class="soap-quote__conditional" id="sq-basementFields" aria-hidden="true">
+                <div class="soap-quote__grid" style="margin-top:10px;">
+                  <div class="soap-quote__box soap-quote__counter">
+                    <div class="soap-quote__labelrow"><span>Basement Rooms</span></div>
+                    <div class="soap-quote__counterMain">
+                      <button type="button" class="soap-quote__btnCircle" data-target="basementRooms">−</button>
+                      <div class="soap-quote__value" id="sq-basementRooms-value">0</div>
+                      <button type="button" class="soap-quote__btnCircle" data-target="basementRooms" data-op="plus">+</button>
+                    </div>
+                    <input type="hidden" id="sq-basementRooms" name="basementRooms" value="0">
+                  </div>
+
+                  <div class="soap-quote__box soap-quote__counter">
+                    <div class="soap-quote__labelrow"><span>Basement Bathrooms</span></div>
+                    <div class="soap-quote__counterMain">
+                      <button type="button" class="soap-quote__btnCircle" data-target="basementBathrooms">−</button>
+                      <div class="soap-quote__value" id="sq-basementBathrooms-value">0</div>
+                      <button type="button" class="soap-quote__btnCircle" data-target="basementBathrooms" data-op="plus">+</button>
+                    </div>
+                    <input type="hidden" id="sq-basementBathrooms" name="basementBathrooms" value="0">
+                  </div>
+                </div>
+              </div>
+
+              <div class="soap-quote__pricePreview" id="sq-pricePreview" aria-live="polite">
+                <div class="soap-quote__priceHead">
+                  <div class="soap-quote__priceMain">
+                    <h3>Estimate</h3>
+                    <strong id="sq-totalPrice">$0</strong>
+                  </div>
+                  <button type="button" class="soap-quote__priceToggle" id="sq-priceToggle" aria-label="Show add-ons">˅</button>
+                </div>
+                <div class="soap-quote__addonPanel" id="sq-addonPanel">
+                  <div class="soap-quote__priceRow"><span>Base Price</span><strong id="sq-basePrice">$0</strong></div>
+                  <div class="soap-quote__priceRow"><span>Bedrooms Add-on</span><strong id="sq-bedPrice">$0</strong></div>
+                  <div class="soap-quote__priceRow"><span>Bathrooms Add-on</span><strong id="sq-bathPrice">$0</strong></div>
+                  <div class="soap-quote__priceRow"><span>Pets Add-on</span><strong id="sq-petsPrice">$0</strong></div>
+                  <div class="soap-quote__priceRow"><span>Basement Add-on</span><strong id="sq-basementPrice">$0</strong></div>
+                  <div class="soap-quote__priceRow"><span>Basement Rooms/Baths</span><strong id="sq-basementExtraPrice">$0</strong></div>
+                </div>
+              </div>
+
+              <div class="soap-quote__actions">
+                <button class="soap-quote__submit" type="submit">Book Now</button>
+              </div>
+            </form>
           </div>
-
-          <form id="instant-quote" class="quote-form" data-quote-mode="redirect" data-redirect="book.html" data-redirect-anchor="start" novalidate>
-            <div class="quote-grid">
-              <label class="field" for="quote-first-name">
-                <span class="field-label">Name</span>
-                <input id="quote-first-name" name="first-name" type="text" placeholder="e.g. Jordan Smith" autocomplete="name" data-required>
-              </label>
-
-              <label class="field" for="quote-email">
-                <span class="field-label">Email</span>
-                <input id="quote-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" data-required>
-              </label>
-
-              <label class="field field-inline" for="quote-service">
-                <span class="field-label">Type of Service</span>
-                <div class="select-wrap">
-                  <select id="quote-service" name="service" data-required>
-                    <option value="" disabled selected>Select a service</option>
-                    <option value="home">Home General Cleaning</option>
-                    <option value="commercial">Factory / Commercial / Industrial Cleaning</option>
-                    <option value="office">Office Workspace Cleaning</option>
-                  </select>
-                </div>
-              </label>
-
-              <label class="field field-inline" for="quote-sqft">
-                <span class="field-label">Square Footage</span>
-                <div class="select-wrap">
-                  <select id="quote-sqft" name="square-footage" data-required>
-                    <option value="" disabled selected>Select an approximate size</option>
-                    <option value="1000-1500">1,000 – 1,500 sq ft</option>
-                    <option value="1500-2000">1,500 – 2,000 sq ft</option>
-                    <option value="2000-2500">2,000 – 2,500 sq ft</option>
-                    <option value="2500-3000">2,500 – 3,000 sq ft</option>
-                    <option value="3000-3500">3,000 – 3,500 sq ft</option>
-                    <option value="3500-4000">3,500 – 4,000 sq ft</option>
-                    <option value="4000-4500">4,000 – 4,500 sq ft</option>
-                    <option value="4500-5000">4,500 – 5,000 sq ft</option>
-                    <option value="5000-5500">5,000 – 5,500 sq ft</option>
-                    <option value="5500-6000">5,500 – 6,000 sq ft</option>
-                    <option value="6000-6500">6,000 – 6,500 sq ft</option>
-                    <option value="6500-7000">6,500 – 7,000 sq ft</option>
-                    <option value="7000-7500">7,000 – 7,500 sq ft</option>
-                    <option value="7500-8000">7,500 – 8,000 sq ft</option>
-                    <option value="8000-8500">8,000 – 8,500 sq ft</option>
-                    <option value="8500-9000">8,500 – 9,000 sq ft</option>
-                    <option value="9000-9500">9,000 – 9,500 sq ft</option>
-                    <option value="9500-10000">9,500 – 10,000 sq ft</option>
-                    <option value="10000-10500">10,000 – 10,500 sq ft</option>
-                    <option value="10500-11000">10,500 – 11,000 sq ft</option>
-                    <option value="11000-11500">11,000 – 11,500 sq ft</option>
-                    <option value="11500-12000">11,500 – 12,000 sq ft</option>
-                    <option value="12000-12500">12,000 – 12,500 sq ft</option>
-                    <option value="12500-13000">12,500 – 13,000 sq ft</option>
-                    <option value="13000-13500">13,000 – 13,500 sq ft</option>
-                    <option value="13500-14000">13,500 – 14,000 sq ft</option>
-                    <option value="14000-14500">14,000 – 14,500 sq ft</option>
-                    <option value="14500-15000">14,500 – 15,000 sq ft</option>
-                    <option value="15000-15500">15,000 – 15,500 sq ft</option>
-                    <option value="15500-16000">15,500 – 16,000 sq ft</option>
-                    <option value="16000-16500">16,000 – 16,500 sq ft</option>
-                    <option value="16500-17000">16,500 – 17,000 sq ft</option>
-                    <option value="17000-17500">17,000 – 17,500 sq ft</option>
-                    <option value="17500-18000">17,500 – 18,000 sq ft</option>
-                    <option value="18000-18500">18,000 – 18,500 sq ft</option>
-                    <option value="18500-19000">18,500 – 19,000 sq ft</option>
-                    <option value="19000-19500">19,000 – 19,500 sq ft</option>
-                    <option value="19500-20000">19,500 – 20,000 sq ft</option>
-                  </select>
-                </div>
-              </label>
-            </div>
-
-            <div id="service-details" class="service-details" aria-live="polite">
-              <div class="service-detail-group detail-inline" data-service-detail="home" aria-hidden="true">
-                <label class="detail-inline-field" for="home-rooms">
-                  <span class="detail-card-label">Number of bedrooms</span>
-                  <div class="number-wrap">
-                    <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease bedrooms" aria-controls="home-rooms"><span aria-hidden="true">−</span></button>
-                    <input id="home-rooms" name="home-rooms" type="number" min="1" max="12" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-label-prefix="bedroom" data-label-plural="bedrooms" data-detail-key="homeRooms">
-                    <button type="button" class="stepper-button" data-step="1" aria-label="Increase bedrooms" aria-controls="home-rooms"><span aria-hidden="true">+</span></button>
-                  </div>
-                </label>
-                <label class="detail-inline-field" for="home-bathrooms">
-                  <span class="detail-card-label">Number of bathrooms</span>
-                  <div class="number-wrap">
-                    <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease bathrooms" aria-controls="home-bathrooms"><span aria-hidden="true">−</span></button>
-                    <input id="home-bathrooms" name="home-bathrooms" type="number" min="1" max="10" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-label-prefix="bathroom" data-label-plural="bathrooms" data-detail-key="homeBathrooms">
-                    <button type="button" class="stepper-button" data-step="1" aria-label="Increase bathrooms" aria-controls="home-bathrooms"><span aria-hidden="true">+</span></button>
-                  </div>
-                </label>
-                <div class="detail-inline-field detail-inline-pets" data-detail-pets>
-                  <span class="detail-card-label">Pets on site?</span>
-                  <input type="hidden" name="home-pets" data-required data-service-required="home">
-                  <div class="mini-pill-group tight" role="radiogroup" aria-label="Are there pets?">
-                    <button type="button" class="mini-pill" data-target-input="home-pets" data-value="no" data-label="No pets">No</button>
-                    <button type="button" class="mini-pill" data-target-input="home-pets" data-value="yes" data-label="Yes, pets">Yes</button>
-                  </div>
-                </div>
-                <div class="detail-inline-field detail-inline-basement" data-detail-basement>
-                  <span class="detail-card-label">Basement?</span>
-                  <input type="hidden" name="home-basement" data-required data-service-required="home">
-                  <div class="mini-pill-group tight" role="radiogroup" aria-label="Is a basement included?">
-                    <button type="button" class="mini-pill" data-target-input="home-basement" data-value="no" data-label="No basement">No</button>
-                    <button type="button" class="mini-pill" data-target-input="home-basement" data-value="yes" data-label="Basement included">Yes</button>
-                  </div>
-                </div>
-                <div class="detail-basement-extra" data-basement-extra hidden aria-hidden="true">
-                  <label class="detail-inline-field" for="home-basement-rooms">
-                    <span class="detail-card-label">Basement rooms</span>
-                    <div class="number-wrap">
-                      <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease basement rooms" aria-controls="home-basement-rooms"><span aria-hidden="true">−</span></button>
-                      <input id="home-basement-rooms" name="home-basement-rooms" type="number" min="1" max="8" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-dependent-on="home-basement" data-dependent-value="yes" data-label-prefix="basement room" data-label-plural="basement rooms" data-detail-key="homeBasementRooms">
-                      <button type="button" class="stepper-button" data-step="1" aria-label="Increase basement rooms" aria-controls="home-basement-rooms"><span aria-hidden="true">+</span></button>
-                    </div>
-                  </label>
-                  <label class="detail-inline-field" for="home-basement-bathrooms">
-                    <span class="detail-card-label">Basement bathrooms</span>
-                    <div class="number-wrap">
-                      <button type="button" class="stepper-button" data-step="-1" aria-label="Decrease basement bathrooms" aria-controls="home-basement-bathrooms"><span aria-hidden="true">−</span></button>
-                      <input id="home-basement-bathrooms" name="home-basement-bathrooms" type="number" min="1" max="4" step="1" inputmode="numeric" placeholder="0" data-required data-service-required="home" data-dependent-on="home-basement" data-dependent-value="yes" data-label-prefix="basement bathroom" data-label-plural="basement bathrooms" data-detail-key="homeBasementBathrooms">
-                      <button type="button" class="stepper-button" data-step="1" aria-label="Increase basement bathrooms" aria-controls="home-basement-bathrooms"><span aria-hidden="true">+</span></button>
-                    </div>
-                  </label>
-                </div>
-              </div>
-
-              <div class="service-detail-group" data-service-detail="office" aria-hidden="true">
-                <p class="service-detail-title">Office Workspace Details</p>
-                <div class="detail-card-grid">
-                  <div class="detail-card">
-                    <span class="detail-card-label">Number of Offices</span>
-                    <input type="hidden" name="office-offices" data-required data-service-required="office">
-                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Number of offices">
-                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="1-5" data-label="1 – 5 offices">1–5</button>
-                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="6-10" data-label="6 – 10 offices">6–10</button>
-                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="11-20" data-label="11 – 20 offices">11–20</button>
-                      <button type="button" class="mini-pill" data-target-input="office-offices" data-value="21+" data-label="21+ offices">21+</button>
-                    </div>
-                  </div>
-                  <div class="detail-card">
-                    <span class="detail-card-label">Number of Bathrooms</span>
-                    <input type="hidden" name="office-bathrooms" data-required data-service-required="office">
-                    <div class="mini-pill-group tight" role="radiogroup" aria-label="Number of bathrooms">
-                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="1-2" data-label="1 – 2 bathrooms">1–2</button>
-                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="3-4" data-label="3 – 4 bathrooms">3–4</button>
-                      <button type="button" class="mini-pill" data-target-input="office-bathrooms" data-value="5+" data-label="5+ bathrooms">5+</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="quote-summary" aria-live="polite">
-              <div class="quote-summary-line">
-                <span>Base Package</span>
-                <strong data-quote-base>—</strong>
-              </div>
-              <div class="quote-summary-line" data-quote-detail-row hidden>
-                <span>Service Details</span>
-                <strong data-quote-detail>—</strong>
-              </div>
-              <div class="quote-summary-line total">
-                <span>Estimated Visit Total</span>
-                <strong data-quote-total>—</strong>
-              </div>
-            </div>
-
-            <div class="quote-actions">
-              <button type="button" id="quote-see-price" class="quote-see-price" disabled>See My Price</button>
-            </div>
-          </form>
-        </div>
+        </section>
       </div>
 
     </div>
@@ -577,6 +575,197 @@
         });
       });
 
+    })();
+  </script>
+  <script>
+    (() => {
+      const root = document.getElementById('soapQuote');
+      if (!root) return;
+
+      const counters = { bedrooms: 0, bathrooms: 0, basementRooms: 0, basementBathrooms: 0 };
+      const q = (sel) => root.querySelector(sel);
+      const map = {
+        bedrooms: { hidden: q('#sq-bedrooms'), value: q('#sq-bedrooms-value') },
+        bathrooms: { hidden: q('#sq-bathrooms'), value: q('#sq-bathrooms-value') },
+        basementRooms: { hidden: q('#sq-basementRooms'), value: q('#sq-basementRooms-value') },
+        basementBathrooms: { hidden: q('#sq-basementBathrooms'), value: q('#sq-basementBathrooms-value') }
+      };
+
+      const serviceKey = {
+        'House Cleaning': 'home',
+        'Commercial Cleaning': 'commercial',
+        'Office Cleaning': 'office'
+      };
+
+      const baseByBand = {
+        home: [165,185,215,245,285,325,345,365,385,405,425,445,465,485,505,525,545,565,585,605,625,645,665,685,705,725,745,765,785,805,825,845,865,885,905,925,945,965],
+        commercial: [240,285,330,380,425,470,495,520,545,570,595,620,645,670,695,720,745,770,795,820,845,870,895,920,945,970,995,1020,1045,1070,1095,1120,1145,1170,1195,1220,1245,1270],
+        office: [210,250,295,335,375,420,442,464,486,508,530,552,574,596,618,640,662,684,706,728,750,772,794,816,838,860,882,904,926,948,970,992,1014,1036,1058,1080,1102,1124]
+      };
+
+      function formatPrice(value){ return `$${Math.max(0, Math.round(value))}`; }
+      function basePrice(service, sqft){
+        const key = serviceKey[service];
+        const area = Number(sqft || 0);
+        if (!key || !area || area < 1000) return 0;
+        const band = Math.min(37, Math.max(0, Math.floor((area - 1000) / 500)));
+        return baseByBand[key][band] || 0;
+      }
+
+      function calcTotals(){
+        const service = q('#sq-service').value;
+        const sqft = q('#sq-sqft').value;
+        const base = basePrice(service, sqft);
+        const bed = counters.bedrooms * 25;
+        const bath = counters.bathrooms * 18;
+        const pets = q('#sq-pets').value === 'Yes' ? 25 : 0;
+        const basement = q('#sq-basement').value === 'Yes' ? 45 : 0;
+        const basementExtra = q('#sq-basement').value === 'Yes' ? (counters.basementRooms * 20) + (counters.basementBathrooms * 16) : 0;
+        const total = base + bed + bath + pets + basement + basementExtra;
+        return {base, bed, bath, pets, basement, basementExtra, total};
+      }
+
+      function renderPricePreview(){
+        const t = calcTotals();
+        q('#sq-basePrice').textContent = formatPrice(t.base);
+        q('#sq-bedPrice').textContent = formatPrice(t.bed);
+        q('#sq-bathPrice').textContent = formatPrice(t.bath);
+        q('#sq-petsPrice').textContent = formatPrice(t.pets);
+        q('#sq-basementPrice').textContent = formatPrice(t.basement);
+        q('#sq-basementExtraPrice').textContent = formatPrice(t.basementExtra);
+        q('#sq-totalPrice').textContent = formatPrice(t.total);
+      }
+
+      function syncCounter(name) {
+        if (!map[name]) return;
+        map[name].hidden.value = counters[name];
+        map[name].value.textContent = counters[name];
+        renderPricePreview();
+      }
+      Object.keys(counters).forEach(syncCounter);
+
+      root.querySelectorAll('.soap-quote__btnCircle').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.target;
+          const isPlus = btn.dataset.op === 'plus';
+          if (!(target in counters)) return;
+          counters[target] = isPlus ? counters[target] + 1 : Math.max(0, counters[target] - 1);
+          syncCounter(target);
+        });
+      });
+
+      function setToggle(group, value) {
+        const hidden = group === 'pets' ? q('#sq-pets') : q('#sq-basement');
+        if (!hidden) return;
+        hidden.value = value;
+
+        root.querySelectorAll(`.soap-quote__toggleBtn[data-toggle="${group}"]`).forEach((b) => b.classList.remove('is-active'));
+        const activeBtn = root.querySelector(`.soap-quote__toggleBtn[data-toggle="${group}"][data-value="${value}"]`);
+        if (activeBtn) activeBtn.classList.add('is-active');
+
+        if (group === 'basement') {
+          const area = q('#sq-basementFields');
+          if (!area) return;
+
+          if (value === 'Yes') {
+            area.classList.add('is-show', 'pop-in');
+            area.setAttribute('aria-hidden', 'false');
+            setTimeout(() => area.classList.remove('pop-in'), 320);
+          } else {
+            area.classList.remove('is-show', 'pop-in');
+            area.setAttribute('aria-hidden', 'true');
+            counters.basementRooms = 0;
+            counters.basementBathrooms = 0;
+            syncCounter('basementRooms');
+            syncCounter('basementBathrooms');
+          }
+        }
+
+        renderPricePreview();
+      }
+
+      root.querySelectorAll('.soap-quote__toggleBtn').forEach((btn) => {
+        btn.addEventListener('click', () => setToggle(btn.dataset.toggle, btn.dataset.value));
+      });
+
+      ['#sq-service', '#sq-sqft'].forEach((sel) => {
+        const el = q(sel);
+        if (el) el.addEventListener('input', renderPricePreview);
+      });
+
+      setToggle('pets', 'No');
+      setToggle('basement', 'No');
+
+      const form = q('#soapQuoteForm');
+      const pricePreview = q('#sq-pricePreview');
+      const priceToggle = q('#sq-priceToggle');
+      if (!form || !pricePreview || !priceToggle) return;
+
+      let touchTimer;
+      const openAddonPanel = () => pricePreview.classList.add('is-open');
+      const closeAddonPanel = () => pricePreview.classList.remove('is-open');
+
+      priceToggle.addEventListener('mouseenter', openAddonPanel);
+      pricePreview.addEventListener('mouseleave', closeAddonPanel);
+      priceToggle.addEventListener('focus', openAddonPanel);
+      priceToggle.addEventListener('blur', closeAddonPanel);
+      priceToggle.addEventListener('touchstart', () => {
+        openAddonPanel();
+        clearTimeout(touchTimer);
+        touchTimer = setTimeout(closeAddonPanel, 1100);
+      }, { passive: true });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const serviceLabel = q('#sq-service').value;
+        const serviceMap = {
+          'House Cleaning': 'home',
+          'Commercial Cleaning': 'commercial',
+          'Office Cleaning': 'office'
+        };
+        const service = serviceMap[serviceLabel] || '';
+
+        const sqftRaw = Number(q('#sq-sqft').value || 0);
+        const bandIndex = sqftRaw >= 1000 ? Math.min(37, Math.max(0, Math.floor((sqftRaw - 1000) / 500))) : 0;
+        const bandStart = 1000 + (bandIndex * 500);
+        const bandEnd = bandStart + 500;
+        const sqftKey = `${bandStart}-${bandEnd}`;
+
+        const totals = calcTotals();
+        const base = basePrice(serviceLabel, String(sqftRaw));
+        const detail = totals.total - base;
+
+        const fullName = q('#sq-name').value.trim();
+        const parts = fullName.split(/\s+/).filter(Boolean);
+        const firstName = parts[0] || '';
+        const lastName = parts.slice(1).join(' ');
+
+        const params = new URLSearchParams({
+          service,
+          serviceLabel,
+          sqft: sqftKey,
+          sqftLabel: `${bandStart.toLocaleString()} – ${bandEnd.toLocaleString()} sq ft`,
+          basePrice: String(base),
+          detailPrice: String(detail),
+          total: String(totals.total),
+          firstName,
+          lastName,
+          fullName,
+          email: q('#sq-email').value.trim(),
+          homeRooms: q('#sq-bedrooms').value,
+          homeBathrooms: q('#sq-bathrooms').value,
+          homePets: (q('#sq-pets').value || '').toLowerCase(),
+          homeBasement: (q('#sq-basement').value || '').toLowerCase(),
+          homeBasementRooms: q('#sq-basementRooms').value,
+          homeBasementBathrooms: q('#sq-basementBathrooms').value
+        });
+
+        window.location.href = `book.html?${params.toString()}#start`;
+      });
+
+      renderPricePreview();
     })();
   </script>
   <script>

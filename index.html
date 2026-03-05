@@ -108,10 +108,11 @@
       font-display:swap;
     }
 
-    .logo{display:flex;align-items:center}
+    .logo{display:flex;align-items:center;height:56px;overflow:visible}
+    .logo > a{display:block;width:92px;height:56px;overflow:visible}
     .logo .soap{display:none !important}
     .logo .logo-text{display:none !important}
-    .logo .logo-image{display:block;width:96px;height:96px;object-fit:contain;image-rendering:-webkit-optimize-contrast;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+    .logo .logo-image{display:block;width:92px;height:56px;object-fit:contain;transform:scale(1.48);transform-origin:left center;image-rendering:-webkit-optimize-contrast;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
 
     .text-side{padding-top:1.2rem}
 
@@ -170,7 +171,7 @@
   <header class="navbar">
     <div class="logo">
       <a href="/" aria-label="DufferinDeepClean home">
-        <img class="logo-image" src="ddcv4.png" alt="DufferinDeepClean logo" width="96" height="96">
+        <img class="logo-image" src="ddcv4.png" alt="DufferinDeepClean logo" width="92" height="56">
       </a>
     </div>
     <nav class="nav-links">
@@ -178,7 +179,6 @@
       <a href="#services">Services</a>
       <a href="#about">About Us</a>
       <a href="contact.html">Contact</a>
-      <a href="book.html#start" class="quote-btn">Book Online</a>
     </nav>
     <div class="nav-actions">
       <button class="nav-cart" type="button" data-cart-toggle aria-haspopup="dialog" aria-controls="navCartPopover" aria-expanded="false">
@@ -1429,44 +1429,6 @@
         syncBasementExtras(serviceInput ? serviceInput.value : '');
         updateTotals();
       }
-    })();
-  </script>
-
-  <script>
-    (function(){
-      const navQuoteLink = document.querySelector('.nav-links .quote-btn');
-      const quoteSection = document.getElementById('quote');
-      if(!navQuoteLink || !quoteSection) return;
-
-      let spotlightTimer = null;
-
-      navQuoteLink.addEventListener('click', (event) => {
-        if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-        if(typeof event.button === 'number' && event.button !== 0) return;
-        event.preventDefault();
-        quoteSection.classList.remove('quote-spotlight');
-        void quoteSection.offsetWidth;
-        quoteSection.classList.add('quote-spotlight');
-        quoteSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        const focusTarget = quoteSection.querySelector('input, button');
-        if(focusTarget){
-          try {
-            focusTarget.focus({ preventScroll: true });
-          } catch(_){
-            focusTarget.focus();
-          }
-        }
-
-        if(spotlightTimer){
-          window.clearTimeout(spotlightTimer);
-        }
-
-        spotlightTimer = window.setTimeout(() => {
-          quoteSection.classList.remove('quote-spotlight');
-          spotlightTimer = null;
-        }, 1600);
-      });
     })();
   </script>
 

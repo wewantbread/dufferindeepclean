@@ -156,7 +156,10 @@ h1, h2, h3 {
   background: linear-gradient(to right, black, transparent); z-index: 3; pointer-events: none; }
 .image-top-diffuse { position: absolute; inset: 0 0 auto 0; height: 150px; pointer-events: none; z-index: 3;
   background: linear-gradient(180deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.45) 55%, transparent 100%);
-  filter: blur(24px);
+  display: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 .hero-carousel{ position:relative; width:100%; height:100%; }
 .hero-slide{ position:absolute; inset:0; opacity:0; transition: opacity .7s ease; pointer-events:none; }
@@ -3774,6 +3777,10 @@ html.ios .mini-pill {
   background:
     radial-gradient(120% 110% at 82% -15%, rgba(118, 227, 255, 0.24) 0%, rgba(118, 227, 255, 0.08) 35%, rgba(0, 0, 0, 0) 70%),
     linear-gradient(180deg, rgba(0,0,0,.74) 0%, rgba(0,0,0,.42) 52%, transparent 100%) !important;
+  display: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* Remove purple/pink ball badge near cart */

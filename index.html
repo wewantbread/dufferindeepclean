@@ -199,25 +199,37 @@
     }
     html.ios .navbar{
       position:relative;
-      padding-right:112px !important;
+      padding-right:132px !important;
     }
     html.ios .nav-actions{
-      right:12px;
-      top:50%;
-      transform:translateY(-50%);
+      position:absolute !important;
+      right:max(6px, env(safe-area-inset-right)) !important;
+      top:50% !important;
+      transform:translateY(-50%) !important;
+      width:auto !important;
+      justify-content:flex-end !important;
     }
     html.ios .about-section{
       display:none !important;
     }
+    html.ios .soap-quote__title,
+    html.ios .services-header h1,
+    html.ios .service-copy h3{
+      font-family:'Porkys','Bebas Neue',sans-serif !important;
+    }
+    html.ios .services-header h1{
+      color:#a855f7 !important;
+    }
     @media (max-width:700px){
       html.ios .navbar{
-        padding-right:112px !important;
+        padding-right:132px !important;
         padding-bottom:8px !important;
       }
       html.ios .nav-actions{
-        right:12px;
-        top:50%;
-        transform:translateY(-50%);
+        position:absolute !important;
+        right:max(6px, env(safe-area-inset-right)) !important;
+        top:50% !important;
+        transform:translateY(-50%) !important;
       }
     }
   </style>

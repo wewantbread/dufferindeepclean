@@ -72,11 +72,19 @@
     const paymentsEl = navPopover.querySelector('[data-popover-payments]');
     const statusEl = navPopover.querySelector('[data-popover-status]');
     const closeBtn = navPopover.querySelector('[data-cart-close]');
-    const googleBtn = navPopover.querySelector('[data-google-pay-button]');
     const navPayPalStatus = navPopover.querySelector('#nav-paypal-status');
 
-    if(navImage && !navImage.getAttribute('src')){
-      applyCartImage(navImage);
+    let checkoutBtn = navPopover.querySelector('[data-cart-checkout]');
+    if(paymentsEl && !checkoutBtn){
+      checkoutBtn = document.createElement('button');
+      checkoutBtn.type = 'button';
+      checkoutBtn.className = 'cart-checkout-btn';
+      checkoutBtn.dataset.cartCheckout = '1';
+      checkoutBtn.textContent = 'Checkout';
+      checkoutBtn.addEventListener('click', () => {
+        window.location.href = 'book.html#start';
+      });
+      paymentsEl.appendChild(checkoutBtn);
     }
 
     function ensurePaymentOptions(){
@@ -128,8 +136,6 @@
       }
       return { paypalShortcut, debitCreditShortcut, stripeShortcut };
     }
-
-    ensurePaymentOptions();
 
     let qtyEl = navPopover.querySelector('[data-popover-qty]');
     if(!qtyEl){
@@ -294,8 +300,8 @@
       if(paymentsEl){
         const showPayments = hasItem && state.total && state.total > 0;
         paymentsEl.hidden = !showPayments;
-        if(googleBtn){
-          googleBtn.disabled = !showPayments;
+        if(checkoutBtn){
+          checkoutBtn.disabled = !showPayments;
         }
       }
 

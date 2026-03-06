@@ -135,11 +135,13 @@
       font-display:swap;
     }
 
-    .logo{display:flex;align-items:center;justify-content:center;height:auto;overflow:visible;position:relative;z-index:6;pointer-events:auto}
+    .logo{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;height:auto;overflow:visible;position:relative;z-index:6;pointer-events:auto}
     .logo > a{display:block;overflow:visible}
     .logo .soap{display:none !important}
     .logo .logo-text{display:none !important}
     .logo .logo-image{display:block;width:min(56vw,460px);height:auto;max-height:100px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));animation:logoAppear .8s ease both .1s;position:relative;z-index:7}
+    .logo-callout{display:inline-flex;align-items:center;gap:.35rem;font-size:.85rem;font-weight:300;letter-spacing:.01em;color:rgba(245,245,248,.92);text-decoration:none}
+    .logo-callout svg{width:14px;height:14px;display:block}
 
     .text-side{padding-top:1.2rem}
 
@@ -261,6 +263,12 @@
     <div class="logo">
       <a href="/" aria-label="DufferinDeepClean home">
         <img class="logo-image" src="DufferinDeepCleanlogo.png" alt="DufferinDeepClean logo" width="400" height="100">
+      </a>
+      <a class="logo-callout" href="tel:+12899657880" aria-label="Call 289-965-7880 today">
+        <span>Call (289-965-7880) Today</span>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <path d="M7.2 2.25A2.25 2.25 0 0 0 5.02 4.9a22.94 22.94 0 0 0 14.08 14.08 2.25 2.25 0 0 0 2.65-2.18v-2.07a1.5 1.5 0 0 0-1.28-1.48l-3.36-.48a1.5 1.5 0 0 0-1.44.62l-.74 1.04a18.03 18.03 0 0 1-5.35-5.35l1.04-.74a1.5 1.5 0 0 0 .62-1.44l-.48-3.36a1.5 1.5 0 0 0-1.48-1.28H7.2Z" fill="currentColor"/>
+        </svg>
       </a>
     </div>
     <nav class="nav-links">

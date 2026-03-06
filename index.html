@@ -202,17 +202,23 @@
       padding-right:84px !important;
     }
     html.ios .nav-actions{
+      position:absolute;
+      top:50%;
       right:max(2px, env(safe-area-inset-right)) !important;
+      transform:translateY(-50%);
+    }
+    html.ios .about-section{
+      display:none !important;
     }
     @media (max-width:700px){
       html.ios .navbar{
-        padding-right:16px !important;
-        padding-bottom:56px !important;
+        padding-right:72px !important;
+        padding-bottom:8px !important;
       }
       html.ios .nav-actions{
-        top:100%;
+        top:50%;
         right:max(2px, env(safe-area-inset-right)) !important;
-        transform:translateY(-42px);
+        transform:translateY(-50%);
       }
     }
   </style>

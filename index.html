@@ -180,7 +180,10 @@
 
     /* iOS-only layout tweaks requested: wider quote + cart button placement */
     html.ios .hero-quote{
-      width:100% !important;
+      width:100vw !important;
+      max-width:100vw !important;
+      margin-left:calc(50% - 50vw) !important;
+      margin-right:calc(50% - 50vw) !important;
       display:flex;
       justify-content:center;
     }
@@ -189,30 +192,57 @@
       max-width:100vw !important;
       margin-left:auto !important;
       margin-right:auto !important;
-      padding-inline:4px;
+      padding-inline:2px;
       box-sizing:border-box;
     }
     html.ios .soap-quote__card{
-      padding:14px;
+      width:100% !important;
+      padding:14px 10px;
       border:none !important;
       box-shadow:none !important;
+      border-radius:16px;
+    }
+    html.ios .text-side{
+      padding-left:6px !important;
+      padding-right:6px !important;
     }
     html.ios .navbar{
       position:relative;
-      padding-right:84px !important;
+      padding-right:132px !important;
     }
     html.ios .nav-actions{
-      right:8px;
+      position:absolute !important;
+      right:max(6px, env(safe-area-inset-right)) !important;
+      top:50% !important;
+      transform:translateY(-50%) !important;
+      width:auto !important;
+      justify-content:flex-end !important;
+    }
+    html.ios .about-section{
+      display:none !important;
+    }
+    html.ios .soap-quote__title,
+    html.ios .services-page .services-header h1,
+    html.ios .services-page .service-card h3{
+      font-family:'Porkys','Bebas Neue',sans-serif !important;
+      font-weight:400 !important;
+      font-style:normal !important;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    html.ios .services-page .services-header h1{
+      color:#a855f7 !important;
     }
     @media (max-width:700px){
       html.ios .navbar{
-        padding-right:16px !important;
-        padding-bottom:56px !important;
+        padding-right:132px !important;
+        padding-bottom:8px !important;
       }
       html.ios .nav-actions{
-        top:100%;
-        right:16px;
-        transform:translateY(-42px);
+        position:absolute !important;
+        right:max(6px, env(safe-area-inset-right)) !important;
+        top:50% !important;
+        transform:translateY(-50%) !important;
       }
     }
   </style>

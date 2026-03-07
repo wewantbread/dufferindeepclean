@@ -36,8 +36,8 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(255,255,255,0.07);
-      padding: 8px 16px !important;
-      min-height: 74px;
+      padding: 7px 16px !important;
+      min-height: 70px;
     }
 
     /* Logo: match “about us” font + left→right reveal + bigger */
@@ -139,7 +139,7 @@
     .logo > a{display:block;overflow:visible}
     .logo .soap{display:none !important}
     .logo .logo-text{display:none !important}
-    .logo .logo-image{display:block;width:min(56vw,460px);height:auto;max-height:100px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));animation:logoAppear .8s ease both .1s;position:relative;z-index:7}
+    .logo .logo-image{display:block;width:min(56vw,460px);height:auto;max-height:94px;object-fit:contain;image-rendering:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));animation:logoAppear .8s ease both .1s;position:relative;z-index:7}
     .logo-callout{display:inline-flex;align-items:center;gap:.35rem;font-size:.85rem;font-weight:300;letter-spacing:.01em;color:rgba(245,245,248,.92);text-decoration:none}
     .logo-callout svg{width:14px;height:14px;display:block}
 
@@ -147,10 +147,11 @@
 
     /* Homepage soap quote */
     .soap-quote{max-width:760px;width:min(100%,760px);margin:0;position:relative;z-index:2}
+    @media (min-width:1024px){.soap-quote{max-width:790px;width:min(100%,790px)}}
     .soap-quote *{box-sizing:border-box}
     .soap-quote__card{border-radius:22px;border:1px solid rgba(255,255,255,.12);background:rgba(12,12,18,.28);backdrop-filter:blur(16px) saturate(125%);box-shadow:0 18px 50px rgba(0,0,0,.35);padding:12px}
     .soap-quote__top{display:flex;align-items:center;justify-content:flex-start;padding:2px 2px 10px}
-.soap-quote__title{font-family:'Porkys','Inter',sans-serif;font-size:1.05rem;line-height:1.1;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;margin:0;padding:0;border-radius:0;background:transparent;border:none;color:#fff;-webkit-text-stroke:1px rgba(139,92,246,.92);text-shadow:0 0 8px rgba(139,92,246,.35)}
+.soap-quote__title{font-family:'Porkys','Inter',sans-serif;font-size:1.05rem;line-height:1.1;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;margin:0;padding:0;border-radius:0;background:transparent !important;border:none !important;box-shadow:none !important;color:#fff;-webkit-text-stroke:1px rgba(139,92,246,.92);text-shadow:0 0 8px rgba(139,92,246,.35);animation:titleSwipeIn .72s ease-out both}
     .soap-quote__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
     .soap-quote__box{border-radius:16px;border:1px solid rgba(255,255,255,.07);background:rgba(10,10,16,.4);padding:10px;min-height:96px}
     .soap-quote__labelrow{display:flex;align-items:center;margin-bottom:8px;font-size:.82rem;font-weight:600;color:rgba(245,245,248,.96)}
@@ -179,6 +180,14 @@
     .soap-quote__actions{margin-top:12px;display:flex;justify-content:flex-end}
     .soap-quote__submit{min-width:170px;height:42px;border-radius:11px;border:1px solid rgba(167,139,250,.55);background:linear-gradient(180deg,rgba(196,181,253,.35),rgba(167,139,250,.28));color:#f8f6ff;font-size:.88rem;font-weight:700;cursor:pointer;box-shadow:0 0 0 1px rgba(196,181,253,.18) inset,0 8px 20px rgba(139,92,246,.18)}
     @media (max-width:700px){.soap-quote{max-width:100%;width:100%}.soap-quote__grid{grid-template-columns:1fr}.soap-quote__submit{width:100%}}
+
+
+    @keyframes titleSwipeIn{0%{opacity:0;transform:translateX(-24px)}100%{opacity:1;transform:translateX(0)}}
+
+    @media (max-width:965px){
+      .logo-callout{display:flex;justify-content:center;align-items:center;width:100%;text-align:center}
+      .logo-callout svg{margin-inline:auto}
+    }
 
     /* iOS-only layout tweaks requested: wider quote + cart button placement */
     html.ios .hero-quote{
@@ -1634,6 +1643,29 @@
       dots.forEach((dot, i)=> dot.setAttribute('aria-selected', i === index ? 'true' : 'false'));
       setActive(0);
       start();
+    })();
+  </script>
+
+
+  <script>
+    (function(){
+      const servicesHeader = document.querySelector('.services-header');
+      if (!servicesHeader) return;
+      if (!('IntersectionObserver' in window)) {
+        servicesHeader.classList.add('is-visible');
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            servicesHeader.classList.add('is-visible');
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.25 });
+
+      observer.observe(servicesHeader);
     })();
   </script>
 

@@ -5,24 +5,529 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Contact — DufferinDeepClean</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <!-- Keep your existing fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <script src="nav-cart.js" defer></script>
+
+  <style>
+    :root {
+      --bg: #07131a;
+      --bg-2: #0d1d25;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --line: rgba(255, 255, 255, 0.14);
+      --text: #f7fbff;
+      --muted: #b8c8d3;
+      --accent: #8be9ff;
+      --accent-2: #d9f8ff;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+
+      /* Replace this with your self-hosted Porky's font if you uploaded it */
+      --porkys: "Porky's", "Bebas Neue", "Arial Black", sans-serif;
+      --body: "Inter", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(139, 233, 255, 0.18), transparent 32%),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.08), transparent 22%),
+        linear-gradient(180deg, #0a1820 0%, #07131a 100%);
+      color: var(--text);
+      font-family: var(--body);
+      min-height: 100%;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      border-radius: 999px;
+      pointer-events: none;
+      filter: blur(70px);
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    body::before {
+      width: 280px;
+      height: 280px;
+      top: 80px;
+      left: -60px;
+      background: rgba(125, 232, 255, 0.18);
+    }
+
+    body::after {
+      width: 320px;
+      height: 320px;
+      right: -80px;
+      bottom: 120px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: min(1180px, calc(100% - 28px));
+      margin: 18px auto 0;
+      padding: 14px 16px;
+      background: rgba(8, 22, 29, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .logo img {
+      height: clamp(44px, 6vw, 62px);
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .nav-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .nav-cart {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      border: 1px solid rgba(139, 233, 255, 0.22);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      font: inherit;
+    }
+
+    .nav-cart:hover {
+      transform: translateY(-1px);
+      border-color: rgba(139, 233, 255, 0.5);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .nav-cart-icon {
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+    }
+
+    .nav-cart-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .nav-cart-label {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-cart-count {
+      min-width: 22px;
+      height: 22px;
+      padding: 0 6px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      background: var(--accent);
+      color: #041117;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .page-main {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 28px));
+      margin: 22px auto 60px;
+    }
+
+    .contact-shell {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .contact-panel,
+    .contact-form-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .contact-panel {
+      padding: clamp(1.4rem, 2.2vw, 2rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .contact-kicker {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(139, 233, 255, 0.12);
+      border: 1px solid rgba(139, 233, 255, 0.22);
+      color: var(--accent-2);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .contact-title {
+      margin: 0;
+      font-family: var(--porkys);
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      text-shadow:
+        0 1px 0 rgba(255,255,255,0.18),
+        0 10px 24px rgba(0,0,0,0.22);
+    }
+
+    .contact-title span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .contact-copy {
+      margin: 18px 0 0;
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 1.03rem;
+      line-height: 1.72;
+    }
+
+    .contact-highlights {
+      display: grid;
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .highlight {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .highlight-icon {
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(139, 233, 255, 0.14);
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .highlight strong {
+      display: block;
+      font-size: 0.96rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .highlight p,
+    .highlight a {
+      margin: 0;
+      color: var(--muted);
+      text-decoration: none;
+      line-height: 1.5;
+    }
+
+    .highlight a:hover {
+      color: #fff;
+    }
+
+    .contact-form-card {
+      padding: clamp(1.35rem, 2.1vw, 1.9rem);
+    }
+
+    .form-card-title {
+      margin: 0 0 8px;
+      font-family: var(--porkys);
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: #fff;
+    }
+
+    .form-card-subtitle {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #f5fbff;
+      letter-spacing: 0.02em;
+    }
+
+    .field input {
+      width: 100%;
+      min-height: 58px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 0 16px;
+      background: rgba(5, 17, 23, 0.55);
+      color: #fff;
+      outline: none;
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .field input::placeholder {
+      color: rgba(220, 236, 245, 0.48);
+    }
+
+    .field input:focus {
+      border-color: rgba(139, 233, 255, 0.62);
+      box-shadow: 0 0 0 4px rgba(139, 233, 255, 0.12);
+      background: rgba(6, 22, 30, 0.84);
+    }
+
+    .form-note {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+
+    .contact-submit {
+      appearance: none;
+      border: 0;
+      border-radius: 18px;
+      min-height: 58px;
+      padding: 0 18px;
+      background: linear-gradient(180deg, #baf4ff 0%, #84e6fb 100%);
+      color: #06202a;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(132, 230, 251, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    }
+
+    .contact-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(132, 230, 251, 0.28);
+      filter: brightness(1.03);
+    }
+
+    .contact-submit:active {
+      transform: translateY(0);
+    }
+
+    .bottom-strip {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .bottom-strip strong {
+      color: #fff;
+    }
+
+    /* Cart popover stays compatible */
+    .nav-cart-popover[hidden] {
+      display: none !important;
+    }
+
+    .nav-cart-popover {
+      position: fixed;
+      top: 88px;
+      right: max(14px, calc((100vw - 1180px) / 2 + 14px));
+      width: min(420px, calc(100vw - 28px));
+      z-index: 50;
+    }
+
+    .nav-cart-popover-inner {
+      position: relative;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(8, 21, 28, 0.94);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.42);
+      backdrop-filter: blur(20px);
+    }
+
+    .cart-popover-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      border: 0;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+
+    .cart-popover-header {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .cart-popover-header img {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .cart-popover-title,
+    .cart-popover-subtitle,
+    .cart-popover-empty,
+    .cart-popover-status,
+    .cart-popover-totals,
+    .cart-popover-paypal-status {
+      color: var(--muted);
+    }
+
+    .cart-popover-title {
+      color: #fff;
+      font-weight: 800;
+      margin: 0 0 6px;
+    }
+
+    .cart-popover-subtitle {
+      margin: 0;
+    }
+
+    .cart-popover-google {
+      width: 100%;
+      margin-top: 12px;
+      min-height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+
+    @media (max-width: 920px) {
+      .contact-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .page-main {
+        margin-top: 18px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        width: calc(100% - 18px);
+        margin-top: 10px;
+        padding: 10px 12px;
+        border-radius: 18px;
+      }
+
+      .logo img {
+        height: 42px;
+      }
+
+      .nav-cart {
+        padding: 0.8rem 0.9rem;
+      }
+
+      .nav-cart-label {
+        display: none;
+      }
+
+      .page-main {
+        width: calc(100% - 18px);
+        margin-bottom: 34px;
+      }
+
+      .contact-panel,
+      .contact-form-card {
+        border-radius: 22px;
+      }
+
+      .contact-panel,
+      .contact-form-card {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 <body data-cart-image="deepcleanpackage.png">
 
   <header class="navbar">
-    <div class="logo">
-      <span class="soap">🧼</span>
-      <a class="logo-text" href="index.html">DufferinDeepClean</a>
-    </div>
-    <nav class="nav-links">
-      <a href="index.html#home">Home</a>
-      <a href="services.html">Services</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html" aria-current="page">Contact</a>
-      <a href="book.html#start" class="quote-btn">Book Online</a>
-    </nav>
+    <a class="logo" href="index.html" aria-label="Dufferin Deep Clean home">
+      <img src="DufferinDeepCleanLogo.png" alt="Dufferin Deep Clean logo" />
+    </a>
+
     <div class="nav-actions">
       <button class="nav-cart" type="button" data-cart-toggle aria-haspopup="dialog" aria-controls="navCartPopover" aria-expanded="false">
         <span class="nav-cart-icon" aria-hidden="true">
@@ -35,65 +540,116 @@
       </button>
     </div>
   </header>
+
   <aside class="nav-cart-popover" id="navCartPopover" role="dialog" aria-modal="false" aria-label="Cart summary" hidden>
     <div class="nav-cart-popover-inner">
       <button type="button" class="cart-popover-close" data-cart-close aria-label="Close cart">
         <span aria-hidden="true">&times;</span>
       </button>
+
       <header class="cart-popover-header">
-        <img data-cart-popover-image alt="Cart package preview" loading="lazy" />
+        <img data-cart-popover-image alt="Cart package preview" loading="lazy" src="deepcleanpackage.png" />
         <div>
           <p class="cart-popover-title" data-popover-service>Your cart is empty</p>
           <p class="cart-popover-subtitle" data-popover-frequency>Build a package to see pricing here.</p>
         </div>
       </header>
+
       <p class="cart-popover-status" data-popover-status hidden></p>
       <p class="cart-popover-empty" data-popover-empty>Use “Book Online” to customise your cleaning package.</p>
       <dl class="cart-popover-details" data-popover-details hidden></dl>
+
       <div class="cart-popover-totals" data-popover-totals hidden>
-        <div><span>Visit total</span><span data-popover-total>—</span></div>
+        <div><span>Visit total</span> <span data-popover-total>—</span></div>
       </div>
+
       <div class="cart-popover-payments" data-popover-payments hidden>
         <div id="nav-paypal-buttons" data-paypal-container="nav"></div>
         <p class="cart-popover-paypal-status" id="nav-paypal-status" role="status" aria-live="polite"></p>
-        <button type="button" class="btn cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
+        <button type="button" class="cart-popover-google" data-google-pay-button disabled>Google Pay (coming soon)</button>
       </div>
     </div>
   </aside>
 
   <main class="page-main">
-    <section class="page-hero">
-      <p class="page-kicker">get in touch</p>
-      <h1 class="page-title">Let’s schedule your deep clean</h1>
-      <p class="page-lede">We respond quickly because spotless spaces can’t wait. Reach out, tell us about your space, and we’ll craft a plan that sparkles.</p>
-    </section>
+    <section class="contact-shell">
+      <div class="contact-panel">
+        <div>
+          <p class="contact-kicker">Get in Touch</p>
+          <h1 class="contact-title">Contact <span>Us</span></h1>
+          <p class="contact-copy">
+            Need a house clean, office clean, move-in or move-out service, or recurring maintenance?
+            Send us your details and we’ll get back to you fast with the next steps.
+          </p>
 
-    <section class="page-card">
-      <h2>contact details</h2>
-      <dl class="contact-list">
-        <div>
-          <dt>Email</dt>
-          <dd><a href="mailto:hello@dufferindeepclean.ca">hello@dufferindeepclean.ca</a></dd>
-        </div>
-        <div>
-          <dt>Phone</dt>
-          <dd><a href="tel:+16475551234">(647) 555-1234</a></dd>
-        </div>
-        <div>
-          <dt>Service hours</dt>
-          <dd>Monday to Saturday, 7:00am – 8:00pm</dd>
-        </div>
-        <div>
-          <dt>Service area</dt>
-          <dd>Dufferin County, Peel Region, and the western GTA</dd>
-        </div>
-      </dl>
-    </section>
+          <div class="contact-highlights">
+            <div class="highlight">
+              <div class="highlight-icon">☎</div>
+              <div>
+                <strong>Call or Text</strong>
+                <a href="tel:+12899657880">289 965 7880</a>
+              </div>
+            </div>
 
-    <section class="page-card contact-cta">
-      <h2>ready when you are</h2>
-      <p>Prefer to build your package online? Our booking flow lets you choose the exact services, schedule, and frequency that match your space.</p>
-      <a class="quote-btn-home" href="book.html#start">Start a booking</a>
+            <div class="highlight">
+              <div class="highlight-icon">✉</div>
+              <div>
+                <strong>Email</strong>
+                <a href="mailto:dufferindeepcleaners@gmail.com">dufferindeepcleaners@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="highlight">
+              <div class="highlight-icon">★</div>
+              <div>
+                <strong>Serving Ontario</strong>
+                <p>Professional residential and commercial cleaning with a polished, reliable touch.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-strip">
+          <strong>Fast replies.</strong> Leave your name, phone number, and email so we can contact you properly and get your cleaning booked in.
+        </div>
+      </div>
+
+      <section class="contact-form-card" aria-labelledby="contactFormTitle">
+        <h2 class="form-card-title" id="contactFormTitle">Book a Callback</h2>
+        <p class="form-card-subtitle">
+          Fill out the form below and press send. It will open an email draft addressed to our inbox.
+        </p>
+
+        <form
+          class="contact-form"
+          action="mailto:dufferindeepcleaners@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input id="name" name="Name" type="text" placeholder="Your full name" required />
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="Phone" type="tel" placeholder="289 555 1234" required />
+          </div>
+
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input id="email" name="Email" type="email" placeholder="you@example.com" required />
+          </div>
+
+          <input type="hidden" name="Subject" value="New Dufferin Deep Clean Contact Request" />
+
+          <button class="contact-submit" type="submit">Send Request</button>
+
+          <p class="form-note">
+            This form uses your device’s default mail app. If you want the button to send directly from the site with no email app popup, you’ll need a form backend such as Formspree, Web3Forms, or custom PHP.
+          </p>
+        </form>
+      </section>
     </section>
   </main>
 

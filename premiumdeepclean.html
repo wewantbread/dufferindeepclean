@@ -21,7 +21,6 @@
     .story-grid { display: grid; gap: 1.6rem; }
     .reveal-item { display: grid; gap: 1rem; grid-template-columns: 1fr; align-items: center; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 1.2rem; opacity: 0; transform: translateY(24px); transition: transform .6s ease, opacity .6s ease; }
     .reveal-item.is-visible { opacity: 1; transform: translateY(0); }
-    .reveal-item img { width: 100%; border-radius: 16px; border: 1px solid rgba(255,255,255,.2); box-shadow: 0 0 40px rgba(120, 208, 255, .25); }
     .type-line { min-height: 5.8em; color: #e8f8ff; font-size: 1.05rem; line-height: 1.7; }
     .quote-card { max-width: 900px; margin: 0 auto; }
     .service-lock { display: inline-flex; margin-top: .4rem; padding: .3rem .7rem; border-radius: 999px; border: 1px solid rgba(0,212,255,.35); color: #9fe9ff; font-size: .85rem; }
@@ -33,7 +32,11 @@
 </head>
 <body data-cart-image="deepcleanpackage.png">
   <header class="navbar">
-    <div class="logo"><span class="soap">🧼</span><a class="logo-text" href="index.html">DufferinDeepClean</a></div>
+    <div class="logo">
+      <a href="index.html" aria-label="DufferinDeepClean home">
+        <img class="logo-image" src="DufferinDeepCleanlogo.png" alt="DufferinDeepClean logo" width="400" height="100">
+      </a>
+    </div>
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <div class="service-nav">
@@ -57,9 +60,9 @@
     </section>
 
     <section class="story-grid" aria-label="Premium deep clean highlights">
-      <article class="reveal-item"><img src="deepcleanpackage.png" alt="Detailed premium deep clean setup" /><p class="type-line" data-text="Our premium deep clean starts with full dust removal on trims, frames, vents, and high-touch areas so every room feels reset from top to bottom."></p></article>
-      <article class="reveal-item"><img src="baseboards.png" alt="Close-up of baseboards after detailed cleaning" /><p class="type-line" data-text="Baseboards, corners, and hard-to-reach edges receive focused attention to remove built-up debris and restore that fresh, polished look."></p></article>
-      <article class="reveal-item"><img src="window.png" alt="Sparkling window and sill cleaned in a home" /><p class="type-line" data-text="Glass, mirror surfaces, and window sills are detailed with streak-free care, while bathrooms and kitchens are sanitized for a healthy finish."></p></article>
+      <article class="reveal-item"><p class="type-line" data-text="Our premium deep clean starts with full dust removal on trims, frames, vents, and high-touch areas so every room feels reset from top to bottom."></p></article>
+      <article class="reveal-item"><p class="type-line" data-text="Baseboards, corners, and hard-to-reach edges receive focused attention to remove built-up debris and restore that fresh, polished look."></p></article>
+      <article class="reveal-item"><p class="type-line" data-text="Glass, mirror surfaces, and window sills are detailed with streak-free care, while bathrooms and kitchens are sanitized for a healthy finish."></p></article>
     </section>
 
     <section id="quote" class="hero-quote" aria-labelledby="quote-title">

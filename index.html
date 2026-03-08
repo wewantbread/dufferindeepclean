@@ -185,8 +185,8 @@
     @keyframes titleSwipeIn{0%{opacity:0;transform:translateX(-24px)}100%{opacity:1;transform:translateX(0)}}
 
     @media (max-width:965px){
-      .logo-callout{display:flex;justify-content:center;align-items:center;width:100%;text-align:center}
-      .logo-callout svg{margin-inline:auto}
+      .logo-callout{display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;text-align:center;gap:.45rem;margin-top:.3rem}
+      .logo-callout svg{display:block;margin-inline:auto}
     }
 
     /* iOS-only layout tweaks requested: wider quote + cart button placement */
@@ -508,7 +508,7 @@
     </div>
 
     <div class="services-grid">
-      <a class="service-card" href="#quote" data-service-card data-service="home">
+      <article class="service-card" data-service-card data-service="home" role="button" tabindex="0">
         <div class="office-carousel" data-office-carousel aria-label="House cleaning photo carousel">
           <div class="office-carousel-track">
             <div class="office-slide">
@@ -540,10 +540,11 @@
         <div class="service-copy">
           <h3>House Cleaning Package</h3>
           <p>Room-by-room house cleaning with gleaming kitchens, sanitized bathrooms, refreshed bedrooms, and welcoming living areas tailored to your routine.</p>
+          <p class="service-included-note"><a class="service-included-link" href="premiumdeepclean.html">What's included</a></p>
         </div>
-      </a>
+      </article>
 
-      <a class="service-card" href="#quote" data-service-card data-service="commercial">
+      <article class="service-card" data-service-card data-service="commercial" role="button" tabindex="0">
         <div class="office-carousel" data-office-carousel aria-label="Commercial cleaning photo carousel">
           <div class="office-carousel-track">
             <div class="office-slide">
@@ -557,10 +558,11 @@
         <div class="service-copy">
           <h3>Commercial Cleaning Package</h3>
           <p>Ideal for light-industrial units and warehouses with attached offices—covers production aisles, loading zones, staff areas, and restrooms with safety-first detailing.</p>
+          <p class="service-included-note"><a class="service-included-link" href="commercialdeepclean.html">What's included</a></p>
         </div>
-      </a>
+      </article>
 
-      <a class="service-card" href="#quote" data-service-card data-service="office">
+      <article class="service-card" data-service-card data-service="office" role="button" tabindex="0">
         <div class="office-carousel" data-office-carousel aria-label="Office cleaning photo carousel">
           <div class="office-carousel-track">
             <div class="office-slide">
@@ -583,8 +585,9 @@
         <div class="service-copy">
           <h3>Office Cleaning Package</h3>
           <p>Professional office upkeep that dusts workstations, refreshes conference rooms, polishes reception areas, and tidies shared kitchens for a productive team.</p>
+          <p class="service-included-note"><a class="service-included-link" href="officecleanings.html">What's included</a></p>
         </div>
-      </a>
+      </article>
     </div>
   </section>
 
@@ -1547,7 +1550,19 @@
       const serviceSelect = quoteForm ? quoteForm.querySelector('#quote-service') : null;
 
       serviceCards.forEach(card => {
+        card.addEventListener('keydown', event => {
+          if(event.key === 'Enter' || event.key === ' '){
+            event.preventDefault();
+            card.click();
+          }
+        });
+
         card.addEventListener('click', event => {
+          if(event.target.closest('.service-included-link')){
+            event.stopPropagation();
+            return;
+          }
+
           const serviceKey = card.dataset.service || '';
           if(serviceSelect && serviceKey){
             const matchingOption = Array.from(serviceSelect.options).find(option => option.value === serviceKey);
